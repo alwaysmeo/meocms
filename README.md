@@ -11,19 +11,13 @@
     <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## Install Expand
+## Change php version
+`sudo update-alternatives --config php`
+
+## Install php expand
 
 `php8.3-redis`
 
 ## License
 
--
-The
-Laravel
-framework
-is
-open-sourced
-software
-licensed
-under
-the [MIT license](https://opensource.org/licenses/MIT).
+- The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
