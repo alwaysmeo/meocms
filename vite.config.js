@@ -20,20 +20,29 @@ export default defineConfig(({ mode }) => {
                 input: 'resources/js/app.js',
                 refresh: true
             }),
-            vue()
+            vue({
+                template: {
+                    transformAssetUrls: {
+                        base: null,
+                        includeAbsolute: false
+                    }
+                }
+            })
         ],
         server: {
-            host: VITE_HOST,
+            host: '0.0.0.0',
             port: VITE_PORT,
             open: false,
-            hmr: VITE_HOT === 'true',
-            // proxy: {
-            //     '/api': {
-            //         target: VITE_API_DOMAIN,
-            //         changeOrigin: true,
-            //         rewrite: (path) => path.replace(/^\/api/, '')
-            //     }
-            // }
+            hmr: {
+                host: VITE_HOST
+            },
+            proxy: {
+                '/api': {
+                    target: VITE_API_DOMAIN,
+                    changeOrigin: true,
+                    rewrite: (path) => path.replace(/^\/api/, '')
+                }
+            }
         }
     }
 })
