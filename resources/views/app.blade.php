@@ -10,7 +10,7 @@
     <meta name="language" content="{{ str_replace('_', '-', app()->getLocale()) }}" />
     <meta name="copyright" content="{{ config('app.name') }}" />
     <meta name="application-name" content="{{ config('app.name') }}" />
-    <title inertia>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
 </head>
 <body>
     <div id="app"></div>

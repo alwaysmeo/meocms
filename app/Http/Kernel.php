@@ -12,9 +12,7 @@ class Kernel extends HttpKernel {
      *
      * @var array<int, class-string|string>
      */
-    protected $middleware = [
-        \Illuminate\Http\Middleware\HandleCors::class,
-    ];
+    protected $middleware = [];
 
     /**
      * The application's route middleware groups.
@@ -22,9 +20,7 @@ class Kernel extends HttpKernel {
      * @var array<string, array<int, class-string|string>>
      */
     protected $middlewareGroups = [
-        'web' => [
-            \App\Http\Middleware\HandleInertiaRequests::class,
-        ],
+        'web' => [],
         'api' => [],
     ];
 
