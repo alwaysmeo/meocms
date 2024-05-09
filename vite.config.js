@@ -38,7 +38,7 @@ export default defineConfig(({ mode }) => {
             viteAutoImport({
                 imports: ["vue"],
                 eslintrc: {
-                    enabled: true,
+                    enabled: false,
                     filepath: "resources/app/.eslintrc-auto-import.json",
                     globalsPropValue: true,
                 },
