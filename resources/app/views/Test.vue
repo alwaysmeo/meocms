@@ -1,12 +1,9 @@
-<script setup>
-    const props = defineProps(['props']);
-    console.log(props)
-</script>
+<script setup></script>
 
 <template>
-    <a-button>测试页面</a-button>
+	<a-button @click="$router.push('/app/home')">测试页面</a-button>
 </template>
 
 <style lang="scss" scoped>
-    /** */
+	/** */
 </style>
