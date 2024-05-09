@@ -5,7 +5,6 @@ import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import viteCompression from "vite-plugin-compression";
-import viteVueDevTools from "vite-plugin-vue-devtools";
 import viteAutoImport from "unplugin-auto-import/vite";
 import viteComponents from "unplugin-vue-components/vite";
 import viteRemoveConsole from "vite-plugin-remove-console";
@@ -33,7 +32,6 @@ export default defineConfig(({ mode }) => {
                 },
             }),
             vueJsx(),
-            viteVueDevTools(),
             viteRemoveConsole({
                 externalValue: ["version"],
             }),
