@@ -12,7 +12,6 @@ import viteLaravel from "laravel-vite-plugin";
 
 export default defineConfig(({ mode }) => {
     const {
-        VITE_HOT,
         VITE_HOST,
         VITE_BASE_URL,
         VITE_PORT,
@@ -22,6 +21,7 @@ export default defineConfig(({ mode }) => {
     console.log(loadEnv(mode, __dirname));
 
     return {
+        base: VITE_BASE_URL,
         plugins: [
             vue({
                 template: {
@@ -79,6 +79,39 @@ export default defineConfig(({ mode }) => {
                 "@utils": resolve(__dirname, "resources/app/utils"),
                 "@routes": resolve(__dirname, "resources/app/router"),
                 vue: "vue/dist/vue.esm-bundler.js",
+            },
+        },
+        css: {
+            preprocessorOptions: {
+                scss: {
+                    additionalData: `@import '@assets/styles/index.scss';`,
+                    charset: false,
+                    outputStyle: "compressed",
+                },
+            },
+        },
+        build: {
+            outDir: VITE_OUTDIR,
+            chunkSizeWarningLimit: 500,
+            minify: true,
+            cssCodeSplit: true,
+            rollupOptions: {
+                output: {
+                    entryFileNames: "js/[name].[hash].js",
+                    chunkFileNames: "js/[name].[hash].js",
+                    assetFileNames: "[ext]/[name].[hash].[ext]",
+                    manualChunks(path) {
+                        if (path.includes(".pnpm")) {
+                            return path
+                                .match(/\.pnpm\/.+?(?=@)/)[0]
+                                .replace(/\.pnpm\/@*/, "");
+                        } else if (path.includes("node_modules")) {
+                            return path
+                                .match(/node_modules\/.+?(?=\/)/)[0]
+                                .replace(/node_modules\/@*/, "");
+                        }
+                    },
+                },
             },
         },
         server: {

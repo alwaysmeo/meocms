@@ -1,7 +1,9 @@
 <script setup></script>
 
 <template>
-	<a-button @click="$router.go(-1)">首页</a-button>
+	<div class="container">
+		<a-button>首页</a-button>
+	</div>
 </template>
 
 <style lang="scss" scoped>
