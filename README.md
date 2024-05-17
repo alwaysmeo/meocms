@@ -11,12 +11,17 @@
     <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## Change php version
+## Change php version to 8.3
 `sudo update-alternatives --config php`
 
 ## Install php expand
 
-`php8.3-redis`
+- must: `php8.3-redis` `php8.3-dom` `php8.3-xml` `php8.3-curl` `php8.3-mysql` `php8.3-fpm`
+- selectable: `php8.3-mbstring`
+
+## Database data migration
+
+`php artisan migrate`
 
 ## License
 

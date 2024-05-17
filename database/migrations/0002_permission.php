@@ -4,14 +4,15 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        /* 管理端_权限菜单表 */
-        Schema::create('admin_permissions', function (Blueprint $table) {
+        /* 权限菜单表 */
+        Schema::create('permissions', function (Blueprint $table) {
             $table->id();
             $table->integer('parent_id')->comment('父级ID');
             $table->string('code', 30)->comment('唯一标识');
@@ -26,16 +27,16 @@ return new class extends Migration {
             $table->collation('utf8mb4_unicode_ci');
         });
 
-        /* 管理端_用户所属角色表 */
-        Schema::create('admin_permissions_role', function (Blueprint $table) {
+        /* 角色所属权限表 */
+        Schema::create('permissions_role', function (Blueprint $table) {
             $table->integer('permissions_ids')->comment('权限ID列表');
             $table->integer('role_id')->comment('角色ID');
             $table->charset('utf8mb4');
             $table->collation('utf8mb4_unicode_ci');
         });
 
-        /* 管理端_角色表 */
-        Schema::create('admin_role', function (Blueprint $table) {
+        /* 角色表 */
+        Schema::create('role', function (Blueprint $table) {
             $table->id();
             $table->string('name', 30)->comment('角色名称');
             $table->integer('slot')->comment('角色排序');
@@ -44,8 +45,8 @@ return new class extends Migration {
             $table->collation('utf8mb4_unicode_ci');
         });
 
-        /* 管理端_用户所属角色表 */
-        Schema::create('admin_role_user', function (Blueprint $table) {
+        /* 用户所属角色表 */
+        Schema::create('role_user', function (Blueprint $table) {
             $table->integer('user_id')->comment('用户ID');
             $table->integer('role_id')->comment('角色ID');
             $table->charset('utf8mb4');
@@ -58,9 +59,9 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('admin_permissions');
-        Schema::dropIfExists('admin_permissions_role');
-        Schema::dropIfExists('admin_role');
-        Schema::dropIfExists('admin_user_role');
+        Schema::dropIfExists('permissions');
+        Schema::dropIfExists('permissions_role');
+        Schema::dropIfExists('role');
+        Schema::dropIfExists('user_role');
     }
 };

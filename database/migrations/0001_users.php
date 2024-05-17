@@ -4,14 +4,15 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        /* 管理端_用户表 */
-        Schema::create('admin_users', function (Blueprint $table) {
+        /* 用户表 */
+        Schema::create('users', function (Blueprint $table) {
             $table->id()->primary()->unique();
             $table->string('email', 60)->comment('邮箱账号');
             $table->string('password', 255)->comment('账号密码');
@@ -34,6 +35,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('admin_users');
+        Schema::dropIfExists('users');
     }
 };
