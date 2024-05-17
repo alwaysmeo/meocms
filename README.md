@@ -12,6 +12,7 @@
 </p>
 
 ## Change php version to 8.3
+
 `sudo update-alternatives --config php`
 
 ## Install php expand
@@ -19,9 +20,13 @@
 - must: `php8.3-redis` `php8.3-dom` `php8.3-xml` `php8.3-curl` `php8.3-mysql` `php8.3-fpm`
 - selectable: `php8.3-mbstring`
 
-## Database data migration
+## Database migrations
 
 `php artisan migrate`
+
+## Database seeding
+
+`php artisan db:seed`
 
 ## License
 
