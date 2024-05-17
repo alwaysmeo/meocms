@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -14,11 +15,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
+        # 创建系统管理员账号
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'id' => 1,
+            'email' => env('ADMIN_DEFAULT_EMAIL', 'email@email.com'),
+            'password' => Hash::make(env('ADMIN_DEFAULT_PASSWORD', '123456')),
+            'nickname' => '系统管理员',
+            'headimg' => 1,
+            'status' => 1
         ]);
     }
 }
