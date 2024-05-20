@@ -16,9 +16,9 @@ return new class extends Migration
             'upload_record' => '资源上传记录表',
             'users' => '用户表',
             'permissions' => '权限菜单表',
-            'permissions_role' => '角色所拥有的权限表',
-            'role' => '角色表',
-            'role_user' => '用户所属的角色表',
+            'permissions_role' => '角色权限关联表',
+            'roles' => '角色表',
+            'role_user' => '角色用户关联表',
         ];
         /* 生成表注释 */
         foreach ($arr as $k => $v) {
