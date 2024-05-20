@@ -29,8 +29,8 @@ return new class extends Migration
 
         /* 角色权限关联表 */
         Schema::create('permissions_role', function (Blueprint $table) {
-            $table->integer('role_id')->comment('角色ID');
-            $table->integer('permission_ids')->comment('权限ID列表');
+            $table->integer('role_id')->unique()->comment('角色ID');
+            $table->json('permission_ids')->comment('权限ID列表');
             $table->charset('utf8mb4');
             $table->collation('utf8mb4_unicode_ci');
         });
@@ -47,7 +47,7 @@ return new class extends Migration
 
         /* 用户角色关联表 */
         Schema::create('role_user', function (Blueprint $table) {
-            $table->integer('user_id')->comment('用户ID');
+            $table->integer('user_id')->unique()->comment('用户ID');
             $table->integer('role_id')->comment('角色ID');
             $table->charset('utf8mb4');
             $table->collation('utf8mb4_unicode_ci');
@@ -61,7 +61,7 @@ return new class extends Migration
     {
         Schema::dropIfExists('permissions');
         Schema::dropIfExists('permissions_role');
-        Schema::dropIfExists('role');
-        Schema::dropIfExists('user_role');
+        Schema::dropIfExists('roles');
+        Schema::dropIfExists('role_user');
     }
 };
