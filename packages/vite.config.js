@@ -52,19 +52,56 @@ export default defineConfig(({ mode }) => {
 			}),
 			visualizer({ open: true })
 		],
+		chainWebpack: (config) => {
+			config.resolve.alias.set('@opentiny/vue-theme', '@opentiny/vue-theme/aurora-theme')
+		},
 		resolve: {
-			alias: {
-				'@': resolve(__dirname, '/src'),
-				'@apis': resolve(__dirname, '/src/apis'),
-				'@views': resolve(__dirname, '/src/views'),
-				'@assets': resolve(__dirname, '/src/assets'),
-				'@stores': resolve(__dirname, '/src/stores'),
-				'@components': resolve(__dirname, '/src/components'),
-				'@hooks': resolve(__dirname, '/src/hooks'),
-				'@utils': resolve(__dirname, '/src/utils'),
-				'@routes': resolve(__dirname, '/src/router'),
-				vue: 'vue/dist/vue.esm-bundler.js'
-			}
+			alias: [
+				{
+					find: '@',
+					replacement: resolve(__dirname, 'src')
+				},
+				{
+					find: '@apis',
+					replacement: resolve(__dirname, 'src/apis')
+				},
+				{
+					find: '@views',
+					replacement: resolve(__dirname, 'src/views')
+				},
+				{
+					find: '@assets',
+					replacement: resolve(__dirname, 'src/assets')
+				},
+				{
+					find: '@stores',
+					replacement: resolve(__dirname, 'src/stores')
+				},
+				{
+					find: '@components',
+					replacement: resolve(__dirname, 'src/components')
+				},
+				{
+					find: '@hooks',
+					replacement: resolve(__dirname, 'src/hooks')
+				},
+				{
+					find: '@utils',
+					replacement: resolve(__dirname, 'src/utils')
+				},
+				{
+					find: '@routes',
+					replacement: resolve(__dirname, 'src/routes')
+				},
+				{
+					find: 'vue',
+					replacement: 'vue/dist/vue.esm-bundler.js'
+				},
+				{
+					find: /\@opentiny\/vue-theme\/(?!(aurora))/,
+					replacement: '@opentiny/vue-theme/aurora-theme/'
+				}
+			]
 		},
 		css: {
 			preprocessorOptions: {
