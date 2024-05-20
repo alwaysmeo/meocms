@@ -1,8 +1,9 @@
 <script setup></script>
 
 <template>
-	<div class="container">
-		<a-button @click="$router.push('/test')">首页</a-button>
+	<div class="always-container">
+		<tiny-icon-share></tiny-icon-share>
+		<tiny-button type="primary" native-type="submit">主要按钮</tiny-button>
 	</div>
 </template>
 

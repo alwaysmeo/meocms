@@ -8,9 +8,9 @@
         "build": "pnpm -C ./packages build"
     },
     "dependencies": {
-        "@ant-design/icons-vue": "^7.0.1",
+        "@opentiny/vue": "3",
+        "@opentiny/vue-icon": "^3.16.0",
         "@vueuse/core": "^10.9.0",
-        "ant-design-vue": "^4.2.1",
         "axios": "^1.6.8",
         "dayjs": "^1.11.11",
         "localforage": "^1.10.0",
