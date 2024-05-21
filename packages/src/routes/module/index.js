@@ -1,6 +1,7 @@
 'use strict'
 import Layout from '@components/layout/Layout.vue'
 import home from './home'
+import system from './system'
 
 export default [
 	{
@@ -11,7 +12,8 @@ export default [
 	},
 	{
 		path: '/',
+		redirect: '/home',
 		component: Layout,
-		children: [home]
+		children: [home, system]
 	}
 ]

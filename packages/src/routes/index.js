@@ -6,14 +6,7 @@ import module from './module'
 
 const router = createRouter({
 	history: createWebHistory(),
-	routes: [
-		{
-			path: '/',
-			redirect: '/home',
-			component: { template: '<router-view />' },
-			children: module
-		}
-	]
+	routes: module
 })
 
 Middleware(router)
