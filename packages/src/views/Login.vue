@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-	<a-button>登录</a-button>
+	<tiny-button>登录</tiny-button>
 </template>
 
 <style lang="scss" scoped>
