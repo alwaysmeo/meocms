@@ -1,7 +1,8 @@
+Login.vue
 <script setup></script>
 
 <template>
-	<tiny-button @click="$router.push('/home')">测试页面</tiny-button>
+	<tiny-button>用户管理</tiny-button>
 </template>
 
 <style lang="scss" scoped>
