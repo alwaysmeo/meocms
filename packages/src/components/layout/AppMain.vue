@@ -1,20 +1,19 @@
-<script setup>
-	const route = useRoute()
-</script>
+<script setup></script>
 
 <template>
 	<div class="main-app">
-		<div class="breadcrumb">
+		<div class="main-breadcrumb">
 			<tiny-breadcrumb>
 				<tiny-breadcrumb-item
-					v-for="(item, index) in route.matched.filter((item) => item.name)"
+					v-for="(item, index) in $route.matched.filter((item) => item.name)"
 					:key="item.name"
 					:to="index ? { name: item.name } : {}"
 					:label="item.meta.title"
+					:class="{ disabled: !index && item.children.length }"
 				/>
 			</tiny-breadcrumb>
 		</div>
-		<router-view :key="route.path" v-slot="{ Component }">
+		<router-view v-slot="{ Component }">
 			<transition appear name="fade-transform" mode="out-in">
 				<keep-alive>
 					<component :is="Component" />
@@ -29,17 +28,15 @@
 		height: calc(100vh - 60px - 60px);
 		overflow-y: auto;
 		padding: 20px;
-		.breadcrumb {
+		.main-breadcrumb {
 			margin-bottom: 10px;
+			.disabled :deep(.tiny-breadcrumb__inner:hover) {
+				cursor: default;
+				color: var(--ti-breadcrumb-text-color);
+			}
 		}
 		:deep(.tiny-breadcrumb .tiny-breadcrumb__item) {
 			cursor: pointer;
-			&:first-child {
-				cursor: default;
-				.tiny-breadcrumb__inner:hover {
-					color: var(--ti-breadcrumb-text-color);
-				}
-			}
 		}
 	}
 </style>
