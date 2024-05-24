@@ -11,7 +11,6 @@ export const useTabsListStore = defineStore(storeKey, {
 			if (!isEmpty(key)) Object.assign(this.$state, { [key]: value })
 		},
 		remove(key) {
-			console.log(key)
 			if (isEmpty(this.$state)) return
 			delete this.$state[key]
 		},
@@ -28,7 +27,7 @@ export const useTabsListStore = defineStore(storeKey, {
 		strategies: [
 			{
 				key: storeKey,
-				storage: localStorage
+				storage: window.localStorage
 			}
 		]
 	}

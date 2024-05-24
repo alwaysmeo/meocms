@@ -1,5 +1,4 @@
 'use strict'
-import { isEmpty } from 'radash'
 import { defineStore } from 'pinia'
 import STORAGE_KEY from '@utils/storageKey'
 
@@ -18,7 +17,7 @@ export const useSidebarStore = defineStore(storeKey, {
 			}
 		},
 		setCollaps(collapsed) {
-			this.collapsed = !this.collapsed
+			this.collapsed = collapsed ?? !this.collapsed
 		},
 		clear() {
 			this.list = []

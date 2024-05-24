@@ -26,7 +26,7 @@ export const userInfoStore = defineStore(storeKey, {
 		strategies: [
 			{
 				key: storeKey,
-				storage: localStorage
+				storage: window.localStorage
 			}
 		]
 	}

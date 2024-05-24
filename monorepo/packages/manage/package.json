@@ -7,7 +7,7 @@
     "scripts": {
         "dev": "vite --host --mode development",
         "build": "vite build --emptyOutDir --mode production",
-        "lint": "eslint --ext .js,.vue src",
-        "format": "prettier --write \"src/**/*.{js,vue,json,scss}\""
+        "lint": "eslint 'src/**/*.{vue,js,json}'",
+        "format": "prettier --write 'src/**/*.{vue,js,json,scss}'"
     }
 }
