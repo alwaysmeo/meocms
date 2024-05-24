@@ -6,6 +6,5 @@
     "semi": false,
     "trailingComma": "none",
     "singleQuote": true,
-    "bracketSpacing": true,
-    "editor.formatOnSave": true
+    "bracketSpacing": true
 }
