@@ -1,82 +1,62 @@
 <script setup>
-	import { pascal } from 'radash'
+	import { last } from 'radash'
+	import { useTabsListStore } from '@stores/tabsListStore.js'
 
 	const route = useRoute()
 	const router = useRouter()
+	const tabsListStore = useTabsListStore()
 
 	const tabs_active = ref('')
-	const tabs_list = reactive([])
+	const tabs_list = tabsListStore.get()
 
 	watch(
 		route,
 		(to, from) => {
-			const names = to.matched
+			const value = to.matched
 				.filter((item) => item.name)
-				.map((item) => item.name)
+				.map((item) => item)
 				.slice(0, 2)
-			const name = names[names.length - 1]
-			tabs_active.value = name
-			console.log(route)
-			if (!tabs_list.some((item) => item.name === name)) {
-				tabs_list.push({ name, title: route.meta.title })
-			}
+			const last_value = last(value)
+			tabs_active.value = last_value.name
+			tabsListStore.add({ key: last_value.name, value: last_value.meta.title })
 		},
-		{
-			immediate: true
-		}
+		{ immediate: true }
 	)
-
-	const cacheAllow = computed(() => {
-		console.log(tabs_list.map((item) => pascal(item.name)))
-		return tabs_list.map((item) => pascal(item.name))
-	})
-
-	const component = ref(null)
-
-	function setComp(com) {
-		console.log(com)
-		component.value = com
-	}
-
-	function closeTabs(name) {
-		tabs_list.splice(
-			tabs_list.findIndex((item) => item.name === name),
-			1
-		)
-	}
 </script>
 
 <template>
-	<div class="main-app">
+	<div>
 		<div class="main-tabs">
 			<tiny-tabs
 				v-model="tabs_active"
 				:with-close="true"
 				tab-style="card"
 				@click="router.push({ name: $event.name })"
-				@close="closeTabs"
+				@close="tabsListStore.remove($event)"
 			>
-				<tiny-tab-item v-for="item in tabs_list" :key="item.name" :title="item.title" :name="item.name" />
+				<tiny-tab-item v-for="(value, key) in tabs_list" :key="key" :title="value" :name="key" />
 			</tiny-tabs>
 		</div>
-		<div class="main-breadcrumb">
-			<tiny-breadcrumb>
-				<tiny-breadcrumb-item
-					v-for="(item, index) in $route.matched.filter((item) => item.name)"
-					:key="item.name"
-					:to="index ? { name: item.name } : {}"
-					:label="item.meta.title"
-					:class="{ disabled: !index && item.children.length }"
-				/>
-			</tiny-breadcrumb>
+		<div class="main-app">
+			<div class="main-breadcrumb">
+				<tiny-breadcrumb>
+					<tiny-breadcrumb-item
+						v-for="(item, index) in route.matched.filter((item) => item.name)"
+						:key="item.name"
+						:to="index ? { name: item.name } : {}"
+						:label="item.meta.title"
+						:class="{ disabled: !index && item.children.length }"
+					/>
+				</tiny-breadcrumb>
+			</div>
+			<router-view v-slot="{ Component }">
+				<transition appear name="fade-transform" mode="out-in">
+					<keep-alive>
+						<component :is="Component" />
+					</keep-alive>
+				</transition>
+			</router-view>
 		</div>
-		<router-view v-slot="{ Component: comp }">
-			<transition appear name="fade-transform" mode="out-in">
-				<keep-alive :include="['Home', 'SystemPermission', 'System', 'RouterView']">
-					<component :is="(setComp(comp), component)" />
-				</keep-alive>
-			</transition>
-		</router-view>
 	</div>
 </template>
 

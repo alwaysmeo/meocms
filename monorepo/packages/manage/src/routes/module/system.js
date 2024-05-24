@@ -1,10 +1,12 @@
 'use strict'
 
+import component from '@components/layout/Component.vue'
+
 export default {
 	path: 'system',
 	name: 'system',
 	meta: { title: '系统管理' },
-	component: { template: '<router-view />' },
+	component,
 	children: [
 		{
 			path: 'user',
