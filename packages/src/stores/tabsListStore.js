@@ -24,11 +24,6 @@ export const useTabsListStore = defineStore(storeKey, {
 	getters: {},
 	persist: {
 		enabled: true,
-		strategies: [
-			{
-				key: storeKey,
-				storage: window.localStorage
-			}
-		]
+		key: storeKey
 	}
 })

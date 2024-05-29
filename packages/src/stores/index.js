@@ -1,7 +1,10 @@
 import { createPinia } from 'pinia'
-import piniaPersistedstate from 'pinia-plugin-persistedstate'
+import { createPersistedState } from 'pinia-plugin-persistedstate'
+import localforage from 'localforage'
 
-const store = createPinia()
-store.use(piniaPersistedstate)
+const pinia = createPinia()
+pinia.use(createPersistedState({
+	storage: window.localStorage
+}))
 
-export default store
+export default pinia
