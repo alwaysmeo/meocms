@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => {
 		plugins: [
 			vue(),
 			vueJsx(),
-			// viteVueDevTools(),
+			viteVueDevTools(),
 			viteRemoveConsole({
 				externalValue: ['version']
 			}),

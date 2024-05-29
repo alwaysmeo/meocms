@@ -1,6 +1,7 @@
 {
 	"compilerOptions": {
 		"baseUrl": ".",
+		"module": "ES2022",
 		"paths": {
 			"@/*": ["src/*"],
 			"@apis/*": ["src/apis/*"],

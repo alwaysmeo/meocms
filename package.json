@@ -1,0 +1,8 @@
+{
+	"scripts": {
+		"dev": "pnpm -C ./packages dev",
+		"build": "pnpm -C ./packages build",
+		"lint": "pnpm -C ./packages lint",
+		"format": "pnpm -C ./packages format"
+	}
+}
