@@ -1,4 +1,5 @@
 <script setup>
+	defineOptions({ name: 'SystemPermission' })
 	const count = ref(0)
 
 	onActivated(() => {

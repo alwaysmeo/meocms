@@ -1,4 +1,6 @@
-<script setup></script>
+<script setup>
+	defineOptions({ name: 'Login' })
+</script>
 
 <template>
 	<tiny-button>登录</tiny-button>

@@ -11,7 +11,7 @@
 
 	watch(
 		route,
-		(to, from) => {
+		(to) => {
 			const value = to.matched
 				.filter((item) => item.name)
 				.map((item) => item)
@@ -51,9 +51,7 @@
 			</div>
 			<router-view v-slot="{ Component }">
 				<transition appear name="fade-transform" mode="out-in">
-					<keep-alive>
-						<component :is="Component" />
-					</keep-alive>
+					<component :is="Component" />
 				</transition>
 			</router-view>
 		</div>
