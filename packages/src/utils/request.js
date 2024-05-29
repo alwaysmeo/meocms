@@ -2,7 +2,7 @@ import Axios from 'axios'
 
 const axios = Axios.create({
 	timeout: 30000,
-	baseUrl: ''
+	baseUrl: import.meta.env.VITE_API_DOMAIN
 })
 
 axios.defaults.headers.post['Content-Type'] = 'application/json'
