@@ -1,5 +1,5 @@
 <script setup>
-	import { last } from 'radash'
+	import { isEmpty, isEqual, last } from 'radash'
 	import { useTabsListStore } from '@stores/tabsListStore.js'
 
 	const route = useRoute()
@@ -8,6 +8,10 @@
 
 	const tabs_active = ref('')
 	const tabs_list = tabsListStore.get()
+	const tabs_with_close = computed(() => {
+		const keys = Object.keys(tabs_list)
+		return !isEqual(keys.length, 1) || !isEqual(keys[0], 'home')
+	})
 
 	watch(
 		route,
@@ -22,6 +26,12 @@
 		},
 		{ immediate: true }
 	)
+
+	function closeTabs(event) {
+		tabsListStore.remove(event)
+		if (isEmpty(tabs_list)) return router.replace({ name: 'home' })
+		if (isEqual(route.name, event)) return router.replace({ name: Object.keys(tabs_list)[0] })
+	}
 </script>
 
 <template>
@@ -29,10 +39,15 @@
 		<div class="main-tabs">
 			<tiny-tabs
 				v-model="tabs_active"
-				:with-close="true"
+				:with-close="tabs_with_close"
+				overflow-title
+				show-more-tabs
+				more-show-all
+				size="small"
 				tab-style="card"
+				title-width="120px"
+				@close="closeTabs"
 				@click="router.push({ name: $event.name })"
-				@close="tabsListStore.remove($event)"
 			>
 				<tiny-tab-item v-for="(value, key) in tabs_list" :key="key" :title="value" :name="key" />
 			</tiny-tabs>
@@ -59,8 +74,23 @@
 </template>
 
 <style scoped lang="scss">
+	.main-tabs {
+		:deep(.tiny-tabs__content) {
+			margin: 0;
+		}
+		:deep(.tiny-tabs.tiny-tabs--card > .tiny-tabs__header .tiny-tabs__nav) {
+			border-top: none;
+			border-left: none;
+		}
+		:deep(.tiny-tabs.tiny-tabs--small .tiny-tabs__item) {
+			border-top: none;
+			height: 40px;
+			line-height: 1;
+		}
+	}
+
 	.main-app {
-		height: calc(100vh - 60px - 60px);
+		height: calc(100vh - 60px - 60px - 40px);
 		overflow-y: auto;
 		padding: 20px;
 		.main-breadcrumb {

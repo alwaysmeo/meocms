@@ -10,7 +10,7 @@
 		<Header />
 		<div class="main">
 			<Sidebar />
-			<div>
+			<div class="content-container">
 				<AppMain />
 				<Footer />
 			</div>
@@ -22,5 +22,8 @@
 	.layout .main {
 		display: grid;
 		grid-template-columns: auto 1fr;
+		.content-container {
+			overflow: hidden;
+		}
 	}
 </style>
