@@ -1,0 +1,52 @@
+// 全局公共样式类名
+
+.text-overflow {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+@for $i from 2 through 8 {
+	.text-overflow-#{$i} {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+		-webkit-line-clamp: #{$i};
+		-webkit-box-orient: vertical;
+		white-space: normal;
+	}
+}
+
+.white-space-pre-wrap {
+	white-space: pre-wrap;
+}
+
+.text-align-left {
+	text-align: left;
+}
+.text-align-right {
+	text-align: right;
+}
+.text-align-center {
+	text-align: center;
+}
+.text-align-justify {
+	text-align: justify;
+}
+
+.font-weight-light {
+	font-weight: 300;
+}
+.font-weight-normal {
+	font-weight: 400;
+}
+.font-weight-bold {
+	font-weight: 700;
+}
+
+.active:active {
+	opacity: 0.6;
+}
+
+.text-indent {
+	text-indent: 2em;
+}

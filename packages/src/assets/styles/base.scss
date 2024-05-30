@@ -1,10 +1,15 @@
 // 基础样式
 html,
 body,
-p {
+p,
+ul {
 	margin: 0;
 	padding: 0;
 	font-family: 'Microsoft Yahei';
+}
+
+body {
+	color: $color-text;
 }
 
 div,
