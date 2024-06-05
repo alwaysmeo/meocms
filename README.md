@@ -11,7 +11,7 @@
     <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## Change php version to 8.3
+## Change php version to >= 8.2
 
 `sudo update-alternatives --config php`
 
