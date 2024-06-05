@@ -16,6 +16,7 @@ class UsersSeeder extends Seeder
 	 */
 	public function run(): void
 	{
+		Users::query()->truncate();
 		# 创建系统超级管理员账号
 		Users::query()->create([
 			'ulid' => Str::ulid(),
