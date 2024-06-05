@@ -1,4 +1,6 @@
-<script setup></script>
+<script setup>
+	import { IconPublicHome, IconUser, IconDerive } from '@opentiny/vue-icon'
+</script>
 
 <template>
 	<div class="header">
@@ -6,6 +8,30 @@
 			<img src="" alt="logo" />
 		</div>
 		<div class="tools">
+			<tiny-popover placement="bottom-end" trigger="hover">
+				<template #reference>
+					<div class="user">
+						<tiny-user-head type="icon" min round />
+						<span>用户</span>
+					</div>
+				</template>
+				<div class="user-popover-container">
+					<div class="popover-body">
+						<div>
+							<tiny-icon-calendar />
+							<span>登录时间：2024-06-04 19:01:12</span>
+						</div>
+						<div>
+							<tiny-icon-mark-on />
+							<span>IP地址：114.114.114.114</span>
+						</div>
+					</div>
+					<div class="popover-footer">
+						<tiny-button type="text" icon="TinyIconUser">个人中心</tiny-button>
+						<tiny-button type="text" icon="TinyIconDerive">退出登录</tiny-button>
+					</div>
+				</div>
+			</tiny-popover>
 			<div>
 				<tiny-tooltip content="消息通知" placement="bottom">
 					<tiny-button icon="TinyIconPublicNotice" type="text" size="large" />
@@ -14,22 +40,16 @@
 					<tiny-button icon="TinyIconSetting" type="text" size="large" />
 				</tiny-tooltip>
 			</div>
-			<tiny-dropdown :show-icon="false" trigger="click">
-				<tiny-user-head type="icon" min round></tiny-user-head>
+			<tiny-dropdown class="site-dropdown" :show-icon="false" trigger="click" inherit-width>
+				<div class="now-site">
+					<tiny-icon-public-home />
+					<span>站点名称</span>
+				</div>
 				<template #dropdown>
 					<tiny-dropdown-menu visible-arrow>
-						<tiny-dropdown-item>
-							<tiny-icon-user class="header-dropdown-icon" />
-							<span>用户中心</span>
-						</tiny-dropdown-item>
-						<tiny-dropdown-item>
-							<tiny-icon-writing class="header-dropdown-icon" />
-							<span>用户设置</span>
-						</tiny-dropdown-item>
-						<tiny-dropdown-item>
-							<tiny-icon-derive class="header-dropdown-icon" />
-							<span>退出登录</span>
-						</tiny-dropdown-item>
+						<tiny-dropdown-item tip="站点1" tip-position="left">站点1</tiny-dropdown-item>
+						<tiny-dropdown-item tip="站点2" tip-position="left">站点2</tiny-dropdown-item>
+						<tiny-dropdown-item tip="站点3" tip-position="left">站点3</tiny-dropdown-item>
 					</tiny-dropdown-menu>
 				</template>
 			</tiny-dropdown>
@@ -50,18 +70,50 @@
 			align-items: center;
 			justify-content: flex-end;
 			gap: 20px;
+			.user {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				.tiny-user-head {
+					--ti-userhead-head-small-size: 30px;
+					--ti-userhead-head-icon-small-size: 12px;
+				}
+				span {
+					font-size: 14px;
+					color: #666;
+				}
+			}
+			.site-dropdown {
+				.now-site {
+					display: flex;
+					align-items: center;
+					gap: 5px;
+					font-size: 14px;
+					--ti-dropdown-icon-size: 14px;
+				}
+			}
 		}
 	}
-
-	.header-dropdown-icon {
-		vertical-align: text-top;
-		+ span {
-			padding-left: 5px;
+	.user-popover-container {
+		.popover-body {
+			margin-bottom: 12px;
+			> div {
+				display: flex;
+				align-items: center;
+				gap: 5px;
+				svg {
+					fill: #666;
+				}
+				&:not(:last-child) {
+					margin-bottom: 6px;
+				}
+			}
 		}
-	}
-	.tiny-user-head {
-		--ti-userhead-head-small-size: 34px;
-		--ti-dropdown-icon-color: white;
-		--ti-dropdown-icon-size: 14px;
+		.popover-footer {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 10px;
+		}
 	}
 </style>
