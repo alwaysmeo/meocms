@@ -16,8 +16,7 @@ class UsersSeeder extends Seeder
 	public function run(): void
 	{
 		# 创建系统超级管理员账号
-		Users::factory()->create([
-			'id' => 1,
+		Users::query()->create([
 			'ulid' => '00000000',
 			'email' => env('ADMIN_DEFAULT_EMAIL', 'email@email.com'),
 			'password' => Hash::make(env('ADMIN_DEFAULT_PASSWORD', '123456')),

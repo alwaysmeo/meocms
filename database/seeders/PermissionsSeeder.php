@@ -15,10 +15,8 @@ class PermissionsSeeder extends Seeder
 	public function run(): void
 	{
 		# 创建系统权限列表
-		$data = [
+		Permissions::query()->insert([
 			['parent_id' => Null, 'code' => 'home', 'name' => '首页', 'description' => '首页', 'icon' => 'TinyIconPublicHome', 'url' => '/home', 'slot' => 0, 'level' => 1, 'show' => 1]
-		];
-		foreach ($data as $item)
-			Permissions::factory()->create($item);
+		]);
 	}
 }
