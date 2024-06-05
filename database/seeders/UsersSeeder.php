@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Users;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -16,7 +16,7 @@ class UsersSeeder extends Seeder
 	public function run(): void
 	{
 		# 创建系统超级管理员账号
-		User::factory()->create([
+		Users::factory()->create([
 			'id' => 1,
 			'ulid' => '00000000',
 			'email' => env('ADMIN_DEFAULT_EMAIL', 'email@email.com'),
