@@ -19,9 +19,5 @@ export const useSidebarStore = defineStore(storeKey, {
 			this.$state = new Array()
 		}
 	},
-	getters: {},
-	persist: {
-		enabled: false,
-		key: storeKey
-	}
+	getters: {}
 })

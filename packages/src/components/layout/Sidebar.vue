@@ -6,24 +6,27 @@
 
 	const sidebarStore = useSidebarStore()
 
-	const treeMenuRef = ref([])
 	const sidebar_list = reactive([])
 
 	onMounted(async () => {
-		await sidebar_list.push(...sidebarStore.get())
-	})
-
-	const expanded_keys = computed(() => {
-		return route.matched
+		const data = await sidebarStore.get()
+		sidebar_list.push(
+			...data.map((item) => {
+				return { ...item, customIcon: item.icon }
+			})
+		)
+		// 默认选中
+		expanded_keys.value = route.matched
 			.filter((item) => item.name)
 			.map((item) => item.name)
 			.slice(0, 2)
-	})
-	const expanded_keys_highlight = computed(() => {
-		return expanded_keys.value[expanded_keys.value.length - 1]
+		expanded_keys_highlight.value = expanded_keys.value[expanded_keys.value.length - 1]
 	})
 
-	function handleMenu(data, node) {
+	const expanded_keys = ref()
+	const expanded_keys_highlight = ref()
+
+	function handleMenu(data) {
 		router.push({ name: data.code })
 	}
 </script>
@@ -37,7 +40,6 @@
 			:indent="36"
 			:default-expanded-keys="expanded_keys"
 			:default-expanded-keys-highlight="expanded_keys_highlight"
-			ref="treeMenuRef"
 			node-key="code"
 			ellipsis
 			menu-collapsible

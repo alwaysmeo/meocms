@@ -22,7 +22,7 @@ class Permissions extends Model
         'name',
         'description',
         'icon',
-        'url',
+        'path',
         'slot',
         'level',
         'show'

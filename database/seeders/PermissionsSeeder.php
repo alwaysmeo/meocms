@@ -22,7 +22,7 @@ class PermissionsSeeder extends Seeder
 				'name' => '首页',
 				'description' => '首页',
 				'icon' => 'TinyIconPublicHome',
-				'url' => '/home',
+				'path' => '/home',
 				'level' => 1
 			],
 			[
@@ -30,28 +30,28 @@ class PermissionsSeeder extends Seeder
 				'name' => '系统管理',
 				'description' => '系统管理',
 				'icon' => 'TinyIconDataSource',
-				'url' => '/system',
+				'path' => '/system',
 				'level' => 1
 			],
 			[
 				'code' => 'system-user',
 				'name' => '用户管理',
 				'description' => '系统管理-用户管理',
-				'url' => '/system/user',
+				'path' => '/system/user',
 				'level' => 2
 			],
 			[
 				'code' => 'system-role',
 				'name' => '角色管理',
 				'description' => '系统管理-角色管理',
-				'url' => '/system/role',
+				'path' => '/system/role',
 				'level' => 2
 			],
 			[
 				'code' => 'system-permission',
 				'name' => '权限管理',
 				'description' => '系统管理-权限管理',
-				'url' => '/system/permission',
+				'path' => '/system/permission',
 				'level' => 2
 			],
 		];

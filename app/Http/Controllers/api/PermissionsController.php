@@ -25,11 +25,7 @@ class PermissionsController extends Controller
 
 	public function list(Request $request): Response
 	{
-		$list = Permissions::query()
-			->get();
-		return $this->success([
-			'list' => $list->toArray(),
-			'code' => 200,
-		]);
+		$list = Permissions::query()->get();
+		return $this->success($this->buildTree($list->toArray()));
 	}
 }
