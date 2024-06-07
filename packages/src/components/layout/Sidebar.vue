@@ -1,39 +1,17 @@
 <script setup>
+	import { useSidebarStore } from '@stores/sidebarStore'
+
 	const route = useRoute()
 	const router = useRouter()
 
+	const sidebarStore = useSidebarStore()
+
 	const treeMenuRef = ref([])
-	const sidebar_list = reactive([
-		{
-			id: 1,
-			code: 'home',
-			customIcon: 'TinyIconPublicHome',
-			name: '首页'
-		},
-		{
-			id: 2,
-			code: 'system',
-			customIcon: 'TinyIconDataSource',
-			name: '系统管理',
-			children: [
-				{
-					id: 3,
-					code: 'system-user',
-					name: '用户管理'
-				},
-				{
-					id: 4,
-					code: 'system-role',
-					name: '角色管理'
-				},
-				{
-					id: 5,
-					code: 'system-permission',
-					name: '权限管理'
-				}
-			]
-		}
-	])
+	const sidebar_list = reactive([])
+
+	onMounted(async () => {
+		await sidebar_list.push(...sidebarStore.get())
+	})
 
 	const expanded_keys = computed(() => {
 		return route.matched

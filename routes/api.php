@@ -12,3 +12,7 @@
 */
 
 
+use App\Http\Controllers\api\PermissionsController;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/permissions/list', [PermissionsController::class, 'list']); // 获取用户权限列表

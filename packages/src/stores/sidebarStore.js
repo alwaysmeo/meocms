@@ -1,27 +1,27 @@
 'use strict'
+import { isEmpty, isEqual } from 'radash'
 import { defineStore } from 'pinia'
 import STORAGE_KEY from '@utils/storageKey'
+import permissionsApi from '@apis/permissions'
 
 const storeKey = STORAGE_KEY.SIDEBAR_LIST
 export const useSidebarStore = defineStore(storeKey, {
-	state: () => ({
-		list: [],
-		code: [],
-		collapsed: false // 侧边栏是否折叠
-	}),
+	state: () => new Array(),
 	actions: {
 		async get() {
-			return {
-				list: this.list,
-				code: this.code
+			if (isEmpty(this.$state)) {
+				const { code, data } = await permissionsApi.list()
+				if (isEqual(code, 200)) this.$state = data
 			}
-		},
-		setCollaps(collapsed) {
-			this.collapsed = collapsed ?? !this.collapsed
+			return this.$state
 		},
 		clear() {
-			this.list = []
-			this.code = []
+			this.$state = new Array()
 		}
+	},
+	getters: {},
+	persist: {
+		enabled: false,
+		key: storeKey
 	}
 })
