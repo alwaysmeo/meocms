@@ -15,10 +15,10 @@ return new class extends Migration
         Schema::create('permissions', function (Blueprint $table) {
             $table->id();
             $table->integer('parent_id')->nullable()->comment('父级ID');
-            $table->string('code', 30)->comment('唯一标识');
+            $table->string('code', 50)->comment('唯一标识');
             $table->string('name', 30)->comment('权限名称');
-            $table->string('description', 120)->nullable()->comment('权限描述');
-            $table->string('icon', 20)->nullable()->comment('权限图标');
+            $table->string('description', 200)->nullable()->comment('权限描述');
+            $table->string('icon', 30)->nullable()->comment('权限图标');
             $table->string('path', 255)->comment('页面路径地址');
             $table->integer('slot')->comment('菜单排序');
             $table->tinyInteger('level')->default(1)->comment('菜单层级 【1:一级, 2:二级, 3:三级】');

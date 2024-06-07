@@ -54,6 +54,79 @@ class PermissionsSeeder extends Seeder
 				'path' => '/system/permission',
 				'level' => 2
 			],
+			[
+				'code' => 'content',
+				'name' => '内容管理',
+				'description' => '内容管理',
+				'icon' => 'TinyIconText',
+				'path' => '/content',
+				'level' => 1
+			],
+			[
+				'code' => 'content-article',
+				'name' => '内容管理',
+				'description' => '内容管理-文章管理',
+				'path' => '/content/article',
+				'level' => 2
+			],
+			[
+				'code' => 'content-model',
+				'name' => '内容模型管理',
+				'description' => '内容管理-内容模型管理',
+				'path' => '/content/model',
+				'level' => 2
+			],
+			[
+				'code' => 'content-timing',
+				'name' => '定时任务',
+				'description' => '内容管理-定时任务',
+				'path' => '/content/timing',
+				'level' => 2
+			],
+			[
+				'code' => 'column',
+				'name' => '栏目管理',
+				'description' => '栏目管理',
+				'icon' => 'TinyIconEditorAlignLeft',
+				'path' => '/column',
+				'level' => 1
+			],
+			[
+				'code' => 'column-model',
+				'name' => '栏目模型管理',
+				'description' => '栏目管理-栏目模型管理',
+				'path' => '/column/model',
+				'level' => 2
+			],
+			[
+				'code' => 'statistics',
+				'name' => '数据统计',
+				'description' => '数据统计',
+				'icon' => 'TinyIconAreaChart',
+				'path' => '/statistics',
+				'level' => 1
+			],
+			[
+				'code' => 'statistics-general',
+				'name' => '网站概况',
+				'description' => '数据统计-网站概况',
+				'path' => '/statistics/general',
+				'level' => 2
+			],
+			[
+				'code' => 'statistics-visitor',
+				'name' => '访客分析',
+				'description' => '数据统计-访客分析',
+				'path' => '/statistics/visitor',
+				'level' => 2
+			],
+			[
+				'code' => 'statistics-content',
+				'name' => '内容数据统计',
+				'description' => '数据统计-内容数据统计',
+				'path' => '/statistics/content',
+				'level' => 2
+			],
 		];
 		for ($i = 0; $i < count($data); $i++) $data[$i]['slot'] = $i;
 		foreach ($data as $item) {
