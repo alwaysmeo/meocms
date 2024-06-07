@@ -8,6 +8,9 @@
 
 	const sidebar_list = reactive([])
 
+	const expanded_keys = ref()
+	const expanded_keys_highlight = ref()
+
 	onMounted(async () => {
 		const data = await sidebarStore.get()
 		sidebar_list.push(
@@ -15,16 +18,21 @@
 				return { ...item, customIcon: item.icon }
 			})
 		)
-		// 默认选中
+		setExpanded()
+	})
+
+	watch(route, () => {
+		setExpanded()
+	})
+
+	// 默认选中
+	function setExpanded() {
 		expanded_keys.value = route.matched
 			.filter((item) => item.name)
 			.map((item) => item.name)
 			.slice(0, 2)
 		expanded_keys_highlight.value = expanded_keys.value[expanded_keys.value.length - 1]
-	})
-
-	const expanded_keys = ref()
-	const expanded_keys_highlight = ref()
+	}
 
 	function handleMenu(data) {
 		router.push({ name: data.code })
