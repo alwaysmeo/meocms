@@ -11,12 +11,17 @@
 |
 */
 
+use App\Http\Controllers\api\AccountController;
 use App\Http\Controllers\api\PermissionsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/user', function (Request $request) {
-    return $request->user();
+	return $request->user();
 })->middleware('auth:sanctum');
 
 Route::get('/permissions/list', [PermissionsController::class, 'list']); // 获取用户权限列表
+
+Route::group(['prefix' => 'account'], function () {
+	Route::post('/login', [AccountController::class, 'login']); // 用户登录
+});

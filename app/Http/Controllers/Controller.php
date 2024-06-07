@@ -13,7 +13,7 @@ abstract class Controller
 		return response($result);
 	}
 
-	protected function error($data = null, $message = 'error', $code = 0): Response
+	protected function fail($data = null, $message = 'error', $code = 0): Response
 	{
 		$result = ['data' => $data, 'message' => $message, 'code' => $code];
 		return response($result);
