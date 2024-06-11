@@ -25,4 +25,6 @@ Route::get('/permissions/list', [PermissionsController::class, 'list']);
 Route::group(['prefix' => 'account'], function () {
 	/* 用户登录 */
 	Route::post('/login', [AccountController::class, 'login']);
+	/* 用户注册/新增 */
+	Route::post('/register', [AccountController::class, 'register']);
 });
