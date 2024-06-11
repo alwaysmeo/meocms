@@ -16,7 +16,7 @@ return new class extends Migration
 			$table->id();
 			$table->ulid('user_id')->comment('用户id');
 			$table->ulid('control_user_id')->comment('操作人用户id');
-			$table->tinyInteger('type')->default(0)->comment('操作类型 【0:其他, 1:注册, 2:登录 3:登出 4:注销 5:修改信息 6:封禁, 7:解封, 8:重置密码');
+			$table->tinyInteger('type')->default(0)->comment('操作类型 【0:其他, 1:注册, 2:登录/登出 3:注销 4:修改信息 5:封禁, 6:解封, 7:重置密码');
 			$table->string('description', 200)->nullable()->comment('描述信息');
 			$table->ipAddress('ip')->nullable()->comment('操作者IP地址');
 			$table->string('longitude', 30)->nullable()->comment('操作者经度');

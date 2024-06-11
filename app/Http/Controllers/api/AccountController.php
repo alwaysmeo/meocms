@@ -9,6 +9,8 @@ use App\Services\Common;
 use App\Services\Mapping;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -41,10 +43,12 @@ class AccountController extends Controller
 			'user_id' => $user->ulid,
 			'control_user_id' => $user->ulid,
 			'type' => 2,
-			'description' => '账号登录',
+			'description' => '账号登录/登出',
 			'ip' => $common->ip($request)
 		]);
-		return $this->success($user);
+		Cache::put('user-'.$user['ulid'], $token, now()->addMinutes(intval(env('CACHE_DURATION'))));
+		$cookie = Cookie::make('token', $token, env('CACHE_DURATION'));
+		return $this->success($user)->cookie($cookie);
 	}
 
 	public function register(Request $request): Response
@@ -62,7 +66,7 @@ class AccountController extends Controller
 		Users::query()->create([
 			'email' => $req['account'],
 			'password' => Hash::make($req['password']),
-			'nickname' => '用户' . time()
+			'nickname' => '用户'.time()
 		]);
 		return $this->success();
 	}
