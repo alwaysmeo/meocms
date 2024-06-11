@@ -27,4 +27,6 @@ Route::group(['prefix' => 'account'], function () {
 	Route::post('/login', [AccountController::class, 'login']);
 	/* 用户注册/新增 */
 	Route::post('/register', [AccountController::class, 'register']);
+	/* 用户登出 */
+	Route::post('/logout', [AccountController::class, 'logout']);
 });

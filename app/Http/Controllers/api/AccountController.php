@@ -70,4 +70,17 @@ class AccountController extends Controller
 		]);
 		return $this->success();
 	}
+
+	public function logout(Request $request): Response
+	{
+		$user = auth('auth')->user();
+		Users::query()->where('id', $user['id'])->update(['token' => null]);
+		AccountRecord::query()
+			->where(['type' => 2, 'user_id' => $user['ulid']])
+			->latest('id')
+			->update(['updated_at' => date('Y-m-d H:i:s')]);
+		Cache::forget('user-'.$user['ulid']);
+		$cookie = Cookie::make('token', null, -1);
+		return $this->success()->cookie($cookie);
+	}
 }
