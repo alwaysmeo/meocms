@@ -2,15 +2,17 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class Users extends Authenticatable
 {
-	use HasFactory, Notifiable;
+	use HasUlids, HasFactory, Notifiable;
 
 	protected $table = 'users';
+	protected $primaryKey = 'ulid';
 
 	/**
 	 * The attributes that are mass assignable.

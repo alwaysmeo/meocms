@@ -60,7 +60,6 @@ class AccountController extends Controller
 		if ($user) return $this->fail(null, Mapping::$code['3002'], 3002);
 		// 创建用户
 		Users::query()->create([
-			'ulid' => Str::ulid(),
 			'email' => $req['account'],
 			'password' => Hash::make($req['password']),
 			'nickname' => '用户' . time()
