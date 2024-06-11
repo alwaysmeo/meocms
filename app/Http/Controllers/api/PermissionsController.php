@@ -13,7 +13,6 @@ class PermissionsController extends Controller
 	{
 		$branch = array();
 		foreach ($elements as $element) {
-			$index = 0;
 			if ($element['parent_id'] === $parentId) {
 				$children = $this->buildTree($elements, $element['id']);
 				if ($children) $element['children'] = $children;
