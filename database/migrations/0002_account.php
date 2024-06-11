@@ -14,8 +14,8 @@ return new class extends Migration
 		/* 账号操作记录表 */
 		Schema::create('account_record', function (Blueprint $table) {
 			$table->id();
-			$table->char('user_id', 26)->comment('用户id');
-			$table->char('control_user_id', 26)->comment('操作人用户id');
+			$table->ulid('user_id')->comment('用户id');
+			$table->ulid('control_user_id')->comment('操作人用户id');
 			$table->tinyInteger('type')->comment('操作类型 【0:未知, 1:注册, 2:登录 3:登出 4:注销 5:修改信息 6:封禁, 7:解封, 8:重置密码');
 			$table->string('description', 120)->nullable()->comment('描述信息');
 			$table->ipAddress('ip')->comment('操作者IP地址');

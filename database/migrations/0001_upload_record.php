@@ -14,7 +14,7 @@ return new class extends Migration
         /* 素材文件上传记录表 */
         Schema::create('upload_record', function (Blueprint $table) {
             $table->id()->primary()->unique();
-            $table->integer('user_id')->comment('上传者用户id');
+            $table->ulid('user_id')->comment('上传者用户id');
             $table->string('url', 255)->comment('文件路径');
             $table->tinyInteger('type')->default(0)->comment('文件类型【0:其他, 1:图片, 2:视频, 3:文件, 4:音频】');
             $table->string('origin_name', 200)->comment('源文件名称');
