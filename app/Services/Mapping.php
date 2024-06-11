@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-class ValidatorMap
+class Mapping
 {
 	public static array $code = [
 		'1000' => 'Token失效，请重新登录',
@@ -25,20 +25,5 @@ class ValidatorMap
 		'6000' => '已有申请在审核中，请勿重复提交',
 
 		'7000' => '当前QQ账号暂未绑定本站点邮箱',
-	];
-
-
-	// 自定义验证错误信息
-	public static array $message = [
-		'required' => ':attribute参数错误',
-		'in' => ':attribute参数错误',
-		'account.email' => '账号格式错误',
-		'password.regex' => '密码必须是字母或数字',
-		'password.between' => '密码长度必需在:min至:max位之间',
-		'code.digits' => '验证码必须是6位数字',
-		'image.mimes' => '文件格式格式错误',
-		'image.between' => '文件大小超过限制',
-		'file.mimes' => '文件格式格式错误',
-		'file.between' => '文件大小超过限制',
 	];
 }
