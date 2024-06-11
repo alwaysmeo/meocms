@@ -2,22 +2,23 @@
 
 namespace App\Models;
 
+use App\Casts\Json;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class PermissionsRole extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-    protected $table = 'permissions_role';
+	protected $table = 'permissions_role';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'role_id',
-        'permission_ids'
-    ];
+	protected $fillable = [
+		'role_id',
+		'permission_ids'
+	];
+
+	protected function casts(): array
+	{
+		return ['permission_ids' => Json::class];
+	}
 }

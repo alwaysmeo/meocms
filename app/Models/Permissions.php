@@ -11,11 +11,6 @@ class Permissions extends Model
 
     protected $table = 'permissions';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'parent_id',
         'code',

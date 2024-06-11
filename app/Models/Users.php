@@ -49,6 +49,7 @@ class Users extends Authenticatable
     {
         return [
             'password' => 'hashed',
+            'last_login_at' => 'datetime:Y-m-d H:i:s',
             'created_at' => 'datetime:Y-m-d H:i:s',
             'updated_at' => 'datetime:Y-m-d H:i:s',
             'deleted_at' => 'datetime:Y-m-d H:i:s'

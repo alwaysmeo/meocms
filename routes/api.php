@@ -13,15 +13,16 @@
 
 use App\Http\Controllers\api\AccountController;
 use App\Http\Controllers\api\PermissionsController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\api\TestController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
-	return $request->user();
-})->middleware('auth:sanctum');
+/* 测试 */
+Route::get('/test', [TestController::class, 'test']);
 
-Route::get('/permissions/list', [PermissionsController::class, 'list']); // 获取用户权限列表
+/* 获取用户权限列表 */
+Route::get('/permissions/list', [PermissionsController::class, 'list']);
 
 Route::group(['prefix' => 'account'], function () {
-	Route::post('/login', [AccountController::class, 'login']); // 用户登录
+	/* 用户登录 */
+	Route::post('/login', [AccountController::class, 'login']);
 });

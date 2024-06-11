@@ -11,11 +11,6 @@ class UploadRecord extends Model
 
     protected $table = 'upload_record';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'user_id',
         'url',
