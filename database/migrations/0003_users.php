@@ -21,7 +21,7 @@ return new class extends Migration
 		    $table->integer('picture')->nullable()->comment('用户头像');
 		    $table->bigInteger('phone')->nullable()->comment('手机号码');
 		    $table->tinyInteger('status')->default(1)->comment('账号状态【0:封禁, 1:正常】');
-		    $table->string('browser_fingerprint', 180)->comment('浏览器指纹');
+		    $table->string('browser_fingerprint', 180)->nullable()->comment('浏览器指纹');
 		    $table->dateTime('last_login_at')->nullable()->comment('最后一次登录时间');
 		    $table->dateTime('created_at')->useCurrent()->comment('注册时间');
 		    $table->dateTime('updated_at')->nullable()->useCurrentOnUpdate()->comment('更新时间');
