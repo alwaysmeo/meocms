@@ -23,7 +23,7 @@ class UsersSeeder extends Seeder
 			'email' => env('ADMIN_DEFAULT_EMAIL', 'email@email.com'),
 			'password' => Hash::make(env('ADMIN_DEFAULT_PASSWORD', '123456')),
 			'nickname' => '系统管理员',
-			'headimg' => 1
+			'picture' => 1
 		]);
 	}
 }
