@@ -20,7 +20,7 @@ class AccountController extends Controller
 	/** 用户登录 */
 	public function login(Request $request): Response
 	{
-		$req = $request->only(['account', 'password']);
+		$req = $request->only(['account', 'password', 'browser_fingerprint']);
 		$validator = Validator::make($req, [
 			'account' => 'required|email',
 			'password' => 'required|regex:/^[a-zA-Z0-9]+$/|between:6,20',
@@ -36,7 +36,12 @@ class AccountController extends Controller
 		if ($user->status === 0) return $this->fail(null, Mapping::$code['3000'], 3000);
 		// 生成token
 		$token = Str::random(128);
-		Users::query()->where('ulid', $user->ulid)->update(['token' => $token, 'last_login_at' => date('Y-m-d H:i:s')]);
+		Users::query()->where('ulid', $user->ulid)
+			->update([
+				'token' => $token,
+				'browser_fingerprint' => $req['browser_fingerprint'] ?? null,
+				'last_login_at' => date('Y-m-d H:i:s')
+			]);
 		// 添加登录记录
 		$common = new Common();
 		AccountRecord::query()->create([
@@ -46,8 +51,9 @@ class AccountController extends Controller
 			'description' => '账号登录/登出',
 			'ip' => $common->ip($request)
 		]);
-		Cache::put('user-'.$user['ulid'], $token, now()->addMinutes(intval(env('CACHE_DURATION'))));
-		$cookie = Cookie::make('token', $token, env('CACHE_DURATION'));
+		$cache_duration = intval(env('CACHE_DURATION'));
+		Cache::put('user-'.$user['ulid'], $token, now()->addMinutes($cache_duration));
+		$cookie = Cookie::make('token', $token, $cache_duration);
 		return $this->success($user)->cookie($cookie);
 	}
 
