@@ -31,28 +31,25 @@ class AccountController extends Controller
 		$user = Users::query()->where('email', $req['account'])->whereNull('deleted_at')->first();
 		if (!$user) return $this->fail(null, Mapping::$code['3002'], 3002);
 		// 验证密码
-		if (!Hash::check($req['password'], $user->password)) return $this->fail(null, Mapping::$code['3003'], 3003);
+		if (!Hash::check($req['password'], $user->getAuthPassword())) return $this->fail(null, Mapping::$code['3003'], 3003);
 		// 验证账号禁封状态
 		if ($user->status === 0) return $this->fail(null, Mapping::$code['3000'], 3000);
 		// 生成token
 		$token = Str::random(128);
-		Users::query()->where('ulid', $user->ulid)
-			->update([
-				'token' => $token,
-				'browser_fingerprint' => $req['browser_fingerprint'] ?? null,
-				'last_login_at' => date('Y-m-d H:i:s')
-			]);
+		$user->setRememberToken($token);
+		// 更新其他用户信息
+		$user->update(['browser_fingerprint' => $req['browser_fingerprint'] ?? null, 'last_login_at' => date('Y-m-d H:i:s')]);
 		// 添加登录记录
 		$common = new Common();
 		AccountRecord::query()->create([
-			'user_id' => $user->ulid,
-			'control_user_id' => $user->ulid,
+			'user_id' => $user->getAuthIdentifier(),
+			'control_user_id' => $user->getAuthIdentifier(),
 			'type' => 2,
 			'description' => '账号登录/登出',
 			'ip' => $common->ip($request)
 		]);
 		$cache_duration = intval(env('CACHE_DURATION'));
-		Cache::put('user-'.$user['ulid'], $token, now()->addMinutes($cache_duration));
+		Cache::put('user-'.$user->getAuthIdentifier(), $token, now()->addMinutes($cache_duration));
 		$cookie = Cookie::make('token', $token, $cache_duration);
 		return $this->success($user)->cookie($cookie);
 	}
@@ -80,7 +77,7 @@ class AccountController extends Controller
 	public function logout(Request $request): Response
 	{
 		$user = auth('auth')->user();
-		Users::query()->where('id', $user['id'])->update(['token' => null]);
+		Users::query()->where('ulid', $user['ulid'])->update(['token' => null]);
 		AccountRecord::query()
 			->where(['type' => 2, 'user_id' => $user['ulid']])
 			->latest('id')
