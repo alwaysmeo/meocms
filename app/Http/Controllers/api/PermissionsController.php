@@ -9,6 +9,7 @@ use Illuminate\Http\Response;
 
 class PermissionsController extends Controller
 {
+	/* 构建树形结构 */
 	protected function buildTree(array $elements, $parentId = null): array
 	{
 		$branch = array();
@@ -22,6 +23,7 @@ class PermissionsController extends Controller
 		return $branch;
 	}
 
+	/* 获取权限列表 */
 	public function list(Request $request): Response
 	{
 		$list = Permissions::query()->get();

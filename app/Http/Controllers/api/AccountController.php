@@ -17,7 +17,7 @@ use Illuminate\Support\Str;
 
 class AccountController extends Controller
 {
-	/** 用户登录 */
+	/* 登录 */
 	public function login(Request $request): Response
 	{
 		$req = $request->only(['account', 'password', 'browser_fingerprint']);
@@ -27,19 +27,19 @@ class AccountController extends Controller
 			'browser_fingerprint' => 'between:0,180'
 		]);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
-		// 用户是否存在
+		/* 用户是否存在 */
 		$user = Users::query()->where('email', $req['account'])->whereNull('deleted_at')->first();
 		if (!$user) return $this->fail(null, Mapping::$code['3001'], 3001);
-		// 验证密码
+		/* 验证密码 */
 		if (!Hash::check($req['password'], $user->getAuthPassword())) return $this->fail(null, Mapping::$code['3003'], 3003);
-		// 验证账号禁封状态
+		/* 验证账号禁封状态 */
 		if ($user->status === 0) return $this->fail(null, Mapping::$code['3000'], 3000);
-		// 生成token
+		/* 生成token */
 		$token = Str::random(128);
 		$user->setRememberToken($token);
-		// 更新其他用户信息
+		/* 更新其他用户信息 */
 		$user->update(['browser_fingerprint' => $req['browser_fingerprint'] ?? null, 'last_login_at' => date('Y-m-d H:i:s')]);
-		// 添加登录记录
+		/* 添加登录记录 */
 		$common = new Common();
 		AccountRecord::query()->create([
 			'user_id' => $user->getAuthIdentifier(),
@@ -54,6 +54,7 @@ class AccountController extends Controller
 		return $this->success($user)->cookie($cookie);
 	}
 
+	/* 注册 */
 	public function register(Request $request): Response
 	{
 		$req = $request->only(['account', 'password']);
@@ -62,10 +63,10 @@ class AccountController extends Controller
 			'password' => 'required|regex:/^[a-zA-Z0-9]+$/|between:6,20'
 		]);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
-		// 查询账号是否已存在
+		/* 验证账号是否已存在 */
 		$user = Users::query()->where('email', $req['account'])->whereNull('deleted_at')->first();
 		if ($user) return $this->fail(null, Mapping::$code['3002'], 3002);
-		// 创建用户
+		/* 创建用户 */
 		Users::query()->create([
 			'email' => $req['account'],
 			'password' => Hash::make($req['password']),
@@ -74,6 +75,7 @@ class AccountController extends Controller
 		return $this->success();
 	}
 
+	/* 登出 */
 	public function logout(): Response
 	{
 		$user = auth('auth')->user();
