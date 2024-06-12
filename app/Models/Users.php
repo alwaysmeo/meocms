@@ -40,7 +40,8 @@ class Users extends Authenticatable
 	 * @var array<int, string>
 	 */
 	protected $hidden = [
-		'password'
+		'password',
+		'browser_fingerprint'
 	];
 
 	protected $appends = ['picture_info'];
