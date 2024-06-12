@@ -29,7 +29,7 @@ class AccountController extends Controller
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
 		// 用户是否存在
 		$user = Users::query()->where('email', $req['account'])->whereNull('deleted_at')->first();
-		if (!$user) return $this->fail(null, Mapping::$code['3002'], 3002);
+		if (!$user) return $this->fail(null, Mapping::$code['3001'], 3001);
 		// 验证密码
 		if (!Hash::check($req['password'], $user->getAuthPassword())) return $this->fail(null, Mapping::$code['3003'], 3003);
 		// 验证账号禁封状态
@@ -74,7 +74,7 @@ class AccountController extends Controller
 		return $this->success();
 	}
 
-	public function logout(Request $request): Response
+	public function logout(): Response
 	{
 		$user = auth('auth')->user();
 		Users::query()->where('ulid', $user['ulid'])->update(['token' => null]);
