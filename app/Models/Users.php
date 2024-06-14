@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as AuthenticatableAuthenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class Users extends AuthenticatableAuthenticatable
 {
-	use HasUlids, HasFactory, Notifiable;
+	use HasApiTokens, HasUlids, HasFactory, Notifiable;
 
 	protected $table = 'users';
 	protected $primaryKey = 'ulid';

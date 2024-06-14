@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 
 class AccountController extends Controller
 {
@@ -34,10 +33,10 @@ class AccountController extends Controller
 		if (!Hash::check($req['password'], $user->getAuthPassword())) return $this->fail(null, Mapping::$code['3003'], 3003);
 		/* 验证账号禁封状态 */
 		if ($user->status === 0) return $this->fail(null, Mapping::$code['3000'], 3000);
-		/* 生成token */
-		$token = Str::random(128);
-		$user->setRememberToken($token);
-		/* 更新其他用户信息 */
+		/* 生成令牌 */
+		$token = $user->createToken(strtolower(env('APP_NAME')));
+		$user->setRememberToken($token->plainTextToken);
+		/* 更新用户信息 */
 		$user->update(['browser_fingerprint' => $req['browser_fingerprint'] ?? null, 'last_login_at' => date('Y-m-d H:i:s')]);
 		/* 添加登录记录 */
 		$common = new Common();
@@ -49,8 +48,8 @@ class AccountController extends Controller
 			'ip' => $common->ip($request)
 		]);
 		$cache_duration = intval(env('CACHE_DURATION'));
-		Cache::put('user-'.$user->getAuthIdentifier(), $token, now()->addMinutes($cache_duration));
-		$cookie = Cookie::make('token', $token, $cache_duration);
+		Cache::put('user-'.$user->getAuthIdentifier(), $token->plainTextToken, now()->addMinutes($cache_duration));
+		$cookie = Cookie::make('token', $token->plainTextToken, $cache_duration);
 		return $this->success($user)->cookie($cookie);
 	}
 
@@ -76,10 +75,10 @@ class AccountController extends Controller
 	}
 
 	/* 登出 */
-	public function logout(): Response
+	public function logout(Request $request): Response
 	{
 		$user = auth('auth')->user();
-		Users::query()->where('ulid', $user['ulid'])->update(['token' => null]);
+		$request->user()->currentAccessToken()->delete();
 		AccountRecord::query()
 			->where(['type' => 2, 'user_id' => $user['ulid']])
 			->latest('id')

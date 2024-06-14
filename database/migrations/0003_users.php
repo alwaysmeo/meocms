@@ -29,6 +29,18 @@ return new class extends Migration
 		    $table->charset('utf8mb4');
 		    $table->collation('utf8mb4_unicode_ci');
 	    });
+
+		/* 访问令牌表 */
+	    Schema::create('personal_access_tokens', function (Blueprint $table) {
+		    $table->id();
+		    $table->ulidMorphs('tokenable');
+		    $table->string('name');
+		    $table->string('token', 64)->unique();
+		    $table->text('abilities')->nullable();
+		    $table->timestamp('last_used_at')->nullable();
+		    $table->timestamp('expires_at')->nullable();
+		    $table->timestamps();
+	    });
     }
 
     /**
@@ -37,5 +49,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('users');
+	    Schema::dropIfExists('personal_access_tokens');
     }
 };
