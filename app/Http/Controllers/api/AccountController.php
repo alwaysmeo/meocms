@@ -10,12 +10,17 @@ use App\Services\Mapping;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class AccountController extends Controller
 {
+	/* 令牌失效回调 */
+	public function invalid(): Response
+	{
+		return $this->fail(null, Mapping::$code['1000'], 1000);
+	}
+
 	/* 登录 */
 	public function login(Request $request): Response
 	{
@@ -49,8 +54,7 @@ class AccountController extends Controller
 		]);
 		$cache_duration = intval(env('CACHE_DURATION'));
 		Cache::put('user-'.$user->getAuthIdentifier(), $token->plainTextToken, now()->addMinutes($cache_duration));
-		$cookie = Cookie::make('token', $token->plainTextToken, $cache_duration);
-		return $this->success($user)->cookie($cookie);
+		return $this->success($user);
 	}
 
 	/* 注册 */
@@ -77,14 +81,12 @@ class AccountController extends Controller
 	/* 登出 */
 	public function logout(Request $request): Response
 	{
-		$user = auth('auth')->user();
 		$request->user()->currentAccessToken()->delete();
 		AccountRecord::query()
-			->where(['type' => 2, 'user_id' => $user['ulid']])
+			->where(['type' => 2, 'user_id' => $request->user()->ulid])
 			->latest('id')
 			->update(['updated_at' => date('Y-m-d H:i:s')]);
-		Cache::forget('user-'.$user['ulid']);
-		$cookie = Cookie::make('token', null, -1);
-		return $this->success()->cookie($cookie);
+		Cache::forget('user-'.$request->user()->ulid);
+		return $this->success();
 	}
 }

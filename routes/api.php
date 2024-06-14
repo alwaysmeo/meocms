@@ -19,14 +19,21 @@ use Illuminate\Support\Facades\Route;
 /* 测试 */
 Route::get('/test', [TestController::class, 'test']);
 
-/* 获取用户权限列表 */
-Route::get('/permissions/list', [PermissionsController::class, 'list']);
 
 Route::group(['prefix' => 'account'], function () {
+	/* 令牌失效 */
+	Route::get('/invalid', [AccountController::class, 'invalid'])->name('login');
 	/* 用户登录 */
 	Route::post('/login', [AccountController::class, 'login']);
 	/* 用户注册/新增 */
 	Route::post('/register', [AccountController::class, 'register']);
 	/* 用户登出 */
-	Route::post('/logout', [AccountController::class, 'logout']);
+	Route::post('/logout', [AccountController::class, 'logout'])->middleware('auth:api');
+});
+
+Route::group(['middleware' => 'auth:api'], function () {
+	/* 文件上传 */
+//	Route::post('upload/file', [UploadController::class, 'uploadFile']); // 服务器 文件上传
+	/* 获取用户权限列表 */
+	Route::get('/permissions/list', [PermissionsController::class, 'list']);
 });
