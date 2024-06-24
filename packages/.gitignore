@@ -1,3 +1,10 @@
+
+# Editor directories and files
+.idea
+.vscode
+.svn
+.git
+
 node_modules
 .env.development
 .env.production
