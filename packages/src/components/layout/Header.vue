@@ -1,6 +1,4 @@
-<script setup>
-	import { IconPublicHome, IconUser, IconDerive } from '@opentiny/vue-icon'
-</script>
+<script setup></script>
 
 <template>
 	<div class="header">

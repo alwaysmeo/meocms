@@ -1,5 +1,6 @@
 <script setup>
 	import { useMessage } from '@hooks/useMessage'
+	import { isEqual } from 'radash'
 
 	defineOptions({ name: 'Login' })
 	const MIN_SPEED = 1
