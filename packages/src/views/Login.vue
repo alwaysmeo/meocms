@@ -2,6 +2,7 @@
 	import { iconUser, iconLock } from '@opentiny/vue-icon'
 	import { useMessage } from '@hooks/useMessage'
 	import { isEqual } from 'radash'
+	import dayjs from 'dayjs'
 
 	defineOptions({ name: 'Login' })
 	const MIN_SPEED = 1
@@ -64,6 +65,10 @@
 
 		requestAnimationFrame(update)
 	}
+
+	const year = computed(() =>
+		dayjs().format('YYYY') > 2024 ? `2024-${dayjs().format('YYYY')}` : dayjs().format('YYYY')
+	)
 
 	onMounted(() => {
 		initBlobs()
@@ -140,14 +145,16 @@
 					/>
 				</tiny-form-item>
 				<tiny-form-item class="remember-container" prop="remember">
-					<tiny-checkbox v-model="form.data.remember" name="tiny-checkbox">{{ $t('meo.form.tip.remember') }}</tiny-checkbox>
+					<tiny-checkbox v-model="form.data.remember" name="tiny-checkbox">{{
+						$t('meo.form.tip.remember')
+					}}</tiny-checkbox>
 				</tiny-form-item>
 			</tiny-form>
 			<div class="submit-container">
 				<tiny-button @click="submit">{{ $t('meo.form.tip.submit') }}</tiny-button>
 			</div>
 		</div>
-		<div class="footer-container">© Copyright 2024-2024 {{ $t('meo.project_name') }} 粤ICP备2022083294号-2</div>
+		<div class="footer-container">© Copyright {{ year }} {{ $t('meo.project_name') }} 粤ICP备2022083294号-2</div>
 	</div>
 </template>
 
@@ -276,6 +283,7 @@
 		transform: translateX(-50%);
 		text-shadow: 0 0 6px #9180ff;
 	}
+
 	@media (max-width: 1200px) {
 		.bouncing-blobs-container .bouncing-blobs-glass {
 			backdrop-filter: blur(120px);
