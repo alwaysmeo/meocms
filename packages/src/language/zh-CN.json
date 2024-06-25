@@ -1,3 +1,6 @@
 {
-	"language": "语言"
+	"meo": {
+		"language": "语言",
+		"project_name": "meocms"
+	}
 }
