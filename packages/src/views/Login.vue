@@ -1,4 +1,5 @@
 <script setup>
+	import { iconUser, iconLock } from '@opentiny/vue-icon'
 	import { useMessage } from '@hooks/useMessage'
 	import { isEqual } from 'radash'
 
@@ -114,19 +115,29 @@
 			</div>
 		</div>
 		<div class="login-container">
+			<div class="title">
+				<p>Meo</p>
+				<p>Content Management System</p>
+			</div>
 			<tiny-form
 				ref="formRef"
 				:model="form.data"
 				:rules="form.rules"
-				label-width="70px"
-				validate-type="tip"
-				validate-position="right"
+				label-width="0"
+				validate-type="text"
+				validate-position="left-start"
 			>
-				<tiny-form-item class="form-item" label="账号：" prop="account">
-					<tiny-input v-model="form.data.account" placeholder="请输入邮箱账号" />
+				<tiny-form-item class="form-item" prop="account">
+					<tiny-input v-model="form.data.account" :prefix-icon="iconUser()" placeholder="请输入邮箱账号" />
 				</tiny-form-item>
-				<tiny-form-item class="form-item" label="密码：" prop="password">
-					<tiny-input v-model="form.data.password" placeholder="请输入账号密码" />
+				<tiny-form-item class="form-item" prop="password">
+					<tiny-input
+						v-model="form.data.password"
+						:prefix-icon="iconLock()"
+						type="password"
+						placeholder="请输入账号密码"
+						show-password
+					/>
 				</tiny-form-item>
 				<tiny-form-item class="remember-container" prop="remember">
 					<tiny-checkbox v-model="form.data.remember" name="tiny-checkbox">记住我</tiny-checkbox>
@@ -136,6 +147,7 @@
 				<tiny-button @click="submit">提交</tiny-button>
 			</div>
 		</div>
+		<div class="footer-container">© Copyright 2024-2024 {{ $t('meo.project_name') }} 粤ICP备2022083294号-2</div>
 	</div>
 </template>
 
@@ -197,16 +209,40 @@
 		margin: 20vh auto 0 auto;
 		padding: 20px;
 		max-width: 380px;
+		.title {
+			margin-bottom: 30px;
+			text-align: center;
+			font-weight: 700;
+			color: white;
+			font-size: 22px;
+			text-shadow: 0 0 10px #9180ff;
+		}
 		.form-item {
 			:deep(input) {
 				--ti-input-bg-color: transparent;
 				border-top: none;
 				border-left: none;
 				border-right: none;
+				border-bottom-color: #ffffff7f;
+				border-radius: 0;
+				color: white;
+				&::placeholder {
+					color: #ffffff4c;
+				}
+			}
+			:deep(.tiny-svg) {
+				font-size: 16px;
+				fill: #ffffff99;
 			}
 		}
 		.remember-container {
 			text-align: right;
+			:deep(.tiny-checkbox .tiny-checkbox__inner) {
+				text-align: left;
+			}
+			:deep(.tiny-checkbox__label) {
+				color: #ffffff4c;
+			}
 		}
 		.submit-container {
 			button {
@@ -215,8 +251,27 @@
 				backdrop-filter: blur(10px);
 				display: block;
 				width: 100%;
+				height: 40px;
+				border-radius: 20px;
+				box-shadow: 0 0 6px #ffffff4d;
+				font-size: 14px;
+				color: #ffffff;
 			}
 		}
+		:deep(.tiny-form-item.is-error .tiny-input__inner) {
+			background-color: transparent;
+		}
+	}
+
+	.footer-container {
+		font-size: 12px;
+		color: white;
+		text-align: center;
+		position: fixed;
+		bottom: 30px;
+		left: 50%;
+		transform: translateX(-50%);
+		text-shadow: 0 0 6px #9180ff;
 	}
 	@media (max-width: 1200px) {
 		.bouncing-blobs-container .bouncing-blobs-glass {
