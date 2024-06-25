@@ -128,23 +128,23 @@
 				validate-position="left-start"
 			>
 				<tiny-form-item class="form-item" prop="account">
-					<tiny-input v-model="form.data.account" :prefix-icon="iconUser()" placeholder="请输入邮箱账号" />
+					<tiny-input v-model="form.data.account" :prefix-icon="iconUser()" :placeholder="$t('meo.form.tip.account')" />
 				</tiny-form-item>
 				<tiny-form-item class="form-item" prop="password">
 					<tiny-input
 						v-model="form.data.password"
 						:prefix-icon="iconLock()"
+						:placeholder="$t('meo.form.tip.password')"
 						type="password"
-						placeholder="请输入账号密码"
 						show-password
 					/>
 				</tiny-form-item>
 				<tiny-form-item class="remember-container" prop="remember">
-					<tiny-checkbox v-model="form.data.remember" name="tiny-checkbox">记住我</tiny-checkbox>
+					<tiny-checkbox v-model="form.data.remember" name="tiny-checkbox">{{ $t('meo.form.tip.remember') }}</tiny-checkbox>
 				</tiny-form-item>
 			</tiny-form>
 			<div class="submit-container">
-				<tiny-button @click="submit">提交</tiny-button>
+				<tiny-button @click="submit">{{ $t('meo.form.tip.submit') }}</tiny-button>
 			</div>
 		</div>
 		<div class="footer-container">© Copyright 2024-2024 {{ $t('meo.project_name') }} 粤ICP备2022083294号-2</div>
@@ -233,6 +233,9 @@
 			:deep(.tiny-svg) {
 				font-size: 16px;
 				fill: #ffffff99;
+			}
+			:deep(.tiny-form-item__error) {
+				padding-left: 30px;
 			}
 		}
 		.remember-container {

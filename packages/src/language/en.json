@@ -1,0 +1,14 @@
+{
+	"meo": {
+		"language": "language",
+		"project_name": "meo content management system",
+		"form": {
+			"tip": {
+				"account": "Please enter your email account",
+				"password": "Please enter your account password",
+				"submit": "Submit",
+				"remember": "Remember me"
+			}
+		}
+	}
+}
