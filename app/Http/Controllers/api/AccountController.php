@@ -52,7 +52,7 @@ class AccountController extends Controller
 			'ip' => $common->ip($request)
 		]);
 		$cache_duration = intval(env('CACHE_DURATION'));
-		Cache::put('user-'.$user->getAuthIdentifier(), $token->plainTextToken, now()->addMinutes($cache_duration));
+		Cache::put('user-' . $user->getAuthIdentifier(), $token->plainTextToken, now()->addMinutes($cache_duration));
 		return $this->success($user);
 	}
 
@@ -72,7 +72,7 @@ class AccountController extends Controller
 		Users::query()->create([
 			'email' => $req['account'],
 			'password' => Hash::make($req['password']),
-			'nickname' => '用户'.time()
+			'nickname' => '用户' . time()
 		]);
 		return $this->success();
 	}
@@ -85,7 +85,7 @@ class AccountController extends Controller
 			->where(['type' => 2, 'user_id' => $request->user()->ulid])
 			->latest('id')
 			->update(['updated_at' => date('Y-m-d H:i:s')]);
-		Cache::forget('user-'.$request->user()->ulid);
+		Cache::forget('user-' . $request->user()->ulid);
 		return $this->success();
 	}
 }
