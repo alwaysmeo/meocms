@@ -1,7 +1,7 @@
 import { createI18n } from 'vue-i18n'
 import locale from '@opentiny/vue-locale'
-import enUS from './en_US.json'
-import zhCN from './zh_CN.json'
+import enUS from './enUS.json'
+import zhCN from './zhCN.json'
 
 export default locale.initI18n({
 	i18n: { locale: 'enUS' },

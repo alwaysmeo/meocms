@@ -82,8 +82,8 @@
 			remember: false
 		},
 		rules: {
-			account: [{ required: true, message: t('meo.form.tip.account'), trigger: 'blur' }],
-			password: [{ required: true, message: t('meo.form.tip.password'), trigger: 'blur' }]
+			account: [{ required: true, message: t('meo.form.error_tip.account'), trigger: 'blur' }],
+			password: [{ required: true, message: t('meo.form.error_tip.password'), trigger: 'blur' }]
 		}
 	})
 	async function submit() {
@@ -96,7 +96,7 @@
 			// 	userId: user_info.userId
 			// })
 			if (isEqual(code, 200)) {
-				useMessage('提交成功', 'success')
+				useMessage(t('meo.form.success_tip.submit'), 'success')
 			}
 		})
 	}
@@ -133,25 +133,25 @@
 				validate-position="left-start"
 			>
 				<tiny-form-item class="form-item" prop="account">
-					<tiny-input v-model="form.data.account" :prefix-icon="iconUser()" :placeholder="$t('meo.form.tip.account')" />
+					<tiny-input v-model="form.data.account" :prefix-icon="iconUser()" :placeholder="$t('meo.form.error_tip.account')" />
 				</tiny-form-item>
 				<tiny-form-item class="form-item" prop="password">
 					<tiny-input
 						v-model="form.data.password"
 						:prefix-icon="iconLock()"
-						:placeholder="$t('meo.form.tip.password')"
+						:placeholder="$t('meo.form.error_tip.password')"
 						type="password"
 						show-password
 					/>
 				</tiny-form-item>
 				<tiny-form-item class="remember-container" prop="remember">
 					<tiny-checkbox v-model="form.data.remember" name="tiny-checkbox">
-						{{ $t('meo.form.tip.remember') }}
+						{{ $t('meo.form.error_tip.remember') }}
 					</tiny-checkbox>
 				</tiny-form-item>
 			</tiny-form>
 			<div class="submit-container">
-				<tiny-button @click="submit">{{ $t('meo.form.tip.submit') }}</tiny-button>
+				<tiny-button @click="submit">{{ $t('meo.form.submit') }}</tiny-button>
 			</div>
 		</div>
 		<div class="footer-container">© Copyright {{ year }} {{ $t('meo.project_name') }} 粤ICP备2022083294号-2</div>
