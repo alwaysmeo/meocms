@@ -30,20 +30,20 @@
 		move() {
 			this.x += this.vx
 			this.y += this.vy
-			if (this.x >= window.innerWidth - this.size) {
-				this.x = window.innerWidth - this.size
+			if (this.x >= window.innerWidth - this.size / 2) {
+				this.x = window.innerWidth - this.size / 2
 				this.vx *= -1
 			}
-			if (this.y >= window.innerHeight - this.size) {
-				this.y = window.innerHeight - this.size
+			if (this.y >= window.innerHeight - this.size / 2) {
+				this.y = window.innerHeight - this.size / 2
 				this.vy *= -1
 			}
-			if (this.x <= 0) {
-				this.x = 0
+			if (this.x <= - this.size / 2) {
+				this.x = - this.size / 2
 				this.vx *= -1
 			}
-			if (this.y <= 0) {
-				this.y = 0
+			if (this.y <= - this.size / 2) {
+				this.y = - this.size / 2
 				this.vy *= -1
 			}
 			this.el.style.transform = `translate(${this.x - this.initialX}px, ${this.y - this.initialY}px)`
@@ -117,6 +117,7 @@
 				<div class="bouncing-blob bouncing-blob-pink"></div>
 				<div class="bouncing-blob bouncing-blob-purple"></div>
 				<div class="bouncing-blob bouncing-blob-pink"></div>
+				<div class="bouncing-blob bouncing-blob-blue"></div>
 			</div>
 		</div>
 		<div class="login-container">
@@ -145,9 +146,9 @@
 					/>
 				</tiny-form-item>
 				<tiny-form-item class="remember-container" prop="remember">
-					<tiny-checkbox v-model="form.data.remember" name="tiny-checkbox">{{
-						$t('meo.form.tip.remember')
-					}}</tiny-checkbox>
+					<tiny-checkbox v-model="form.data.remember" name="tiny-checkbox">
+						{{ $t('meo.form.tip.remember') }}
+					</tiny-checkbox>
 				</tiny-form-item>
 			</tiny-form>
 			<div class="submit-container">
