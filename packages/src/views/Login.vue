@@ -2,16 +2,17 @@
 	import { iconUser, iconLock } from '@opentiny/vue-icon'
 	import { useMessage } from '@hooks/useMessage'
 	import { isEqual } from 'radash'
+	import i18n from '@language'
 	import dayjs from 'dayjs'
 
 	defineOptions({ name: 'Login' })
+	const { t } = i18n.global
+
 	const MIN_SPEED = 1
 	const MAX_SPEED = 2
-
 	function randomNumber(min, max) {
 		return Math.random() * (max - min) + min
 	}
-
 	class Blob {
 		constructor(el) {
 			this.el = el
@@ -38,20 +39,18 @@
 				this.y = window.innerHeight - this.size / 2
 				this.vy *= -1
 			}
-			if (this.x <= - this.size / 2) {
-				this.x = - this.size / 2
+			if (this.x <= -this.size / 2) {
+				this.x = -this.size / 2
 				this.vx *= -1
 			}
-			if (this.y <= - this.size / 2) {
-				this.y = - this.size / 2
+			if (this.y <= -this.size / 2) {
+				this.y = -this.size / 2
 				this.vy *= -1
 			}
 			this.el.style.transform = `translate(${this.x - this.initialX}px, ${this.y - this.initialY}px)`
 		}
 	}
-
 	const blobsRef = ref()
-
 	function initBlobs() {
 		const blobEls = blobsRef.value.querySelectorAll('.bouncing-blob')
 		const blobs = Array.from(blobEls).map((blobEl) => new Blob(blobEl))
@@ -83,8 +82,8 @@
 			remember: false
 		},
 		rules: {
-			account: [{ required: true, message: '请输入邮箱账号', trigger: 'blur' }],
-			password: [{ required: true, message: '请输入账号密码', trigger: 'blur' }]
+			account: [{ required: true, message: t('meo.form.tip.account'), trigger: 'blur' }],
+			password: [{ required: true, message: t('meo.form.tip.password'), trigger: 'blur' }]
 		}
 	})
 	async function submit() {

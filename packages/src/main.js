@@ -8,7 +8,7 @@ import Icons from '@opentiny/vue-icon'
 const app = createApp(App)
 app.use(stores)
 app.use(routes)
-app.use(language({ locale: 'en' }))
+app.use(language)
 app.mount('#app')
 Object.keys(Icons).forEach((key) => {
 	app.component(`Tiny${key}`, Icons[key]())

@@ -1,17 +1,16 @@
 import { createI18n } from 'vue-i18n'
 import locale from '@opentiny/vue-locale'
-import en from './en.json'
-import cn from './cn.json'
+import enUS from './en_US.json'
+import zhCN from './zh_CN.json'
 
-export default (i18n) =>
-	locale.initI18n({
-		i18n,
-		createI18n: ({ locale, messages }) => {
-			return createI18n({
-				locale,
-				messages,
-				legacy: false
-			})
-		},
-		messages: { cn, en }
-	})
+export default locale.initI18n({
+	i18n: { locale: 'enUS' },
+	createI18n: ({ locale, messages }) => {
+		return createI18n({
+			locale,
+			messages,
+			legacy: false
+		})
+	},
+	messages: { zhCN, enUS }
+})

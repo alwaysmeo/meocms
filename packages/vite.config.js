@@ -96,11 +96,15 @@ export default defineConfig(({ mode }) => {
 					replacement: resolve(__dirname, 'src/routes')
 				},
 				{
+					find: '@language',
+					replacement: resolve(__dirname, 'src/language')
+				},
+				{
 					find: 'vue',
 					replacement: 'vue/dist/vue.esm-bundler.js'
 				},
 				{
-					find: /\@opentiny\/vue-theme\/(?!(aurora))/,
+					find: /@opentiny\/vue-theme\/(?!(aurora))/,
 					replacement: '@opentiny/vue-theme/aurora-theme/'
 				}
 			]
