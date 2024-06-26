@@ -1,5 +1,6 @@
 <script setup>
-	import { iconUser, iconLock } from '@opentiny/vue-icon'
+	import { IconUser, IconLock, IconHelpful } from '@opentiny/vue-icon'
+	import { useBotd } from '@hooks/useFingerprintjs'
 	import { useMessage } from '@hooks/useMessage'
 	import { isEqual, random } from 'radash'
 	import accountApi from '@apis/account'
@@ -50,7 +51,7 @@
 		}
 	}
 
-	onMounted(() => {
+	onMounted(async () => {
 		const blobEls = blobsRef.value.querySelectorAll('.bouncing-blob')
 		const blobs = Array.from(blobEls).map((blobEl) => new Blob(blobEl))
 		function update() {
@@ -60,11 +61,13 @@
 			})
 		}
 		requestAnimationFrame(update)
+		state.bot = await useBotd()
 	})
 
-	const year = computed(() =>
-		dayjs().format('YYYY') > 2024 ? `2024-${dayjs().format('YYYY')}` : dayjs().format('YYYY')
-	)
+	const state = reactive({
+		year: computed(() => (dayjs().format('YYYY') > 2024 ? `2024-${dayjs().format('YYYY')}` : dayjs().format('YYYY'))),
+		bot: false
+	})
 
 	const formRef = ref()
 	const form = reactive({
@@ -127,25 +130,33 @@
 				<tiny-form-item class="form-item" prop="account">
 					<tiny-input
 						v-model="form.data.account"
-						:prefix-icon="iconUser()"
+						:prefix-icon="IconUser()"
 						:placeholder="$t('meo.form.error_tip.account')"
 					/>
 				</tiny-form-item>
 				<tiny-form-item class="form-item" prop="password">
 					<tiny-input
 						v-model="form.data.password"
-						:prefix-icon="iconLock()"
+						:prefix-icon="IconLock()"
 						:placeholder="$t('meo.form.error_tip.password')"
 						type="password"
 						show-password
 					/>
+				</tiny-form-item>
+				<tiny-form-item class="form-item form-item-vcode" prop="vcode">
+					<tiny-input
+						v-model="form.data.vcode"
+						:prefix-icon="IconHelpful()"
+						:placeholder="$t('meo.form.error_tip.vcode')"
+					/>
+					<div>1231312312</div>
 				</tiny-form-item>
 			</tiny-form>
 			<div class="submit-container">
 				<tiny-button @click="submit">{{ $t('meo.form.submit') }}</tiny-button>
 			</div>
 		</div>
-		<div class="footer-container">© Copyright {{ year }} {{ $t('meo.project_name') }} 粤ICP备2022083294号-2</div>
+		<div class="footer-container">© Copyright {{ state.year }} {{ $t('meo.project_name') }} 粤ICP备2022083294号-2</div>
 	</div>
 </template>
 
@@ -234,6 +245,13 @@
 			}
 			:deep(.tiny-form-item__error) {
 				padding-left: 30px;
+			}
+		}
+		.form-item-vcode {
+			:deep(.tiny-form-item__content-muti-children) {
+				display: grid;
+				grid-template-columns: 1fr 100px;
+				gap: 10px;
 			}
 		}
 		.submit-container {

@@ -9,7 +9,7 @@
 			"error_tip": {
 				"account": "Please enter your email account",
 				"password": "Please enter your account password",
-				"remember": "Remember me"
+				"vcode": "Please enter the verification code in the picture"
 			},
 			"submit": "Submit"
 		}

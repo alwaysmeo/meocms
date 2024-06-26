@@ -9,7 +9,7 @@
 			"error_tip": {
 				"account": "请输入邮箱账号",
 				"password": "请输入账号密码",
-				"remember": "记住我"
+				"vcode": "请输入图片中的验证码"
 			},
 			"submit": "提交"
 		}
