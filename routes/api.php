@@ -12,13 +12,13 @@
 */
 
 use App\Http\Controllers\api\AccountController;
+use App\Http\Controllers\api\CommonController;
 use App\Http\Controllers\api\PermissionsController;
 use App\Http\Controllers\api\TestController;
 use Illuminate\Support\Facades\Route;
 
 /* 测试 */
 Route::get('/test', [TestController::class, 'test']);
-
 
 Route::group(['prefix' => 'account'], function () {
 	/* 令牌失效 */
@@ -31,9 +31,14 @@ Route::group(['prefix' => 'account'], function () {
 	Route::post('/logout', [AccountController::class, 'logout'])->middleware('auth:api');
 });
 
+Route::group(['prefix' => 'common'], function () {
+	/* 生成验证码 */
+	Route::post('/captcha', [CommonController::class, 'captcha']);
+});
+
 Route::group(['middleware' => 'auth:api'], function () {
 	/* 文件上传 */
-//	Route::post('upload/file', [UploadController::class, 'uploadFile']); // 服务器 文件上传
+//	Route::post('upload/file', [UploadController::class, 'uploadFile']);
 	/* 获取用户权限列表 */
 	Route::get('/permissions/list', [PermissionsController::class, 'list']);
 });

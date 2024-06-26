@@ -6,10 +6,10 @@ import request from '@utils/request'
  * 注册
  * @param account 账号
  * @param password 密码
- * @param vcode 验证码
+ * @param captcha 验证码
  */
-async function register({ account, password, vcode }) {
-	return await request.post(`/api/account/register`, { account, password, vcode })
+async function register({ account, password, captcha }) {
+	return await request.post(`/api/account/register`, { account, password, captcha })
 }
 
 /**
