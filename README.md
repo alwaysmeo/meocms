@@ -17,7 +17,7 @@
 
 ## Install php expand
 
-- must: `php8.3-redis` `php8.3-dom` `php8.3-xml` `php8.3-curl` `php8.3-mysql` `php8.3-fpm`
+- must: `php8.3-redis` `php8.3-dom` `php8.3-xml` `php8.3-curl` `php8.3-mysql` `php8.3-fpm` `php8.3-gd`
 - selectable: `php8.3-mbstring`
 
 ## Database migrations
