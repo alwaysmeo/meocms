@@ -16,17 +16,16 @@ async function register({ account, password, vcode }) {
  * 登录
  * @param account 账号
  * @param password 密码
- * @param browser_fingerprint 浏览器指纹（可选）
  */
-async function login({ account, password, browser_fingerprint }) {
-	return await request.post(`/api/account/login`, { account, password, browser_fingerprint })
+async function login({ account, password }) {
+	return await request.post(`/api/account/login`, { account, password })
 }
 
 /**
  * 登出
  */
 async function logout() {
-	return await request.post(`/api/account/logout`, )
+	return await request.post(`/api/account/logout`)
 }
 
 export default { register, login, logout }

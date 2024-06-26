@@ -11,6 +11,7 @@
 		"format": "prettier --write 'src/**/*.{vue,js,json,scss}'"
 	},
 	"dependencies": {
+		"@fingerprintjs/botd": "^1.9.1",
 		"@opentiny/vue": "3",
 		"@opentiny/vue-icon": "^3.16.0",
 		"@opentiny/vue-locale": "^3.16.0",
@@ -46,6 +47,6 @@
 		"vue-router": "^4.4.0"
 	},
 	"volta": {
-		"node": "20.11.1"
+		"node": "20.15.0"
 	}
 }

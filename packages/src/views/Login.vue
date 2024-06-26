@@ -1,7 +1,8 @@
 <script setup>
 	import { iconUser, iconLock } from '@opentiny/vue-icon'
 	import { useMessage } from '@hooks/useMessage'
-	import { isEqual } from 'radash'
+	import { isEqual, random } from 'radash'
+	import accountApi from '@apis/account'
 	import i18n from '@language'
 	import dayjs from 'dayjs'
 
@@ -10,24 +11,22 @@
 
 	const MIN_SPEED = 1
 	const MAX_SPEED = 2
-	function randomNumber(min, max) {
-		return Math.random() * (max - min) + min
-	}
+
+	const blobsRef = ref()
 	class Blob {
 		constructor(el) {
 			this.el = el
 			const boundingRect = this.el.getBoundingClientRect()
 			this.size = boundingRect.width
-			this.initialX = randomNumber(0, window.innerWidth - this.size)
-			this.initialY = randomNumber(0, window.innerHeight - this.size)
+			this.initialX = random(0, window.innerWidth - this.size)
+			this.initialY = random(0, window.innerHeight - this.size)
 			this.el.style.top = `${this.initialY}px`
 			this.el.style.left = `${this.initialX}px`
-			this.vx = randomNumber(MIN_SPEED, MAX_SPEED) * (Math.random() > 0.5 ? 1 : -1)
-			this.vy = randomNumber(MIN_SPEED, MAX_SPEED) * (Math.random() > 0.5 ? 1 : -1)
+			this.vx = random(MIN_SPEED, MAX_SPEED) * (Math.random() > 0.5 ? 1 : -1)
+			this.vy = random(MIN_SPEED, MAX_SPEED) * (Math.random() > 0.5 ? 1 : -1)
 			this.x = this.initialX
 			this.y = this.initialY
 		}
-
 		move() {
 			this.x += this.vx
 			this.y += this.vy
@@ -50,51 +49,43 @@
 			this.el.style.transform = `translate(${this.x - this.initialX}px, ${this.y - this.initialY}px)`
 		}
 	}
-	const blobsRef = ref()
-	function initBlobs() {
+
+	onMounted(() => {
 		const blobEls = blobsRef.value.querySelectorAll('.bouncing-blob')
 		const blobs = Array.from(blobEls).map((blobEl) => new Blob(blobEl))
-
 		function update() {
 			requestAnimationFrame(update)
 			blobs.forEach((blob) => {
 				blob.move()
 			})
 		}
-
 		requestAnimationFrame(update)
-	}
+	})
 
 	const year = computed(() =>
 		dayjs().format('YYYY') > 2024 ? `2024-${dayjs().format('YYYY')}` : dayjs().format('YYYY')
 	)
-
-	onMounted(() => {
-		initBlobs()
-	})
 
 	const formRef = ref()
 	const form = reactive({
 		area_list: [],
 		data: {
 			account: '',
-			password: '',
-			remember: false
+			password: ''
 		},
 		rules: {
 			account: [{ required: true, message: t('meo.form.error_tip.account'), trigger: 'blur' }],
 			password: [{ required: true, message: t('meo.form.error_tip.password'), trigger: 'blur' }]
 		}
 	})
+
 	async function submit() {
 		await formRef.value.validate(async (valid) => {
 			if (!valid) return
-			// const { code } = await messageApi.create({
-			// 	...form.data,
-			// 	images: isEmpty(form.data.images) ? undefined : JSON.stringify(form.data.images),
-			// 	video: isEmpty(form.data.video) ? undefined : JSON.stringify(form.data.video),
-			// 	userId: user_info.userId
-			// })
+			const { code } = await accountApi.login({
+				account: form.data.account,
+				password: form.data.password
+			})
 			if (isEqual(code, 200)) {
 				useMessage(t('meo.form.success_tip.submit'), 'success')
 			}
@@ -108,6 +99,7 @@
 			<div class="bouncing-blobs-glass"></div>
 			<div ref="blobsRef" class="bouncing-blobs">
 				<div class="bouncing-blob bouncing-blob-blue"></div>
+				<div class="bouncing-blob bouncing-blob-purple"></div>
 				<div class="bouncing-blob bouncing-blob-blue"></div>
 				<div class="bouncing-blob bouncing-blob-blue"></div>
 				<div class="bouncing-blob bouncing-blob-white"></div>
@@ -133,7 +125,11 @@
 				validate-position="left-start"
 			>
 				<tiny-form-item class="form-item" prop="account">
-					<tiny-input v-model="form.data.account" :prefix-icon="iconUser()" :placeholder="$t('meo.form.error_tip.account')" />
+					<tiny-input
+						v-model="form.data.account"
+						:prefix-icon="iconUser()"
+						:placeholder="$t('meo.form.error_tip.account')"
+					/>
 				</tiny-form-item>
 				<tiny-form-item class="form-item" prop="password">
 					<tiny-input
@@ -143,11 +139,6 @@
 						type="password"
 						show-password
 					/>
-				</tiny-form-item>
-				<tiny-form-item class="remember-container" prop="remember">
-					<tiny-checkbox v-model="form.data.remember" name="tiny-checkbox">
-						{{ $t('meo.form.error_tip.remember') }}
-					</tiny-checkbox>
 				</tiny-form-item>
 			</tiny-form>
 			<div class="submit-container">
@@ -245,27 +236,25 @@
 				padding-left: 30px;
 			}
 		}
-		.remember-container {
-			text-align: right;
-			:deep(.tiny-checkbox .tiny-checkbox__inner) {
-				text-align: left;
-			}
-			:deep(.tiny-checkbox__label) {
-				color: #ffffff4c;
-			}
-		}
 		.submit-container {
 			button {
+				margin-top: 20px;
 				border: none;
-				background-color: #ffffff4d;
-				backdrop-filter: blur(10px);
 				display: block;
 				width: 100%;
 				height: 40px;
-				border-radius: 20px;
-				box-shadow: 0 0 6px #ffffff4d;
 				font-size: 14px;
 				color: #ffffff;
+				border-radius: 20px;
+				backdrop-filter: blur(10px);
+				background-color: #ffffff4d;
+				box-shadow: 0 0 6px #ffffff4d;
+				transition: all 0.3s;
+				&:hover {
+					backdrop-filter: blur(0);
+					background-color: #dbe4ff4d;
+					box-shadow: 0 0 18px #55cfff4d;
+				}
 			}
 		}
 		:deep(.tiny-form-item.is-error .tiny-input__inner) {

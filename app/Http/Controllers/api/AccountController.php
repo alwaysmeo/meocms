@@ -24,11 +24,10 @@ class AccountController extends Controller
 	/* 登录 */
 	public function login(Request $request): Response
 	{
-		$req = $request->only(['account', 'password', 'browser_fingerprint']);
+		$req = $request->only(['account', 'password']);
 		$validator = Validator::make($req, [
 			'account' => 'required|email',
-			'password' => 'required|regex:/^[a-zA-Z0-9]+$/|between:6,20',
-			'browser_fingerprint' => 'between:0,180'
+			'password' => 'required|regex:/^[a-zA-Z0-9]+$/|between:6,20'
 		]);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
 		/* 用户是否存在 */
@@ -42,7 +41,7 @@ class AccountController extends Controller
 		$token = $user->createToken(strtolower(env('APP_NAME')));
 		$user->setRememberToken($token->plainTextToken);
 		/* 更新用户信息 */
-		$user->update(['browser_fingerprint' => $req['browser_fingerprint'] ?? null, 'last_login_at' => date('Y-m-d H:i:s')]);
+		$user->update(['last_login_at' => date('Y-m-d H:i:s')]);
 		/* 添加登录记录 */
 		$common = new Common();
 		AccountRecord::query()->create([
