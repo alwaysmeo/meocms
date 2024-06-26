@@ -1,21 +1,27 @@
 <script setup>
-	import { IconUser, IconLock, IconHelpful } from '@opentiny/vue-icon'
+	import { IconUser, IconLock, IconFreezeLeft } from '@opentiny/vue-icon'
 	import { useBotd } from '@hooks/useFingerprintjs'
 	import { useMessage } from '@hooks/useMessage'
 	import { isEqual, random } from 'radash'
 	import accountApi from '@apis/account'
+	import commonApi from '@apis/common'
 	import i18n from '@language'
 	import dayjs from 'dayjs'
 
 	defineOptions({ name: 'Login' })
+
 	const { t } = i18n.global
 
-	const MIN_SPEED = 1
-	const MAX_SPEED = 2
+	const state = reactive({
+		year: computed(() => (dayjs().format('YYYY') > 2024 ? `2024-${dayjs().format('YYYY')}` : dayjs().format('YYYY'))),
+		captcha: null
+	})
 
 	const blobsRef = ref()
 	class Blob {
 		constructor(el) {
+			const MIN_SPEED = 1
+			const MAX_SPEED = 2
 			this.el = el
 			const boundingRect = this.el.getBoundingClientRect()
 			this.size = boundingRect.width
@@ -61,12 +67,7 @@
 			})
 		}
 		requestAnimationFrame(update)
-		state.bot = await useBotd()
-	})
-
-	const state = reactive({
-		year: computed(() => (dayjs().format('YYYY') > 2024 ? `2024-${dayjs().format('YYYY')}` : dayjs().format('YYYY'))),
-		bot: false
+		if (!(await useBotd())) captcha()
 	})
 
 	const formRef = ref()
@@ -74,11 +75,13 @@
 		area_list: [],
 		data: {
 			account: '',
-			password: ''
+			password: '',
+			captcha_value: ''
 		},
 		rules: {
-			account: [{ required: true, message: t('meo.form.error_tip.account'), trigger: 'blur' }],
-			password: [{ required: true, message: t('meo.form.error_tip.password'), trigger: 'blur' }]
+			account: [{ required: true, message: t('meo.form.tip.account'), trigger: 'blur' }],
+			password: [{ required: true, message: t('meo.form.tip.password'), trigger: 'blur' }],
+			captcha_value: [{ required: true, message: t('meo.form.tip.error.captcha_format'), trigger: 'blur' }]
 		}
 	})
 
@@ -87,12 +90,30 @@
 			if (!valid) return
 			const { code } = await accountApi.login({
 				account: form.data.account,
-				password: form.data.password
+				password: form.data.password,
+				captcha: {
+					key: state.captcha.key,
+					value: form.data.captcha_value
+				}
 			})
 			if (isEqual(code, 200)) {
-				useMessage(t('meo.form.success_tip.submit'), 'success')
+				useMessage(t('meo.form.tip.success.submit'), 'success')
+			}
+			if (isEqual(code, 3005)) {
+				useMessage(t('meo.form.tip.error.captcha'), 'error')
+				form.data.password = ''
+				form.data.captcha_value = ''
+				await captcha()
 			}
 		})
+	}
+
+	async function captcha() {
+		const { code, data } = await commonApi.captcha()
+		if (isEqual(code, 200)) {
+			console.log(data)
+			state.captcha = data
+		}
 	}
 </script>
 
@@ -128,28 +149,27 @@
 				validate-position="left-start"
 			>
 				<tiny-form-item class="form-item" prop="account">
-					<tiny-input
-						v-model="form.data.account"
-						:prefix-icon="IconUser()"
-						:placeholder="$t('meo.form.error_tip.account')"
-					/>
+					<tiny-input v-model="form.data.account" :prefix-icon="IconUser()" :placeholder="$t('meo.form.tip.account')" />
 				</tiny-form-item>
 				<tiny-form-item class="form-item" prop="password">
 					<tiny-input
 						v-model="form.data.password"
 						:prefix-icon="IconLock()"
-						:placeholder="$t('meo.form.error_tip.password')"
+						:placeholder="$t('meo.form.tip.password')"
 						type="password"
 						show-password
 					/>
 				</tiny-form-item>
-				<tiny-form-item class="form-item form-item-vcode" prop="vcode">
+				<tiny-form-item v-if="state.captcha" class="form-item form-item-captcha" prop="captcha_value">
 					<tiny-input
-						v-model="form.data.vcode"
-						:prefix-icon="IconHelpful()"
-						:placeholder="$t('meo.form.error_tip.vcode')"
+						v-model="form.data.captcha_value"
+						:maxlength="6"
+						:prefix-icon="IconFreezeLeft()"
+						:placeholder="$t('meo.form.tip.captcha')"
 					/>
-					<div>1231312312</div>
+					<div class="captcha" @click="captcha()">
+						<img :src="state.captcha.img" alt="captcha" />
+					</div>
 				</tiny-form-item>
 			</tiny-form>
 			<div class="submit-container">
@@ -247,11 +267,19 @@
 				padding-left: 30px;
 			}
 		}
-		.form-item-vcode {
+		.form-item-captcha {
 			:deep(.tiny-form-item__content-muti-children) {
 				display: grid;
 				grid-template-columns: 1fr 100px;
 				gap: 10px;
+			}
+			.captcha {
+				cursor: pointer;
+				img {
+					width: 100%;
+					height: 100%;
+					border-radius: 4px;
+				}
 			}
 		}
 		.submit-container {

@@ -24,12 +24,16 @@ class AccountController extends Controller
 	/* 登录 */
 	public function login(Request $request): Response
 	{
-		$req = $request->only(['account', 'password']);
+		$req = $request->only(['account', 'password', 'captcha']);
 		$validator = Validator::make($req, [
 			'account' => 'required|email',
 			'password' => 'required|regex:/^[a-zA-Z0-9]+$/|between:6,20'
 		]);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
+		/* 校验验证码 */
+		if (isset($req['captcha'])) {
+			if (!captcha_api_check($req['captcha']['value'], $req['captcha']['key'])) return $this->fail(null, Mapping::$code['3005'], 3005);
+		}
 		/* 用户是否存在 */
 		$user = Users::query()->where('email', $req['account'])->whereNull('deleted_at')->first();
 		if (!$user) return $this->fail(null, Mapping::$code['3001'], 3001);

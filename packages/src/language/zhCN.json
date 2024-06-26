@@ -3,13 +3,17 @@
 		"language": "语言",
 		"project_name": "meocms",
 		"form": {
-			"success_tip": {
-				"submit": "提交成功"
-			},
-			"error_tip": {
+			"tip": {
 				"account": "请输入邮箱账号",
 				"password": "请输入账号密码",
-				"vcode": "请输入图片中的验证码"
+				"captcha": "请输入图片中的验证码",
+				"success": {
+					"submit": "提交成功"
+				},
+				"error": {
+					"captcha_format": "验证码格式错误",
+					"captcha": "验证码错误"
+				}
 			},
 			"submit": "提交"
 		}

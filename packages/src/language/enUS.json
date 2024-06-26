@@ -3,13 +3,17 @@
 		"language": "language",
 		"project_name": "meo content management system",
 		"form": {
-			"success_tip": {
-				"submit": "Submit successfully"
-			},
-			"error_tip": {
+			"tip": {
 				"account": "Please enter your email account",
 				"password": "Please enter your account password",
-				"vcode": "Please enter the verification code in the picture"
+				"captcha": "verification code",
+				"success": {
+					"submit": "Submitted successfully"
+				},
+				"error": {
+					"captcha_format": "Verification code format error",
+					"captcha": "Verification code error"
+				}
 			},
 			"submit": "Submit"
 		}
