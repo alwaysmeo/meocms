@@ -15,6 +15,8 @@
 	const { t } = i18n.global
 	const userInfo = useUserInfoStore()
 
+	if (!isEmpty(userInfo.get())) router.replace({ name: 'home' })
+
 	const state = reactive({
 		year: computed(() => (dayjs().format('YYYY') > 2024 ? `2024-${dayjs().format('YYYY')}` : dayjs().format('YYYY'))),
 		captcha: null
@@ -61,8 +63,6 @@
 	}
 
 	onMounted(async () => {
-		console.log(userInfo.get())
-		if (!isEmpty(userInfo.get())) router.replace({ name: 'home' })
 		const blobEls = blobsRef.value.querySelectorAll('.bouncing-blob')
 		const blobs = Array.from(blobEls).map((blobEl) => new Blob(blobEl))
 		function update() {
