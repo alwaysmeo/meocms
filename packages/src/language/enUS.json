@@ -8,7 +8,8 @@
 				"password": "Please enter your account password",
 				"captcha": "verification code",
 				"success": {
-					"submit": "Submitted successfully"
+					"submit": "Submitted successfully",
+					"submit_login": "Login successfully"
 				},
 				"error": {
 					"captcha_format": "Verification code format error",
@@ -16,6 +17,24 @@
 				}
 			},
 			"submit": "Submit"
+		},
+		"request": {
+			"error": {
+				"401": "Identity token invalid",
+				"1000": "Identity token invalid",
+				"2000": "Do not frequently obtain verification codes",
+				"2001": "The maximum number of times to obtain the verification code has been reached",
+				"2002": "Verification code error or expired",
+				"2003": "Verification code sending failed",
+				"3000": "The account has been disabled",
+				"3001": "Account does not exist",
+				"3002": "Account already exists",
+				"3003": "Account or password error",
+				"3004": "Old password verification error",
+				"3005": "Verification code error",
+				"4000": "Upload failed",
+				"5000": "Parameter error"
+			}
 		}
 	}
 }
