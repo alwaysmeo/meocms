@@ -4,20 +4,21 @@ import { defineStore } from 'pinia'
 import STORAGE_KEY from '@utils/storageKey'
 
 const storeKey = STORAGE_KEY.USER_INFO
-export const userInfoStore = defineStore(storeKey, {
-	state: () => ({
-		data: {}
-	}),
+export const useUserInfoStore = defineStore(storeKey, {
+	state: () => {
+		return {
+			data: new Object()
+		}
+	},
 	actions: {
 		set(data) {
-			const value = isEmpty(this.data) ? {} : this.data
-			this.data = { ...value, ...data }
+			if (!isEmpty(data)) Object.assign(this.data, data)
 		},
 		get() {
 			return this.data
 		},
 		clear() {
-			this.data = {}
+			this.data = new Object()
 		}
 	},
 	getters: {},

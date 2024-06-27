@@ -2,15 +2,18 @@
 	import { IconUser, IconLock, IconFreezeLeft } from '@opentiny/vue-icon'
 	import { useBotd } from '@hooks/useFingerprintjs'
 	import { useMessage } from '@hooks/useMessage'
-	import { isEqual, random } from 'radash'
+	import { useUserInfoStore } from '@stores/userInfoStore'
+	import { isEmpty, isEqual, random } from 'radash'
 	import accountApi from '@apis/account'
 	import commonApi from '@apis/common'
 	import i18n from '@language'
 	import dayjs from 'dayjs'
 
 	defineOptions({ name: 'Login' })
+	const router = useRouter()
 
 	const { t } = i18n.global
+	const userInfo = useUserInfoStore()
 
 	const state = reactive({
 		year: computed(() => (dayjs().format('YYYY') > 2024 ? `2024-${dayjs().format('YYYY')}` : dayjs().format('YYYY'))),
@@ -58,6 +61,8 @@
 	}
 
 	onMounted(async () => {
+		console.log(userInfo.get())
+		if (!isEmpty(userInfo.get())) router.replace({ name: 'home' })
 		const blobEls = blobsRef.value.querySelectorAll('.bouncing-blob')
 		const blobs = Array.from(blobEls).map((blobEl) => new Blob(blobEl))
 		function update() {
@@ -67,7 +72,7 @@
 			})
 		}
 		requestAnimationFrame(update)
-		if (!(await useBotd())) captcha()
+		if (await useBotd()) captcha()
 	})
 
 	const formRef = ref()
@@ -75,8 +80,7 @@
 		area_list: [],
 		data: {
 			account: '',
-			password: '',
-			captcha_value: ''
+			password: ''
 		},
 		rules: {
 			account: [{ required: true, message: t('meo.form.tip.account'), trigger: 'blur' }],
@@ -88,30 +92,37 @@
 	async function submit() {
 		await formRef.value.validate(async (valid) => {
 			if (!valid) return
-			const { code } = await accountApi.login({
+			const params = {
 				account: form.data.account,
-				password: form.data.password,
-				captcha: {
-					key: state.captcha.key,
-					value: form.data.captcha_value
-				}
-			})
+				password: form.data.password
+			}
+			if (!isEmpty(state.captcha)) {
+				Object.assign(params, {
+					captcha: {
+						key: state.captcha.key,
+						value: form.data.captcha_value
+					}
+				})
+			}
+			const { code, data } = await accountApi.login(params)
 			if (isEqual(code, 200)) {
-				useMessage(t('meo.form.tip.success.submit'), 'success')
-			}
-			if (isEqual(code, 3005)) {
-				useMessage(t('meo.form.tip.error.captcha'), 'error')
+				useMessage(t('meo.form.tip.success.submit_login'), 'success')
+				userInfo.set(data)
+				router.push({ name: 'home' })
+			} else {
 				form.data.password = ''
-				form.data.captcha_value = ''
-				await captcha()
+				if (state.captcha) {
+					form.data.captcha_value = ''
+					await captcha()
+				}
 			}
+			if (isEqual(code, 3005)) useMessage(t('meo.form.tip.error.captcha'), 'error')
 		})
 	}
 
 	async function captcha() {
 		const { code, data } = await commonApi.captcha()
 		if (isEqual(code, 200)) {
-			console.log(data)
 			state.captcha = data
 		}
 	}
