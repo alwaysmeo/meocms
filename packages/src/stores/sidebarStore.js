@@ -6,18 +6,28 @@ import permissionsApi from '@apis/permissions'
 
 const storeKey = STORAGE_KEY.SIDEBAR_LIST
 export const useSidebarStore = defineStore(storeKey, {
-	state: () => new Array(),
-	actions: {
-		async get() {
-			if (isEmpty(this.$state)) {
-				const { code, data } = await permissionsApi.list()
-				if (isEqual(code, 200)) this.$state = data
-			}
-			return this.$state
-		},
-		clear() {
-			this.$state = new Array()
+	state: () => {
+		return {
+			list: new Array(),
+			collapsed: false
 		}
 	},
-	getters: {}
+	actions: {
+		async getList() {
+			if (isEmpty(this.list)) {
+				const { code, data } = await permissionsApi.list()
+				if (isEqual(code, 200)) this.list = data
+			}
+			return this.list
+		},
+		getCollapsed() {
+			return this.collapsed
+		},
+		changeCollapsed() {
+			this.collapsed = !this.collapsed
+		},
+		clear() {
+			this.list = new Array()
+		}
+	}
 })

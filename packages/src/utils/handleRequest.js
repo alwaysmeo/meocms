@@ -1,5 +1,5 @@
 'use strict'
-import { useMessage } from '@hooks/useMessage'
+import { message } from 'ant-design-vue'
 import { useUserInfoStore } from '@stores/userInfoStore'
 import { isString } from 'radash'
 import routes from '@routes'
@@ -10,7 +10,7 @@ const { t } = i18n.global
 // 错误码映射表
 const mapping = {
 	401: () => {
-		useMessage(t('meo.request.error.401'), 'error')
+		message.error(t('meo.request.error.401'), 'error')
 		const userInfo = useUserInfoStore()
 		userInfo.clear()
 		routes.replace({ name: 'login' })
@@ -32,7 +32,7 @@ const mapping = {
 
 export default (data, source) => {
 	if (mapping[data.code]) {
-		if (isString(mapping[data.code])) useMessage(mapping[data.code], 'error')
+		if (isString(mapping[data.code])) message.error(mapping[data.code])
 		mapping[data.code](data)
 	}
 }

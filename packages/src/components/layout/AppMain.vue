@@ -37,7 +37,7 @@
 <template>
 	<div>
 		<div class="main-tabs">
-			<tiny-tabs
+			<!-- <tiny-tabs
 				v-model="tabs_active"
 				:with-close="tabs_with_close"
 				overflow-title
@@ -50,11 +50,11 @@
 				@click="router.push({ name: $event.name })"
 			>
 				<tiny-tab-item v-for="(value, key) in tabs_list" :key="key" :title="value" :name="key" />
-			</tiny-tabs>
+			</tiny-tabs> -->
 		</div>
 		<div class="main-app">
 			<div class="main-breadcrumb">
-				<tiny-breadcrumb>
+				<!-- <tiny-breadcrumb>
 					<tiny-breadcrumb-item
 						v-for="(item, index) in route.matched.filter((item) => item.name)"
 						:key="item.name"
@@ -62,7 +62,7 @@
 						:label="item.meta.title"
 						:class="{ disabled: !index && item.children.length }"
 					/>
-				</tiny-breadcrumb>
+				</tiny-breadcrumb> -->
 			</div>
 			<router-view v-slot="{ Component }">
 				<transition appear name="fade-transform" mode="out-in">

@@ -1,7 +1,6 @@
 <script setup>
-	import { IconUser, IconLock, IconFreezeLeft } from '@opentiny/vue-icon'
+	import { message } from 'ant-design-vue'
 	import { useBotd } from '@hooks/useFingerprintjs'
-	import { useMessage } from '@hooks/useMessage'
 	import { useUserInfoStore } from '@stores/userInfoStore'
 	import { isEmpty, isEqual, random } from 'radash'
 	import accountApi from '@apis/account'
@@ -72,10 +71,9 @@
 			})
 		}
 		requestAnimationFrame(update)
-		if (await useBotd()) captcha()
+		if ((await useBotd())) captcha()
 	})
 
-	const formRef = ref()
 	const form = reactive({
 		area_list: [],
 		data: {
@@ -89,35 +87,31 @@
 		}
 	})
 
-	async function submit() {
-		await formRef.value.validate(async (valid) => {
-			if (!valid) return
-			const params = {
-				account: form.data.account,
-				password: form.data.password
-			}
-			if (!isEmpty(state.captcha)) {
-				Object.assign(params, {
-					captcha: {
-						key: state.captcha.key,
-						value: form.data.captcha_value
-					}
-				})
-			}
-			const { code, data } = await accountApi.login(params)
-			if (isEqual(code, 200)) {
-				useMessage(t('meo.form.tip.success.submit_login'), 'success')
-				userInfo.set(data)
-				router.push({ name: 'home' })
-			} else {
-				form.data.password = ''
-				if (state.captcha) {
-					form.data.captcha_value = ''
-					await captcha()
+	async function onFinish() {
+		const params = {
+			account: form.data.account,
+			password: form.data.password
+		}
+		if (!isEmpty(state.captcha)) {
+			Object.assign(params, {
+				captcha: {
+					key: state.captcha.key,
+					value: form.data.captcha_value
 				}
+			})
+		}
+		const { code, data } = await accountApi.login(params)
+		if (isEqual(code, 200)) {
+			message.success(t('meo.form.tip.success.submit_login'), 'success')
+			userInfo.set(data)
+			router.push({ name: 'home' })
+		} else {
+			form.data.password = ''
+			if (state.captcha) {
+				form.data.captcha_value = ''
+				await captcha()
 			}
-			if (isEqual(code, 3005)) useMessage(t('meo.form.tip.error.captcha'), 'error')
-		})
+		}
 	}
 
 	async function captcha() {
@@ -151,41 +145,39 @@
 				<p>Meo</p>
 				<p>Content Management System</p>
 			</div>
-			<tiny-form
-				ref="formRef"
-				:model="form.data"
-				:rules="form.rules"
-				label-width="0"
-				validate-type="text"
-				validate-position="left-start"
-			>
-				<tiny-form-item class="form-item" prop="account">
-					<tiny-input v-model="form.data.account" :prefix-icon="IconUser()" :placeholder="$t('meo.form.tip.account')" />
-				</tiny-form-item>
-				<tiny-form-item class="form-item" prop="password">
-					<tiny-input
-						v-model="form.data.password"
-						:prefix-icon="IconLock()"
-						:placeholder="$t('meo.form.tip.password')"
-						type="password"
-						show-password
-					/>
-				</tiny-form-item>
-				<tiny-form-item v-if="state.captcha" class="form-item form-item-captcha" prop="captcha_value">
-					<tiny-input
-						v-model="form.data.captcha_value"
-						:maxlength="6"
-						:prefix-icon="IconFreezeLeft()"
-						:placeholder="$t('meo.form.tip.captcha')"
-					/>
-					<div class="captcha" @click="captcha()">
-						<img :src="state.captcha.img" alt="captcha" />
+			<a-form :model="form.data" :rules="form.rules" autocomplete="off" @finish="onFinish">
+				<a-form-item class="form-item" name="account">
+					<a-input v-model:value="form.data.account" :placeholder="$t('meo.form.tip.account')">
+						<template #prefix>
+							<ant-user-outlined />
+						</template>
+					</a-input>
+				</a-form-item>
+				<a-form-item class="form-item" name="password">
+					<a-input-password v-model:value="form.data.password" :placeholder="$t('meo.form.tip.password')">
+						<template #prefix>
+							<ant-lock-outlined />
+						</template>
+					</a-input-password>
+				</a-form-item>
+				<a-form-item v-if="state.captcha" class="form-item" name="captcha_value">
+					<div class="captcha-container">
+						<a-input v-model:value="form.data.captcha_value" :placeholder="$t('meo.form.tip.account')" :maxlength="6">
+							<template #prefix>
+								<ant-safety-certificate-outlined />
+							</template>
+						</a-input>
+						<div class="captcha" @click="captcha()">
+							<img :src="state.captcha.img" alt="captcha" />
+						</div>
 					</div>
-				</tiny-form-item>
-			</tiny-form>
-			<div class="submit-container">
-				<tiny-button @click="submit">{{ $t('meo.form.submit') }}</tiny-button>
-			</div>
+				</a-form-item>
+				<a-form-item>
+					<a-button class="submit-container" type="primary" html-type="submit" block>
+						{{ $t('meo.form.submit') }}
+					</a-button>
+				</a-form-item>
+			</a-form>
 		</div>
 		<div class="footer-container">© Copyright {{ state.year }} {{ $t('meo.project_name') }} 粤ICP备2022083294号-2</div>
 	</div>
@@ -258,32 +250,24 @@
 			text-shadow: 0 0 10px #9180ff;
 		}
 		.form-item {
-			:deep(input) {
-				--ti-input-bg-color: transparent;
+			:deep(input),
+			:deep(:where(.css-dev-only-do-not-override-19iuou).ant-input-affix-wrapper) {
 				border-top: none;
 				border-left: none;
 				border-right: none;
 				border-bottom-color: #ffffff7f;
+				background-color: transparent;
 				border-radius: 0;
 				color: white;
 				&::placeholder {
 					color: #ffffff4c;
 				}
 			}
-			:deep(.tiny-svg) {
-				font-size: 16px;
-				fill: #ffffff99;
-			}
-			:deep(.tiny-form-item__error) {
-				padding-left: 30px;
-			}
 		}
-		.form-item-captcha {
-			:deep(.tiny-form-item__content-muti-children) {
-				display: grid;
-				grid-template-columns: 1fr 100px;
-				gap: 10px;
-			}
+		.captcha-container {
+			display: grid;
+			grid-template-columns: 1fr 100px;
+			gap: 10px;
 			.captcha {
 				cursor: pointer;
 				img {

@@ -16,7 +16,7 @@ axios.interceptors.request.use(
 		nprogress.start()
 		const userInfo = useUserInfoStore()
 		const { token } = userInfo.get()
-		if (token) response.headers['Authorization'] = `Bearer 1${token}`
+		if (token) response.headers['Authorization'] = `Bearer ${token}`
 		return response
 	},
 	(error) => {
@@ -26,12 +26,13 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
 	(response) => {
-		console.log(response.data)
 		handleRequest(response.data)
+		nprogress.done()
 		return response.data
 	},
 	(error) => {
 		handleRequest(error, 'http')
+		nprogress.done()
 		return Promise.reject(error)
 	},
 	async function axiosRetryInterceptor(error) {

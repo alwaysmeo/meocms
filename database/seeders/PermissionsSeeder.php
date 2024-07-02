@@ -21,7 +21,7 @@ class PermissionsSeeder extends Seeder
 				'code' => 'home',
 				'name' => '首页',
 				'description' => '首页',
-				'icon' => 'TinyIconPublicHome',
+				'icon' => 'AntHomeOutlined',
 				'path' => '/home',
 				'level' => 1
 			],
@@ -29,7 +29,7 @@ class PermissionsSeeder extends Seeder
 				'code' => 'system',
 				'name' => '系统管理',
 				'description' => '系统管理',
-				'icon' => 'TinyIconDataSource',
+				'icon' => 'AntInboxOutlined',
 				'path' => '/system',
 				'level' => 1
 			],
@@ -58,7 +58,7 @@ class PermissionsSeeder extends Seeder
 				'code' => 'content',
 				'name' => '内容管理',
 				'description' => '内容管理',
-				'icon' => 'TinyIconText',
+				'icon' => 'AntContainerOutlined',
 				'path' => '/content',
 				'level' => 1
 			],
@@ -87,7 +87,7 @@ class PermissionsSeeder extends Seeder
 				'code' => 'column',
 				'name' => '栏目管理',
 				'description' => '栏目管理',
-				'icon' => 'TinyIconEditorAlignLeft',
+				'icon' => 'AntProfileOutlined',
 				'path' => '/column',
 				'level' => 1
 			],
@@ -102,7 +102,7 @@ class PermissionsSeeder extends Seeder
 				'code' => 'statistics',
 				'name' => '数据统计',
 				'description' => '数据统计',
-				'icon' => 'TinyIconAreaChart',
+				'icon' => 'AntLineChartOutlined',
 				'path' => '/statistics',
 				'level' => 1
 			],

@@ -1,6 +1,7 @@
 import { resolve } from 'path'
 import { defineConfig, loadEnv } from 'vite'
 import { visualizer } from 'rollup-plugin-visualizer'
+import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import viteCompression from 'vite-plugin-compression'
@@ -36,13 +37,8 @@ export default defineConfig(({ mode }) => {
 			viteComponents({
 				directoryAsNamespace: true,
 				resolvers: [
+					AntDesignVueResolver({ importStyle: false }),
 					(name) => {
-						if (name.startsWith('Tiny') && !name.startsWith('TinyIcon')) {
-							return {
-								name: name.slice(4),
-								from: '@opentiny/vue'
-							}
-						}
 						if (name.startsWith('Meo')) return { name: name.slice(3), from: '@components/common' }
 					}
 				]
