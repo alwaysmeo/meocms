@@ -1,28 +1,22 @@
 import Axios from 'axios'
-import { Loading } from '@opentiny/vue'
-import { useMessage } from '@hooks/useMessage'
+import nprogress from '@utils/nprogress'
 import { useUserInfoStore } from '@stores/userInfoStore'
-import { isEqual } from 'radash'
-import router from '@routes'
-import i18n from '@language'
+import handleRequest from '@utils/handleRequest'
 
-const { t } = i18n.global
-const domain = import.meta.env.VITE_API_DOMAIN
-
-let loading
 const axios = Axios.create({
 	timeout: 30000,
-	baseURL: domain
+	baseURL: import.meta.env.VITE_API_DOMAIN
 })
 
+axios.defaults.retry = 1 // 自动重试次数
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 axios.interceptors.request.use(
 	(response) => {
-		loading = Loading.service({ lock: true, text: 'Loading', background: '#ffffff7f' })
+		nprogress.start()
 		const userInfo = useUserInfoStore()
 		const { token } = userInfo.get()
-		if (token) response.headers['Authorization'] = `Bearer ${token}`
+		if (token) response.headers['Authorization'] = `Bearer 1${token}`
 		return response
 	},
 	(error) => {
@@ -32,37 +26,21 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
 	(response) => {
-		if (handleError[response.data.code]) useMessage(handleError[response.data.code], 'error')
-		loading.close()
+		console.log(response.data)
+		handleRequest(response.data)
 		return response.data
 	},
 	(error) => {
-		if (handleError[error.response.status]) useMessage(handleError[error.response.status], 'error')
-		if (isEqual(error.response.status, 401)) {
-			const userInfo = useUserInfoStore()
-			userInfo.clear()
-			router.replace({ name: 'login' })
-		}
-		loading.close()
+		handleRequest(error, 'http')
 		return Promise.reject(error)
+	},
+	async function axiosRetryInterceptor(error) {
+		nprogress.done()
+		error.config.retryCount = error.config.retryCount ?? 0
+		if (error.config.retryCount >= error.config.retry) return Promise.reject(error)
+		error.config.retryCount += 1
+		return await axios(error.config)
 	}
 )
-
-const handleError = {
-	401: t('meo.request.error.401'),
-	1000: t('meo.request.error.3000'),
-	2000: t('meo.request.error.2000'),
-	2001: t('meo.request.error.2001'),
-	2002: t('meo.request.error.2002'),
-	2003: t('meo.request.error.2003'),
-	3000: t('meo.request.error.3000'),
-	3001: t('meo.request.error.3001'),
-	3002: t('meo.request.error.3002'),
-	3003: t('meo.request.error.3003'),
-	3004: t('meo.request.error.3004'),
-	3005: t('meo.request.error.3005'),
-	4000: t('meo.request.error.4000'),
-	5000: t('meo.request.error.5000')
-}
 
 export default axios
