@@ -13,9 +13,6 @@
 	"dependencies": {
 		"@ant-design/icons-vue": "^7.0.1",
 		"@fingerprintjs/botd": "^1.9.1",
-		"@opentiny/vue": "3",
-		"@opentiny/vue-icon": "^3.16.0",
-		"@opentiny/vue-locale": "^3.16.0",
 		"ant-design-vue": "^4.2.3",
 		"axios": "^1.6.8",
 		"dayjs": "^1.11.11",
