@@ -3,12 +3,14 @@
 <template>
 	<div class="header">
 		<a-popover>
-			<div class="user">
-				<ant-user-outlined />
+			<a-button type="text" size="small">
+				<template #icon>
+					<ant-user-outlined />
+				</template>
 				<span>用户</span>
-			</div>
+			</a-button>
 			<template #content>
-				<div class="user-popover-container">
+				<div class="userinfo-container">
 					<div class="popover-body">
 						<div>
 							<ant-history-outlined />
@@ -20,41 +22,54 @@
 						</div>
 					</div>
 					<div class="popover-footer">
-						<tiny-button type="text" icon="TinyIconUser">个人中心</tiny-button>
-						<tiny-button type="text" icon="TinyIconDerive">退出登录</tiny-button>
+						<a-button type="text">
+							<template #icon>
+								<ant-user-outlined />
+							</template>
+							<span>个人中心</span>
+						</a-button>
+						<a-button type="text">
+							<template #icon>
+								<ant-login-outlined />
+							</template>
+							<span>退出登录</span>
+						</a-button>
 					</div>
 				</div>
 			</template>
 		</a-popover>
-		<div class="tools">
-			<a-tooltip content="消息通知" placement="bottom">
-				<a-button type="text" shape="circle" size="small">
-					<template #icon>
-						<ant-message-outlined />
-					</template>
-				</a-button>
-			</a-tooltip>
-			<a-tooltip content="设置" placement="bottom">
-				<a-button type="text" shape="circle" size="small">
-					<template #icon>
-						<ant-message-outlined />
-					</template>
-				</a-button>
-			</a-tooltip>
-		</div>
-		<a-dropdown class="site-dropdown" :show-icon="false" trigger="click" inherit-width>
-			<div class="now-site">
-				<ant-home-outlined />
+		<a-tooltip title="消息通知" placement="bottom">
+			<a-button type="text" size="small">
+				<template #icon>
+					<ant-message-outlined />
+				</template>
+			</a-button>
+		</a-tooltip>
+		<a-tooltip title="设置" placement="bottom">
+			<a-button type="text" size="small">
+				<template #icon>
+					<ant-setting-outlined />
+				</template>
+			</a-button>
+		</a-tooltip>
+		<a-popover placement="bottomLeft" overlayClassName="site-popover">
+			<a-button type="text" size="small">
+				<template #icon>
+					<ant-bank-outlined />
+				</template>
 				<span>站点名称</span>
-			</div>
-			<template #overlay>
-				<a-menu>
-					<a-menu-item>站点1</a-menu-item>
-					<a-menu-item>站点1</a-menu-item>
-					<a-menu-item>站点1</a-menu-item>
-				</a-menu>
+			</a-button>
+			<template #content>
+				<div class="site-container">
+					<a-button type="text">站点名称</a-button>
+					<a-button type="text">站点名称</a-button>
+					<a-button type="text">站点名称</a-button>
+					<a-button type="text">站点名称</a-button>
+					<a-button type="text">站点名称</a-button>
+					<a-button type="text">站点名称</a-button>
+				</div>
 			</template>
-		</a-dropdown>
+		</a-popover>
 	</div>
 </template>
 
@@ -62,53 +77,33 @@
 	.header {
 		display: flex;
 		align-items: center;
-		gap: 20px;
-		.user {
-			display: flex;
-			align-items: center;
-			gap: 10px;
-			cursor: pointer;
-			span {
-				font-size: 14px;
-				color: #666;
-			}
-		}
-		.tools {
-			display: flex;
-			align-items: center;
-			gap: 10px;
-			:deep(button) {
-				color: #666;
-			}
-		}
-		.now-site {
-			display: flex;
-			align-items: center;
-			gap: 4px;
+		gap: 10px;
+		:deep(button) {
 			color: #666;
-			cursor: pointer;
 		}
 	}
-	.user-popover-container {
+	.userinfo-container {
 		.popover-body {
-			margin-bottom: 12px;
 			> div {
+				padding: 4px 10px;
 				display: flex;
 				align-items: center;
-				gap: 5px;
-				svg {
-					fill: #666;
-				}
-				&:not(:last-child) {
-					margin-bottom: 6px;
-				}
+				gap: 8px;
 			}
 		}
 		.popover-footer {
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			gap: 10px;
+		}
+	}
+	.site-container {
+		display: grid;
+		grid-template-columns: repeat(1, 1fr);
+		max-height: 380px;
+		overflow-y: auto;
+		:deep(button) {
+			text-align: left;
 		}
 	}
 </style>
