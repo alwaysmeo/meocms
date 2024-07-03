@@ -12,7 +12,7 @@
 
 <template>
 	<div class="always-container">
-		<tiny-button type="primary" native-type="submit" @click="count++">{{ count }} 权限管理</tiny-button>
+		<a-button type="primary" @click="count++">{{ count }} 权限管理</a-button>
 	</div>
 </template>
 

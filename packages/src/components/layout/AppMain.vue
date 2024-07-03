@@ -75,18 +75,6 @@
 
 <style scoped lang="scss">
 	.main-tabs {
-		:deep(.tiny-tabs__content) {
-			margin: 0;
-		}
-		:deep(.tiny-tabs.tiny-tabs--card > .tiny-tabs__header .tiny-tabs__nav) {
-			border-top: none;
-			border-left: none;
-		}
-		:deep(.tiny-tabs.tiny-tabs--small .tiny-tabs__item) {
-			border-top: none;
-			height: 40px;
-			line-height: 1;
-		}
 	}
 
 	.main-app {
@@ -95,13 +83,6 @@
 		padding: 20px;
 		.main-breadcrumb {
 			margin-bottom: 10px;
-			.disabled :deep(.tiny-breadcrumb__inner:hover) {
-				cursor: default;
-				color: var(--ti-breadcrumb-text-color);
-			}
-			:deep(.tiny-breadcrumb .tiny-breadcrumb__item) {
-				cursor: pointer;
-			}
 		}
 	}
 </style>

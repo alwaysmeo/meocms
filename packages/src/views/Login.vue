@@ -298,9 +298,6 @@
 				}
 			}
 		}
-		:deep(.tiny-form-item.is-error .tiny-input__inner) {
-			background-color: transparent;
-		}
 	}
 
 	.footer-container {

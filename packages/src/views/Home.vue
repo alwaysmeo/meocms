@@ -12,9 +12,7 @@
 
 <template>
 	<div class="always-container">
-		{{ count }}
-		<tiny-icon-share/>
-		<tiny-button type="primary" native-type="submit" @click="count++">主要按钮</tiny-button>
+		<a-button type="primary" native-type="submit" @click="count++">{{ count }} 主要按钮</a-button>
 	</div>
 </template>
 

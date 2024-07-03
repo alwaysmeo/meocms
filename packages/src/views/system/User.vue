@@ -3,7 +3,7 @@
 </script>
 
 <template>
-	<tiny-button>用户管理</tiny-button>
+	<a-button>用户管理</a-button>
 </template>
 
 <style lang="scss" scoped>

@@ -16,9 +16,6 @@ export default defineConfig(({ mode }) => {
 
 	return {
 		base: VITE_BASE_URL,
-		define: {
-			'process.env': { ...process.env, TINY_MODE: 'pc' }
-		},
 		plugins: [
 			vue(),
 			vueJsx(),
@@ -50,9 +47,6 @@ export default defineConfig(({ mode }) => {
 			}),
 			visualizer({ open: true })
 		],
-		chainWebpack: (config) => {
-			config.resolve.alias.set('@opentiny/vue-theme', '@opentiny/vue-theme/aurora-theme')
-		},
 		resolve: {
 			alias: [
 				{
@@ -98,10 +92,6 @@ export default defineConfig(({ mode }) => {
 				{
 					find: 'vue',
 					replacement: 'vue/dist/vue.esm-bundler.js'
-				},
-				{
-					find: /@opentiny\/vue-theme\/(?!(aurora))/,
-					replacement: '@opentiny/vue-theme/aurora-theme/'
 				}
 			]
 		},
