@@ -1,0 +1,40 @@
+{
+	"meo": {
+		"language": "Sprache",
+		"project_name": "Meocms",
+		"form": {
+			"tip": {
+				"account": "Bitte geben sie ihr e-mail-konto ein",
+				"password": "Bitte geben Sie Ihr Konto-Passwort ein",
+				"captcha": "Authentifizierungscode",
+				"success": {
+					"submit": "Einspruch stattgegeben.",
+					"submit_login": "Erfolgreich im logbuch."
+				},
+				"error": {
+					"captcha_format": "Fehler beim Verifizierungscodeformat",
+					"captcha": "Fehler beim Verifizierungscode"
+				}
+			},
+			"submit": "Eingereicht werden"
+		},
+		"request": {
+			"error": {
+				"401": "Identitätstoken ungültig",
+				"1000": "Identitätstoken ungültig",
+				"2000": "Besorgen Sie sich nicht häufig Verifizierungscodes",
+				"2001": "Die anzahl der authentifizierungscodes hat den obergrenze überschritten",
+				"2002": "Authentifizierung falsch Oder abgelaufen",
+				"2003": "Authentifizierungscode nicht übertragen",
+				"3000": "Die kontonummer sind gesperrt",
+				"3001": "Die bankdaten existieren nicht",
+				"3002": "Die kontonummer existiert bereits",
+				"3003": "Falsche kontonummer Oder passwort",
+				"3004": "Das alte passwort ist fehlerhaft",
+				"3005": "Authentifizierungsfehler bestätigt",
+				"4000": "Upload fehlgeschlagen",
+				"5000": "Der Parameter ist falsch"
+			}
+		}
+	}
+}

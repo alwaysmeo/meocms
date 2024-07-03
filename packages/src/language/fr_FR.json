@@ -1,0 +1,40 @@
+{
+	"meo": {
+		"language": "Langue",
+		"project_name": "Meocms",
+		"form": {
+			"tip": {
+				"account": "Veuillez entrer votre email",
+				"password": "Veuillez entrer le mot de passe du compte",
+				"captcha": "Veuillez entrer le code de vérification de l’image",
+				"success": {
+					"submit": "Soumis avec succès",
+					"submit_login": "Connexion réussie"
+				},
+				"error": {
+					"captcha_format": "Format de captcha incorrect",
+					"captcha": "Code de vérification incorrect"
+				}
+			},
+			"submit": "Présenté par le"
+		},
+		"request": {
+			"error": {
+				"401": "Token d’identité désactivé",
+				"1000": "Token d’identité désactivé",
+				"2000": "N'obtenez pas fréquemment de codes de vérification",
+				"2001": "Vous avez atteint le nombre maximum de fois que vous pouvez obtenir un code de validation",
+				"2002": "Le captcha est incorrect ou a expiré",
+				"2003": "Échec de l’envoi du captcha",
+				"3000": "Le compte est désactivé",
+				"3001": "Le compte n’existe pas",
+				"3002": "Le compte existe déjà",
+				"3003": "Compte ou mot de passe incorrect",
+				"3004": "Erreur de vérification de l’ancien mot de passe",
+				"3005": "Code de vérification incorrect",
+				"4000": "Le téléchargement a échoué",
+				"5000": "Paramètres incorrects"
+			}
+		}
+	}
+}

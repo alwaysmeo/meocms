@@ -1,7 +1,7 @@
 {
 	"meo": {
-		"language": "language",
-		"project_name": "meo content management system",
+		"language": "Language",
+		"project_name": "Meocms",
 		"form": {
 			"tip": {
 				"account": "Please enter your email account",
