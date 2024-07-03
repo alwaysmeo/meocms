@@ -26,12 +26,12 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
 	(response) => {
-		handleRequest(response.data)
+		handleRequest({ response })
 		nprogress.done()
 		return response.data
 	},
 	(error) => {
-		handleRequest(error, 'http')
+		handleRequest({ error })
 		nprogress.done()
 		return Promise.reject(error)
 	},

@@ -1,7 +1,7 @@
 'use strict'
 import { message } from 'ant-design-vue'
 import { useUserInfoStore } from '@stores/userInfoStore'
-import { isString } from 'radash'
+import { isEqual, isString, isNumber } from 'radash'
 import routes from '@routes'
 import i18n from '@language'
 
@@ -9,12 +9,6 @@ const { t } = i18n.global
 
 // 错误码映射表
 const mapping = {
-	401: () => {
-		message.error(t('meo.request.error.401'), 'error')
-		const userInfo = useUserInfoStore()
-		userInfo.clear()
-		routes.replace({ name: 'login' })
-	},
 	1000: t('meo.request.error.3000'),
 	2000: t('meo.request.error.2000'),
 	2001: t('meo.request.error.2001'),
@@ -30,9 +24,15 @@ const mapping = {
 	5000: t('meo.request.error.5000')
 }
 
-export default (data, source) => {
-	if (mapping[data.code]) {
-		if (isString(mapping[data.code])) message.error(mapping[data.code])
-		mapping[data.code](data)
+export default ({ response, error }) => {
+	if (isNumber(response?.data?.code) && mapping[response.data.code]) {
+		if (isString(mapping[response.data.code])) message.error(mapping[response.data.code])
+		mapping[response.data.code](response)
+	}
+	if (isEqual(error?.response?.status, 401)) {
+		message.error(t('meo.request.error.401'), 'error')
+		const userInfo = useUserInfoStore()
+		userInfo.clear()
+		routes.replace({ name: 'login' })
 	}
 }

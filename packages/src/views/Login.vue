@@ -14,8 +14,6 @@
 	const { t } = i18n.global
 	const userInfo = useUserInfoStore()
 
-	if (!isEmpty(userInfo.get())) router.replace({ name: 'home' })
-
 	const state = reactive({
 		year: computed(() => (dayjs().format('YYYY') > 2024 ? `2024-${dayjs().format('YYYY')}` : dayjs().format('YYYY'))),
 		captcha: null

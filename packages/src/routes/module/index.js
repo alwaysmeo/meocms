@@ -7,7 +7,7 @@ export default [
 	{
 		path: '/login',
 		name: 'login',
-		meta: { title: '登录注册' },
+		meta: { title: '登录注册', verifyLogin: false },
 		component: () => import('@views/Login.vue')
 	},
 	{
