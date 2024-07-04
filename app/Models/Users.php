@@ -18,7 +18,6 @@ class Users extends AuthenticatableAuthenticatable
 
 	/**
 	 * The attributes that are mass assignable.
-	 *
 	 * @var array<int, string>
 	 */
 	protected $fillable = [
@@ -38,7 +37,6 @@ class Users extends AuthenticatableAuthenticatable
 
 	/**
 	 * The attributes that should be hidden for serialization.
-	 *
 	 * @var array<int, string>
 	 */
 	protected $hidden = [
@@ -49,7 +47,6 @@ class Users extends AuthenticatableAuthenticatable
 
 	/**
 	 * Get the attributes that should be cast.
-	 *
 	 * @return array<string, string>
 	 */
 	protected function casts(): array
@@ -69,5 +66,10 @@ class Users extends AuthenticatableAuthenticatable
 			->whereNull('deleted_at')
 			->select('url', 'origin_name', 'suffix')
 			->find($this->attributes['picture']);
+	}
+
+	public function getStatusAttribute($value): string
+	{
+		return [0 => '封禁', 1 => '正常'][$value];
 	}
 }

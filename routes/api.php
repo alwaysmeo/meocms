@@ -15,6 +15,7 @@ use App\Http\Controllers\api\AccountController;
 use App\Http\Controllers\api\CommonController;
 use App\Http\Controllers\api\PermissionsController;
 use App\Http\Controllers\api\TestController;
+use App\Http\Controllers\api\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /* 测试 */
@@ -41,4 +42,10 @@ Route::group(['middleware' => 'auth:api'], function () {
 //	Route::post('upload/file', [UploadController::class, 'uploadFile']);
 	/* 获取用户权限列表 */
 	Route::get('/permissions/list', [PermissionsController::class, 'list']);
+
+
+	Route::group(['prefix' => 'users'], function () {
+		/* 获取用户列表 */
+		Route::get('/list', [UsersController::class, 'list']);
+	});
 });

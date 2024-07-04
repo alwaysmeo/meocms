@@ -1,4 +1,5 @@
 // 颜色类
+$color-primary: #1677ff;
 $color-text: #272b32;
 $color-red: #ff4d4f;
 $color-orange: #ed7b2f;
@@ -9,6 +10,9 @@ $color-gray: #888e99;
 $color-black: #000000;
 $color-white: #ffffff;
 
+.color-primary {
+	color: $color-primary;
+}
 .color-text {
 	color: $color-text;
 }
