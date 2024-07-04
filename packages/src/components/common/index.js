@@ -1,3 +1,4 @@
-import MeTable from './Table.vue'
+import Table from './Table.vue'
+import Dropdown from './Dropdown.vue'
 
-export const Table = MeTable
+export { Table, Dropdown }
