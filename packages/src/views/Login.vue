@@ -69,7 +69,7 @@
 			})
 		}
 		requestAnimationFrame(update)
-		if ((await useBotd())) captcha()
+		if (await useBotd()) captcha()
 	})
 
 	const form = reactive({
@@ -101,7 +101,7 @@
 		const { code, data } = await accountApi.login(params)
 		if (isEqual(code, 200)) {
 			message.success(t('meo.form.tip.success.submit_login'), 'success')
-			userInfo.set(data)
+			await userInfo.set(data)
 			router.push({ name: 'home' })
 		} else {
 			form.data.password = ''

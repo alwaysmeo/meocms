@@ -15,7 +15,7 @@
 	const openKeys = ref([])
 	const selectedKeys = ref([])
 
-	onMounted(async () => {
+	onMounted(() => {
 		openKeys.value = route.matched
 			.filter((item) => item.name)
 			.map((item) => item.name)
@@ -66,8 +66,8 @@
 			justify-content: center;
 			height: 64px;
 		}
-		:deep(:where(.css-dev-only-do-not-override-19iuou).ant-menu-light.ant-menu-root.ant-menu-inline),
-		:deep(:where(.css-dev-only-do-not-override-19iuou).ant-menu-light.ant-menu-root.ant-menu-vertical) {
+		:deep(.ant-menu-inline),
+		:deep(.ant-menu-vertical) {
 			border-inline-end: none;
 		}
 	}

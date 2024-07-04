@@ -24,7 +24,7 @@ const mapping = {
 	5000: t('meo.request.error.5000')
 }
 
-export default ({ response, error }) => {
+export default async ({ response, error }) => {
 	if (isNumber(response?.data?.code) && mapping[response.data.code]) {
 		if (isString(mapping[response.data.code])) message.error(mapping[response.data.code])
 		mapping[response.data.code](response)
@@ -32,7 +32,7 @@ export default ({ response, error }) => {
 	if (isEqual(error?.response?.status, 401)) {
 		message.error(t('meo.request.error.401'), 'error')
 		const userInfo = useUserInfoStore()
-		userInfo.clear()
+		await userInfo.clear()
 		routes.replace({ name: 'login' })
 	}
 }

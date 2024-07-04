@@ -29,5 +29,10 @@ export const useSidebarStore = defineStore(storeKey, {
 		clear() {
 			this.list = new Array()
 		}
+	},
+	persist: {
+		paths: ['collapsed'],
+		enabled: true,
+		key: storeKey
 	}
 })

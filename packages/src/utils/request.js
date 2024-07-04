@@ -12,10 +12,10 @@ axios.defaults.retry = 1 // 自动重试次数
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 axios.interceptors.request.use(
-	(response) => {
+	async (response) => {
 		nprogress.start()
 		const userInfo = useUserInfoStore()
-		const { token } = userInfo.get()
+		const { token } = await userInfo.get()
 		if (token) response.headers['Authorization'] = `Bearer ${token}`
 		return response
 	},

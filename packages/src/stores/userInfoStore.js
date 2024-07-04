@@ -2,6 +2,7 @@
 import { isEmpty } from 'radash'
 import { defineStore } from 'pinia'
 import STORAGE_KEY from '@utils/storageKey'
+import localforage from '@utils/localforage'
 
 const storeKey = STORAGE_KEY.USER_INFO
 export const useUserInfoStore = defineStore(storeKey, {
@@ -11,19 +12,22 @@ export const useUserInfoStore = defineStore(storeKey, {
 		}
 	},
 	actions: {
-		set(data) {
-			if (!isEmpty(data)) Object.assign(this.data, data)
+		async set(data) {
+			if (!isEmpty(data)) {
+				Object.assign(this.data, data)
+			}
+			await localforage.setItem(storeKey, { ...this.data })
 		},
-		get() {
+		async get() {
+			if (isEmpty(this.data)) {
+				const obj = await localforage.getItem(storeKey)
+				Object.assign(this.data, obj)
+			}
 			return this.data
 		},
-		clear() {
+		async clear() {
 			this.data = new Object()
+			await localforage.removeItem(storeKey)
 		}
-	},
-	getters: {},
-	persist: {
-		enabled: true,
-		key: storeKey
 	}
 })

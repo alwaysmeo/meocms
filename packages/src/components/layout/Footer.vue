@@ -7,8 +7,9 @@
 <style scoped lang="scss">
 	.footer {
 		overflow-y: auto;
-		height: 60px;
+		height: 50px;
 		text-align: center;
 		color: #ccc;
+		line-height: 50px;
 	}
 </style>
