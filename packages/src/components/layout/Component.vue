@@ -4,7 +4,7 @@
 
 	const tabsListStore = useTabsListStore()
 	const allow_list = computed(() => {
-		return Object.keys(tabsListStore.get()).map(item => pascal(item))
+		return Object.keys(tabsListStore.get()).map((item) => pascal(item))
 	})
 </script>
 

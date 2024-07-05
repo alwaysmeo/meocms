@@ -62,12 +62,7 @@
 			<slot name="bodyCell" v-bind="scoped"></slot>
 			<template v-if="isEqual(scoped.column.dataIndex, 'action')">
 				<a-space>
-					<a-button
-						class="color-primary"
-						type="text"
-						size="small"
-						@click="handleAction(action_first.key, scoped.record)"
-					>
+					<a-button class="color-primary" type="text" size="small" @click="handleAction(action_first.key, scoped.record)">
 						{{ action_first.value }}
 					</a-button>
 					<meo-dropdown :list="action_list" @menu="handleAction($event, scoped.record)" />

@@ -40,12 +40,7 @@
 				<template v-else>
 					<a-sub-menu :key="parent.code" :title="parent.name">
 						<template #icon><component :is="parent.icon" /></template>
-						<a-menu-item
-							v-for="child in parent.children"
-							:key="child.code"
-							:title="child.name"
-							@click="router.push({ name: child.code })"
-						>
+						<a-menu-item v-for="child in parent.children" :key="child.code" :title="child.name" @click="router.push({ name: child.code })">
 							{{ child.name }}
 						</a-menu-item>
 					</a-sub-menu>
