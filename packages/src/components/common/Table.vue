@@ -5,13 +5,26 @@
 	const emits = defineEmits(['paginate', 'action'])
 
 	const props = defineProps({
+		columns: {
+			type: Array,
+			default: () => new Array(),
+			message: '表格列的配置'
+		},
 		total: {
 			type: Number,
-			default: 0
+			default: 0,
+			validator: (val) => val >= 0,
+			message: '数据总数'
 		},
 		action: {
 			type: Object,
-			default: () => ({})
+			default: () => new Object(),
+			message: '操作列中的数据对象：{ key: value }'
+		},
+		selector: {
+			type: Boolean,
+			default: false,
+			message: '表头选择器'
 		}
 	})
 
@@ -54,7 +67,7 @@
 </script>
 
 <template>
-	<a-table class="custom-table" @change="change" :pagination="{ ...pagination, total: props.total }" v-bind="$attrs">
+	<a-table class="custom-table" @change="change" :pagination="{ ...pagination, total: props.total }" :scroll="{ x: 1200 }" v-bind="$attrs" :columns="props.columns">
 		<template #bodyCell="scoped">
 			<template v-if="isEqual(scoped.column.dataIndex, 'index')">
 				{{ (pagination.current - 1) * pagination.pageSize + (scoped.index + 1) }}

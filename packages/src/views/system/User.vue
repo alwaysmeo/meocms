@@ -1,17 +1,20 @@
 <script setup>
 	import { isEqual } from 'radash'
 	import usersApi from '@apis/users'
+	import i18n from '@language'
 
 	defineOptions({ name: 'SystemUser' })
 
+	const { t } = i18n.global
+
 	const table = reactive({
 		columns: [
-			{ dataIndex: 'index', title: '序号', width: 120, align: 'center' },
-			{ dataIndex: 'email', key: 'email', title: '邮箱账号' },
-			{ dataIndex: 'nickname', key: 'nickname', title: '用户名' },
-			{ dataIndex: 'role', key: 'role', title: '角色组' },
-			{ dataIndex: 'status', key: 'status', title: '状态', width: 120, align: 'center' },
-			{ dataIndex: 'action', key: 'action', title: '操作', width: 160, align: 'center' }
+			{ dataIndex: 'index', title: t('meo.pages.system.user.table.columns.index'), width: 120, align: 'center' },
+			{ dataIndex: 'email', key: 'email', title: t('meo.pages.system.user.table.columns.email') },
+			{ dataIndex: 'nickname', key: 'nickname', title: t('meo.pages.system.user.table.columns.nickname') },
+			{ dataIndex: 'role', key: 'role', title: t('meo.pages.system.user.table.columns.role') },
+			{ dataIndex: 'status', key: 'status', title: t('meo.pages.system.user.table.columns.status'), width: 120, align: 'center' },
+			{ dataIndex: 'action', key: 'action', title: t('meo.pages.system.user.table.columns.action'), width: 160, align: 'center' }
 		],
 		data: [],
 		loading: true,
@@ -39,21 +42,33 @@
 
 <template>
 	<div>
-		<meo-table
-			:columns="table.columns"
-			:dataSource="table.data"
-			:loading="table.loading"
-			:total="table.total"
-			:action="{ detail: '详情', edit: '编辑', delete: '删除' }"
-			@paginate="list"
-			@action="handleAction"
-		>
-			<template #bodyCell="{ column, record }">
-				<template v-if="isEqual(column.dataIndex, 'role')">
-					{{ record.role ?? '未设置' }}
+		<div class="primary-container">
+			<div class="primary-header">
+				<div>
+					<div class="title">{{ $t('meo.pages.system.user.title') }}</div>
+					<div class="desc">{{ $t('meo.pages.system.user.desc') }}</div>
+				</div>
+				<a-space>
+					<a-button type="primary">Primary Button</a-button>
+					<a-button type="primary">Primary Button</a-button>
+				</a-space>
+			</div>
+			<meo-table
+				:columns="table.columns"
+				:dataSource="table.data"
+				:loading="table.loading"
+				:total="table.total"
+				:action="{ detail: '详情', edit: '编辑', delete: '删除' }"
+				@paginate="list"
+				@action="handleAction"
+			>
+				<template #bodyCell="{ column, record }">
+					<template v-if="isEqual(column.dataIndex, 'role')">
+						{{ record.role ?? '未设置' }}
+					</template>
 				</template>
-			</template>
-		</meo-table>
+			</meo-table>
+		</div>
 	</div>
 </template>
 
