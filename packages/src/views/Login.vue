@@ -12,7 +12,7 @@
 	const router = useRouter()
 
 	const { t } = i18n.global
-	const userInfo = useUserInfoStore()
+	const userInfoStore = useUserInfoStore()
 
 	const state = reactive({
 		year: computed(() => (dayjs().format('YYYY') > 2024 ? `2024-${dayjs().format('YYYY')}` : dayjs().format('YYYY'))),
@@ -101,7 +101,7 @@
 		const { code, data } = await accountApi.login(params)
 		if (isEqual(code, 200)) {
 			message.success(t('meo.form.tip.success.submit_login'), 'success')
-			await userInfo.set(data)
+			await userInfoStore.set(data)
 			router.push({ name: 'home' })
 		} else {
 			form.data.password = ''
