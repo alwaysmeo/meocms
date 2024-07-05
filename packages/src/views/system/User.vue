@@ -24,6 +24,8 @@
 		data: [],
 		open: false,
 		loading: true,
+		page: 1,
+		limit: 10,
 		total: 0
 	})
 
@@ -32,7 +34,7 @@
 	}
 
 	onMounted(async () => {
-		await list({})
+		await list({ page: table.page, limit: table.limit })
 	})
 
 	async function list({ page, limit }) {
@@ -64,6 +66,8 @@
 			<meo-table
 				v-model:open="table.open"
 				v-model:columns="table.columns"
+				v-model:page="table.page"
+				v-model:limit="table.limit"
 				:dataSource="table.data"
 				:loading="table.loading"
 				:total="table.total"

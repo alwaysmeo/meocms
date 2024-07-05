@@ -3,7 +3,7 @@
 	import { isEqual, first, omit } from 'radash'
 	import { useVModel } from '@vueuse/core'
 
-	const emits = defineEmits(['update:open', 'update:columns', 'paginate', 'action'])
+	const emits = defineEmits(['update:open', 'update:columns', 'update:page', 'update:limit', 'paginate', 'action'])
 
 	const props = defineProps({
 		columns: {
@@ -16,6 +16,18 @@
 			default: 0,
 			validator: (val) => val >= 0,
 			message: '数据总数'
+		},
+		page: {
+			type: Number,
+			default: 1,
+			validator: (val) => val >= 0,
+			message: '页码'
+		},
+		limit: {
+			type: Number,
+			default: 10,
+			validator: (val) => val >= 0,
+			message: '数量限制'
 		},
 		action: {
 			type: Object,
@@ -42,9 +54,9 @@
 	const checkbox_list = useVModel(props, 'columns', emits)
 
 	function handleChange(paginate, filters, sorter, { action, currentDataSource }) {
-		state.page = paginate.current
-		state.limit = paginate.pageSize
-		emits(action, { page: state.page, limit: state.limit, total: props.total }, filters, sorter, { action, currentDataSource })
+		emits('update:page', paginate.current)
+		emits('update:limit', paginate.pageSize)
+		emits(action, { page: paginate.current, limit: paginate.pageSize, total: props.total }, filters, sorter, { action, currentDataSource })
 	}
 
 	function handleAction(key, record) {
@@ -61,7 +73,7 @@
 	<div class="meo-table-container">
 		<a-table
 			class="meo-table"
-			:pagination="{ current: state.page, pageSize: state.limit, total: props.total }"
+			:pagination="{ current: props.page, pageSize: props.limit, total: props.total }"
 			:scroll="{ x: 1200 }"
 			@change="handleChange"
 			v-bind="$attrs"
@@ -69,7 +81,7 @@
 		>
 			<template #bodyCell="scoped">
 				<template v-if="isEqual(scoped.column.dataIndex, 'index')">
-					{{ (state.page - 1) * state.limit + (scoped.index + 1) }}
+					{{ (props.page - 1) * props.limit + (scoped.index + 1) }}
 				</template>
 				<slot name="bodyCell" v-bind="scoped"></slot>
 				<template v-if="isEqual(scoped.column.dataIndex, 'action')">
