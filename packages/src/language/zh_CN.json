@@ -44,8 +44,8 @@
 		"pages": {
 			"system": {
 				"user": {
-					"title ": "用户管理",
-					"desc ": "系统用户信息管理",
+					"title": "用户管理",
+					"desc": "系统用户信息管理",
 					"table": {
 						"columns": {
 							"index": "序号",

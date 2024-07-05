@@ -38,14 +38,14 @@
 		},
 		"tip": {
 			"success": {
-				"submit_logout": "退出成功"
+				"submit_logout": "登出成功"
 			}
 		},
 		"pages": {
 			"system": {
 				"user": {
-					"title ": "用戶管理",
-					"desc ": "系統用戶資訊管理",
+					"title": "用戶管理",
+					"desc": "系統用戶資訊管理",
 					"table": {
 						"columns": {
 							"index": "序號",
