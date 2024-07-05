@@ -20,7 +20,7 @@
 	<a-dropdown
 		v-bind="$attrs"
 		trigger="click"
-		placement="bottomRight"
+		placement="bottom"
 		:getPopupContainer="(e) => e.parentNode.parentNode.parentNode"
 	>
 		<slot name="overlay" v-if="$slots.default"></slot>
