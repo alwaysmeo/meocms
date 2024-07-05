@@ -10,6 +10,7 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 		display: -webkit-box;
+		line-clamp: #{$i};
 		-webkit-line-clamp: #{$i};
 		-webkit-box-orient: vertical;
 		white-space: normal;
@@ -49,4 +50,24 @@
 
 .text-indent {
 	text-indent: 2em;
+}
+
+.primary-container {
+	padding: 20px;
+	border-radius: 10px;
+	background-color: white;
+	> .primary-header {
+		margin-bottom: 20px;
+		display: flex;
+		justify-content: space-between;
+		.title {
+			font-size: 20px;
+			font-weight: 700;
+		}
+		.desc {
+			margin-top: 2px;
+			font-size: 14px;
+			color: #ccc;
+		}
+	}
 }
