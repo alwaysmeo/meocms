@@ -3,7 +3,7 @@
 	import { isEqual, first, omit } from 'radash'
 	import { useVModel } from '@vueuse/core'
 
-	const emits = defineEmits(['update:open', 'paginate', 'action'])
+	const emits = defineEmits(['update:open', 'update:columns', 'paginate', 'action'])
 
 	const props = defineProps({
 		columns: {
@@ -25,7 +25,7 @@
 		open: {
 			type: Boolean,
 			default: false,
-			message: '控制选择可见的表格列的模态框显示隐藏 v-model:open'
+			message: '控制选择可见的表格列的模态框显示隐藏 v-model:open，（需设置 v-model:columns）'
 		}
 	})
 
@@ -34,34 +34,26 @@
 		limit: 10,
 		open: useVModel(props, 'open', emits),
 		action_first: computed(() => new Object({ key: first(Object.keys(props.action)), value: first(Object.values(props.action)) })),
-		action_list: computed(() => omit(props.action, [state.action_first.value.key]))
+		action_list: computed(() => omit(props.action, [state.action_first.value.key])),
+		columns: computed(() => props.columns.filter((item) => item.show))
 	})
 
-	function change(paginate, filters, sorter, { action, currentDataSource }) {
+	const checkbox = ref(props.columns.filter((item) => item.show).map((item) => item.dataIndex))
+	const checkbox_list = useVModel(props, 'columns', emits)
+
+	function handleChange(paginate, filters, sorter, { action, currentDataSource }) {
 		state.page = paginate.current
 		state.limit = paginate.pageSize
-		emits(
-			action,
-			{
-				page: state.page,
-				limit: state.limit,
-				total: props.total
-			},
-			filters,
-			sorter,
-			{
-				action,
-				currentDataSource
-			}
-		)
+		emits(action, { page: state.page, limit: state.limit, total: props.total }, filters, sorter, { action, currentDataSource })
 	}
 
 	function handleAction(key, record) {
 		emits('action', key, record)
 	}
 
-	function confirm() {
-		console.log(props.columns)
+	function handleConfirm() {
+		for (const item of checkbox_list.value) item.show = checkbox.value.includes(item.dataIndex)
+		state.open = false
 	}
 </script>
 
@@ -69,11 +61,11 @@
 	<div class="meo-table-container">
 		<a-table
 			class="meo-table"
-			@change="change"
 			:pagination="{ current: state.page, pageSize: state.limit, total: props.total }"
 			:scroll="{ x: 1200 }"
+			@change="handleChange"
 			v-bind="$attrs"
-			:columns="props.columns"
+			:columns="state.columns"
 		>
 			<template #bodyCell="scoped">
 				<template v-if="isEqual(scoped.column.dataIndex, 'index')">
@@ -93,10 +85,14 @@
 				<div class="text-align-center">{{ $attrs.emptyTxt ?? '暂无数据' }}</div>
 			</template>
 		</a-table>
-		<a-modal v-model:open="state.open" title="选择可见的表格列" centered @ok="confirm" @cancel="state.open = false">
-			<p>Some contents...</p>
-			<p>Some contents...</p>
-			<p>Some contents...</p>
+		<a-modal class="modal-container" v-model:open="state.open" title="选择可见的表格列" centered @ok="handleConfirm" @cancel="state.open = false">
+			<a-checkbox-group class="checkbox-container" v-model:value="checkbox">
+				<a-checkbox v-for="item in checkbox_list" :key="item.dataIndex" :value="item.dataIndex" :disabled="['index', 'action'].includes(item.dataIndex)">
+					<a-tooltip :title="item.title">
+						{{ item.title }}
+					</a-tooltip>
+				</a-checkbox>
+			</a-checkbox-group>
 		</a-modal>
 	</div>
 </template>
@@ -110,6 +106,24 @@
 			left: 0;
 			z-index: 1;
 			font-size: 20px;
+		}
+	}
+	.modal-container {
+		.checkbox-container {
+			padding: 10px 30px 0 30px;
+			width: 100%;
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 10px;
+			:deep(label) {
+				overflow: hidden;
+				> span:last-child {
+					display: block;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+				}
+			}
 		}
 	}
 </style>
