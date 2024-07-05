@@ -1,37 +1,60 @@
-<script setup></script>
+<script setup>
+	import { message } from 'ant-design-vue'
+	import { useAsyncState } from '@vueuse/core'
+	import { isEqual } from 'radash'
+	import { useUserInfoStore } from '@stores/userInfoStore'
+	import { modal } from '@hooks/useModal'
+	import accountApi from '@apis/account'
+	import i18n from '@language'
+
+	const { t } = i18n.global
+	const router = useRouter()
+	const userInfoStore = useUserInfoStore()
+
+	const { state: userInfo } = useAsyncState(async () => await userInfoStore.get())
+
+	async function logout() {
+		modal({
+			title: '提示',
+			content: `确认退出【${userInfo.value.nickname}】账号？`,
+			confirm: async () => {
+				const { code } = await accountApi.logout()
+				if (isEqual(code, 200)) {
+					message.success(t('meo.tip.success.submit_logout'), 'success')
+					await userInfoStore.clear()
+					router.replace({ name: 'login' })
+				}
+			}
+		})
+	}
+</script>
 
 <template>
 	<div class="header">
 		<a-popover>
 			<a-button type="text" size="small">
-				<template #icon>
-					<ant-user-outlined />
-				</template>
-				<span>用户</span>
+				<ant-user-outlined />
+				<span>{{ userInfo?.nickname ?? '-' }}</span>
 			</a-button>
 			<template #content>
 				<div class="userinfo-container">
 					<div class="popover-body">
 						<div>
 							<ant-history-outlined />
-							<span>登录时间：2024-06-04 19:01:12</span>
+							<span>登录时间：{{ userInfo?.last_login_at ?? '-' }}</span>
 						</div>
 						<div>
 							<ant-laptop-outlined />
-							<span>IP地址：114.114.114.114</span>
+							<span>IP地址：0.0.0.0</span>
 						</div>
 					</div>
 					<div class="popover-footer">
 						<a-button type="text">
-							<template #icon>
-								<ant-user-outlined />
-							</template>
+							<ant-user-outlined />
 							<span>个人中心</span>
 						</a-button>
-						<a-button type="text">
-							<template #icon>
-								<ant-login-outlined />
-							</template>
+						<a-button type="text" @click="logout">
+							<ant-login-outlined />
 							<span>退出登录</span>
 						</a-button>
 					</div>
@@ -40,23 +63,17 @@
 		</a-popover>
 		<a-tooltip title="消息通知" placement="bottom">
 			<a-button type="text" size="small">
-				<template #icon>
-					<ant-message-outlined />
-				</template>
+				<ant-message-outlined />
 			</a-button>
 		</a-tooltip>
 		<a-tooltip title="设置" placement="bottom">
 			<a-button type="text" size="small">
-				<template #icon>
-					<ant-setting-outlined />
-				</template>
+				<ant-setting-outlined />
 			</a-button>
 		</a-tooltip>
 		<a-popover placement="bottomLeft" overlayClassName="site-popover">
 			<a-button type="text" size="small">
-				<template #icon>
-					<ant-bank-outlined />
-				</template>
+				<ant-bank-outlined />
 				<span>站点名称</span>
 			</a-button>
 			<template #content>
