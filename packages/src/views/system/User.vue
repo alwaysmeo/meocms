@@ -9,26 +9,15 @@
 
 	const table = reactive({
 		columns: [
-			{ dataIndex: 'index', title: t('meo.pages.system.user.table.columns.index'), width: 120, align: 'center' },
-			{ dataIndex: 'email', key: 'email', title: t('meo.pages.system.user.table.columns.email') },
-			{ dataIndex: 'nickname', key: 'nickname', title: t('meo.pages.system.user.table.columns.nickname') },
-			{ dataIndex: 'role', key: 'role', title: t('meo.pages.system.user.table.columns.role') },
-			{
-				dataIndex: 'status',
-				key: 'status',
-				title: t('meo.pages.system.user.table.columns.status'),
-				width: 120,
-				align: 'center'
-			},
-			{
-				dataIndex: 'action',
-				key: 'action',
-				title: t('meo.pages.system.user.table.columns.action'),
-				width: 160,
-				align: 'center'
-			}
+			{ dataIndex: 'index', title: t('meo.pages.system.user.table.columns.index'), width: 120, align: 'center', show: true },
+			{ dataIndex: 'email', key: 'email', title: t('meo.pages.system.user.table.columns.email'), show: true },
+			{ dataIndex: 'nickname', key: 'nickname', title: t('meo.pages.system.user.table.columns.nickname'), show: true },
+			{ dataIndex: 'role', key: 'role', title: t('meo.pages.system.user.table.columns.role'), show: true },
+			{ dataIndex: 'status', key: 'status', title: t('meo.pages.system.user.table.columns.status'), width: 120, align: 'center', show: true },
+			{ dataIndex: 'action', key: 'action', title: t('meo.pages.system.user.table.columns.action'), width: 160, align: 'center', show: true }
 		],
 		data: [],
+		open: false,
 		loading: true,
 		total: 0
 	})
@@ -61,11 +50,14 @@
 					<div class="desc">{{ $t('meo.pages.system.user.desc') }}</div>
 				</div>
 				<a-space>
-					<a-button type="primary">Primary Button</a-button>
+					<a-button @click="table.open = true">
+						<span>列表筛选</span>
+					</a-button>
 					<a-button type="primary">Primary Button</a-button>
 				</a-space>
 			</div>
 			<meo-table
+				v-model:open="table.open"
 				:columns="table.columns"
 				:dataSource="table.data"
 				:loading="table.loading"
