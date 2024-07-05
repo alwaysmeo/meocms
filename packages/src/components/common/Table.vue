@@ -1,4 +1,4 @@
-<!-- 表格组件 -->
+<!-- 表格组件：table component -->
 <script setup>
 	import { isEqual, first, omit } from 'radash'
 	import { useVModel } from '@vueuse/core'
@@ -94,10 +94,17 @@
 				</template>
 			</template>
 			<template #emptyText>
-				<div class="text-align-center">{{ $attrs.emptyTxt ?? '暂无数据' }}</div>
+				<div class="text-align-center">{{ $attrs.emptyTxt ?? $t('meo.components.common.table.not_data') }}</div>
 			</template>
 		</a-table>
-		<a-modal class="modal-container" v-model:open="state.open" title="选择可见的表格列" centered @ok="handleConfirm" @cancel="state.open = false">
+		<a-modal
+			:title="$t('meo.components.common.table.select_table_header')"
+			v-model:open="state.open"
+			centered
+			class="modal-container"
+			@ok="handleConfirm"
+			@cancel="state.open = false"
+		>
 			<a-checkbox-group class="checkbox-container" v-model:value="checkbox">
 				<a-checkbox v-for="item in checkbox_list" :key="item.dataIndex" :value="item.dataIndex" :disabled="['index', 'action'].includes(item.dataIndex)">
 					<a-tooltip :title="item.title">

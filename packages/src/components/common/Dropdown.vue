@@ -1,4 +1,4 @@
-<!-- 下拉菜单组件 -->
+<!-- 下拉菜单组件：dropdown menu component -->
 <script setup>
 	import { isEmpty } from 'radash'
 
@@ -7,11 +7,13 @@
 	const props = defineProps({
 		desc: {
 			type: String,
-			default: '更多'
+			default: '更多',
+			message: '表格列的配置'
 		},
 		list: {
 			type: Object,
-			default: () => ({})
+			default: () => ({}),
+			message: '列表的数据：{ key: value }'
 		}
 	})
 </script>

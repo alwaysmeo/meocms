@@ -41,6 +41,15 @@
 				"submit_logout": "登出成功"
 			}
 		},
+		"components": {
+			"common": {
+				"table": {
+					"not_data": "暫無數據",
+					"select_table_header": "選擇可見的表格列",
+					"list_filtering": "列表篩選"
+				}
+			}
+		},
 		"pages": {
 			"system": {
 				"user": {
@@ -49,11 +58,21 @@
 					"table": {
 						"columns": {
 							"index": "序號",
+							"id": "ID",
+							"picture_info": "頭像",
 							"email": "電子郵箱",
+							"phone": "聯繫電話",
 							"nickname": "用戶名",
 							"role": "角色組",
+							"created_at": "創建時間",
+							"last_login_at": "最後一次登入時間",
 							"status": "狀態",
 							"action": "操作"
+						},
+						"action": {
+							"detail": "詳情",
+							"edit": "編輯",
+							"delete": "刪除"
 						}
 					}
 				}

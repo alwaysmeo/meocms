@@ -10,14 +10,14 @@
 	const table = reactive({
 		columns: [
 			{ dataIndex: 'index', title: t('meo.pages.system.user.table.columns.index'), width: 120, align: 'center', show: true },
-			{ dataIndex: 'ulid', key: 'ulid', title: 'ID', width: 260 },
-			{ dataIndex: 'picture_info', key: 'picture_info', title: '用户头像', width: 120, align: 'center', show: true },
+			{ dataIndex: 'ulid', key: 'ulid', title: t('meo.pages.system.user.table.columns.id'), width: 260 },
+			{ dataIndex: 'picture_info', key: 'picture_info', title: t('meo.pages.system.user.table.columns.picture_info'), width: 120, align: 'center', show: true },
 			{ dataIndex: 'email', key: 'email', title: t('meo.pages.system.user.table.columns.email'), show: true },
-			{ dataIndex: 'phone', key: 'phone', title: '联系电话', width: 150, align: 'center' },
+			{ dataIndex: 'phone', key: 'phone', title: t('meo.pages.system.user.table.columns.phone'), width: 150, align: 'center' },
 			{ dataIndex: 'nickname', key: 'nickname', title: t('meo.pages.system.user.table.columns.nickname'), show: true },
 			{ dataIndex: 'role', key: 'role', title: t('meo.pages.system.user.table.columns.role'), align: 'center', show: true },
-			{ dataIndex: 'created_at', key: 'created_at', title: '注册时间', width: 170, align: 'center' },
-			{ dataIndex: 'last_login_at', key: 'last_login_at', title: '最后一次登录时间', width: 170, align: 'center' },
+			{ dataIndex: 'created_at', key: 'created_at', title: t('meo.pages.system.user.table.columns.created_at'), width: 170, align: 'center' },
+			{ dataIndex: 'last_login_at', key: 'last_login_at', title: t('meo.pages.system.user.table.columns.last_login_at'), width: 170, align: 'center' },
 			{ dataIndex: 'status', key: 'status', title: t('meo.pages.system.user.table.columns.status'), width: 120, align: 'center', show: true },
 			{ dataIndex: 'action', key: 'action', title: t('meo.pages.system.user.table.columns.action'), width: 160, align: 'center', show: true }
 		],
@@ -58,7 +58,7 @@
 				</div>
 				<a-space>
 					<a-button @click="table.open = true">
-						<span>列表筛选</span>
+						<span>{{ $t('meo.components.common.table.list_filtering') }}</span>
 					</a-button>
 					<a-button type="primary">Primary Button</a-button>
 				</a-space>
@@ -71,13 +71,17 @@
 				:dataSource="table.data"
 				:loading="table.loading"
 				:total="table.total"
-				:action="{ detail: '详情', edit: '编辑', delete: '删除' }"
+				:action="{
+					detail: $t('meo.pages.system.user.table.action.detail'),
+					edit: $t('meo.pages.system.user.table.action.edit'),
+					delete: $t('meo.pages.system.user.table.action.delete')
+				}"
 				@paginate="list"
 				@action="handleAction"
 			>
 				<template #bodyCell="{ column, record }">
 					<template v-if="isEqual(column.dataIndex, 'role')">
-						{{ record.role ?? '未设置' }}
+						{{ record.role ?? '-' }}
 					</template>
 					<template v-if="isEqual(column.dataIndex, 'picture_info')">
 						<a-avatar :size="50" :src="record?.picture_info?.url">
