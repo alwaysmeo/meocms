@@ -35,6 +35,29 @@
 				"4000": "上传失败",
 				"5000": "参数错误"
 			}
+		},
+		"tip": {
+			"success": {
+				"submit_logout": "退出成功"
+			}
+		},
+		"pages": {
+			"system": {
+				"user": {
+					"title ": "用户管理",
+					"desc ": "系统用户信息管理",
+					"table": {
+						"columns": {
+							"index": "序号",
+							"email": "邮箱账号",
+							"nickname": "用户名",
+							"role": "角色组",
+							"status": "状态",
+							"action": "操作"
+						}
+					}
+				}
+			}
 		}
 	}
 }
