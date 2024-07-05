@@ -14,8 +14,8 @@ axios.defaults.headers.post['Content-Type'] = 'application/json'
 axios.interceptors.request.use(
 	async (response) => {
 		nprogress.start()
-		const userInfo = useUserInfoStore()
-		const { token } = await userInfo.get()
+		const userInfoStore = useUserInfoStore()
+		const { token } = await userInfoStore.get()
 		if (token) response.headers['Authorization'] = `Bearer ${token}`
 		return response
 	},

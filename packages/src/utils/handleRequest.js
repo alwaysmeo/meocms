@@ -31,8 +31,8 @@ export default async ({ response, error }) => {
 	}
 	if (isEqual(error?.response?.status, 401)) {
 		message.error(t('meo.request.error.401'), 'error')
-		const userInfo = useUserInfoStore()
-		await userInfo.clear()
+		const userInfoStore = useUserInfoStore()
+		await userInfoStore.clear()
 		routes.replace({ name: 'login' })
 	}
 }
