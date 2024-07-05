@@ -13,8 +13,20 @@
 			{ dataIndex: 'email', key: 'email', title: t('meo.pages.system.user.table.columns.email') },
 			{ dataIndex: 'nickname', key: 'nickname', title: t('meo.pages.system.user.table.columns.nickname') },
 			{ dataIndex: 'role', key: 'role', title: t('meo.pages.system.user.table.columns.role') },
-			{ dataIndex: 'status', key: 'status', title: t('meo.pages.system.user.table.columns.status'), width: 120, align: 'center' },
-			{ dataIndex: 'action', key: 'action', title: t('meo.pages.system.user.table.columns.action'), width: 160, align: 'center' }
+			{
+				dataIndex: 'status',
+				key: 'status',
+				title: t('meo.pages.system.user.table.columns.status'),
+				width: 120,
+				align: 'center'
+			},
+			{
+				dataIndex: 'action',
+				key: 'action',
+				title: t('meo.pages.system.user.table.columns.action'),
+				width: 160,
+				align: 'center'
+			}
 		],
 		data: [],
 		loading: true,

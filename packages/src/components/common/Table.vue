@@ -67,7 +67,14 @@
 </script>
 
 <template>
-	<a-table class="custom-table" @change="change" :pagination="{ ...pagination, total: props.total }" :scroll="{ x: 1200 }" v-bind="$attrs" :columns="props.columns">
+	<a-table
+		class="custom-table"
+		@change="change"
+		:pagination="{ ...pagination, total: props.total }"
+		:scroll="{ x: 1200 }"
+		v-bind="$attrs"
+		:columns="props.columns"
+	>
 		<template #bodyCell="scoped">
 			<template v-if="isEqual(scoped.column.dataIndex, 'index')">
 				{{ (pagination.current - 1) * pagination.pageSize + (scoped.index + 1) }}
@@ -75,7 +82,12 @@
 			<slot name="bodyCell" v-bind="scoped"></slot>
 			<template v-if="isEqual(scoped.column.dataIndex, 'action')">
 				<a-space>
-					<a-button class="color-primary" type="text" size="small" @click="handleAction(action_first.key, scoped.record)">
+					<a-button
+						class="color-primary"
+						type="text"
+						size="small"
+						@click="handleAction(action_first.key, scoped.record)"
+					>
 						{{ action_first.value }}
 					</a-button>
 					<meo-dropdown :list="action_list" @menu="handleAction($event, scoped.record)" />
