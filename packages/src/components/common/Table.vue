@@ -33,9 +33,7 @@
 		page: 1,
 		limit: 10,
 		open: useVModel(props, 'open', emits),
-		action_first: computed(
-			() => new Object({ key: first(Object.keys(props.action)), value: first(Object.values(props.action)) })
-		),
+		action_first: computed(() => new Object({ key: first(Object.keys(props.action)), value: first(Object.values(props.action)) })),
 		action_list: computed(() => omit(props.action, [state.action_first.value.key]))
 	})
 
@@ -84,12 +82,7 @@
 				<slot name="bodyCell" v-bind="scoped"></slot>
 				<template v-if="isEqual(scoped.column.dataIndex, 'action')">
 					<a-space>
-						<a-button
-							class="color-primary"
-							type="text"
-							size="small"
-							@click="handleAction(state.action_first.key, scoped.record)"
-						>
+						<a-button class="color-primary" type="text" size="small" @click="handleAction(state.action_first.key, scoped.record)">
 							{{ state.action_first.value }}
 						</a-button>
 						<meo-dropdown :list="state.action_list" @menu="handleAction($event, scoped.record)" />

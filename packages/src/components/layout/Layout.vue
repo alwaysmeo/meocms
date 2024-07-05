@@ -20,11 +20,7 @@
 			</a-layout-sider>
 			<a-layout>
 				<a-layout-header>
-					<ant-menu-fold-outlined
-						class="flip-button"
-						:class="{ flip: collapsed }"
-						@click="sidebarStore.changeCollapsed()"
-					/>
+					<ant-menu-fold-outlined class="flip-button" :class="{ flip: collapsed }" @click="sidebarStore.changeCollapsed()" />
 					<Header />
 				</a-layout-header>
 				<a-layout-content>
