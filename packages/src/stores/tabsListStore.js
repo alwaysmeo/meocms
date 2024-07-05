@@ -12,12 +12,12 @@ export const useTabsListStore = defineStore(storeKey, {
 	actions: {
 		async add({ key, value }) {
 			Object.assign(this.data, { [key]: value })
-			await localforage.setItem(storeKey, { ...this.data })
+			await localforage.setItem(storeKey, toRaw(this.data))
 		},
 		async remove(key) {
 			if (isEmpty(this.data)) return
 			delete this.data[key]
-			await localforage.setItem(storeKey, { ...this.data })
+			await localforage.setItem(storeKey, toRaw(this.data))
 		},
 		async get() {
 			if (isEmpty(this.data)) {

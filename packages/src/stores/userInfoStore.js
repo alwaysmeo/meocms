@@ -15,13 +15,12 @@ export const useUserInfoStore = defineStore(storeKey, {
 		async set(data) {
 			if (!isEmpty(data)) {
 				Object.assign(this.data, data)
+				await localforage.setItem(storeKey, toRaw(this.data))
 			}
-			await localforage.setItem(storeKey, { ...this.data })
 		},
 		async get() {
 			if (isEmpty(this.data)) {
-				const obj = await localforage.getItem(storeKey)
-				Object.assign(this.data, obj)
+				Object.assign(this.data, await localforage.getItem(storeKey))
 			}
 			return this.data
 		},
