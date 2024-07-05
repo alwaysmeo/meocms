@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
-	/* 获取权限列表 */
+	/* 获取用户列表 */
 	public function list(Request $request): Response
 	{
-		$req = $request->only(['page', 'limit']);
+		$req = $request->only(['page', 'limit', 'search_type', 'keyword']);
 		$validator = Validator::make($req, [
 			'page' => 'integer',
 			'limit' => 'integer',
@@ -22,17 +22,17 @@ class UsersController extends Controller
 		]);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
 
-		$page = isset($req['page']) ? intval($req['page']) : null;
-		$limit = isset($req['limit']) ? intval($req['limit']) : null;
+		$page = $req['page'] ?? 1;
+		$limit = $req['limit'] ?? 10;
 		$search_type = $req['search_type'] ?? null;
 		$keyword = $req['keyword'] ?? null;
 		$list = Users::query();
 		$list->select('ulid', 'email', 'nickname', 'picture', 'phone', 'status', 'last_login_at', 'created_at');
 		$list->where('deleted_at', NULL);
 		$list->orderBy('created_at', 'desc');
-		$search_type && $keyword && $list->where($search_type, 'like', '%' . $keyword . '%');
+		($search_type && $keyword) && $list->where($search_type, 'like', '%' . $keyword . '%');
 		$total = $list->count();
-		($page && $limit) && $list->offset(($page - 1) * $limit)->limit($limit);
+		$list->offset(($page - 1) * $limit)->limit($limit);
 		return $this->success([
 			'list' => $list->get(),
 			'total' => $total,
