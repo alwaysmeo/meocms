@@ -40,11 +40,15 @@ Route::group(['prefix' => 'common'], function () {
 Route::group(['middleware' => 'auth:api'], function () {
 	/* 文件上传 */
 //	Route::post('upload/file', [UploadController::class, 'uploadFile']);
-	/* 获取用户权限列表 */
-	Route::get('/permissions/list', [PermissionsController::class, 'list']);
+	Route::group(['prefix' => 'permissions'], function () {
+		/* 获取所有权限列表 */
+		Route::get('/list', [PermissionsController::class, 'list']);
+	});
 
 
 	Route::group(['prefix' => 'users'], function () {
+		/* 获取用户权限列表 */
+		Route::get('/permissions/list', [UsersController::class, 'permissionsList']);
 		/* 获取用户列表 */
 		Route::get('/list', [UsersController::class, 'list']);
 	});

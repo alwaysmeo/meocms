@@ -3,13 +3,32 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Permissions;
+use App\Models\PermissionsRole;
+use App\Models\RoleUser;
 use App\Models\Users;
+use App\Services\Common;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
+	/* 获取用户权限列表 */
+	public function permissionsList(Request $request): Response
+	{
+		$user = $request->user();
+		$role = RoleUser::query()->where('user_ulid', $user->ulid)->first();
+		$permission = PermissionsRole::query()->where('role_id', $role->role_id)->first();
+		$list = Permissions::query()
+			->where('show', 1)
+			->whereIn('id', json_decode($permission->permission_ids))
+			->orderBy('slot')
+			->get();
+		$common = new Common();
+		return $this->success($common->buildTree($list->toArray()));
+	}
+
 	/* 获取用户列表 */
 	public function list(Request $request): Response
 	{
@@ -21,7 +40,6 @@ class UsersController extends Controller
 			'keyword' => 'max:60',
 		]);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
-
 		$page = $req['page'] ?? 1;
 		$limit = $req['limit'] ?? 10;
 		$search_type = $req['search_type'] ?? null;
