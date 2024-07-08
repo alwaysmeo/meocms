@@ -100,7 +100,7 @@
 		}
 		const { code, data } = await accountApi.login(params)
 		if (isEqual(code, 200)) {
-			message.success(t('meo.form.tip.success.submit_login'), 'success')
+			message.success(t('meo.form.tip.success.submit_login'))
 			await userInfoStore.set(data)
 			router.push({ name: 'home' })
 		} else {

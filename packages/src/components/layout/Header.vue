@@ -20,7 +20,7 @@
 			confirm: async () => {
 				const { code } = await accountApi.logout()
 				if (isEqual(code, 200)) {
-					message.success(t('meo.tip.success.submit_logout'), 'success')
+					message.success(t('meo.tip.success.submit_logout'))
 					await userInfoStore.clear()
 					router.replace({ name: 'login' })
 				}
