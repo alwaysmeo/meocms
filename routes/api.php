@@ -14,6 +14,7 @@
 use App\Http\Controllers\api\AccountController;
 use App\Http\Controllers\api\CommonController;
 use App\Http\Controllers\api\PermissionsController;
+use App\Http\Controllers\api\RolesController;
 use App\Http\Controllers\api\TestController;
 use App\Http\Controllers\api\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +41,16 @@ Route::group(['prefix' => 'common'], function () {
 Route::group(['middleware' => 'auth:api'], function () {
 	/* 文件上传 */
 //	Route::post('upload/file', [UploadController::class, 'uploadFile']);
+
+	Route::group(['prefix' => 'roles'], function () {
+		/* 获取角色列表 */
+		Route::get('/list', [RolesController::class, 'list']);
+		/* 新增修改角色 */
+		Route::post('/upsert', [RolesController::class, 'upsert']);
+		/* 删除角色 */
+		Route::post('/delete', [RolesController::class, 'delete']);
+	});
+
 	Route::group(['prefix' => 'permissions'], function () {
 		/* 获取所有权限列表 */
 		Route::get('/list', [PermissionsController::class, 'list']);

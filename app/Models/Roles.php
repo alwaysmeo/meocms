@@ -15,6 +15,14 @@ class Roles extends Model
 
     protected $fillable = [
         'name',
-        'slot'
+        'slot',
+        'show'
     ];
+
+	protected $appends = ['count'];
+
+	public function getCountAttribute(): int
+	{
+		return RoleUser::query()->where('role_id', $this->attributes['id'])->get()->count();
+	}
 }
