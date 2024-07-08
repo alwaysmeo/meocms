@@ -1,4 +1,5 @@
-import Table from './Table.vue'
 import Dropdown from './Dropdown.vue'
+import Modal from './Modal.vue'
+import Table from './Table.vue'
 
-export { Table, Dropdown }
+export { Dropdown, Modal, Table }
