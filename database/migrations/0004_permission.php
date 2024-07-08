@@ -47,7 +47,7 @@ return new class extends Migration
 
         /* 用户角色关联表 */
         Schema::create('role_user', function (Blueprint $table) {
-            $table->ulid('user_id')->unique()->comment('用户ID');
+            $table->ulid('user_ulid')->unique()->comment('用户ID');
             $table->integer('role_id')->comment('角色ID');
             $table->charset('utf8mb4');
             $table->collation('utf8mb4_unicode_ci');

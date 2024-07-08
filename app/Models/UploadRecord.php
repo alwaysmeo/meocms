@@ -12,7 +12,7 @@ class UploadRecord extends Model
     protected $table = 'upload_record';
 
     protected $fillable = [
-        'user_id',
+        'user_ulid',
         'url',
         'type',
         'origin_name',

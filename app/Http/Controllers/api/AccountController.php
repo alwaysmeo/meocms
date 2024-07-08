@@ -49,8 +49,8 @@ class AccountController extends Controller
 		/* 添加登录记录 */
 		$common = new Common();
 		AccountRecord::query()->create([
-			'user_id' => $user->getAuthIdentifier(),
-			'control_user_id' => $user->getAuthIdentifier(),
+			'user_ulid' => $user->getAuthIdentifier(),
+			'control_user_ulid' => $user->getAuthIdentifier(),
 			'type' => 2,
 			'description' => '账号登录/登出',
 			'ip' => $common->ip($request)
@@ -86,7 +86,7 @@ class AccountController extends Controller
 	{
 		$request->user()->currentAccessToken()->delete();
 		AccountRecord::query()
-			->where(['type' => 2, 'user_id' => $request->user()->ulid])
+			->where(['type' => 2, 'user_ulid' => $request->user()->ulid])
 			->latest('id')
 			->update(['updated_at' => date('Y-m-d H:i:s')]);
 		Cache::forget('user-' . $request->user()->ulid);

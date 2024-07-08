@@ -12,8 +12,8 @@ class AccountRecord extends Model
 	protected $table = 'account_record';
 
 	protected $fillable = [
-		'user_id',
-		'control_user_id',
+		'user_ulid',
+		'control_user_ulid',
 		'type',
 		'description',
 		'ip',
