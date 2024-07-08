@@ -11,6 +11,7 @@ class PermissionsRole extends Model
 	use HasFactory;
 
 	protected $table = 'permissions_role';
+	protected $primaryKey = 'role_id';
 	public $timestamps = false;
 
 	protected $fillable = [

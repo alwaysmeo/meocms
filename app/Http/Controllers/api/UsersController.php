@@ -18,11 +18,11 @@ class UsersController extends Controller
 	public function permissionsList(Request $request): Response
 	{
 		$user = $request->user();
-		$role = RoleUser::query()->where('user_ulid', $user->ulid)->first();
-		$permission = PermissionsRole::query()->where('role_id', $role->role_id)->first();
+		$role = RoleUser::query()->find($user['ulid']);
+		$permission = PermissionsRole::query()->find($role['role_id']);
 		$list = Permissions::query()
 			->where('show', 1)
-			->whereIn('id', json_decode($permission->permission_ids))
+			->whereIn('id', json_decode($permission['permission_ids']))
 			->orderBy('slot')
 			->get();
 		$common = new Common();

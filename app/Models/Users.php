@@ -68,6 +68,14 @@ class Users extends AuthenticatableAuthenticatable
 			->find($this->attributes['picture']);
 	}
 
+	public function getRoleInfoAttribute(): object|null
+	{
+		return UploadRecord::query()
+			->whereNull('deleted_at')
+			->select('url', 'origin_name', 'suffix')
+			->find($this->attributes['picture']);
+	}
+
 	public function getStatusAttribute($value): string
 	{
 		return [0 => '封禁', 1 => '正常'][$value];
