@@ -26,12 +26,20 @@
 		loading: true,
 		page: 1,
 		limit: 10,
-		total: 0
+		total: 0,
+		action: (key, record) => {
+			console.log(key, record)
+			return {
+				detail: () => {
+					detail.open = true
+				}
+			}[key]()
+		}
 	})
 
-	function handleAction(key, record) {
-		console.log(key, record)
-	}
+	const detail = reactive({
+		open: false
+	})
 
 	onMounted(async () => {
 		await list({ page: table.page, limit: table.limit })
@@ -77,12 +85,9 @@
 					delete: $t('meo.pages.system.user.table.action.delete')
 				}"
 				@paginate="list"
-				@action="handleAction"
+				@action="table.action"
 			>
 				<template #bodyCell="{ column, record }">
-					<template v-if="isEqual(column.dataIndex, 'role')">
-						{{ record.role ?? '-' }}
-					</template>
 					<template v-if="isEqual(column.dataIndex, 'picture_info')">
 						<a-avatar :size="50" :src="record?.picture_info?.url">
 							<template #icon><ant-user-outlined /></template>
@@ -91,9 +96,14 @@
 					<template v-if="isEqual(column.dataIndex, 'phone')">
 						{{ record.phone ?? '-' }}
 					</template>
+					<template v-if="isEqual(column.dataIndex, 'role')"> 【{{ record.role_info.name }}】 </template>
 				</template>
 			</meo-table>
 		</div>
+
+		<meo-modal v-model:open="detail.open" title="用户详情" cancel="关闭" :confirm="false">
+			<div>123</div>
+		</meo-modal>
 	</div>
 </template>
 
