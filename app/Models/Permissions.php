@@ -10,6 +10,7 @@ class Permissions extends Model
     use HasFactory;
 
     protected $table = 'permissions';
+	public $timestamps = false;
 
     protected $fillable = [
         'parent_id',

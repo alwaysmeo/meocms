@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Permissions;
+use App\Models\PermissionsRole;
 use Illuminate\Database\Seeder;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -128,11 +129,19 @@ class PermissionsSeeder extends Seeder
 				'level' => 2
 			],
 		];
-		for ($i = 0; $i < count($data); $i++) $data[$i]['slot'] = $i;
+		$ids = [];
+		for ($i = 0; $i < count($data); $i++) {
+			$data[$i]['slot'] = $i;
+			$ids[] = $i + 1;
+		}
 		foreach ($data as $item) {
 			if ($item['level'] === 2)
 				$item['parent_id'] = Permissions::query()->where('level', 1)->latest('id')->value('id');
 			Permissions::query()->insert($item);
 		}
+		PermissionsRole::query()->create([
+			'role_id' => 1,
+			'permission_ids' => json_encode($ids)
+		]);
 	}
 }
