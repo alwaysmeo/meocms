@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Couchbase\Role;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as AuthenticatableAuthenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -43,7 +45,7 @@ class Users extends AuthenticatableAuthenticatable
 		'password'
 	];
 
-	protected $appends = ['picture_info'];
+	protected $appends = ['picture_info', 'role_info'];
 
 	/**
 	 * Get the attributes that should be cast.
@@ -68,16 +70,14 @@ class Users extends AuthenticatableAuthenticatable
 			->find($this->attributes['picture']);
 	}
 
-	public function getRoleInfoAttribute(): object|null
-	{
-		return UploadRecord::query()
-			->whereNull('deleted_at')
-			->select('url', 'origin_name', 'suffix')
-			->find($this->attributes['picture']);
-	}
-
 	public function getStatusAttribute($value): string
 	{
 		return [0 => '封禁', 1 => '正常'][$value];
+	}
+
+	public function getRoleInfoAttribute(): object
+	{
+		$role = RoleUser::query()->find($this->attributes['ulid']);
+		return Roles::query()->select('id', 'name')->find($role['role_id']);
 	}
 }
