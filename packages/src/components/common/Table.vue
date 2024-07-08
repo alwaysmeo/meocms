@@ -46,7 +46,7 @@
 		limit: 10,
 		open: useVModel(props, 'open', emits),
 		action_first: computed(() => new Object({ key: first(Object.keys(props.action)), value: first(Object.values(props.action)) })),
-		action_list: computed(() => omit(props.action, [state.action_first.value.key])),
+		action_list: computed(() => omit(props.action, [state.action_first.key])),
 		columns: computed(() => props.columns.filter((item) => item.show))
 	})
 

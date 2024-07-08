@@ -19,7 +19,7 @@
 </script>
 
 <template>
-	<a-dropdown v-bind="$attrs" trigger="click" placement="bottom" :getPopupContainer="(e) => e.parentNode.parentNode.parentNode">
+	<a-dropdown v-bind="$attrs" trigger="click" placement="bottom" :getPopupContainer="(e) => e.parentNode.parentNode.parentNode.parentNode">
 		<slot name="overlay" v-if="$slots.default"></slot>
 		<a-button v-else class="base-button" type="text" size="small">
 			<span>{{ props.desc }}</span>
