@@ -8,8 +8,8 @@ import request from '@utils/request'
  * @param password 密码
  * @param captcha<{ key, value }> 验证码
  */
-async function register({ account, password, captcha }) {
-	return await request.post(`/api/account/register`, { account, password, captcha })
+async function register(data) {
+	return await request.post(`/api/account/register`, data)
 }
 
 /**
@@ -18,8 +18,8 @@ async function register({ account, password, captcha }) {
  * @param password 密码
  * @param captcha<{ key, value }> 验证码
  */
-async function login({ account, password, captcha }) {
-	return await request.post(`/api/account/login`, { account, password, captcha })
+async function login(data) {
+	return await request.post(`/api/account/login`, data)
 }
 
 /**
