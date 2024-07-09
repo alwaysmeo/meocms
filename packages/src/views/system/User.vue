@@ -80,9 +80,9 @@
 				:loading="table.loading"
 				:total="table.total"
 				:action="{
-					detail: $t('meo.pages.system.user.table.action.detail'),
-					edit: $t('meo.pages.system.user.table.action.edit'),
-					delete: $t('meo.pages.system.user.table.action.delete')
+					detail: $t('meo.components.common.table.action.detail'),
+					edit: $t('meo.components.common.table.action.edit'),
+					delete: $t('meo.components.common.table.action.delete')
 				}"
 				@paginate="list"
 				@action="table.action"
@@ -97,6 +97,9 @@
 						{{ record.phone ?? '-' }}
 					</template>
 					<template v-if="isEqual(column.dataIndex, 'role')"> 【{{ record.role_info.name }}】 </template>
+					<template v-if="isEqual(column.dataIndex, 'status')">
+						{{ ['封禁', '正常'][record.status] }}
+					</template>
 				</template>
 			</meo-table>
 		</div>

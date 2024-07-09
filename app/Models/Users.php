@@ -70,11 +70,6 @@ class Users extends AuthenticatableAuthenticatable
 			->find($this->attributes['picture']);
 	}
 
-	public function getStatusAttribute($value): string
-	{
-		return [0 => '封禁', 1 => '正常'][$value];
-	}
-
 	public function getRoleInfoAttribute(): object
 	{
 		$role = RoleUser::query()->find($this->attributes['ulid']);
