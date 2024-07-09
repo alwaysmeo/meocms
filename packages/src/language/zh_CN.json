@@ -46,7 +46,12 @@
 				"table": {
 					"not_data": "暂无数据",
 					"select_table_header": "选择可见的表格列",
-					"list_filtering": "列表筛选"
+					"list_filtering": "列表筛选",
+					"action": {
+						"detail": "详情",
+						"edit": "编辑",
+						"delete": "删除"
+					}
 				}
 			}
 		},
@@ -68,11 +73,6 @@
 							"last_login_at": "最后一次登录时间",
 							"status": "状态",
 							"action": "操作"
-						},
-						"action": {
-							"detail": "详情",
-							"edit": "编辑",
-							"delete": "删除"
 						}
 					}
 				}

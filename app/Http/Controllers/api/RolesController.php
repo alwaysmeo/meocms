@@ -23,7 +23,7 @@ class RolesController extends Controller
 		$page = $req['page'] ?? 1;
 		$limit = $req['limit'] ?? 10;
 		$list = Roles::query();
-		$list->select('id', 'name');
+		$list->select('id', 'name', 'slot', 'show');
 		$list->orderBy('slot');
 		$total = $list->count();
 		$list->offset(($page - 1) * $limit)->limit($limit);
@@ -38,14 +38,19 @@ class RolesController extends Controller
 	/* 新增修改角色 */
 	public function upsert(Request $request): Response
 	{
-		$req = $request->only(['id', 'name', 'show']);
+		$req = $request->only(['role_id', 'name', 'show']);
 		$validator = Validator::make($req, [
-			'id' => 'integer',
+			'role_id' => 'integer',
 			'name' => 'max:30',
 			'show' => 'in:0,1'
 		]);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
-		Roles::query()->updateOrInsert(['id' => $req['id']], $req);
+		$input = [
+			'id' => $req['role_id'],
+			'name' => $req['name'] ?? null,
+			'show' => $req['show']
+		];
+		Roles::query()->updateOrInsert(['id' => $req['role_id']], $input);
 		return $this->success();
 	}
 

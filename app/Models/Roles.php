@@ -25,4 +25,9 @@ class Roles extends Model
 	{
 		return RoleUser::query()->where('role_id', $this->attributes['id'])->get()->count();
 	}
+
+	public function getShowAttribute($value): bool
+	{
+		return [0 => false, 1 => true][$value];
+	}
 }
