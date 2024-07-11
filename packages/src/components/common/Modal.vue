@@ -31,7 +31,14 @@
 </script>
 
 <template>
-	<a-modal centered :width="{ small: '320px', middle: '480px', large: '640px' }[props.size]" v-bind="$attrs" v-model:open="open" @cancel="onCancel">
+	<a-modal
+		class="modal-container"
+		centered
+		:width="{ small: '320px', middle: '480px', large: '640px' }[props.size]"
+		v-bind="$attrs"
+		v-model:open="open"
+		@cancel="onCancel"
+	>
 		<slot></slot>
 		<template #footer>
 			<slot name="footer" v-if="$slots.footer"></slot>
@@ -44,5 +51,9 @@
 </template>
 
 <style scoped lang="scss">
-	/** */
+	.modal-container {
+		:deep(.ant-modal-header) {
+			margin-bottom: 20px;
+		}
+	}
 </style>
