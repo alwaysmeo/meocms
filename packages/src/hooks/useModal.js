@@ -1,10 +1,12 @@
 import { Modal } from 'ant-design-vue'
 
-export const modal = async (params) => {
+// 对话确认弹窗
+export const useModalConfirm = async (options) => {
 	Modal.confirm({
+		title: '提示',
 		centered: true,
-		...params,
-		onOk: () => params?.confirm?.(),
-		onCancel: () => params?.cancel?.()
+		...options,
+		onOk: async () => options.confirm && (await options.confirm()),
+		onCancel: async () => options.cancel && (await options.cancel())
 	})
 }

@@ -3,7 +3,7 @@
 	import { useAsyncState } from '@vueuse/core'
 	import { isEqual } from 'radash'
 	import { useUserInfoStore } from '@stores/userInfoStore'
-	import { modal } from '@hooks/useModal'
+	import { useModalConfirm } from '@hooks/useModal'
 	import accountApi from '@apis/account'
 	import i18n from '@language'
 
@@ -14,7 +14,7 @@
 	const { state: userInfo } = useAsyncState(async () => await userInfoStore.get())
 
 	async function logout() {
-		modal({
+		useModalConfirm({
 			title: '提示',
 			content: `确认退出【${userInfo.value.nickname}】账号？`,
 			confirm: async () => {
