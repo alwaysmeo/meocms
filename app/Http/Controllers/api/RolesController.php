@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Roles;
+use App\Models\RoleUser;
 use App\Services\Mapping;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -45,12 +46,12 @@ class RolesController extends Controller
 			'show' => 'in:0,1'
 		]);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
-		$input = [
-			'id' => $req['role_id'],
-			'name' => $req['name'] ?? null,
-			'show' => $req['show']
-		];
-		Roles::query()->updateOrInsert(['id' => $req['role_id']], $input);
+		$input = $req;
+		if (isset($req['role_id'])) {
+			unset($input['role_id']);
+			$input['id'] = $req['role_id'];
+		}
+		Roles::query()->updateOrInsert(['id' => isset($input['id']) ?? $input['id']], $input);
 		return $this->success();
 	}
 
@@ -63,5 +64,32 @@ class RolesController extends Controller
 		$res = Roles::query()->where('id', $req['role_id'])->delete();
 		if ($res) return $this->success();
 		else return $this->fail();
+	}
+
+	/* 获取角色关联的用户 */
+	public function users(Request $request): Response
+	{
+		$req = $request->only(['role_id', 'page', 'limit']);
+		$validator = Validator::make($req, [
+			'role_id' => 'required|integer',
+			'page' => 'integer',
+			'limit' => 'integer'
+		]);
+		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
+
+
+		$page = $req['page'] ?? 1;
+		$limit = $req['limit'] ?? 10;
+		$list = RoleUser::query();
+		$list->where('role_id', $req['role_id']);
+		$list->with('user_info');
+		$total = $list->count();
+		$list->offset(($page - 1) * $limit)->limit($limit);
+		return $this->success([
+			'list' => $list->get(),
+			'total' => $total,
+			'page' => $page,
+			'limit' => $limit
+		]);
 	}
 }

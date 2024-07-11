@@ -64,10 +64,12 @@ class Users extends AuthenticatableAuthenticatable
 
 	public function getPictureInfoAttribute(): object|null
 	{
+		if (!isset($this->attributes['picture'])) return null;
 		return UploadRecord::query()
 			->whereNull('deleted_at')
 			->select('url', 'origin_name', 'suffix')
 			->find($this->attributes['picture']);
+
 	}
 
 	public function getRoleInfoAttribute(): object

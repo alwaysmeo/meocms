@@ -21,4 +21,20 @@ async function upsert(data) {
 	return await request.post(`/api/roles/upsert`, data)
 }
 
-export default { list, upsert }
+/**
+ * 删除角色
+ * @param role_id 角色id
+ */
+async function deleted(data) {
+	return await request.post(`/api/roles/delete`, data)
+}
+
+/**
+ * 获取角色关联的用户
+ * @param role_id 角色id
+ */
+async function users(data) {
+	return await request.get(`/api/roles/users`, { params: data })
+}
+
+export default { list, upsert, deleted, users }

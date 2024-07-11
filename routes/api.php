@@ -49,6 +49,8 @@ Route::group(['middleware' => 'auth:api'], function () {
 		Route::post('/upsert', [RolesController::class, 'upsert']);
 		/* 删除角色 */
 		Route::post('/delete', [RolesController::class, 'delete']);
+		/* 获取角色关联的用户 */
+		Route::get('/users', [RolesController::class, 'users']);
 	});
 
 	Route::group(['prefix' => 'permissions'], function () {

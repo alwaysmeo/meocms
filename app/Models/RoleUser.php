@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class RoleUser extends Model
@@ -13,10 +14,17 @@ class RoleUser extends Model
 
 	protected $table = 'role_user';
 	protected $primaryKey = 'user_ulid';
+	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $fillable = [
 		'user_ulid',
 		'role_id'
 	];
+
+	public function user_info(): HasOne
+	{
+		return $this->hasOne(Users::class, 'ulid', 'user_ulid')
+			->select('ulid', 'nickname', 'email', 'phone');
+	}
 }
