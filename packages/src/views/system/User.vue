@@ -28,10 +28,10 @@
 		limit: 10,
 		total: 0,
 		action: (key, record) => {
-			console.log(key, record)
 			return {
 				detail: () => {
 					detail.open = true
+					detail.data = record
 				}
 			}[key]()
 		}
