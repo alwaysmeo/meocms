@@ -14,8 +14,9 @@ class RolesController extends Controller
 	/* 获取角色列表 */
 	public function list(Request $request): Response
 	{
-		$req = $request->only(['page', 'limit']);
+		$req = $request->only(['organize_id', 'page', 'limit']);
 		$validator = Validator::make($req, [
+			'organize_id' => 'required|integer',
 			'page' => 'integer',
 			'limit' => 'integer'
 		]);
@@ -23,7 +24,8 @@ class RolesController extends Controller
 		$page = $req['page'] ?? 1;
 		$limit = $req['limit'] ?? 10;
 		$list = Roles::query();
-		$list->select('id', 'name', 'slot', 'show');
+		$list->where('organize_id', $req['organize_id']);
+		$list->select('id', 'name', 'organize_id', 'slot', 'show');
 		$list->orderBy('slot');
 		$total = $list->count();
 		$list->offset(($page - 1) * $limit)->limit($limit);
@@ -38,8 +40,9 @@ class RolesController extends Controller
 	/* 新增修改角色 */
 	public function upsert(Request $request): Response
 	{
-		$req = $request->only(['role_id', 'name', 'show']);
+		$req = $request->only(['organize_id', 'role_id', 'name', 'show']);
 		$validator = Validator::make($req, [
+			'organize_id' => 'required|integer',
 			'role_id' => 'integer',
 			'name' => 'max:30',
 			'show' => 'in:0,1'
@@ -75,8 +78,6 @@ class RolesController extends Controller
 			'limit' => 'integer'
 		]);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
-
-
 		$page = $req['page'] ?? 1;
 		$limit = $req['limit'] ?? 10;
 		$list = RoleUser::query();
