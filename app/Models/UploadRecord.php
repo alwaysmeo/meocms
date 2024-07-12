@@ -14,10 +14,11 @@ class UploadRecord extends Model
     protected $fillable = [
         'user_ulid',
         'url',
-        'type',
+        'file_type',
         'origin_name',
         'suffix',
         'status',
+        'type',
         'created_at',
         'updated_at',
         'deleted_at'

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\UploadRecord;
 use App\Models\Users;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -15,11 +16,20 @@ class UsersSeeder extends Seeder
 	{
 		Users::query()->truncate();
 		# 创建系统超级管理员账号
-		Users::query()->create([
+		$user = Users::query()->create([
 			'email' => env('ADMIN_DEFAULT_EMAIL', 'email@email.com'),
 			'password' => Hash::make(env('ADMIN_DEFAULT_PASSWORD', '123456')),
 			'nickname' => '系统管理员',
 			'picture' => 1
+		]);
+		# 添加用户头像的上传记录
+		UploadRecord::query()->create([
+			'user_ulid' => $user['ulid'],
+			'url' => 'https://picsum.photos/100/100',
+			'file_type' => 1,
+			'origin_name' => '头像',
+			'suffix' => 'jpeg',
+			'type' => 2,
 		]);
 	}
 }
