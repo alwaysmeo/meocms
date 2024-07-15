@@ -14,8 +14,9 @@
 	const userInfoStore = useUserInfoStore()
 	const organizesStore = useOrganizesStore()
 
-	const { state: userInfo } = useAsyncState(async () => await userInfoStore.get())
-	const { state: organizes } = useAsyncState(async () => await organizesStore.get())
+	const { state: userInfo } = useAsyncState(userInfoStore.get())
+	const { state: organizes } = useAsyncState(organizesStore.get())
+
 	async function logout() {
 		useModalConfirm({
 			title: '提示',
