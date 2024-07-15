@@ -75,7 +75,7 @@ class Users extends AuthenticatableAuthenticatable
 	{
 		if (!isset($this->attributes['organize_id'])) return null;
 		return Organizes::query()
-			->select('name', 'description', 'status')
+			->select('name', 'description', 'slot', 'show')
 			->find($this->attributes['organize_id']);
 
 	}

@@ -14,11 +14,11 @@
 	const table = reactive({
 		columns: [
 			{ dataIndex: 'index', title: '序号', width: 120, align: 'center', show: true },
-			{ dataIndex: 'id', key: 'id', title: 'ID', width: 260, align: 'center', show: true },
-			{ dataIndex: 'name', key: 'name', title: '角色名称', show: true },
-			{ dataIndex: 'count', key: 'count', title: '当前已绑定用户数', align: 'center', show: true },
-			{ dataIndex: 'show', key: 'show', title: '是否显示', width: 240, align: 'center', show: true },
-			{ dataIndex: 'action', key: 'action', title: '操作', width: 160, align: 'center', show: true }
+			{ dataIndex: 'id', title: 'ID', width: 260, align: 'center', show: true },
+			{ dataIndex: 'name', title: '角色名称', show: true },
+			{ dataIndex: 'count', title: '当前已绑定用户数', align: 'center', show: true },
+			{ dataIndex: 'show', title: '是否显示', width: 240, align: 'center', show: true },
+			{ dataIndex: 'action', title: '操作', width: 160, align: 'center', show: true }
 		],
 		data: [],
 		open: false,

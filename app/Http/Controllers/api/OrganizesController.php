@@ -19,7 +19,7 @@ class OrganizesController extends Controller
 		$page = isset($req['page']) ?? intval($req['page']);
 		$limit = isset($req['limit']) ?? intval($req['limit']);
 		$list = Organizes::query();
-		$list->select('id', 'name', 'description', 'status', 'slot');
+		$list->select('id', 'name', 'description', 'show', 'slot');
 		$list->orderBy('slot');
 		$total = $list->count();
 		($page && $limit) && $list->offset(($page - 1) * $limit)->limit($limit);

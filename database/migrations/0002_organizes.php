@@ -16,7 +16,7 @@ return new class extends Migration
 		    $table->id();
 		    $table->string('name', 80)->comment('组织名称');
 		    $table->string('description', 200)->comment('组织描述');
-		    $table->tinyInteger('status')->default(1)->comment('状态【0:关闭, 1:开启】');
+		    $table->tinyInteger('show')->default(1)->comment('状态【0:关闭, 1:开启】');
 		    $table->integer('slot')->comment('组织排序');
 		    $table->dateTime('created_at')->useCurrent()->comment('创建时间');
 		    $table->dateTime('updated_at')->nullable()->useCurrentOnUpdate()->comment('更新时间');

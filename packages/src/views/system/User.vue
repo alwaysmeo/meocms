@@ -10,16 +10,16 @@
 	const table = reactive({
 		columns: [
 			{ dataIndex: 'index', title: t('meo.pages.system.user.table.columns.index'), width: 120, align: 'center', show: true },
-			{ dataIndex: 'ulid', key: 'ulid', title: t('meo.pages.system.user.table.columns.id'), width: 260 },
-			{ dataIndex: 'picture_info', key: 'picture_info', title: t('meo.pages.system.user.table.columns.picture_info'), width: 120, align: 'center', show: true },
-			{ dataIndex: 'email', key: 'email', title: t('meo.pages.system.user.table.columns.email'), show: true },
-			{ dataIndex: 'phone', key: 'phone', title: t('meo.pages.system.user.table.columns.phone'), width: 150, align: 'center' },
-			{ dataIndex: 'nickname', key: 'nickname', title: t('meo.pages.system.user.table.columns.nickname'), show: true },
-			{ dataIndex: 'role', key: 'role', title: t('meo.pages.system.user.table.columns.role'), align: 'center', show: true },
-			{ dataIndex: 'created_at', key: 'created_at', title: t('meo.pages.system.user.table.columns.created_at'), width: 170, align: 'center' },
-			{ dataIndex: 'last_login_at', key: 'last_login_at', title: t('meo.pages.system.user.table.columns.last_login_at'), width: 170, align: 'center' },
-			{ dataIndex: 'status', key: 'status', title: t('meo.pages.system.user.table.columns.status'), width: 120, align: 'center', show: true },
-			{ dataIndex: 'action', key: 'action', title: t('meo.pages.system.user.table.columns.action'), width: 160, align: 'center', show: true }
+			{ dataIndex: 'ulid', title: t('meo.pages.system.user.table.columns.id'), width: 260 },
+			{ dataIndex: 'picture_info', title: t('meo.pages.system.user.table.columns.picture_info'), width: 120, align: 'center', show: true },
+			{ dataIndex: 'email', title: t('meo.pages.system.user.table.columns.email'), show: true },
+			{ dataIndex: 'phone', title: t('meo.pages.system.user.table.columns.phone'), width: 150, align: 'center' },
+			{ dataIndex: 'nickname', title: t('meo.pages.system.user.table.columns.nickname'), show: true },
+			{ dataIndex: 'role', title: t('meo.pages.system.user.table.columns.role'), align: 'center', show: true },
+			{ dataIndex: 'created_at', title: t('meo.pages.system.user.table.columns.created_at'), width: 170, align: 'center' },
+			{ dataIndex: 'last_login_at', title: t('meo.pages.system.user.table.columns.last_login_at'), width: 170, align: 'center' },
+			{ dataIndex: 'status', title: t('meo.pages.system.user.table.columns.status'), width: 120, align: 'center', show: true },
+			{ dataIndex: 'action', title: t('meo.pages.system.user.table.columns.action'), width: 160, align: 'center', show: true }
 		],
 		data: [],
 		open: false,

@@ -15,6 +15,12 @@ class Organizes extends Model
     protected $fillable = [
         'name',
         'description',
-        'status'
+        'slot',
+	    'show'
     ];
+
+	public function getShowAttribute($value): bool
+	{
+		return [0 => false, 1 => true][$value];
+	}
 }

@@ -23,4 +23,9 @@ class Permissions extends Model
         'level',
         'show'
     ];
+
+	public function getShowAttribute($value): bool
+	{
+		return [0 => false, 1 => true][$value];
+	}
 }

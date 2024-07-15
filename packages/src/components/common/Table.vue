@@ -73,6 +73,7 @@
 	<div class="meo-table-container">
 		<a-table
 			class="meo-table"
+			rowKey="id"
 			:pagination="{ current: props.page, pageSize: props.limit, total: props.total }"
 			:scroll="{ x: 1200 }"
 			@change="handleChange"

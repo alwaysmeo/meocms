@@ -12,6 +12,10 @@
 		return await sidebarStore.getList()
 	})
 
+	const collapsed = computed(() => {
+		return sidebarStore.getCollapsed()
+	})
+
 	const openKeys = ref([])
 	const selectedKeys = ref([])
 
@@ -21,6 +25,11 @@
 			.map((item) => item.name)
 			.slice(0, 2)
 		selectedKeys.value = [openKeys.value[openKeys.value.length - 1]]
+		if (collapsed.value) {
+			setTimeout(() => {
+				openKeys.value = []
+			}, 2000)
+		}
 	})
 </script>
 
