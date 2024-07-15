@@ -14,11 +14,12 @@ return new class extends Migration
 	    /* 用户表 */
 	    Schema::create('users', function (Blueprint $table) {
 		    $table->ulid()->primary()->unique()->comment('ulid');
+		    $table->integer('organize_id')->comment('所属组织ID');
 		    $table->string('email', 60)->comment('邮箱账号');
 		    $table->string('password', 255)->comment('账号密码');
 		    $table->string('token', 128)->nullable()->comment('登录令牌');
 		    $table->string('nickname', 30)->comment('账号昵称');
-		    $table->integer('picture')->nullable()->comment('用户头像');
+		    $table->integer('picture_id')->nullable()->comment('用户头像（关联上传记录ID）');
 		    $table->bigInteger('phone')->nullable()->comment('手机号码');
 		    $table->tinyInteger('status')->default(1)->comment('账号状态【0:封禁, 1:正常】');
 		    $table->dateTime('last_login_at')->nullable()->comment('最后一次登录时间');

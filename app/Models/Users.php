@@ -22,11 +22,12 @@ class Users extends AuthenticatableAuthenticatable
 	 */
 	protected $fillable = [
 		'ulid',
+		'organize_id',
 		'email',
 		'password',
 		'token',
 		'nickname',
-		'picture',
+		'picture_id',
 		'phone',
 		'status',
 		'last_login_at',
@@ -43,7 +44,7 @@ class Users extends AuthenticatableAuthenticatable
 		'password'
 	];
 
-	protected $appends = ['picture_info', 'role_info'];
+	protected $appends = ['organize_info', 'picture_info', 'role_info'];
 
 	/**
 	 * Get the attributes that should be cast.
@@ -62,11 +63,20 @@ class Users extends AuthenticatableAuthenticatable
 
 	public function getPictureInfoAttribute(): object|null
 	{
-		if (!isset($this->attributes['picture'])) return null;
+		if (!isset($this->attributes['picture_id'])) return null;
 		return UploadRecord::query()
 			->whereNull('deleted_at')
 			->select('url', 'origin_name', 'suffix')
-			->find($this->attributes['picture']);
+			->find($this->attributes['picture_id']);
+
+	}
+
+	public function getOrganizeInfoAttribute(): object|null
+	{
+		if (!isset($this->attributes['organize_id'])) return null;
+		return Organizes::query()
+			->select('name', 'description', 'status')
+			->find($this->attributes['organize_id']);
 
 	}
 

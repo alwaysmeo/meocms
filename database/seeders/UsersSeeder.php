@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Organizes;
 use App\Models\UploadRecord;
 use App\Models\Users;
 use Illuminate\Database\Seeder;
@@ -15,12 +16,14 @@ class UsersSeeder extends Seeder
 	public function run(): void
 	{
 		Users::query()->truncate();
+		$organize = Organizes::query()->first();
 		# 创建系统超级管理员账号
 		$user = Users::query()->create([
+			'organize_id' => $organize['id'],
 			'email' => env('ADMIN_DEFAULT_EMAIL', 'email@email.com'),
 			'password' => Hash::make(env('ADMIN_DEFAULT_PASSWORD', '123456')),
 			'nickname' => '系统管理员',
-			'picture' => 1
+			'picture_id' => 1
 		]);
 		# 添加用户头像的上传记录
 		UploadRecord::query()->create([

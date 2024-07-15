@@ -34,28 +34,28 @@ class UsersController extends Controller
 	{
 		$req = $request->only(['page', 'limit', 'search_type', 'keyword']);
 		$validator = Validator::make($req, [
-			'page' => 'integer',
-			'limit' => 'integer',
+			'organize_id' => 'integer',
+			'page' => 'required|integer',
+			'limit' => 'required|integer',
 			'search_type' => 'in:ulid,email,nickname,phone',
 			'keyword' => 'max:60',
 		]);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
-		$page = $req['page'] ?? 1;
-		$limit = $req['limit'] ?? 10;
 		$search_type = $req['search_type'] ?? null;
 		$keyword = $req['keyword'] ?? null;
 		$list = Users::query();
-		$list->select('ulid', 'email', 'nickname', 'picture', 'phone', 'status', 'last_login_at', 'created_at');
+		$list->select('ulid', 'organize_id', 'email', 'nickname', 'picture_id', 'phone', 'status', 'last_login_at', 'created_at');
+		if (isset($req['organize_id'])) $list->where('organize_id', $req['organize_id']);
 		$list->where('deleted_at', NULL);
 		$list->orderBy('created_at', 'desc');
 		($search_type && $keyword) && $list->where($search_type, 'like', '%' . $keyword . '%');
 		$total = $list->count();
-		$list->offset(($page - 1) * $limit)->limit($limit);
+		$list->offset(($req['page'] - 1) * $req['limit'])->limit($req['limit']);
 		return $this->success([
 			'list' => $list->get(),
 			'total' => $total,
-			'page' => $page,
-			'limit' => $limit
+			'page' => $req['page'],
+			'limit' => $req['limit']
 		]);
 	}
 }
