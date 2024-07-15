@@ -1,13 +1,15 @@
 <script setup>
 	import { message } from 'ant-design-vue'
-	import { isEqual } from 'radash'
 	import { useModalConfirm } from '@hooks/useModal'
+	import { useOrganizesStore } from '@stores/organizesStore'
+	import { isEqual } from 'radash'
 	import rolesApi from '@apis/roles'
 	import i18n from '@language'
 
 	defineOptions({ name: 'SystemRole' })
 
 	const { t } = i18n.global
+	const organizesStore = useOrganizesStore()
 
 	const table = reactive({
 		columns: [
@@ -97,7 +99,12 @@
 
 	async function list() {
 		table.loading = true
-		const { code, data } = await rolesApi.list({ page: table.page, limit: table.limit })
+		const organizes = await organizesStore.get()
+		const { code, data } = await rolesApi.list({
+			organize_id: organizes.checked.id,
+			page: table.page,
+			limit: table.limit
+		})
 		if (isEqual(code, 200)) {
 			table.data = data.list
 			table.total = data.total
