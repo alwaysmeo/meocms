@@ -1,7 +1,8 @@
 'use strict'
 import { message } from 'ant-design-vue'
 import { useUserInfoStore } from '@stores/userInfoStore'
-import { isEqual, isString, isNumber } from 'radash'
+import { isEqual, isString, isNumber, isFunction } from 'radash'
+import localforage from '@utils/localforage'
 import routes from '@routes'
 import i18n from '@language'
 
@@ -25,14 +26,17 @@ const mapping = {
 }
 
 export default async ({ response, error }) => {
+	console.log(typeof mapping[response.data.code])
 	if (isNumber(response?.data?.code) && mapping[response.data.code]) {
 		if (isString(mapping[response.data.code])) message.error(mapping[response.data.code])
-		mapping[response.data.code](response)
+		if (isFunction(mapping[response.data.code])) mapping[response.data.code](response)
 	}
 	if (isEqual(error?.response?.status, 401)) {
 		message.error(t('meo.request.error.401'))
 		const userInfoStore = useUserInfoStore()
 		await userInfoStore.clear()
+		localStorage.clear()
+		localforage.clear()
 		routes.replace({ name: 'login' })
 	}
 }
