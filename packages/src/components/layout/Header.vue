@@ -3,16 +3,19 @@
 	import { useAsyncState } from '@vueuse/core'
 	import { isEqual } from 'radash'
 	import { useUserInfoStore } from '@stores/userInfoStore'
+	import { useOrganizesStore } from '@stores/organizesStore'
 	import { useModalConfirm } from '@hooks/useModal'
+	import localforage from '@utils/localforage'
 	import accountApi from '@apis/account'
 	import i18n from '@language'
 
 	const { t } = i18n.global
 	const router = useRouter()
 	const userInfoStore = useUserInfoStore()
+	const organizesStore = useOrganizesStore()
 
 	const { state: userInfo } = useAsyncState(async () => await userInfoStore.get())
-
+	const { state: organizes } = useAsyncState(async () => await organizesStore.get())
 	async function logout() {
 		useModalConfirm({
 			title: '提示',
@@ -22,10 +25,17 @@
 				if (isEqual(code, 200)) {
 					message.success(t('meo.tip.success.submit_logout'))
 					await userInfoStore.clear()
+					localStorage.clear()
+					localforage.clear()
 					router.replace({ name: 'login' })
 				}
 			}
 		})
+	}
+
+	function changeOrganizes(item) {
+		organizesStore.change(item)
+		router.go(0)
 	}
 </script>
 
@@ -71,19 +81,22 @@
 				<ant-setting-outlined />
 			</a-button>
 		</a-tooltip>
-		<a-popover placement="bottomLeft" overlayClassName="site-popover">
+		<a-popover placement="bottomLeft" overlayClassName="site-popover" trigger="focus">
 			<a-button type="text" size="small">
 				<ant-bank-outlined />
-				<span>站点名称</span>
+				<span>{{ organizes?.checked?.name }}</span>
 			</a-button>
 			<template #content>
 				<div class="site-container">
-					<a-button type="text">站点名称</a-button>
-					<a-button type="text">站点名称</a-button>
-					<a-button type="text">站点名称</a-button>
-					<a-button type="text">站点名称</a-button>
-					<a-button type="text">站点名称</a-button>
-					<a-button type="text">站点名称</a-button>
+					<a-button
+						type="text"
+						v-for="item in organizes.list"
+						:class="{ 'color-primary': isEqual(item.id, organizes?.checked?.id) }"
+						:key="item.id"
+						@click="changeOrganizes(item)"
+					>
+						{{ item.name }}
+					</a-button>
 				</div>
 			</template>
 		</a-popover>

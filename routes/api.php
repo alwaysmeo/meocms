@@ -13,6 +13,7 @@
 
 use App\Http\Controllers\api\AccountController;
 use App\Http\Controllers\api\CommonController;
+use App\Http\Controllers\api\OrganizesController;
 use App\Http\Controllers\api\PermissionsController;
 use App\Http\Controllers\api\RolesController;
 use App\Http\Controllers\api\TestController;
@@ -64,5 +65,10 @@ Route::group(['middleware' => 'auth:api'], function () {
 		Route::get('/permissions/list', [UsersController::class, 'permissionsList']);
 		/* 获取用户列表 */
 		Route::get('/list', [UsersController::class, 'list']);
+	});
+
+	Route::group(['prefix' => 'organizes'], function () {
+		/* 获取组织列表 */
+		Route::get('/list', [OrganizesController::class, 'list']);
 	});
 });

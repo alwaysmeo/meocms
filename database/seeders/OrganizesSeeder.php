@@ -16,7 +16,8 @@ class OrganizesSeeder extends Seeder
 		# 添加系统默认组织
 		Organizes::query()->create([
 			'name' => '默认组织',
-			'description' => '该组织为系统默认组织，可直接修改编辑使用。'
+			'description' => '该组织为系统默认组织，可直接修改编辑使用。',
+			'slot' => 0
 		]);
 	}
 }
