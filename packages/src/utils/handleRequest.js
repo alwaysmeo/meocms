@@ -26,7 +26,6 @@ const mapping = {
 }
 
 export default async ({ response, error }) => {
-	console.log(typeof mapping[response.data.code])
 	if (isNumber(response?.data?.code) && mapping[response.data.code]) {
 		if (isString(mapping[response.data.code])) message.error(mapping[response.data.code])
 		if (isFunction(mapping[response.data.code])) mapping[response.data.code](response)
