@@ -21,17 +21,19 @@ class RolesController extends Controller
 			'limit' => 'required|integer'
 		]);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
+		$page = intval($req['page']);
+		$limit = intval($req['limit']);
 		$list = Roles::query();
 		$list->where('organize_id', $req['organize_id']);
 		$list->select('id', 'name', 'organize_id', 'slot', 'show');
 		$list->orderBy('slot');
 		$total = $list->count();
-		$list->offset(($req['page'] - 1) * $req['limit'])->limit($req['limit']);
+		$list->offset(($page - 1) * $limit)->limit($limit);
 		return $this->success([
 			'list' => $list->get(),
 			'total' => $total,
-			'page' => $req['page'],
-			'limit' => $req['limit']
+			'page' => $page,
+			'limit' => $limit
 		]);
 	}
 
@@ -76,16 +78,18 @@ class RolesController extends Controller
 			'limit' => 'required|integer'
 		]);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
+		$page = intval($req['page']);
+		$limit = intval($req['limit']);
 		$list = RoleUser::query();
 		$list->where('role_id', $req['role_id']);
 		$list->with('user_info');
 		$total = $list->count();
-		$list->offset(($req['page'] - 1) * $req['limit'])->limit($req['limit']);
+		$list->offset(($page - 1) * $limit)->limit($limit);
 		return $this->success([
 			'list' => $list->get(),
 			'total' => $total,
-			'page' => $req['page'],
-			'limit' => $req['limit']
+			'page' => $page,
+			'limit' => $limit
 		]);
 	}
 }

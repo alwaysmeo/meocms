@@ -41,6 +41,8 @@ class UsersController extends Controller
 			'keyword' => 'max:60',
 		]);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
+		$page = intval($req['page']);
+		$limit = intval($req['limit']);
 		$search_type = $req['search_type'] ?? null;
 		$keyword = $req['keyword'] ?? null;
 		$list = Users::query();
@@ -50,12 +52,12 @@ class UsersController extends Controller
 		$list->orderBy('created_at', 'desc');
 		($search_type && $keyword) && $list->where($search_type, 'like', '%' . $keyword . '%');
 		$total = $list->count();
-		$list->offset(($req['page'] - 1) * $req['limit'])->limit($req['limit']);
+		$list->offset(($page - 1) * $limit)->limit($limit);
 		return $this->success([
 			'list' => $list->get(),
 			'total' => $total,
-			'page' => $req['page'],
-			'limit' => $req['limit']
+			'page' => $page,
+			'limit' => $limit
 		]);
 	}
 }
