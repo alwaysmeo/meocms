@@ -4,7 +4,7 @@ import { defineStore } from 'pinia'
 import STORAGE_KEY from '@utils/storageKey'
 import permissionsApi from '@apis/permissions'
 
-const storeKey = STORAGE_KEY.SIDEBAR_LIST
+const storeKey = STORAGE_KEY.SIDEBAR
 export const useSidebarStore = defineStore(storeKey, {
 	state: () => {
 		return {
