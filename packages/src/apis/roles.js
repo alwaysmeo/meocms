@@ -5,8 +5,8 @@ import request from '@utils/request'
 /**
  * 角色列表
  * @param organize_id * 组织ID
- * @param page * 页码
- * @param limit * 每页条数
+ * @param page 页码
+ * @param limit 每页条数
  */
 async function list(data) {
 	return await request.get(`/api/roles/list`, { params: data })

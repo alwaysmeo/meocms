@@ -17,18 +17,18 @@ class RolesController extends Controller
 		$req = $request->only(['organize_id', 'page', 'limit']);
 		$validator = Validator::make($req, [
 			'organize_id' => 'required|integer',
-			'page' => 'required|integer',
-			'limit' => 'required|integer'
+			'page' => 'integer',
+			'limit' => 'integer'
 		]);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
-		$page = intval($req['page']);
-		$limit = intval($req['limit']);
+		$page = isset($req['page']) ?? intval($req['page']);
+		$limit = isset($req['limit']) ?? intval($req['limit']);
 		$list = Roles::query();
 		$list->where('organize_id', $req['organize_id']);
 		$list->select('id', 'name', 'organize_id', 'slot', 'show');
 		$list->orderBy('slot');
 		$total = $list->count();
-		$list->offset(($page - 1) * $limit)->limit($limit);
+		($page && $limit) && $list->offset(($page - 1) * $limit)->limit($limit);
 		return $this->success([
 			'list' => $list->get(),
 			'total' => $total,
