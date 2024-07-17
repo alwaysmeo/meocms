@@ -11,13 +11,20 @@ class Organizes extends Model
     use HasFactory;
 
     protected $table = 'organizes';
-
     protected $fillable = [
         'name',
         'description',
         'slot',
 	    'show'
     ];
+	protected function casts(): array
+	{
+		return [
+			'created_at' => 'datetime:Y-m-d H:i:s',
+			'updated_at' => 'datetime:Y-m-d H:i:s',
+			'deleted_at' => 'datetime:Y-m-d H:i:s'
+		];
+	}
 
 	public function getShowAttribute($value): bool
 	{

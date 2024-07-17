@@ -13,7 +13,6 @@ class PermissionsRole extends Model
 	protected $table = 'permissions_role';
 	protected $primaryKey = 'role_id';
 	public $timestamps = false;
-
 	protected $fillable = [
 		'role_id',
 		'permission_ids'

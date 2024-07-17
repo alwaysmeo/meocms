@@ -5,7 +5,8 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\Permissions;
 use App\Models\PermissionsRole;
-use App\Models\RoleUser;
+use App\Models\UserOrganize;
+use App\Models\UserRole;
 use App\Models\Users;
 use App\Services\Common;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class UsersController extends Controller
 	public function permissionsList(Request $request): Response
 	{
 		$user = $request->user();
-		$role = RoleUser::query()->find($user['ulid']);
+		$role = UserOrganize::query()->find($user['ulid']);
 		$permission = PermissionsRole::query()->find($role['role_id']);
 		$list = Permissions::query()
 			->where('show', 1)
@@ -32,22 +33,32 @@ class UsersController extends Controller
 	/* 获取用户列表 */
 	public function list(Request $request): Response
 	{
-		$req = $request->only(['page', 'limit', 'search_type', 'keyword']);
+		$req = $request->only(['organize_id', 'page', 'limit', 'search_type', 'keyword']);
 		$validator = Validator::make($req, [
-			'organize_id' => 'integer',
+			'organize_id' => 'required|integer',
 			'page' => 'required|integer',
 			'limit' => 'required|integer',
 			'search_type' => 'in:ulid,email,nickname,phone',
 			'keyword' => 'max:60',
 		]);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
+		$organize_id = intval($req['organize_id']);
 		$page = intval($req['page']);
 		$limit = intval($req['limit']);
 		$search_type = $req['search_type'] ?? null;
 		$keyword = $req['keyword'] ?? null;
 		$list = Users::query();
-		$list->select('ulid', 'organize_id', 'email', 'nickname', 'picture_id', 'phone', 'status', 'last_login_at', 'created_at');
-		if (isset($req['organize_id'])) $list->where('organize_id', $req['organize_id']);
+		$list->select('ulid', 'email', 'nickname', 'picture_id', 'phone', 'status', 'last_login_at', 'created_at');
+		# 只查询当前组织的用户
+		$list->whereHas('organize_info', function ($query) use ($organize_id) {
+			$query->where('id', $organize_id);
+		});
+		$list->with(['role_info' => function ($query) use ($organize_id) {
+			$query->where('organize_id', $organize_id)->select('id', 'name');
+		}]);
+		$list->with(['organize_info' => function ($query) use ($organize_id) {
+			$query->where('id', $organize_id)->select('id', 'name');
+		}]);
 		$list->where('deleted_at', NULL);
 		$list->orderBy('created_at', 'desc');
 		($search_type && $keyword) && $list->where($search_type, 'like', '%' . $keyword . '%');

@@ -4,26 +4,24 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Roles extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-    protected $table = 'roles';
+	protected $table = 'roles';
 	public $timestamps = false;
-
-    protected $fillable = [
-        'name',
-        'slot',
-        'show'
-    ];
-
+	protected $fillable = [
+		'organize_id',
+		'name',
+		'slot',
+		'show'
+	];
 	protected $appends = ['count'];
 
 	public function getCountAttribute(): int
 	{
-		return RoleUser::query()->where('role_id', $this->attributes['id'])->get()->count();
+		return UserRole::query()->where('role_id', $this->attributes['id'])->get()->count();
 	}
 
 	public function getShowAttribute($value): bool

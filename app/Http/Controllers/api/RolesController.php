@@ -4,7 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Roles;
-use App\Models\RoleUser;
+use App\Models\UserOrganize;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
@@ -80,7 +80,7 @@ class RolesController extends Controller
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
 		$page = intval($req['page']);
 		$limit = intval($req['limit']);
-		$list = RoleUser::query();
+		$list = UserOrganize::query();
 		$list->where('role_id', $req['role_id']);
 		$list->with('user_info');
 		$total = $list->count();

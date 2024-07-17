@@ -19,7 +19,7 @@
 			{ dataIndex: 'name', title: '权限名称', show: true },
 			{ dataIndex: 'description', title: '权限描述', ellipsis: true, show: true },
 			{ dataIndex: 'path', title: 'URL', show: true },
-			{ dataIndex: 'show', title: '是否显示', width: 240, align: 'center', show: true },
+			{ dataIndex: 'show', title: '是否显示', width: 120, align: 'center', show: true },
 			{ dataIndex: 'action', title: '操作', width: 160, align: 'center', show: true }
 		],
 		data: [],
@@ -84,14 +84,14 @@
 		<div class="primary-container">
 			<div class="primary-header">
 				<div>
-					<div class="title">角色管理</div>
-					<div class="desc">系统角色管理</div>
+					<div class="title">权限管理</div>
+					<div class="desc">系统权限管理</div>
 				</div>
 				<a-space>
 					<a-button @click="table.open = true">
 						<span>{{ $t('meo.components.common.table.list_filtering') }}</span>
 					</a-button>
-					<a-button type="primary" @click="form.create">新增角色</a-button>
+					<a-button type="primary" @click="form.create">新增权限</a-button>
 				</a-space>
 			</div>
 			<meo-table

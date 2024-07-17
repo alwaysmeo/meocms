@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Foundation\Auth\User as AuthenticatableAuthenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -22,7 +23,6 @@ class Users extends AuthenticatableAuthenticatable
 	 */
 	protected $fillable = [
 		'ulid',
-		'organize_id',
 		'email',
 		'password',
 		'token',
@@ -44,7 +44,7 @@ class Users extends AuthenticatableAuthenticatable
 		'password'
 	];
 
-	protected $appends = ['organize_info', 'picture_info', 'role_info'];
+	protected $appends = ['picture_info'];
 
 	/**
 	 * Get the attributes that should be cast.
@@ -68,21 +68,15 @@ class Users extends AuthenticatableAuthenticatable
 			->whereNull('deleted_at')
 			->select('url', 'origin_name', 'suffix')
 			->find($this->attributes['picture_id']);
-
 	}
 
-	public function getOrganizeInfoAttribute(): object|null
+	public function organize_info(): HasOneThrough
 	{
-		if (!isset($this->attributes['organize_id'])) return null;
-		return Organizes::query()
-			->select('name', 'description', 'slot', 'show')
-			->find($this->attributes['organize_id']);
-
+		return $this->HasOneThrough(Organizes::class, UserOrganize::class, 'user_ulid', 'id', 'ulid', 'organize_id');
 	}
 
-	public function getRoleInfoAttribute(): object
+	public function role_info(): HasOneThrough
 	{
-		$role = RoleUser::query()->find($this->attributes['ulid']);
-		return Roles::query()->select('id', 'name')->find($role['role_id']);
+		return $this->HasOneThrough(Roles::class, UserRole::class, 'user_ulid', 'id', 'ulid', 'role_id');
 	}
 }
