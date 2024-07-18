@@ -14,10 +14,10 @@ class OrganizesController extends Controller
 	public function list(Request $request): Response
 	{
 		$req = $request->only(['page', 'limit']);
-		$validator = Validator::make($req, ['page' => 'integer', 'limit' => 'integer']);
+		$validator = Validator::make($req, ['page' => 'required|integer', 'limit' => 'required|integer']);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
-		$page = isset($req['page']) ?? intval($req['page']);
-		$limit = isset($req['limit']) ?? intval($req['limit']);
+		$page = intval($req['page']);
+		$limit = intval($req['limit']);
 		$list = Organizes::query();
 		$list->select('id', 'name', 'description', 'show', 'slot');
 		$list->orderBy('slot');
