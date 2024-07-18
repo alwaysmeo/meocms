@@ -64,7 +64,7 @@
 						"columns": {
 							"index": "序號",
 							"id": "ID",
-							"picture_info": "頭像",
+							"picture": "頭像",
 							"email": "電子郵箱",
 							"phone": "聯繫電話",
 							"nickname": "用戶名",

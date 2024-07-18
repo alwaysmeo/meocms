@@ -24,7 +24,7 @@ class UsersSeeder extends Seeder
 			'email' => env('ADMIN_DEFAULT_EMAIL', 'email@email.com'),
 			'password' => Hash::make(env('ADMIN_DEFAULT_PASSWORD', '123456')),
 			'nickname' => '系统管理员',
-			'picture_id' => 1
+			'picture' => 1
 		]);
 		# 添加用户头像的上传记录
 		UploadRecord::query()->create([

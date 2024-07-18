@@ -47,7 +47,7 @@ class UsersController extends Controller
 		$search_type = $req['search_type'] ?? null;
 		$keyword = $req['keyword'] ?? null;
 		$list = Users::query();
-		$list->select('ulid', 'email', 'nickname', 'picture_id', 'phone', 'status', 'last_login_at', 'created_at');
+		$list->select('ulid', 'email', 'nickname', 'picture', 'phone', 'status', 'last_login_at', 'created_at');
 		# 只查询当前组织的用户
 		$list->whereHas('organize_info', function ($query) use ($organize_id) {
 			$query->where('id', $organize_id);

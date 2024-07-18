@@ -27,7 +27,7 @@ class Users extends AuthenticatableAuthenticatable
 		'password',
 		'token',
 		'nickname',
-		'picture_id',
+		'picture',
 		'phone',
 		'status',
 		'last_login_at',
@@ -44,8 +44,6 @@ class Users extends AuthenticatableAuthenticatable
 		'password'
 	];
 
-	protected $appends = ['picture_info'];
-
 	/**
 	 * Get the attributes that should be cast.
 	 * @return array<string, string>
@@ -61,13 +59,13 @@ class Users extends AuthenticatableAuthenticatable
 		];
 	}
 
-	public function getPictureInfoAttribute(): object|null
+	public function getPictureAttribute(): object|null
 	{
-		if (!isset($this->attributes['picture_id'])) return null;
+		if (!isset($this->attributes['picture'])) return null;
 		return UploadRecord::query()
 			->whereNull('deleted_at')
 			->select('url', 'origin_name', 'suffix')
-			->find($this->attributes['picture_id']);
+			->find($this->attributes['picture']);
 	}
 
 	public function organize_info(): HasOneThrough

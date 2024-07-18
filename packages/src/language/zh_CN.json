@@ -64,7 +64,7 @@
 						"columns": {
 							"index": "序号",
 							"id": "ID",
-							"picture_info": "头像",
+							"picture": "头像",
 							"email": "邮箱账号",
 							"phone": "联系电话",
 							"nickname": "用户名",

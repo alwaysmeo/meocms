@@ -11,7 +11,7 @@
 		columns: [
 			{ dataIndex: 'index', title: t('meo.pages.system.user.table.columns.index'), width: 120, align: 'center', show: true },
 			{ dataIndex: 'ulid', title: t('meo.pages.system.user.table.columns.id'), width: 260 },
-			{ dataIndex: 'picture_info', title: t('meo.pages.system.user.table.columns.picture_info'), width: 120, align: 'center', show: true },
+			{ dataIndex: 'picture', title: t('meo.pages.system.user.table.columns.picture'), width: 120, align: 'center', show: true },
 			{ dataIndex: 'email', title: t('meo.pages.system.user.table.columns.email'), show: true },
 			{ dataIndex: 'phone', title: t('meo.pages.system.user.table.columns.phone'), width: 150, align: 'center' },
 			{ dataIndex: 'nickname', title: t('meo.pages.system.user.table.columns.nickname'), show: true },
@@ -88,8 +88,8 @@
 				@action="table.action"
 			>
 				<template #bodyCell="{ column, record }">
-					<template v-if="isEqual(column.dataIndex, 'picture_info')">
-						<a-avatar :size="50" :src="record?.picture_info?.url">
+					<template v-if="isEqual(column.dataIndex, 'picture')">
+						<a-avatar :size="50" :src="record?.picture?.url">
 							<template #icon><ant-user-outlined /></template>
 						</a-avatar>
 					</template>
