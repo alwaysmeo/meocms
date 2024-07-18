@@ -19,8 +19,7 @@ class UsersController extends Controller
 	public function permissionsList(Request $request): Response
 	{
 		$user = $request->user();
-		$role = UserOrganize::query()->find($user['ulid']);
-		$permission = PermissionsRole::query()->find($role['role_id']);
+		$permission = PermissionsRole::query()->find($user['role_info']['id']);
 		$list = Permissions::query()
 			->where('show', 1)
 			->whereIn('id', json_decode($permission['permission_ids']))
