@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class UserRole extends Model
 {
@@ -23,5 +24,10 @@ class UserRole extends Model
 	public function getNameAttribute(): string
 	{
 		return Roles::query()->find($this->attributes['role_id'])['name'];
+	}
+
+	public function user_info(): hasOne
+	{
+		return $this->hasOne(Users::class, 'ulid', 'user_ulid');
 	}
 }

@@ -1,11 +1,14 @@
 'use strict'
 import nprogress from '@utils/nprogress'
 import { useUserInfoStore } from '@stores/userInfoStore'
+import { useOrganizesStore } from '@stores/organizesStore'
 import { isEmpty, isEqual } from 'radash'
 
 export default async (to, from, next) => {
 	nprogress.start()
 	const userInfoStore = useUserInfoStore()
+	const organizesStore = useOrganizesStore()
+	await organizesStore.set()
 	const userInfo = await userInfoStore.get()
 	// 验证当前页面是否需要登录信息
 	if (isEqual(to.meta.verifyLogin, undefined)) {

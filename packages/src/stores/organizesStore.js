@@ -14,17 +14,22 @@ export const useOrganizesStore = defineStore(storeKey, {
 	},
 	actions: {
 		async get() {
-			const that = this
-			if (isEmpty(this.list)) {
-				const { code, data } = await organizesApi.list()
-				if (isEqual(code, 200)) this.list = data.list
-			}
-			if (isEmpty(this.checked)) {
-				Object.assign(that.checked, that.list[0])
-			}
 			return {
 				checked: this.checked,
 				list: this.list
+			}
+		},
+		async set(list) {
+			const that = this
+			const { code, data } = await organizesApi.list()
+			if (isEqual(code, 200)) {
+				this.list = data.list
+				if (isEmpty(this.checked)) {
+					this.checked = this.list[0]
+				} else {
+					const arr = data.list.filter((item) => isEqual(item.id, that.checked.id))
+					if (!arr.length) this.checked = this.list[0]
+				}
 			}
 		},
 		change(data) {
@@ -36,7 +41,7 @@ export const useOrganizesStore = defineStore(storeKey, {
 		}
 	},
 	persist: {
-		paths: ['checked', 'list'],
+		paths: ['checked'],
 		enabled: true,
 		key: storeKey
 	}

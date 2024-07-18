@@ -113,7 +113,13 @@
 	}
 
 	async function upsert({ role_id, name, show }) {
-		const { code } = await rolesApi.upsert({ role_id, name, show })
+		const organizes = await organizesStore.get()
+		const { code } = await rolesApi.upsert({
+			organize_id: organizes.checked.id,
+			role_id,
+			name,
+			show
+		})
 		if (isEqual(code, 200)) {
 			message.success(role_id ? '修改成功' : '新增成功')
 			await list()
