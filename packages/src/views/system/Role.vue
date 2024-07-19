@@ -93,15 +93,16 @@
 		}
 	})
 
+	const organizes = ref()
 	onMounted(async () => {
+		organizes.value = await organizesStore.get()
 		await list()
 	})
 
 	async function list() {
 		table.loading = true
-		const organizes = await organizesStore.get()
 		const { code, data } = await rolesApi.list({
-			organize_id: organizes.checked.id,
+			organize_id: organizes.value.checked.id,
 			page: table.page,
 			limit: table.limit
 		})
@@ -113,9 +114,8 @@
 	}
 
 	async function upsert({ role_id, name, show }) {
-		const organizes = await organizesStore.get()
 		const { code } = await rolesApi.upsert({
-			organize_id: organizes.checked.id,
+			organize_id: organizes.value.checked.id,
 			role_id,
 			name,
 			show

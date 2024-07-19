@@ -1,11 +1,13 @@
 <script setup>
 	import { isEqual } from 'radash'
+	import { useOrganizesStore } from '@stores/organizesStore'
 	import usersApi from '@apis/users'
 	import i18n from '@language'
 
 	defineOptions({ name: 'SystemUser' })
 
 	const { t } = i18n.global
+	const organizesStore = useOrganizesStore()
 
 	const table = reactive({
 		columns: [
@@ -41,13 +43,19 @@
 		open: false
 	})
 
+	const organizes = ref()
 	onMounted(async () => {
-		await list({ page: table.page, limit: table.limit })
+		organizes.value = await organizesStore.get()
+		await list()
 	})
 
-	async function list({ page, limit }) {
+	async function list() {
 		table.loading = true
-		const { code, data } = await usersApi.list({ page, limit })
+		const { code, data } = await usersApi.list({
+			organize_id: organizes.value.checked.id,
+			page: table.page,
+			limit: table.limit
+		})
 		if (isEqual(code, 200)) {
 			table.data = data.list
 			table.total = data.total
