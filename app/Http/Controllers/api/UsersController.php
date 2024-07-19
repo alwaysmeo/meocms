@@ -35,15 +35,15 @@ class UsersController extends Controller
 		$req = $request->only(['organize_id', 'page', 'limit', 'search_type', 'keyword']);
 		$validator = Validator::make($req, [
 			'organize_id' => 'required|integer',
-			'page' => 'required|integer',
-			'limit' => 'required|integer',
+			'page' => 'integer',
+			'limit' => 'integer',
 			'search_type' => 'in:ulid,email,nickname,phone',
 			'keyword' => 'max:60',
 		]);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
 		$organize_id = intval($req['organize_id']);
-		$page = intval($req['page']);
-		$limit = intval($req['limit']);
+		$page = isset($req['page']) ? intval($req['page']) : null;
+		$limit = isset($req['limit']) ? intval($req['limit']) : null;
 		$search_type = $req['search_type'] ?? null;
 		$keyword = $req['keyword'] ?? null;
 		$list = Users::query();

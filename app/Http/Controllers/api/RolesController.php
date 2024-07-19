@@ -18,13 +18,13 @@ class RolesController extends Controller
 		$req = $request->only(['organize_id', 'page', 'limit']);
 		$validator = Validator::make($req, [
 			'organize_id' => 'required|integer',
-			'page' => 'required|integer',
-			'limit' => 'required|integer'
+			'page' => 'integer',
+			'limit' => 'integer'
 		]);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
 		$organize_id = intval($req['organize_id']);
-		$page = intval($req['page']);
-		$limit = intval($req['limit']);
+		$page = isset($req['page']) ? intval($req['page']) : null;
+		$limit = isset($req['limit']) ? intval($req['limit']) : null;
 		$list = Roles::query();
 		$list->where('deleted_at', null);
 		$list->select('id', 'name', 'slot', 'show');
@@ -88,12 +88,12 @@ class RolesController extends Controller
 		$req = $request->only(['role_id', 'page', 'limit']);
 		$validator = Validator::make($req, [
 			'role_id' => 'required|integer',
-			'page' => 'required|integer',
-			'limit' => 'required|integer'
+			'page' => 'integer',
+			'limit' => 'integer'
 		]);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
-		$page = intval($req['page']);
-		$limit = intval($req['limit']);
+		$page = isset($req['page']) ? intval($req['page']) : null;
+		$limit = isset($req['limit']) ? intval($req['limit']) : null;
 		$list = UserRole::query();
 		$list->where('role_id', $req['role_id']);
 		$list->with(['user_info' => function ($query) {
