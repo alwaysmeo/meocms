@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as AuthenticatableAuthenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -68,9 +69,9 @@ class Users extends AuthenticatableAuthenticatable
 			->find($this->attributes['picture']);
 	}
 
-	public function organize_info(): HasOneThrough
+	public function organize_info(): HasManyThrough
 	{
-		return $this->HasOneThrough(Organizes::class, UserOrganize::class, 'user_ulid', 'id', 'ulid', 'organize_id');
+		return $this->HasManyThrough(Organizes::class, UserOrganize::class, 'user_ulid', 'id', 'ulid', 'organize_id');
 	}
 
 	public function role_info(): HasOneThrough

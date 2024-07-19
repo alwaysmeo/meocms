@@ -17,6 +17,7 @@ class Roles extends Model
 		'show'
 	];
 	protected $appends = ['count'];
+	protected $hidden = ['laravel_through_key'];
 
 	protected function casts(): array
 	{

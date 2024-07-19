@@ -16,8 +16,8 @@ class OrganizesController extends Controller
 		$req = $request->only(['page', 'limit']);
 		$validator = Validator::make($req, ['page' => 'integer', 'limit' => 'integer']);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
-		$page = isset($req['page']) ?? intval($req['page']);
-		$limit = isset($req['limit']) ?? intval($req['limit']);
+		$page = isset($req['page']) ? intval($req['page']) : null;
+		$limit = isset($req['limit']) ? intval($req['limit']) : null;
 		$list = Organizes::query();
 		$list->where('deleted_at', null);
 		$list->select('id', 'name', 'description', 'show', 'slot');

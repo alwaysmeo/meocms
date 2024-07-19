@@ -53,10 +53,9 @@ class UsersController extends Controller
 			$query->where('id', $organize_id);
 		});
 		$list->with(['role_info' => function ($query) use ($organize_id) {
-			$query->where('organize_id', $organize_id)->select('id', 'name');
-		}]);
-		$list->with(['organize_info' => function ($query) use ($organize_id) {
-			$query->where('id', $organize_id)->select('id', 'name');
+			$query->whereHas('organize_info', function ($query) use ($organize_id) {
+				$query->where('organize_id', $organize_id);
+			})->select('id', 'name');
 		}]);
 		$list->where('deleted_at', NULL);
 		$list->orderBy('created_at', 'desc');

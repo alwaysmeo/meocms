@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class UserRole extends Model
 {
@@ -29,5 +30,10 @@ class UserRole extends Model
 	public function user_info(): hasOne
 	{
 		return $this->hasOne(Users::class, 'ulid', 'user_ulid');
+	}
+
+	public function organize_info(): hasOne
+	{
+		return $this->hasOne(RoleOrganize::class, 'role_id', 'role_id');
 	}
 }

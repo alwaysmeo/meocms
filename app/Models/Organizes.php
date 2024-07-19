@@ -17,6 +17,8 @@ class Organizes extends Model
         'slot',
 	    'show'
     ];
+	protected $hidden = ['laravel_through_key'];
+
 	protected function casts(): array
 	{
 		return [
