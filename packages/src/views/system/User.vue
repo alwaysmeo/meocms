@@ -1,7 +1,10 @@
 <script setup>
-	import { isEqual } from 'radash'
+	import { message } from 'ant-design-vue'
+	import { isEmpty, isEqual, pick } from 'radash'
 	import { useOrganizesStore } from '@stores/organizesStore'
+	import rexExp from '@utils/rexExp'
 	import usersApi from '@apis/users'
+	import rolesApi from '@apis/roles'
 	import i18n from '@language'
 
 	defineOptions({ name: 'SystemUser' })
@@ -31,6 +34,15 @@
 		total: 0,
 		action: (key, record) => {
 			return {
+				edit: async () => {
+					if (isEmpty(form.role_list)) {
+						const { code, data } = await rolesApi.list({ organize_id: organizes.value.checked.id })
+						if (isEqual(code, 200)) form.role_list = data.list
+					}
+					form.data = pick(record, ['ulid', 'nickname', 'email', 'phone'])
+					form.data.role_id = record.role_info?.id
+					form.open = true
+				},
 				detail: () => {
 					detail.open = true
 					detail.data = record
@@ -41,6 +53,36 @@
 
 	const detail = reactive({
 		open: false
+	})
+
+	const formRef = ref()
+	const form = reactive({
+		open: false,
+		data: {},
+		role_list: [],
+		rules: {
+			nickname: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+			email: [
+				{ required: true, message: '请输入邮箱账号', trigger: 'blur' },
+				{ pattern: rexExp.email, message: '邮箱格式不正确', trigger: 'change' }
+			],
+			phone: [{ pattern: rexExp.phone, message: '手机号格式不正确', trigger: 'change' }],
+			password: [
+				{ required: true, message: '请输入密码', trigger: 'blur' },
+				{ min: 6, max: 20, message: '密码长度应在6-20位之间', trigger: 'blur' },
+				{ pattern: rexExp.password, message: '密码只能包含字母或数字', trigger: 'change' }
+			],
+			role_id: [{ required: true, message: '请选择角色组', trigger: 'blur' }]
+		},
+		submit: async () => {
+			try {
+				await formRef.value?.validateFields()
+				await upsert()
+			} catch (error) {
+				console.error(error)
+				message.warning('请先完善表单信息')
+			}
+		}
 	})
 
 	const organizes = ref()
@@ -62,6 +104,18 @@
 		}
 		table.loading = false
 	}
+
+	async function upsert() {
+		const { code } = await usersApi.upsert({
+			organize_id: organizes.value.checked.id,
+			...form.data
+		})
+		if (isEqual(code, 200)) {
+			await list()
+			form.open = false
+			form.data = {}
+		}
+	}
 </script>
 
 <template>
@@ -76,7 +130,7 @@
 					<a-button @click="table.open = true">
 						<span>{{ $t('meo.components.common.table.list_filtering') }}</span>
 					</a-button>
-					<a-button type="primary">Primary Button</a-button>
+					<a-button type="primary" @click="table.action('edit', {})">新增用户</a-button>
 				</a-space>
 			</div>
 			<meo-table
@@ -112,8 +166,30 @@
 			</meo-table>
 		</div>
 
-		<meo-modal v-model:open="detail.open" title="用户详情" cancel="关闭" :confirm="false">
-			<div>123</div>
+		<meo-modal v-model:open="form.open" :title="form.data.ulid ? '修改用户' : '新增用户'" @confirm="form.submit">
+			<div>
+				<a-form ref="formRef" :model="form.data" :rules="form.rules" :label-col="{ span: 6 }" :wrapper-col="{ span: 16 }">
+					<a-form-item name="nickname" label="用户名">
+						<a-input v-model:value="form.data.nickname" :maxlength="30" placeholder="请输入用户名" show-count />
+					</a-form-item>
+					<a-form-item name="role_id" label="角色组">
+						<a-select v-model:value="form.data.role_id" placeholder="请选择角色组">
+							<a-select-option v-for="item in form.role_list" :key="item.id" :value="item.id">
+								{{ item.name }}
+							</a-select-option>
+						</a-select>
+					</a-form-item>
+					<a-form-item name="email" label="邮箱账号">
+						<a-input v-model:value="form.data.email" :maxlength="60" placeholder="请输入邮箱账号（用户登录账号）" show-count />
+					</a-form-item>
+					<a-form-item name="phone" label="联系电话">
+						<a-input v-model:value="form.data.phone" :maxlength="11" placeholder="请输入用户联系电话" show-count />
+					</a-form-item>
+					<a-form-item name="password" label="密码">
+						<a-input v-model:value="form.data.password" :maxlength="20" placeholder="请输入用户密码" show-count />
+					</a-form-item>
+				</a-form>
+			</div>
 		</meo-modal>
 	</div>
 </template>

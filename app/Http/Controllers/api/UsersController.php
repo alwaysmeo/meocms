@@ -5,12 +5,15 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\Permissions;
 use App\Models\PermissionsRole;
+use App\Models\RoleOrganize;
 use App\Models\UserOrganize;
 use App\Models\UserRole;
 use App\Models\Users;
 use App\Services\Common;
+use App\Services\Mapping;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
@@ -68,5 +71,44 @@ class UsersController extends Controller
 			'page' => $page,
 			'limit' => $limit
 		]);
+	}
+
+	/* 新增修改用户 */
+	public function upsert(Request $request): Response
+	{
+		$req = $request->only(['ulid', 'organize_id', 'nickname', 'role_id', 'email', 'phone', 'password']);
+		$validator = Validator::make($req, [
+			'organize_id' => 'required|integer',
+			'ulid' => 'ulid',
+			'role_id' => 'required|integer',
+			'nickname' => 'required|between:1,30',
+			'email' => 'required|email',
+			'phone' => 'digits:11',
+			'password' => 'required|regex:/^[a-zA-Z0-9]+$/|between:6,20'
+		]);
+		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
+		if (!isset($req['ulid'])) {
+			$is_exist = Users::query()->where('email', $req['email'])->whereNull('deleted_at')->first();
+			if ($is_exist) return $this->fail(null, Mapping::$code['3002'], 3002);
+		}
+		$user = Users::query()->updateOrCreate(['ulid' => $req['ulid'] ?? null], [
+			'nickname' => $req['nickname'],
+			'email' => $req['email'],
+			'phone' => $req['phone'],
+			'password' => Hash::make($req['password'])
+		]);
+		UserRole::query()->firstOrCreate([
+			'user_ulid' => $user['ulid'], 'role_id' => $req['role_id']], [
+			'user_ulid' => $user['ulid'], 'role_id' => $req['role_id']
+		]);
+		UserOrganize::query()->firstOrCreate([
+			'user_ulid' => $user['ulid'], 'organize_id' => $req['organize_id']], [
+			'user_ulid' => $user['ulid'], 'organize_id' => $req['organize_id']
+		]);
+		RoleOrganize::query()->firstOrCreate([
+			'role_id' => $req['role_id'], 'organize_id' => $req['organize_id']], [
+			'role_id' => $req['role_id'], 'organize_id' => $req['organize_id']
+		]);
+		return $this->success();
 	}
 }

@@ -65,6 +65,8 @@ Route::group(['middleware' => 'auth:api'], function () {
 		Route::get('/permissions/list', [UsersController::class, 'permissionsList']);
 		/* 获取用户列表 */
 		Route::get('/list', [UsersController::class, 'list']);
+		/* 新增修改用户 */
+		Route::post('/upsert', [UsersController::class, 'upsert']);
 	});
 
 	Route::group(['prefix' => 'organizes'], function () {

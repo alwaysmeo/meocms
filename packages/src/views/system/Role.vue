@@ -57,7 +57,7 @@
 			{ dataIndex: 'index', title: '序号', width: 120, align: 'center', show: true },
 			{ dataIndex: 'email', key: 'email', title: '邮箱账号', show: true },
 			{ dataIndex: 'nickname', key: 'nickname', title: '用户名', show: true },
-			{ dataIndex: 'phone', key: 'phone', title: '联系方式', show: true }
+			{ dataIndex: 'phone', key: 'phone', title: '联系电话', show: true }
 		],
 		data: {},
 		list: [],

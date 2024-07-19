@@ -14,10 +14,24 @@ async function list(data) {
 }
 
 /**
+ * 新增修改用户
+ * @param organize_id * 组织ID
+ * @param ulid 用户ULID
+ * @param role_id 角色ID
+ * @param nickname 用户名称
+ * @param email 邮箱账号
+ * @param phone 联系电话
+ * @param password 登录密码
+ */
+async function upsert(data) {
+	return await request.post(`/api/users/upsert`, data)
+}
+
+/**
  * 获取用户权限列表
  */
 async function permissionsList() {
 	return await request.get(`/api/users/permissions/list`)
 }
 
-export default { list, permissionsList }
+export default { list, upsert, permissionsList }
