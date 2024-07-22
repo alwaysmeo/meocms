@@ -4,11 +4,9 @@
 	import { useOrganizesStore } from '@stores/organizesStore'
 	import { isEqual } from 'radash'
 	import rolesApi from '@apis/roles'
-	import i18n from '@language'
 
 	defineOptions({ name: 'SystemRole' })
 
-	const { t } = i18n.global
 	const organizesStore = useOrganizesStore()
 
 	const table = reactive({
@@ -29,7 +27,7 @@
 		action: (key, record) => {
 			return {
 				edit: () => {
-					form.data = { role_id: record.id, name: record.name, show: !!record.show }
+					form.data = { id: record.id, name: record.name, show: record.show }
 					form.open = true
 				},
 				detail: async () => {
@@ -47,7 +45,7 @@
 		},
 		changeShow: async (record) => {
 			record.show = !record.show
-			await upsert({ role_id: record.id, show: record.show ? 1 : 0 })
+			await upsert({ id: record.id, show: record.show })
 		}
 	})
 
@@ -83,7 +81,7 @@
 		submit: async () => {
 			try {
 				await formRef.value.validateFields()
-				await upsert({ ...form.data.name, show: form.data.show ? 1 : 0 })
+				await upsert({ ...form.data, show: form.data.show })
 				form.data = { show: true }
 				form.open = false
 			} catch (error) {
@@ -113,15 +111,15 @@
 		table.loading = false
 	}
 
-	async function upsert({ role_id, name, show }) {
+	async function upsert({ id, name, show }) {
 		const { code } = await rolesApi.upsert({
 			organize_id: organizes.value.checked.id,
-			role_id,
+			id,
 			name,
-			show
+			show: show ? 1 : 0
 		})
 		if (isEqual(code, 200)) {
-			message.success(role_id ? '修改成功' : '新增成功')
+			message.success(id ? '修改成功' : '新增成功')
 			await list()
 		}
 	}

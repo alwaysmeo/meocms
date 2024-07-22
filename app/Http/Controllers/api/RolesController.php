@@ -46,21 +46,16 @@ class RolesController extends Controller
 	/* 新增修改角色 */
 	public function upsert(Request $request): Response
 	{
-		$req = $request->only(['organize_id', 'role_id', 'name', 'show']);
+		$req = $request->only(['organize_id', 'id', 'name', 'show']);
 		$validator = Validator::make($req, [
 			'organize_id' => 'required|integer',
-			'role_id' => 'integer',
+			'id' => 'integer',
 			'name' => 'max:30',
 			'show' => 'in:0,1'
 		]);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
 		$input = $req;
 		unset($input['organize_id']);
-		if (isset($req['role_id'])) {
-			unset($input['role_id']);
-			$input['id'] = $req['role_id'];
-		}
-
 		$role = Roles::query()->updateOrCreate(['id' => $input['id'] ?? null], $input);
 		RoleOrganize::query()->updateOrCreate(
 			['role_id' => $role['id'], 'organize_id' => $req['organize_id']],
