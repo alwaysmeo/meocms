@@ -1,6 +1,6 @@
 <script setup>
 	import { message } from 'ant-design-vue'
-	import { isEmpty, isEqual, pick, first } from 'radash'
+	import { isEmpty, isEqual, pick } from 'radash'
 	import { useOrganizesStore } from '@stores/organizesStore'
 	import { useModalConfirm } from '@hooks/useModal'
 	import rexExp from '@utils/rexExp'
