@@ -102,7 +102,7 @@
 			:title="$t('meo.components.common.table.select_table_header')"
 			v-model:open="state.open"
 			centered
-			class="modal-container"
+			class="meo-table-modal-container"
 			@ok="handleConfirm"
 			@cancel="state.open = false"
 		>
@@ -128,7 +128,7 @@
 			font-size: 20px;
 		}
 	}
-	.modal-container {
+	.meo-table-modal-container {
 		.checkbox-container {
 			padding: 10px 30px 0 30px;
 			width: 100%;

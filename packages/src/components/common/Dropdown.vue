@@ -21,7 +21,7 @@
 <template>
 	<a-dropdown v-bind="$attrs" trigger="click" placement="bottom" :getPopupContainer="(e) => e.parentNode.parentNode.parentNode.parentNode">
 		<slot name="overlay" v-if="$slots.default"></slot>
-		<a-button v-else class="base-button" type="text" size="small">
+		<a-button v-else class="meo-base-button" type="text" size="small">
 			<span>{{ props.desc }}</span>
 			<ant-down-outlined />
 		</a-button>
@@ -35,7 +35,7 @@
 </template>
 
 <style scoped lang="scss">
-	.base-button {
+	.meo-base-button {
 		color: $color-primary;
 		:deep(.anticon) {
 			margin-inline-start: 2px;

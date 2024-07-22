@@ -32,7 +32,7 @@
 
 <template>
 	<a-modal
-		class="modal-container"
+		class="meo-modal-container"
 		centered
 		:width="{ small: '320px', middle: '480px', large: '640px' }[props.size]"
 		v-bind="$attrs"
@@ -51,7 +51,7 @@
 </template>
 
 <style scoped lang="scss">
-	.modal-container {
+	.meo-modal-container {
 		:deep(.ant-modal-header) {
 			margin-bottom: 20px;
 		}
