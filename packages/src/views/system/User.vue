@@ -213,7 +213,7 @@
 		</meo-modal>
 
 		<meo-modal v-model:open="detail.open" title="用户详情" :confirm="false">
-			<a-row :gutter="[20, 20]">
+			<a-row :gutter="[10, 20]">
 				<a-col :span="8" class="text-align-right">用户头像：</a-col>
 				<a-col :span="16">
 					<meo-image :src="detail.data.picture?.url" :width="70" :heitht="70" />

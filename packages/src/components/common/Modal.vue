@@ -39,13 +39,17 @@
 		v-model:open="open"
 		@cancel="onCancel"
 	>
-		<slot></slot>
+		<div class="meo-modal-body">
+			<slot></slot>
+		</div>
 		<template #footer>
-			<slot name="footer" v-if="$slots.footer"></slot>
-			<template v-else>
-				<a-button v-if="props.cancel" @click="onCancel">{{ props.cancel }}</a-button>
-				<a-button type="primary" v-if="props.confirm" @click="emits('confirm')">{{ props.confirm }}</a-button>
-			</template>
+			<div class="meo-modal-footer">
+				<slot name="footer" v-if="$slots.footer"></slot>
+				<template v-else>
+					<a-button v-if="props.cancel" @click="onCancel">{{ props.cancel }}</a-button>
+					<a-button type="primary" v-if="props.confirm" @click="emits('confirm')">{{ props.confirm }}</a-button>
+				</template>
+			</div>
 		</template>
 	</a-modal>
 </template>
@@ -54,6 +58,11 @@
 	.meo-modal-container {
 		:deep(.ant-modal-header) {
 			margin-bottom: 20px;
+		}
+		.meo-modal-body {
+			overflow-y: auto;
+			overflow-x: hidden;
+			max-height: 500px;
 		}
 	}
 </style>
