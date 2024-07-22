@@ -1,42 +1,26 @@
 // 颜色类
 $color-primary: #1677ff;
+$color-success: #52c41a;
+$color-warning: #faad14;
+$color-error: #ff4d4f;
 $color-text: #272b32;
-$color-red: #ff4d4f;
-$color-orange: #ed7b2f;
-$color-yellow: #faad14;
-$color-green: #52c41a;
-$color-blue: #1677ff;
 $color-gray: #888e99;
-$color-black: #000000;
-$color-white: #ffffff;
 
 .color-primary {
 	color: $color-primary;
 }
+.color-success {
+	color: $color-success;
+}
+.color-warning {
+	color: $color-warning;
+}
+.color-error {
+	color: $color-error;
+}
 .color-text {
 	color: $color-text;
 }
-.color-red {
-	color: $color-red;
-}
-.color-orange {
-	color: $color-orange;
-}
-.color-yellow {
-	color: $color-yellow;
-}
-.color-green {
-	color: $color-green;
-}
-.color-blue {
-	color: $color-blue;
-}
 .color-gray {
 	color: $color-gray;
-}
-.color-black {
-	color: $color-black;
-}
-.color-white {
-	color: $color-white;
 }
