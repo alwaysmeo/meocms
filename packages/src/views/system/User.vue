@@ -1,7 +1,8 @@
 <script setup>
 	import { message } from 'ant-design-vue'
-	import { isEmpty, isEqual, pick } from 'radash'
+	import { isEmpty, isEqual, pick, first } from 'radash'
 	import { useOrganizesStore } from '@stores/organizesStore'
+	import { useModalConfirm } from '@hooks/useModal'
 	import rexExp from '@utils/rexExp'
 	import usersApi from '@apis/users'
 	import rolesApi from '@apis/roles'
@@ -34,6 +35,14 @@
 		total: 0,
 		action: (key, record) => {
 			return {
+				detail: async () => {
+					const { code, data } = await usersApi.detail({ ulid: record.ulid })
+					if (isEqual(code, 200)) {
+						detail.select = 0 // 组织列表的 index 索引
+						detail.data = data
+						detail.open = true
+					}
+				},
 				edit: async () => {
 					if (isEmpty(form.role_list)) {
 						const { code, data } = await rolesApi.list({ organize_id: organizes.value.checked.id })
@@ -43,16 +52,27 @@
 					form.data.role_id = record.role_info?.id
 					form.open = true
 				},
-				detail: () => {
-					detail.open = true
-					detail.data = record
+				delete: () => {
+					useModalConfirm({
+						title: '提示',
+						content: h('div', { class: 'meo-modal-content' }, [
+							h('p', {}, `是否删除【${record.nickname}】用户？`),
+							h('p', { class: 'warning' }, `注意：确认删除后该用户将无法登录账号。\n该操作无法撤销恢复，请谨慎操作！`)
+						]),
+						confirm: async () => {
+							const { code } = await rolesApi.deleted({ ulid: record.ulid })
+							if (isEqual(code, 200)) message.success('删除成功')
+						}
+					})
 				}
 			}[key]()
 		}
 	})
 
 	const detail = reactive({
-		open: false
+		open: false,
+		select: null,
+		data: {}
 	})
 
 	const formRef = ref()
@@ -190,6 +210,39 @@
 					</a-form-item>
 				</a-form>
 			</div>
+		</meo-modal>
+
+		<meo-modal v-model:open="detail.open" title="用户详情" :confirm="false">
+			<a-row :gutter="[20, 20]">
+				<a-col :span="8" class="text-align-right">用户头像：</a-col>
+				<a-col :span="16">
+					<meo-image :src="detail.data.picture?.url" :width="70" :heitht="70" />
+				</a-col>
+				<a-col :span="8" class="text-align-right">用户昵称：</a-col>
+				<a-col :span="16">{{ detail.data.nickname }}</a-col>
+				<a-col :span="8" class="text-align-right">邮箱账号：</a-col>
+				<a-col :span="16">{{ detail.data.email }}</a-col>
+				<a-col :span="8" class="text-align-right">联系电话：</a-col>
+				<a-col :span="16">{{ detail.data.phone ?? '-' }}</a-col>
+				<a-col :span="8" class="text-align-right">所属组织：</a-col>
+				<a-col :span="16">
+					<a-select v-model:value="detail.select">
+						<a-select-option v-for="(item, index) in detail.data.organize_info" :key="item.id" :value="index">
+							{{ item.name }}
+						</a-select-option>
+					</a-select>
+				</a-col>
+				<a-col :span="8" class="text-align-right">用户角色：</a-col>
+				<a-col :span="16">{{ detail.data.organize_info[detail.select].role_info.name }}</a-col>
+				<a-col :span="8" class="text-align-right">账号状态：</a-col>
+				<a-col :span="16" :class="['color-error', 'color-success'][detail.data.status]">
+					{{ ['封禁', '正常'][detail.data.status] }}
+				</a-col>
+				<a-col :span="8" class="text-align-right">最后一次登录时间：</a-col>
+				<a-col :span="16">{{ detail.data.last_login_at ?? '-' }}</a-col>
+				<a-col :span="8" class="text-align-right">账号注册时间：</a-col>
+				<a-col :span="16">{{ detail.data.created_at }}</a-col>
+			</a-row>
 		</meo-modal>
 	</div>
 </template>

@@ -111,4 +111,34 @@ class UsersController extends Controller
 		]);
 		return $this->success();
 	}
+
+	/* 用户详情 */
+	public function detail(Request $request): Response
+	{
+		$req = $request->only(['ulid']);
+		$validator = Validator::make($req, ['ulid' => 'required|ulid']);
+		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
+		$user = Users::query();
+		$user->with(['organize_info' => function ($organize_query) {
+			$organize_query->select('id', 'name')
+				->with(['role_info' => function ($role_query) {
+					$role_query->select('id', 'name');
+				}]);
+		}]);
+		$user->select('ulid', 'email', 'nickname', 'picture', 'phone', 'status', 'last_login_at', 'created_at');
+		return $this->success($user->first());
+	}
+
+	/* 注销删除用户 */
+	public function delete(Request $request): Response
+	{
+		$req = $request->only(['ulid']);
+		$validator = Validator::make($req, ['ulid' => 'required|ulid']);
+		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
+		$res = Users::query()->where('ulid', $req['ulid'])->update([
+			'deleted_at' => date('Y-m-d H:i:s')
+		]);
+		if ($res) return $this->success();
+		else return $this->fail();
+	}
 }

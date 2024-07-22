@@ -28,10 +28,26 @@ async function upsert(data) {
 }
 
 /**
+ * 获取用户详情
+ * @param ulid 用户ULID
+ */
+async function detail(data) {
+	return await request.get(`/api/users/detail`, { params: data })
+}
+
+/**
+ * 注销删除用户
+ * @param ulid 用户ULID
+ */
+async function deleted(data) {
+	return await request.post(`/api/users/delete`, data)
+}
+
+/**
  * 获取用户权限列表
  */
 async function permissionsList() {
 	return await request.get(`/api/users/permissions/list`)
 }
 
-export default { list, upsert, permissionsList }
+export default { list, upsert, detail, deleted, permissionsList }

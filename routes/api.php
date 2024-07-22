@@ -67,6 +67,10 @@ Route::group(['middleware' => 'auth:api'], function () {
 		Route::get('/list', [UsersController::class, 'list']);
 		/* 新增修改用户 */
 		Route::post('/upsert', [UsersController::class, 'upsert']);
+		/* 用户详情 */
+		Route::get('/detail', [UsersController::class, 'detail']);
+		/* 注销删除用户 */
+		Route::post('/delete', [UsersController::class, 'delete']);
 	});
 
 	Route::group(['prefix' => 'organizes'], function () {
