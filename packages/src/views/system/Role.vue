@@ -31,21 +31,20 @@
 					form.open = true
 				},
 				detail: async () => {
-					await users({ role_id: record.id })
 					detail.data = record
+					await users()
 					detail.open = true
 				},
 				delete: () => {
 					useModalConfirm({
 						content: `确定要删除【${record.name}】角色？`,
-						confirm: async () => await deleted({ role_id: record.id })
+						confirm: async () => await deleted({ id: record.id })
 					})
 				}
 			}[key]()
 		},
 		changeShow: async (record) => {
 			record.show = !record.show
-			await upsert({ id: record.id, show: record.show })
 		}
 	})
 
@@ -81,8 +80,8 @@
 		submit: async () => {
 			try {
 				await formRef.value.validateFields()
-				await upsert({ ...form.data, show: form.data.show })
-				form.data = { show: true }
+				await upsert()
+				form.data = {}
 				form.open = false
 			} catch (error) {
 				console.error(error)
@@ -111,30 +110,28 @@
 		table.loading = false
 	}
 
-	async function upsert({ id, name, show }) {
+	async function upsert() {
 		const { code } = await rolesApi.upsert({
 			organize_id: organizes.value.checked.id,
-			id,
-			name,
-			show: show ? 1 : 0
+			...form.data
 		})
 		if (isEqual(code, 200)) {
-			message.success(id ? '修改成功' : '新增成功')
+			message.success(form.data.id ? '修改成功' : '新增成功')
 			await list()
 		}
 	}
 
-	async function deleted({ role_id }) {
-		const { code } = await rolesApi.deleted({ role_id })
+	async function deleted({ id }) {
+		const { code } = await rolesApi.deleted({ id })
 		if (isEqual(code, 200)) {
 			message.success('删除成功')
 			await list()
 		}
 	}
 
-	async function users({ role_id }) {
+	async function users() {
 		detail.loading = true
-		const { code, data } = await rolesApi.users({ role_id, page: detail.page, limit: detail.limit })
+		const { code, data } = await rolesApi.users({ id: detail.data.id, page: detail.page, limit: detail.limit })
 		if (isEqual(code, 200)) {
 			detail.list = data.list
 			detail.total = data.total
@@ -178,7 +175,7 @@
 					<template v-if="isEqual(column.dataIndex, 'show')">
 						<a-tooltip>
 							<template #title>
-								{{ record.show ? '点击隐藏（已绑定用户不受影响）' : '点击开启' }}
+								{{ record.show ? '点击关闭（已绑定用户不受影响）' : '点击开启' }}
 							</template>
 							<a-switch :checked="record.show" @change="table.changeShow(record)" />
 						</a-tooltip>

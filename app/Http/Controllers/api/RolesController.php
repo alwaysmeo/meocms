@@ -26,7 +26,10 @@ class RolesController extends Controller
 		$page = isset($req['page']) ? intval($req['page']) : null;
 		$limit = isset($req['limit']) ? intval($req['limit']) : null;
 		$list = Roles::query();
-		$list->where('deleted_at', null);
+		$list->where([
+			'show' => 1,
+			'deleted_at' => null
+		]);
 		$list->select('id', 'name', 'slot', 'show');
 		# 只查询当前组织的角色
 		$list->whereHas('organize_info', function ($query) use ($organize_id) {
@@ -50,8 +53,7 @@ class RolesController extends Controller
 		$validator = Validator::make($req, [
 			'organize_id' => 'required|integer',
 			'id' => 'integer',
-			'name' => 'max:30',
-			'show' => 'in:0,1'
+			'name' => 'max:30'
 		]);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
 		$input = $req;
@@ -67,22 +69,21 @@ class RolesController extends Controller
 	/* 删除角色 */
 	public function delete(Request $request): Response
 	{
-		$req = $request->only(['role_id']);
-		$validator = Validator::make($req, ['role_id' => 'required|integer']);
+		$req = $request->only(['id']);
+		$validator = Validator::make($req, ['id' => 'required|integer']);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
-		$res = Roles::query()->where('id', $req['role_id'])->update([
+		Roles::query()->where('id', $req['id'])->update([
 			'deleted_at' => date('Y-m-d H:i:s')
 		]);
-		if ($res) return $this->success();
-		else return $this->fail();
+		return $this->success();
 	}
 
 	/* 获取角色关联的用户 */
 	public function users(Request $request): Response
 	{
-		$req = $request->only(['role_id', 'page', 'limit']);
+		$req = $request->only(['id', 'page', 'limit']);
 		$validator = Validator::make($req, [
-			'role_id' => 'required|integer',
+			'id' => 'required|integer',
 			'page' => 'integer',
 			'limit' => 'integer'
 		]);
@@ -90,7 +91,7 @@ class RolesController extends Controller
 		$page = isset($req['page']) ? intval($req['page']) : null;
 		$limit = isset($req['limit']) ? intval($req['limit']) : null;
 		$list = UserRole::query();
-		$list->where('role_id', $req['role_id']);
+		$list->where('role_id', $req['id']);
 		$list->with(['user_info' => function ($query) {
 			$query->select('ulid', 'nickname', 'phone', 'email', 'last_login_at', 'picture');
 		}]);
