@@ -26,6 +26,14 @@ export default {
 		return await request.post(`/api/permissions/upsert`, data)
 	},
 
+	/**
+	 * 删除权限
+	 * @param id * 权限ID
+	 */
+	deleted: async function (data) {
+		return await request.post(`/api/permissions/delete`, data)
+	},
+
 	change: {
 		/**
 		 * 修改权限启用状态
