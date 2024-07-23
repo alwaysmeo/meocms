@@ -173,7 +173,7 @@
 						<a-input v-model:value="form.data.name" :maxlength="80" placeholder="请输入权限名称" show-count />
 					</a-form-item>
 					<a-form-item name="description" label="描述信息">
-						<a-input v-model:value="form.data.description" :maxlength="200" placeholder="请输入权限描述信息" show-count />
+						<a-textarea v-model:value="form.data.description" :maxlength="200" placeholder="请输入权限描述信息" show-count />
 					</a-form-item>
 					<a-form-item name="path" label="URL">
 						<a-input v-model:value="form.data.path" :maxlength="230" placeholder="请输入权限 URL" show-count />
