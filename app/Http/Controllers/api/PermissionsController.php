@@ -16,7 +16,11 @@ class PermissionsController extends Controller
 	public function list(): Response
 	{
 		$common = new Common();
-		$list = Permissions::query()->whereNull('deleted_at')->get();
+		$list = Permissions::query()
+			->select('id', 'parent_id', 'code', 'name', 'description', 'icon', 'path', 'slot', 'level', 'show')
+			->whereNull('deleted_at')
+			->orderBy('slot')
+			->get();
 		return $this->success($common->buildTree($list->toArray()));
 	}
 
@@ -47,6 +51,8 @@ class PermissionsController extends Controller
 		$req = $request->only(['id']);
 		$validator = Validator::make($req, ['id' => 'required|integer']);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
+		/* 禁止删除【首页】权限 */
+		if ($req['id'] === 1) return $this->fail(null, Mapping::$code['5002'], 5002);
 		Permissions::query()->where('id', $req['id'])->update([
 			'deleted_at' => date('Y-m-d H:i:s')
 		]);
