@@ -19,7 +19,7 @@ class OrganizesController extends Controller
 		$page = isset($req['page']) ? intval($req['page']) : null;
 		$limit = isset($req['limit']) ? intval($req['limit']) : null;
 		$list = Organizes::query();
-		$list->where('deleted_at', null);
+		$list->whereNull('deleted_at');
 		$list->select('id', 'name', 'description', 'show', 'slot');
 		$list->orderBy('slot');
 		$total = $list->count();
