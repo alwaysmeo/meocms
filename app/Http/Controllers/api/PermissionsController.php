@@ -16,10 +16,7 @@ class PermissionsController extends Controller
 	public function list(): Response
 	{
 		$common = new Common();
-		$list = Permissions::query()->where([
-			'show' => 1,
-			'deleted_at' => null
-		])->get();
+		$list = Permissions::query()->whereNull('deleted_at')->get();
 		return $this->success($common->buildTree($list->toArray()));
 	}
 

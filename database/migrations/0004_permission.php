@@ -29,14 +29,6 @@ return new class extends Migration
             $table->charset('utf8mb4');
             $table->collation('utf8mb4_unicode_ci');
         });
-
-        /* 角色权限关联表 */
-        Schema::create('permissions_role', function (Blueprint $table) {
-            $table->integer('role_id')->unique()->comment('角色ID');
-            $table->json('permission_ids')->comment('权限ID列表');
-            $table->charset('utf8mb4');
-            $table->collation('utf8mb4_unicode_ci');
-        });
     }
 
     /**
@@ -45,6 +37,5 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('permissions');
-        Schema::dropIfExists('permissions_role');
     }
 };

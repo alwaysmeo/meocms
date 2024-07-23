@@ -14,6 +14,7 @@ return new class extends Migration {
 		Schema::create('roles', function (Blueprint $table) {
 			$table->id();
 			$table->string('name', 30)->comment('角色名称');
+			$table->string('description', 200)->nullable()->comment('角色描述');
 			$table->integer('slot')->default(0)->comment('角色排序');
 			$table->tinyInteger('show')->default(1)->comment('是否启用【0:关闭, 1:开启】');
 			$table->dateTime('created_at')->useCurrent()->comment('创建时间');
@@ -30,6 +31,14 @@ return new class extends Migration {
 			$table->charset('utf8mb4');
 			$table->collation('utf8mb4_unicode_ci');
 		});
+
+		/* 角色权限关联表 */
+		Schema::create('role_permissions', function (Blueprint $table) {
+			$table->integer('role_id')->unique()->comment('角色ID');
+			$table->json('permission_ids')->comment('权限ID列表');
+			$table->charset('utf8mb4');
+			$table->collation('utf8mb4_unicode_ci');
+		});
 	}
 
 	/**
@@ -39,5 +48,6 @@ return new class extends Migration {
 	{
 		Schema::dropIfExists('roles');
 		Schema::dropIfExists('role_organize');
+		Schema::dropIfExists('role_permissions');
 	}
 };

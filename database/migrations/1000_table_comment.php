@@ -16,7 +16,7 @@ return new class extends Migration {
 			'organizes' => '组织表',
 			'roles' => '角色表',
 			'permissions' => '权限菜单表',
-			'permissions_role' => '角色权限关联表',
+			'role_permissions' => '角色权限关联表',
 			'users' => '用户表',
 			'user_organize' => '用户组织关联表',
 			'user_role' => '用户角色关联表',

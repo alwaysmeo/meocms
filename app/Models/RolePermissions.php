@@ -6,11 +6,11 @@ use App\Casts\Json;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PermissionsRole extends Model
+class RolePermissions extends Model
 {
 	use HasFactory;
 
-	protected $table = 'permissions_role';
+	protected $table = 'role_permissions';
 	protected $primaryKey = 'role_id';
 	public $timestamps = false;
 	protected $fillable = [

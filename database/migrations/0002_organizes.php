@@ -14,7 +14,7 @@ return new class extends Migration {
 		Schema::create('organizes', function (Blueprint $table) {
 			$table->id();
 			$table->string('name', 80)->comment('组织名称');
-			$table->string('description', 200)->comment('组织描述');
+			$table->string('description', 200)->nullable()->comment('组织描述');
 			$table->tinyInteger('show')->default(1)->comment('是否启用【0:关闭, 1:开启】');
 			$table->integer('slot')->default(0)->comment('组织排序');
 			$table->dateTime('created_at')->useCurrent()->comment('创建时间');

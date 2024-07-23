@@ -30,7 +30,7 @@ class RolesController extends Controller
 			'show' => 1,
 			'deleted_at' => null
 		]);
-		$list->select('id', 'name', 'slot', 'show');
+		$list->select('id', 'name', 'description', 'slot', 'show');
 		# 只查询当前组织的角色
 		$list->whereHas('organize_info', function ($query) use ($organize_id) {
 			$query->where('id', $organize_id);

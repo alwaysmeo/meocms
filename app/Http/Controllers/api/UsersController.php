@@ -4,7 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Permissions;
-use App\Models\PermissionsRole;
+use App\Models\RolePermissions;
 use App\Models\RoleOrganize;
 use App\Models\UserOrganize;
 use App\Models\UserRole;
@@ -22,7 +22,7 @@ class UsersController extends Controller
 	public function permissionsList(Request $request): Response
 	{
 		$user = $request->user();
-		$permission = PermissionsRole::query()->find($user['role_info']['id']);
+		$permission = RolePermissions::query()->find($user['role_info']['id']);
 		$list = Permissions::query()
 			->where('show', 1)
 			->whereIn('id', json_decode($permission['permission_ids']))

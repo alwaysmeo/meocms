@@ -19,7 +19,7 @@
 			{ dataIndex: 'name', title: '权限名称', show: true },
 			{ dataIndex: 'description', title: '权限描述', show: true },
 			{ dataIndex: 'path', title: 'URL', show: true },
-			{ dataIndex: 'show', title: '是否显示', width: 120, align: 'center', show: true },
+			{ dataIndex: 'show', title: '是否启用', width: 120, align: 'center', show: true },
 			{ dataIndex: 'action', title: '操作', width: 160, align: 'center', show: true }
 		],
 		data: [],
