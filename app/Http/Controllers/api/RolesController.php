@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\RoleOrganize;
+use App\Models\RolePermissions;
 use App\Models\Roles;
 use App\Models\UserRole;
 use Illuminate\Http\Request;
@@ -26,10 +27,7 @@ class RolesController extends Controller
 		$page = isset($req['page']) ? intval($req['page']) : null;
 		$limit = isset($req['limit']) ? intval($req['limit']) : null;
 		$list = Roles::query();
-		$list->where([
-			'show' => 1,
-			'deleted_at' => null
-		]);
+		$list->whereNull('deleted_at');
 		$list->select('id', 'name', 'description', 'slot', 'show');
 		# 只查询当前组织的角色
 		$list->whereHas('organize_info', function ($query) use ($organize_id) {
@@ -49,20 +47,24 @@ class RolesController extends Controller
 	/* 新增修改角色 */
 	public function upsert(Request $request): Response
 	{
-		$req = $request->only(['organize_id', 'id', 'name', 'show']);
+		$req = $request->only(['organize_id', 'id', 'name', 'description', 'permission_ids']);
 		$validator = Validator::make($req, [
 			'organize_id' => 'required|integer',
 			'id' => 'integer',
-			'name' => 'max:30'
+			'name' => 'required|max:30',
+			'description' => 'max:200',
+			'permission_ids' => 'required|list'
 		]);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
-		$input = $req;
-		unset($input['organize_id']);
-		$role = Roles::query()->updateOrCreate(['id' => $input['id'] ?? null], $input);
+		$role = Roles::query()->updateOrCreate(['id' => $req['id'] ?? null], $req);
 		RoleOrganize::query()->updateOrCreate(
 			['role_id' => $role['id'], 'organize_id' => $req['organize_id']],
 			['role_id' => $role['id'], 'organize_id' => $req['organize_id']]
 		);
+		RolePermissions::query()->updateOrCreate(['role_id' => $role['id']], [
+			'role_id' => $role['id'],
+			'permission_ids' => json_encode($req['permission_ids'])
+		]);
 		return $this->success();
 	}
 

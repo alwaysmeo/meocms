@@ -2,20 +2,24 @@
 	import { message } from 'ant-design-vue'
 	import { useModalConfirm } from '@hooks/useModal'
 	import { useOrganizesStore } from '@stores/organizesStore'
-	import { isEqual } from 'radash'
+	import { isEmpty, isEqual, pick } from 'radash'
+	import permissionsApi from '@apis/permissions'
 	import rolesApi from '@apis/roles'
 
 	defineOptions({ name: 'SystemRole' })
 
 	const organizesStore = useOrganizesStore()
 
+	const state = reactive({})
+
 	const table = reactive({
 		columns: [
 			{ dataIndex: 'index', title: '序号', width: 120, align: 'center', show: true },
 			{ dataIndex: 'id', title: 'ID', width: 260, align: 'center', show: true },
 			{ dataIndex: 'name', title: '角色名称', show: true },
+			{ dataIndex: 'description', title: '角色描述' },
 			{ dataIndex: 'count', title: '当前已绑定用户数', align: 'center', show: true },
-			{ dataIndex: 'show', title: '是否显示', width: 240, align: 'center', show: true },
+			{ dataIndex: 'show', title: '是否启用', width: 240, align: 'center', show: true },
 			{ dataIndex: 'action', title: '操作', width: 160, align: 'center', show: true }
 		],
 		data: [],
@@ -26,19 +30,28 @@
 		total: 0,
 		action: (key, record) => {
 			return {
-				edit: () => {
-					form.data = { id: record.id, name: record.name, show: record.show }
+				edit: async () => {
+					if (isEmpty(permission_list.value)) await permissionList()
+					form.data = pick(record, ['id', 'name', 'description', 'permission_ids'])
+					if (isEmpty(record)) form.data.permission_ids = []
 					form.open = true
 				},
 				detail: async () => {
+					if (isEmpty(permission_list.value)) await permissionList()
 					detail.data = record
 					await users()
 					detail.open = true
 				},
 				delete: () => {
 					useModalConfirm({
-						content: `确定要删除【${record.name}】角色？`,
-						confirm: async () => await deleted({ id: record.id })
+						content: h('div', { class: 'meo-modal-content' }, [
+							h('p', {}, `确定要删除【${record.name}】角色？`),
+							h('p', { class: 'warning' }, `提示：删除前请先解除该角色下绑定的所有用户。`)
+						]),
+						confirm: async () => {
+							if (record.count > 0) return message.warning('请先解除该角色下绑定的所有用户')
+							await deleted({ id: record.id })
+						}
 					})
 				}
 			}[key]()
@@ -64,15 +77,20 @@
 	const formRef = ref()
 	const form = reactive({
 		open: false,
-		data: {
-			show: true
-		},
+		data: {},
 		rules: {
-			name: [{ required: true, message: '请输角色名称', trigger: 'blur' }]
-		},
-		create: () => {
-			form.data = { show: true }
-			form.open = true
+			name: [{ required: true, message: '请输角色名称', trigger: 'blur' }],
+			permission_ids: [
+				{ required: true, message: '请至少选择一个权限', trigger: 'blur' },
+				{
+					message: '必须选择【首页】权限',
+					trigger: 'blur',
+					validator: (rule, value) => {
+						if (isEqual(value.filter((item) => isEqual(item, 1)).length, 0)) return Promise.reject()
+						return Promise.resolve()
+					}
+				}
+			]
 		},
 		submit: async () => {
 			try {
@@ -87,16 +105,17 @@
 		}
 	})
 
-	const organizes = ref()
+	const permission_list = ref([])
+
 	onMounted(async () => {
-		organizes.value = await organizesStore.get()
+		state.organizes = await organizesStore.get()
 		await list()
 	})
 
 	async function list() {
 		table.loading = true
 		const { code, data } = await rolesApi.list({
-			organize_id: organizes.value.checked.id,
+			organize_id: state.organizes.checked.id,
 			page: table.page,
 			limit: table.limit
 		})
@@ -109,7 +128,7 @@
 
 	async function upsert() {
 		const { code } = await rolesApi.upsert({
-			organize_id: organizes.value.checked.id,
+			organize_id: state.organizes.checked.id,
 			...form.data
 		})
 		if (isEqual(code, 200)) {
@@ -141,6 +160,11 @@
 		}
 		detail.loading = false
 	}
+
+	async function permissionList() {
+		const { code, data } = await permissionsApi.list({ organize_id: state.organizes.checked.id })
+		if (isEqual(code, 200)) permission_list.value = data
+	}
 </script>
 
 <template>
@@ -155,7 +179,7 @@
 					<a-button @click="table.open = true">
 						<span>{{ $t('meo.components.common.table.list_filtering') }}</span>
 					</a-button>
-					<a-button type="primary" @click="form.create">新增角色</a-button>
+					<a-button type="primary" @click="table.action('edit', {})">新增角色</a-button>
 				</a-space>
 			</div>
 			<meo-table
@@ -187,30 +211,48 @@
 			</meo-table>
 		</div>
 
-		<meo-modal class="detail-modal" v-model:open="detail.open" title="角色关联详情" cancel="关闭" :confirm="false">
-			<div class="title">【{{ detail.data.name }}】已关联{{ detail.total }}个账号</div>
-			<meo-table
-				v-model:columns="detail.columns"
-				v-model:page="detail.page"
-				v-model:limit="detail.limit"
-				:dataSource="detail.list"
-				:loading="detail.loading"
-				:total="detail.total"
-				:scroll="{ x: 0 }"
-				@paginate="users"
-			>
-				<template #bodyCell="{ column, record }">
-					<template v-if="isEqual(column.dataIndex, 'email')">
-						{{ record.user_info.email }}
-					</template>
-					<template v-if="isEqual(column.dataIndex, 'nickname')">
-						{{ record.user_info.nickname }}
-					</template>
-					<template v-if="isEqual(column.dataIndex, 'phone')">
-						{{ record.user_info.phone ?? '-' }}
-					</template>
-				</template>
-			</meo-table>
+		<meo-modal class="detail-modal" v-model:open="detail.open" title="角色详情" cancel="关闭" :confirm="false">
+			<a-tabs centered>
+				<a-tab-pane key="permissions" tab="关联权限">
+					<div class="tree-container">
+						<a-tree v-model:checkedKeys="detail.permissions_ids" :tree-data="permission_list" :fieldNames="{ children: 'children', title: 'name', key: 'id' }">
+							<template #title="item">
+								<div class="name" :class="{ active: detail.data.permission_ids.includes(item.id) }">
+									<span class="label">●</span>
+									<span>{{ item.name }}</span>
+								</div>
+							</template>
+						</a-tree>
+					</div>
+				</a-tab-pane>
+				<a-tab-pane key="users" tab="关联用户">
+					<div class="tip-title">【{{ detail.data.name }}】已关联{{ detail.total }}个账号</div>
+					<meo-table
+						v-model:columns="detail.columns"
+						v-model:page="detail.page"
+						v-model:limit="detail.limit"
+						:dataSource="detail.list"
+						:loading="detail.loading"
+						:total="detail.total"
+						:scroll="{ x: 0 }"
+						:pageSizeOptions="['5', '10', '20', '50']"
+						size="small"
+						@paginate="users"
+					>
+						<template #bodyCell="{ column, record }">
+							<template v-if="isEqual(column.dataIndex, 'email')">
+								{{ record.user_info.email }}
+							</template>
+							<template v-if="isEqual(column.dataIndex, 'nickname')">
+								{{ record.user_info.nickname }}
+							</template>
+							<template v-if="isEqual(column.dataIndex, 'phone')">
+								{{ record.user_info.phone ?? '-' }}
+							</template>
+						</template>
+					</meo-table>
+				</a-tab-pane>
+			</a-tabs>
 		</meo-modal>
 
 		<meo-modal v-model:open="form.open" :title="form.data.role_id ? '编辑角色' : '新增角色'" @confirm="form.submit()">
@@ -218,8 +260,18 @@
 				<a-form-item label="角色名称" name="name">
 					<a-input v-model:value="form.data.name" placeholder="请输入角色名称" show-count :maxlength="30" />
 				</a-form-item>
-				<a-form-item label="是否启用" name="show">
-					<a-switch v-model:checked="form.data.show" />
+				<a-form-item name="description" label="角色描述">
+					<a-textarea v-model:value="form.data.description" :maxlength="200" placeholder="请输入角色描述信息" show-count />
+				</a-form-item>
+				<a-form-item label="角色权限" name="permission_ids" validateFirst>
+					<div class="permissions-container">
+						<a-tree
+							checkable
+							v-model:checkedKeys="form.data.permission_ids"
+							:tree-data="permission_list"
+							:fieldNames="{ children: 'children', title: 'name', key: 'id' }"
+						/>
+					</div>
 				</a-form-item>
 			</a-form>
 		</meo-modal>
@@ -228,10 +280,27 @@
 
 <style lang="scss" scoped>
 	.detail-modal {
-		.title {
+		.tree-container {
+			max-height: 400px;
+			overflow-y: auto;
+			.label {
+				padding-right: 6px;
+			}
+			.name {
+				color: $color-gray;
+			}
+			.active {
+				color: $color-primary;
+			}
+		}
+		.tip-title {
 			text-align: center;
 			color: $color-primary;
 			margin-bottom: 10px;
 		}
+	}
+	.permissions-container {
+		max-height: 320px;
+		overflow-y: auto;
 	}
 </style>

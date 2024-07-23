@@ -17,7 +17,7 @@ class Roles extends Model
 		'slot',
 		'show'
 	];
-	protected $appends = ['count'];
+	protected $appends = ['count', 'permission_ids'];
 	protected $hidden = ['laravel_through_key'];
 
 	protected function casts(): array
@@ -37,6 +37,12 @@ class Roles extends Model
 	public function getShowAttribute($value): bool
 	{
 		return [0 => false, 1 => true][$value];
+	}
+
+	public function getPermissionIdsAttribute(): array
+	{
+		$res = RolePermissions::query()->find($this->attributes['id']);
+		return isset($res['permission_ids']) ? json_decode($res['permission_ids']) : [];
 	}
 
 	public function organize_info(): HasOneThrough

@@ -18,7 +18,8 @@ export default {
 	 * @param organize_id * 组织ID
 	 * @param id 角色ID
 	 * @param name 角色名称
-	 * @param show 是否显示
+	 * @param description 角色描述
+	 * @param permissions * 权限IDS
 	 */
 	upsert: async function (data) {
 		return await request.post(`/api/roles/upsert`, data)
