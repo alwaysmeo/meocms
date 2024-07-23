@@ -23,6 +23,9 @@ return new class extends Migration
             $table->integer('slot')->default(0)->comment('菜单排序');
             $table->tinyInteger('level')->default(1)->comment('菜单层级 【1:一级, 2:二级, 3:三级】');
             $table->tinyInteger('show')->default(1)->comment('是否显示【0:隐藏, 1:显示】');
+	        $table->dateTime('created_at')->useCurrent()->comment('创建时间');
+	        $table->dateTime('updated_at')->nullable()->useCurrentOnUpdate()->comment('更新时间');
+	        $table->dateTime('deleted_at')->nullable()->comment('删除时间');
             $table->charset('utf8mb4');
             $table->collation('utf8mb4_unicode_ci');
         });

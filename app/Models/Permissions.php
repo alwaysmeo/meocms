@@ -23,6 +23,15 @@ class Permissions extends Model
         'show'
     ];
 
+	protected function casts(): array
+	{
+		return [
+			'created_at' => 'datetime:Y-m-d H:i:s',
+			'updated_at' => 'datetime:Y-m-d H:i:s',
+			'deleted_at' => 'datetime:Y-m-d H:i:s'
+		];
+	}
+
 	public function getShowAttribute($value): bool
 	{
 		return [0 => false, 1 => true][$value];
