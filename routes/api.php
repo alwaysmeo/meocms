@@ -52,13 +52,20 @@ Route::group(['middleware' => 'auth:api'], function () {
 		Route::post('/delete', [RolesController::class, 'delete']);
 		/* 获取角色关联的用户 */
 		Route::get('/users', [RolesController::class, 'users']);
+		/* 修改角色启用状态 */
+		Route::post('/change/show', [RolesController::class, 'changeShow']);
 	});
 
 	Route::group(['prefix' => 'permissions'], function () {
 		/* 获取所有权限列表 */
 		Route::get('/list', [PermissionsController::class, 'list']);
+		/* 新增修改权限 */
+		Route::post('/upsert', [PermissionsController::class, 'upsert']);
+		/* 删除权限 */
+		Route::post('/delete', [PermissionsController::class, 'delete']);
+		/* 修改权限启用状态 */
+		Route::post('/change/show', [PermissionsController::class, 'changeShow']);
 	});
-
 
 	Route::group(['prefix' => 'users'], function () {
 		/* 获取用户权限列表 */

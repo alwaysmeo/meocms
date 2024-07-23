@@ -48,6 +48,7 @@
 					"select_table_header": "选择可见的表格列",
 					"list_filtering": "列表筛选",
 					"action": {
+						"create": "新增",
 						"detail": "详情",
 						"edit": "编辑",
 						"delete": "删除"
