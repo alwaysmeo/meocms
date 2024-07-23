@@ -52,11 +52,12 @@ class AccountController extends Controller
 			'user_ulid' => $user->getAuthIdentifier(),
 			'control_user_ulid' => $user->getAuthIdentifier(),
 			'type' => 2,
-			'description' => '账号登录/登出',
-			'ip' => $common->ip($request)
+			'description' => '账号登录',
+			'ipv4' => $common->ipv4($request),
+			'ipv6' => $common->ipv6($request)
 		]);
-		$cache_duration = intval(env('CACHE_DURATION'));
-		Cache::put('user-' . $user->getAuthIdentifier(), $token->plainTextToken, now()->addMinutes($cache_duration));
+		/* 设置令牌有效时长 */
+		Cache::put('user-' . $user->getAuthIdentifier(), $token->plainTextToken, now()->addMinutes(intval(env('CACHE_DURATION'))));
 		return $this->success($user);
 	}
 
@@ -85,10 +86,16 @@ class AccountController extends Controller
 	public function logout(Request $request): Response
 	{
 		$request->user()->currentAccessToken()->delete();
-		AccountRecord::query()
-			->where(['type' => 2, 'user_ulid' => $request->user()->ulid])
-			->latest('id')
-			->update(['updated_at' => date('Y-m-d H:i:s')]);
+		/* 添加登出记录 */
+		$common = new Common();
+		AccountRecord::query()->create([
+			'user_ulid' => $request->user()->getAuthIdentifier(),
+			'control_user_ulid' => $request->user()->getAuthIdentifier(),
+			'type' => 3,
+			'description' => '账号登出',
+			'ipv4' => $common->ipv4($request),
+			'ipv6' => $common->ipv6($request)
+		]);
 		Cache::forget('user-' . $request->user()->ulid);
 		return $this->success();
 	}

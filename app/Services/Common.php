@@ -4,11 +4,16 @@ namespace App\Services;
 
 class Common
 {
-
 	/* 获取ipv4地址 */
-	public function ip($request): string
+	public function ipv4($request): string
 	{
 		return $request->server('REMOTE_ADDR') ?? $request->ip() ?? '0.0.0.0';
+	}
+
+	/* 获取ipv6地址 */
+	public function ipv6($request): string|null
+	{
+		return null;
 	}
 
 	/* 构建树形结构 */

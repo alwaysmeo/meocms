@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\AccountRecord;
 use App\Models\Permissions;
 use App\Models\RolePermissions;
 use App\Models\RoleOrganize;
@@ -51,10 +52,11 @@ class UsersController extends Controller
 		$keyword = $req['keyword'] ?? null;
 		$list = Users::query();
 		$list->select('ulid', 'email', 'nickname', 'picture', 'phone', 'status', 'last_login_at', 'created_at');
-		# 只查询当前组织的用户
+		/* 只查询当前组织下的用户 */
 		$list->whereHas('organize_info', function ($query) use ($organize_id) {
 			$query->where('id', $organize_id);
 		});
+		/* 只查询当前组织下的角色 */
 		$list->with(['role_info' => function ($query) use ($organize_id) {
 			$query->whereHas('organize_info', function ($query) use ($organize_id) {
 				$query->where('organize_id', $organize_id);
@@ -87,27 +89,42 @@ class UsersController extends Controller
 			'password' => 'required|regex:/^[a-zA-Z0-9]+$/|between:6,20'
 		]);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
+		/* ulid为空（新增用户） 并且 email 存在于数据库中则返回用户已存在 */
 		if (!isset($req['ulid'])) {
 			$is_exist = Users::query()->where('email', $req['email'])->whereNull('deleted_at')->first();
 			if ($is_exist) return $this->fail(null, Mapping::$code['3002'], 3002);
 		}
+		/* 添加、修改用户信息 */
 		$user = Users::query()->updateOrCreate(['ulid' => $req['ulid'] ?? null], [
 			'nickname' => $req['nickname'],
 			'email' => $req['email'],
 			'phone' => $req['phone'],
 			'password' => Hash::make($req['password'])
 		]);
+		/* 添加、修改用户角色关联 */
 		UserRole::query()->firstOrCreate([
 			'user_ulid' => $user['ulid'], 'role_id' => $req['role_id']], [
 			'user_ulid' => $user['ulid'], 'role_id' => $req['role_id']
 		]);
+		/* 添加、修改用户组织关联 */
 		UserOrganize::query()->firstOrCreate([
 			'user_ulid' => $user['ulid'], 'organize_id' => $req['organize_id']], [
 			'user_ulid' => $user['ulid'], 'organize_id' => $req['organize_id']
 		]);
+		/* 添加、修改角色组织关联 */
 		RoleOrganize::query()->firstOrCreate([
 			'role_id' => $req['role_id'], 'organize_id' => $req['organize_id']], [
 			'role_id' => $req['role_id'], 'organize_id' => $req['organize_id']
+		]);
+		/* 添加账号操作记录 */
+		$common = new Common();
+		AccountRecord::query()->create([
+			'user_ulid' => $user['ulid'],
+			'control_user_ulid' => $request->user()->getAuthIdentifier(),
+			'type' => isset($req['ulid']) ? 4 : 1, # 1:新增, 4:修改信息
+			'description' => isset($req['ulid']) ? '修改用户信息' : '新增用户',
+			'ipv4' => $common->ipv4($request),
+			'ipv6' => $common->ipv6($request)
 		]);
 		return $this->success();
 	}
@@ -135,10 +152,19 @@ class UsersController extends Controller
 		$req = $request->only(['ulid']);
 		$validator = Validator::make($req, ['ulid' => 'required|ulid']);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
-		$res = Users::query()->where('ulid', $req['ulid'])->update([
+		Users::query()->where('ulid', $req['ulid'])->update([
 			'deleted_at' => date('Y-m-d H:i:s')
 		]);
-		if ($res) return $this->success();
-		else return $this->fail();
+		/* 添加账号删除记录 */
+		$common = new Common();
+		AccountRecord::query()->create([
+			'user_ulid' => $req['ulid'],
+			'control_user_ulid' => $request->user()->getAuthIdentifier(),
+			'type' => 5,
+			'description' => '删除用户',
+			'ipv4' => $common->ipv4($request),
+			'ipv6' => $common->ipv6($request)
+		]);
+		return $this->success();
 	}
 }
