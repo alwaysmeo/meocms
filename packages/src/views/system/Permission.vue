@@ -41,6 +41,7 @@
 				},
 				edit: () => {
 					form.data = pick(record, ['id', 'parent_id', 'code', 'icon', 'name', 'description', 'path', 'level'])
+					form.data.level = record.level ?? 0
 					form.open = true
 				},
 				delete: () => {
