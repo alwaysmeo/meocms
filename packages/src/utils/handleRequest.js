@@ -22,7 +22,9 @@ const mapping = {
 	3004: t('meo.request.error.3004'),
 	3005: t('meo.request.error.3005'),
 	4000: t('meo.request.error.4000'),
-	5000: t('meo.request.error.5000')
+	5000: t('meo.request.error.5000'),
+	5001: t('meo.request.error.5001'),
+	5002: t('meo.request.error.5002')
 }
 
 export default async ({ response, error }) => {
