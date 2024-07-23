@@ -6,8 +6,8 @@ export default {
 	/**
 	 * 角色列表
 	 * @param organize_id * 组织ID
-	 * @param page * 页码
-	 * @param limit * 每页条数
+	 * @param page 页码
+	 * @param limit 每页条数
 	 */
 	list: async function (data) {
 		return await request.get(`/api/roles/list`, { params: data })
@@ -17,7 +17,7 @@ export default {
 	 * 新增修改角色
 	 * @param organize_id * 组织ID
 	 * @param id 角色ID
-	 * @param name 角色名称
+	 * @param name * 角色名称
 	 * @param description 角色描述
 	 * @param permissions * 权限IDS
 	 */
