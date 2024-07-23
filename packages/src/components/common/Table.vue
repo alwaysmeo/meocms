@@ -29,6 +29,11 @@
 			validator: (val) => val >= 0,
 			message: '数量限制'
 		},
+		pageSizeOptions: {
+			type: Array,
+			default: () => ['10', '20', '50', '100'],
+			message: '指定每页可以显示多少条'
+		},
 		action: {
 			type: Object,
 			default: () => new Object(),
@@ -74,7 +79,7 @@
 		<a-table
 			class="meo-table"
 			rowKey="id"
-			:pagination="{ current: props.page, pageSize: props.limit, total: props.total }"
+			:pagination="{ current: props.page, pageSize: props.limit, total: props.total, pageSizeOptions: props.pageSizeOptions }"
 			:scroll="{ x: 1200 }"
 			@change="handleChange"
 			v-bind="$attrs"
