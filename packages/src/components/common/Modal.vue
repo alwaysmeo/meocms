@@ -23,11 +23,24 @@
 	})
 
 	const open = useVModel(props, 'open', emits)
+	const loading = ref(false)
 
-	function onCancel() {
-		emits('cancel')
+	async function onCancel() {
+		await emits('cancel')
 		open.value = false
 	}
+
+	function onConfirm() {
+		loading.value = true
+		emits('confirm')
+	}
+
+	watch(
+		() => open.value,
+		(value) => {
+			if (!value) loading.value = false
+		}
+	)
 </script>
 
 <template>
@@ -47,7 +60,7 @@
 				<slot name="footer" v-if="$slots.footer"></slot>
 				<template v-else>
 					<a-button v-if="props.cancel" @click="onCancel">{{ props.cancel }}</a-button>
-					<a-button type="primary" v-if="props.confirm" @click="emits('confirm')">{{ props.confirm }}</a-button>
+					<a-button type="primary" v-if="props.confirm" @click="onConfirm" :loading="loading">{{ props.confirm }}</a-button>
 				</template>
 			</div>
 		</template>
