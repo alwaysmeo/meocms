@@ -104,4 +104,16 @@ class RolesController extends Controller
 			'limit' => $limit
 		]);
 	}
+
+	/* 修改角色启用状态 */
+	public function changeShow(Request $request): Response
+	{
+		$req = $request->only(['id', 'show']);
+		$validator = Validator::make($req, ['id' => 'required|integer', 'show' => 'required|in:0,1']);
+		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
+		Roles::query()->where('id', $req['id'])->update([
+			'show' => $req['show']
+		]);
+		return $this->success();
+	}
 }

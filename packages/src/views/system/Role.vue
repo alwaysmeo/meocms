@@ -42,9 +42,6 @@
 					})
 				}
 			}[key]()
-		},
-		changeShow: async (record) => {
-			record.show = !record.show
 		}
 	})
 
@@ -129,6 +126,12 @@
 		}
 	}
 
+	async function changeShow(record) {
+		record.show = !record.show
+		const { code } = await rolesApi.change.show({ id: record.id, show: record.show ? 1 : 0 })
+		if (isEqual(code, 200)) message.success('修改成功')
+	}
+
 	async function users() {
 		detail.loading = true
 		const { code, data } = await rolesApi.users({ id: detail.data.id, page: detail.page, limit: detail.limit })
@@ -177,7 +180,7 @@
 							<template #title>
 								{{ record.show ? '点击关闭（已绑定用户不受影响）' : '点击开启' }}
 							</template>
-							<a-switch :checked="record.show" @change="table.changeShow(record)" />
+							<a-switch :checked="record.show" @change="changeShow(record)" />
 						</a-tooltip>
 					</template>
 				</template>
