@@ -19,6 +19,15 @@ use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
+	private Common $common;
+	private array $code;
+
+	public function __construct()
+	{
+		$this->common = new Common();
+		$this->code = Mapping::$code;
+	}
+
 	/* 获取用户权限列表 */
 	public function permissionsList(Request $request): Response
 	{
@@ -30,8 +39,7 @@ class UsersController extends Controller
 			->whereIn('id', json_decode($role_permission['permission_ids']))
 			->orderBy('slot')
 			->get();
-		$common = new Common();
-		return $this->success($common->buildTree($list->toArray()));
+		return $this->success($this->common->buildTree($list->toArray()));
 	}
 
 	/* 获取用户列表 */
@@ -93,7 +101,7 @@ class UsersController extends Controller
 		/* ulid为空（新增用户） 并且 email 存在于数据库中则返回用户已存在 */
 		if (!isset($req['ulid'])) {
 			$is_exist = Users::query()->where('email', $req['email'])->whereNull('deleted_at')->first();
-			if ($is_exist) return $this->fail(null, Mapping::$code['3002'], 3002);
+			if ($is_exist) return $this->fail(null, $this->code['3002'], 3002);
 		}
 		/* 添加、修改用户信息 */
 		$user = Users::query()->updateOrCreate(['ulid' => $req['ulid'] ?? null], [
@@ -118,14 +126,13 @@ class UsersController extends Controller
 			'role_id' => $req['role_id'], 'organize_id' => $req['organize_id']
 		]);
 		/* 添加账号操作记录 */
-		$common = new Common();
 		AccountRecord::query()->create([
 			'user_ulid' => $user['ulid'],
 			'control_user_ulid' => $request->user()->getAuthIdentifier(),
 			'type' => isset($req['ulid']) ? 4 : 1, # 1:新增, 4:修改信息
 			'description' => isset($req['ulid']) ? '修改用户信息' : '新增用户',
-			'ipv4' => $common->ipv4($request),
-			'ipv6' => $common->ipv6($request)
+			'ipv4' => $this->common->ipv4($request),
+			'ipv6' => $this->common->ipv6($request)
 		]);
 		return $this->success();
 	}
@@ -157,14 +164,13 @@ class UsersController extends Controller
 			'deleted_at' => date('Y-m-d H:i:s')
 		]);
 		/* 添加账号删除记录 */
-		$common = new Common();
 		AccountRecord::query()->create([
 			'user_ulid' => $req['ulid'],
 			'control_user_ulid' => $request->user()->getAuthIdentifier(),
 			'type' => 5,
 			'description' => '删除用户',
-			'ipv4' => $common->ipv4($request),
-			'ipv6' => $common->ipv6($request)
+			'ipv4' => $this->common->ipv4($request),
+			'ipv6' => $this->common->ipv6($request)
 		]);
 		return $this->success();
 	}
@@ -179,14 +185,13 @@ class UsersController extends Controller
 			'status' => $req['status']
 		]);
 		/* 添加账号操作记录 */
-		$common = new Common();
 		AccountRecord::query()->create([
 			'user_ulid' => $req['ulid'],
 			'control_user_ulid' => $request->user()->getAuthIdentifier(),
 			'type' => $req['status'] === 0 ? 6 : 7, # 6:封禁, 7:解封
 			'description' => $req['status'] === 0 ? '账号封禁' : '账号解封',
-			'ipv4' => $common->ipv4($request),
-			'ipv6' => $common->ipv6($request)
+			'ipv4' => $this->common->ipv4($request),
+			'ipv6' => $this->common->ipv6($request)
 		]);
 		return $this->success();
 	}

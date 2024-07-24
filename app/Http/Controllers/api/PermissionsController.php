@@ -12,16 +12,24 @@ use Illuminate\Support\Facades\Validator;
 
 class PermissionsController extends Controller
 {
+	private Common $common;
+	private array $code;
+
+	public function __construct()
+	{
+		$this->common = new Common();
+		$this->code = Mapping::$code;
+	}
+
 	/* 获取权限列表 */
 	public function list(): Response
 	{
-		$common = new Common();
 		$list = Permissions::query()
 			->select('id', 'parent_id', 'code', 'name', 'description', 'icon', 'path', 'slot', 'level', 'show')
 			->whereNull('deleted_at')
 			->orderBy('slot')
 			->get();
-		return $this->success($common->buildTree($list->toArray()));
+		return $this->success($this->common->buildTree($list->toArray()));
 	}
 
 	/* 新增修改权限 */
@@ -40,7 +48,7 @@ class PermissionsController extends Controller
 		]);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
 		$is_exist = Permissions::query()->where('code', $req['code'])->first();
-		if ($is_exist) return $this->fail(null, Mapping::$code['5001'], 5001);
+		if ($is_exist) return $this->fail(null, $this->code['5001'], 5001);
 		Permissions::query()->updateOrCreate(['id' => $req['id'] ?? null], $req);
 		return $this->success();
 	}
@@ -52,7 +60,7 @@ class PermissionsController extends Controller
 		$validator = Validator::make($req, ['id' => 'required|integer']);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
 		/* 禁止删除【首页】权限 */
-		if ($req['id'] === 1) return $this->fail(null, Mapping::$code['5002'], 5002);
+		if ($req['id'] === 1) return $this->fail(null, $this->code['5002'], 5002);
 		Permissions::query()->where('id', $req['id'])->update([
 			'deleted_at' => date('Y-m-d H:i:s')
 		]);

@@ -15,10 +15,19 @@ use Illuminate\Support\Facades\Validator;
 
 class AccountController extends Controller
 {
+	private Common $common;
+	private array $code;
+
+	public function __construct()
+	{
+		$this->common = new Common();
+		$this->code = Mapping::$code;
+	}
+
 	/* 令牌失效回调 */
 	public function invalid(): Response
 	{
-		return $this->fail(null, Mapping::$code['1000'], 1000);
+		return $this->fail(null, $this->code['1000'], 1000);
 	}
 
 	/* 登录 */
@@ -32,15 +41,15 @@ class AccountController extends Controller
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
 		/* 校验验证码 */
 		if (isset($req['captcha'])) {
-			if (!captcha_api_check($req['captcha']['value'], $req['captcha']['key'])) return $this->fail(null, Mapping::$code['3005'], 3005);
+			if (!captcha_api_check($req['captcha']['value'], $req['captcha']['key'])) return $this->fail(null, $this->code['3005'], 3005);
 		}
 		/* 用户是否存在 */
 		$user = Users::query()->where('email', $req['account'])->whereNull('deleted_at')->first();
-		if (!$user) return $this->fail(null, Mapping::$code['3001'], 3001);
+		if (!$user) return $this->fail(null, $this->code['3001'], 3001);
 		/* 验证密码 */
-		if (!Hash::check($req['password'], $user->getAuthPassword())) return $this->fail(null, Mapping::$code['3003'], 3003);
+		if (!Hash::check($req['password'], $user->getAuthPassword())) return $this->fail(null, $this->code['3003'], 3003);
 		/* 验证账号禁封状态 */
-		if ($user->status === 0) return $this->fail(null, Mapping::$code['3000'], 3000);
+		if ($user->status === 0) return $this->fail(null, $this->code['3000'], 3000);
 		/* 生成令牌 */
 		$token = $user->createToken(strtolower(env('APP_NAME')));
 		$user->setRememberToken($token->plainTextToken);
@@ -50,14 +59,13 @@ class AccountController extends Controller
 			'platform' => str_replace('"', '', $request->server('HTTP_SEC_CH_UA_PLATFORM')) ?? '未知'
 		]);
 		/* 添加登录记录 */
-		$common = new Common();
 		AccountRecord::query()->create([
 			'user_ulid' => $user->getAuthIdentifier(),
 			'control_user_ulid' => $user->getAuthIdentifier(),
 			'type' => 2,
 			'description' => '账号登录',
-			'ipv4' => $common->ipv4($request),
-			'ipv6' => $common->ipv6($request)
+			'ipv4' => $this->common->ipv4($request),
+			'ipv6' => $this->common->ipv6($request)
 		]);
 		/* 设置令牌有效时长 */
 		Cache::put('user-' . $user->getAuthIdentifier(), $token->plainTextToken, now()->addMinutes(intval(env('CACHE_DURATION'))));
@@ -75,7 +83,7 @@ class AccountController extends Controller
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
 		/* 验证账号是否已存在 */
 		$user = Users::query()->where('email', $req['account'])->whereNull('deleted_at')->first();
-		if ($user) return $this->fail(null, Mapping::$code['3002'], 3002);
+		if ($user) return $this->fail(null, $this->code['3002'], 3002);
 		/* 创建用户 */
 		Users::query()->create([
 			'email' => $req['account'],
@@ -90,14 +98,13 @@ class AccountController extends Controller
 	{
 		$request->user()->currentAccessToken()->delete();
 		/* 添加登出记录 */
-		$common = new Common();
 		AccountRecord::query()->create([
 			'user_ulid' => $request->user()->getAuthIdentifier(),
 			'control_user_ulid' => $request->user()->getAuthIdentifier(),
 			'type' => 3,
 			'description' => '账号登出',
-			'ipv4' => $common->ipv4($request),
-			'ipv6' => $common->ipv6($request)
+			'ipv4' => $this->common->ipv4($request),
+			'ipv6' => $this->common->ipv6($request)
 		]);
 		Cache::forget('user-' . $request->user()->ulid);
 		return $this->success();

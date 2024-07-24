@@ -10,6 +10,6 @@ class TestController extends Controller
 {
 	public function test(Request $request): Response
 	{
-		return $this->success();
+		return $this->success($request);
 	}
 }
