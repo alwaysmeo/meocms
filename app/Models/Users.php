@@ -32,6 +32,7 @@ class Users extends AuthenticatableAuthenticatable
 		'phone',
 		'status',
 		'last_login_at',
+		'platform',
 		'created_at',
 		'updated_at',
 		'deleted_at'

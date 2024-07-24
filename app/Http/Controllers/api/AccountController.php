@@ -44,8 +44,11 @@ class AccountController extends Controller
 		/* 生成令牌 */
 		$token = $user->createToken(strtolower(env('APP_NAME')));
 		$user->setRememberToken($token->plainTextToken);
-		/* 更新用户信息 */
-		$user->update(['last_login_at' => date('Y-m-d H:i:s')]);
+		/* 更新用户登录信息 */
+		$user->update([
+			'last_login_at' => date('Y-m-d H:i:s'),
+			'platform' => str_replace('"', '', $request->server('HTTP_SEC_CH_UA_PLATFORM')) ?? '未知'
+		]);
 		/* 添加登录记录 */
 		$common = new Common();
 		AccountRecord::query()->create([
