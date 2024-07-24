@@ -9,7 +9,6 @@ use App\Services\Common;
 use App\Services\Mapping;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -67,8 +66,6 @@ class AccountController extends Controller
 			'ipv4' => $this->common->ipv4($request),
 			'ipv6' => $this->common->ipv6($request)
 		]);
-		/* 设置令牌有效时长 */
-		Cache::put('user-' . $user->getAuthIdentifier(), $token->plainTextToken, now()->addMinutes(intval(env('CACHE_DURATION'))));
 		return $this->success($user);
 	}
 
@@ -106,7 +103,6 @@ class AccountController extends Controller
 			'ipv4' => $this->common->ipv4($request),
 			'ipv6' => $this->common->ipv6($request)
 		]);
-		Cache::forget('user-' . $request->user()->ulid);
 		return $this->success();
 	}
 }
