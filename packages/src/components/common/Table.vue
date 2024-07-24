@@ -1,6 +1,6 @@
 <!-- 表格组件：table component -->
 <script setup>
-	import { isEmpty, isEqual, listify } from 'radash'
+	import { isEmpty, isEqual, first, omit } from 'radash'
 	import { useVModel } from '@vueuse/core'
 
 	const emits = defineEmits(['update:open', 'update:columns', 'update:page', 'update:limit', 'paginate'])
@@ -35,14 +35,19 @@
 			message: '指定每页可以显示多少条'
 		},
 		action: {
-			type: Object,
-			default: () => new Object(),
+			type: Function,
+			default: () => {},
 			message: '操作列中的数据对象：key: { name, show, disabled, click }'
+		},
+		columnOption: {
+			type: Boolean,
+			default: true,
+			message: '是否使用列表筛选弹窗'
 		},
 		open: {
 			type: Boolean,
 			default: false,
-			message: '控制选择可见的表格列的模态框显示隐藏 v-model:open，（需设置 v-model:columns）'
+			message: '控制选择可见的表格列的筛选模态框显示隐藏 v-model:open，（需设置 v-model:columns、columnOption=true）'
 		}
 	})
 
@@ -50,13 +55,8 @@
 		page: 1,
 		limit: 10,
 		open: useVModel(props, 'open', emits),
-		action_first: computed(() => {
-			const arr = listify(props.action, (key, value) => ({ ...value, value: value.name, key }))
-			return isEmpty(arr) ? {} : arr[0]
-		}),
-		action_list: computed(() => {
-			const arr = listify(props.action, (key, value) => ({ ...value, value: value.name, key }))
-			return arr.filter((item, index) => !isEqual(index, 0))
+		action_first_key: computed(() => {
+			return first(Object.keys(props.action()))
 		}),
 		columns: computed(() => props.columns.filter((item) => item.show))
 	})
@@ -94,8 +94,8 @@
 				<slot name="bodyCell" v-bind="scoped"></slot>
 				<template v-if="isEqual(scoped.column.dataIndex, 'action')">
 					<a-space>
-						<a-button class="color-primary" type="text" size="small" @click="state.action_list[state.action_first.key].event(scoped.record)">
-							{{ state.action_first.name }}
+						<a-button class="color-primary" type="text" size="small" @click="props.action(scoped.record)[state.action_first_key].event">
+							{{ props.action(scoped.record)[state.action_first_key].name }}
 						</a-button>
 						<a-dropdown trigger="click" placement="bottom" :getPopupContainer="(e) => e.parentNode.parentNode.parentNode.parentNode">
 							<a-button type="text" size="small">
@@ -103,9 +103,9 @@
 								<ant-down-outlined class="color-primary" />
 							</a-button>
 							<template #overlay>
-								<a-menu @click="state.action_list[$event.key].event(scoped.record)">
-									<template v-for="item in state.action_list" :key="item.key">
-										<a-menu-item v-if="isEmpty(item.hide) || item.hide(scoped.record)" :disabled="item.disabled">
+								<a-menu @click="(e) => props.action(scoped.record)[e.key].event()">
+									<template v-for="(item, key) in omit(props.action(scoped.record), [state.action_first_key])" :key="key">
+										<a-menu-item v-if="isEmpty(item.hide) || item.hide()" :key="key" :disabled="item.disabled">
 											{{ item.name }}
 										</a-menu-item>
 									</template>
@@ -119,12 +119,12 @@
 				<div class="text-align-center">{{ $attrs.emptyTxt ?? $t('meo.components.common.table.not_data') }}</div>
 			</template>
 		</a-table>
-		<a-modal
+		<meo-modal
+			v-if="props.columnOption"
 			:title="$t('meo.components.common.table.select_table_header')"
 			v-model:open="state.open"
-			centered
 			class="meo-table-modal-container"
-			@ok="handleConfirm"
+			@confirm="handleConfirm"
 			@cancel="state.open = false"
 		>
 			<a-checkbox-group class="checkbox-container" v-model:value="checkbox">
@@ -134,7 +134,7 @@
 					</a-tooltip>
 				</a-checkbox>
 			</a-checkbox-group>
-		</a-modal>
+		</meo-modal>
 	</div>
 </template>
 

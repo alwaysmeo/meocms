@@ -10,7 +10,10 @@
 
 	const organizesStore = useOrganizesStore()
 
-	const state = reactive({})
+	const state = reactive({
+		organizes: null,
+		permission_list: []
+	})
 
 	const table = reactive({
 		columns: [
@@ -28,38 +31,40 @@
 		page: 1,
 		limit: 10,
 		total: 0,
-		action: {
-			detail: {
-				name: '详情',
-				event: async (record) => {
-					if (isEmpty(permission_list.value)) await permissionList()
-					detail.data = record
-					await users()
-					detail.open = true
-				}
-			},
-			edit: {
-				name: '编辑',
-				event: async (record) => {
-					if (isEmpty(permission_list.value)) await permissionList()
-					form.data = pick(record, ['id', 'name', 'description', 'permission_ids'])
-					if (isEmpty(record)) form.data.permission_ids = []
-					form.open = true
-				}
-			},
-			delete: {
-				name: '删除',
-				event: (record) => {
-					useModalConfirm({
-						content: h('div', { class: 'meo-modal-content' }, [
-							h('p', {}, `确定要删除【${record.name}】角色？`),
-							h('p', { class: 'warning' }, `提示：删除前请先解除该角色下绑定的所有用户。`)
-						]),
-						confirm: async () => {
-							if (record.count > 0) return message.warning('请先解除该角色下绑定的所有用户')
-							await deleted({ id: record.id })
-						}
-					})
+		action: (record) => {
+			return {
+				detail: {
+					name: '详情',
+					event: async () => {
+						if (isEmpty(state.permission_list)) await permissionList()
+						detail.data = record
+						await users()
+						detail.open = true
+					}
+				},
+				edit: {
+					name: '编辑',
+					event: async () => {
+						if (isEmpty(state.permission_list)) await permissionList()
+						form.data = pick(record, ['id', 'name', 'description', 'permission_ids'])
+						if (isEmpty(record)) form.data.permission_ids = []
+						form.open = true
+					}
+				},
+				delete: {
+					name: '删除',
+					event: () => {
+						useModalConfirm({
+							content: h('div', { class: 'meo-modal-content' }, [
+								h('p', {}, `确定要删除【${record.name}】角色？`),
+								h('p', { class: 'warning' }, `提示：删除前请先解除该角色下绑定的所有用户。`)
+							]),
+							confirm: async () => {
+								if (record.count > 0) return message.warning('请先解除该角色下绑定的所有用户')
+								await deleted({ id: record.id })
+							}
+						})
+					}
 				}
 			}
 		}
@@ -111,8 +116,6 @@
 			}
 		}
 	})
-
-	const permission_list = ref([])
 
 	onMounted(async () => {
 		state.organizes = await organizesStore.get()
@@ -170,7 +173,7 @@
 
 	async function permissionList() {
 		const { code, data } = await permissionsApi.list({ organize_id: state.organizes.checked.id })
-		if (isEqual(code, 200)) permission_list.value = data
+		if (isEqual(code, 200)) state.permission_list = data
 	}
 </script>
 
@@ -217,7 +220,7 @@
 			<a-tabs centered>
 				<a-tab-pane key="permissions" tab="关联权限">
 					<div class="tree-container">
-						<a-tree v-model:checkedKeys="detail.permissions_ids" :tree-data="permission_list" :fieldNames="{ children: 'children', title: 'name', key: 'id' }">
+						<a-tree v-model:checkedKeys="detail.permissions_ids" :tree-data="state.permission_list" :fieldNames="{ children: 'children', title: 'name', key: 'id' }">
 							<template #title="item">
 								<div class="name" :class="{ active: detail.data.permission_ids.includes(item.id) }">
 									<span class="label">●</span>
@@ -233,6 +236,7 @@
 						v-model:columns="detail.columns"
 						v-model:page="detail.page"
 						v-model:limit="detail.limit"
+						:columnOption="false"
 						:dataSource="detail.list"
 						:loading="detail.loading"
 						:total="detail.total"
@@ -270,7 +274,7 @@
 						<a-tree
 							checkable
 							v-model:checkedKeys="form.data.permission_ids"
-							:tree-data="permission_list"
+							:tree-data="state.permission_list"
 							:fieldNames="{ children: 'children', title: 'name', key: 'id' }"
 						/>
 					</div>
