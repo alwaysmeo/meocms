@@ -220,7 +220,11 @@
 			<a-tabs centered>
 				<a-tab-pane key="permissions" tab="关联权限">
 					<div class="tree-container">
-						<a-tree v-model:checkedKeys="detail.permissions_ids" :tree-data="state.permission_list" :fieldNames="{ children: 'children', title: 'name', key: 'id' }">
+						<a-tree
+							v-model:checkedKeys="detail.permissions_ids"
+							:tree-data="state.permission_list"
+							:fieldNames="{ children: 'children', title: 'name', key: 'id' }"
+						>
 							<template #title="item">
 								<div class="name" :class="{ active: detail.data.permission_ids.includes(item.id) }">
 									<span class="label">●</span>
