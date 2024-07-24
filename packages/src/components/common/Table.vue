@@ -1,9 +1,9 @@
 <!-- 表格组件：table component -->
 <script setup>
-	import { isEqual, first, omit } from 'radash'
+	import { isEmpty, isEqual, listify } from 'radash'
 	import { useVModel } from '@vueuse/core'
 
-	const emits = defineEmits(['update:open', 'update:columns', 'update:page', 'update:limit', 'paginate', 'action'])
+	const emits = defineEmits(['update:open', 'update:columns', 'update:page', 'update:limit', 'paginate'])
 
 	const props = defineProps({
 		columns: {
@@ -37,7 +37,7 @@
 		action: {
 			type: Object,
 			default: () => new Object(),
-			message: '操作列中的数据对象：{ key: value }'
+			message: '操作列中的数据对象：key: { name, show, disabled, click }'
 		},
 		open: {
 			type: Boolean,
@@ -50,8 +50,14 @@
 		page: 1,
 		limit: 10,
 		open: useVModel(props, 'open', emits),
-		action_first: computed(() => new Object({ key: first(Object.keys(props.action)), value: first(Object.values(props.action)) })),
-		action_list: computed(() => omit(props.action, [state.action_first.key])),
+		action_first: computed(() => {
+			const arr = listify(props.action, (key, value) => ({ ...value, value: value.name, key }))
+			return isEmpty(arr) ? {} : arr[0]
+		}),
+		action_list: computed(() => {
+			const arr = listify(props.action, (key, value) => ({ ...value, value: value.name, key }))
+			return arr.filter((item, index) => !isEqual(index, 0))
+		}),
 		columns: computed(() => props.columns.filter((item) => item.show))
 	})
 
@@ -62,10 +68,6 @@
 		emits('update:page', paginate.current)
 		emits('update:limit', paginate.pageSize)
 		emits(action, { page: paginate.current, limit: paginate.pageSize, total: props.total }, filters, sorter, { action, currentDataSource })
-	}
-
-	function handleAction(key, record) {
-		emits('action', key, record)
 	}
 
 	function handleConfirm() {
@@ -92,10 +94,24 @@
 				<slot name="bodyCell" v-bind="scoped"></slot>
 				<template v-if="isEqual(scoped.column.dataIndex, 'action')">
 					<a-space>
-						<a-button class="color-primary" type="text" size="small" @click="handleAction(state.action_first.key, scoped.record)">
-							{{ state.action_first.value }}
+						<a-button class="color-primary" type="text" size="small" @click="state.action_list[state.action_first.key].event(scoped.record)">
+							{{ state.action_first.name }}
 						</a-button>
-						<meo-dropdown :list="state.action_list" @menu="handleAction($event, scoped.record)" />
+						<a-dropdown trigger="click" placement="bottom" :getPopupContainer="(e) => e.parentNode.parentNode.parentNode.parentNode">
+							<a-button type="text" size="small">
+								<span class="color-primary">更多</span>
+								<ant-down-outlined class="color-primary" />
+							</a-button>
+							<template #overlay>
+								<a-menu @click="state.action_list[$event.key].event(scoped.record)">
+									<template v-for="item in state.action_list" :key="item.key">
+										<a-menu-item v-if="isEmpty(item.hide) || item.hide(scoped.record)" :disabled="item.disabled">
+											{{ item.name }}
+										</a-menu-item>
+									</template>
+								</a-menu>
+							</template>
+						</a-dropdown>
 					</a-space>
 				</template>
 			</template>

@@ -33,17 +33,21 @@
 		page: 1,
 		limit: 10,
 		total: 0,
-		action: (key, record) => {
-			return {
-				detail: async () => {
+		action: {
+			detail: {
+				name: '详情',
+				event: async (record) => {
 					const { code, data } = await usersApi.detail({ ulid: record.ulid })
 					if (isEqual(code, 200)) {
 						detail.select = 0 // 组织列表的 index 索引
 						detail.data = data
 						detail.open = true
 					}
-				},
-				edit: async () => {
+				}
+			},
+			edit: {
+				name: '编辑',
+				event: async (record) => {
 					if (isEmpty(form.role_list)) {
 						const { code, data } = await rolesApi.list({ organize_id: organizes.value.checked.id })
 						if (isEqual(code, 200)) form.role_list = data.list
@@ -51,8 +55,25 @@
 					form.data = pick(record, ['ulid', 'nickname', 'email', 'phone'])
 					form.data.role_id = record.role_info?.id
 					form.open = true
-				},
-				delete: () => {
+				}
+			},
+			banned: {
+				name: '封禁',
+				hide: (record) => isEqual(record.status, 1),
+				event: async (record) => {
+					await changeStatus({ ulid: record.ulid, status: 0 })
+				}
+			},
+			unseal: {
+				name: '解封',
+				hide: (record) => isEqual(record.status, 0),
+				event: async (record) => {
+					await changeStatus({ ulid: record.ulid, status: 1 })
+				}
+			},
+			delete: {
+				name: '删除',
+				event: (record) => {
 					useModalConfirm({
 						title: '提示',
 						content: h('div', { class: 'meo-modal-content' }, [
@@ -65,7 +86,7 @@
 						}
 					})
 				}
-			}[key]()
+			}
 		}
 	})
 
@@ -136,6 +157,14 @@
 			form.data = {}
 		}
 	}
+
+	async function changeStatus({ ulid, status }) {
+		const { code } = await usersApi.change.status({ ulid, status })
+		if (isEqual(code, 200)) {
+			message.success(['封禁成功', '解封成功'][status])
+			await list()
+		}
+	}
 </script>
 
 <template>
@@ -161,13 +190,8 @@
 				:dataSource="table.data"
 				:loading="table.loading"
 				:total="table.total"
-				:action="{
-					detail: $t('meo.components.common.table.action.detail'),
-					edit: $t('meo.components.common.table.action.edit'),
-					delete: $t('meo.components.common.table.action.delete')
-				}"
+				:action="table.action"
 				@paginate="list"
-				@action="table.action"
 			>
 				<template #bodyCell="{ column, record }">
 					<template v-if="isEqual(column.dataIndex, 'picture')">

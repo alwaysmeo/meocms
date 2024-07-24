@@ -28,21 +28,28 @@
 		page: 1,
 		limit: 10,
 		total: 0,
-		action: (key, record) => {
-			return {
-				edit: async () => {
-					if (isEmpty(permission_list.value)) await permissionList()
-					form.data = pick(record, ['id', 'name', 'description', 'permission_ids'])
-					if (isEmpty(record)) form.data.permission_ids = []
-					form.open = true
-				},
-				detail: async () => {
+		action: {
+			detail: {
+				name: '详情',
+				event: async (record) => {
 					if (isEmpty(permission_list.value)) await permissionList()
 					detail.data = record
 					await users()
 					detail.open = true
-				},
-				delete: () => {
+				}
+			},
+			edit: {
+				name: '编辑',
+				event: async (record) => {
+					if (isEmpty(permission_list.value)) await permissionList()
+					form.data = pick(record, ['id', 'name', 'description', 'permission_ids'])
+					if (isEmpty(record)) form.data.permission_ids = []
+					form.open = true
+				}
+			},
+			delete: {
+				name: '删除',
+				event: (record) => {
 					useModalConfirm({
 						content: h('div', { class: 'meo-modal-content' }, [
 							h('p', {}, `确定要删除【${record.name}】角色？`),
@@ -54,7 +61,7 @@
 						}
 					})
 				}
-			}[key]()
+			}
 		}
 	})
 
@@ -190,13 +197,8 @@
 				:dataSource="table.data"
 				:loading="table.loading"
 				:total="table.total"
-				:action="{
-					detail: $t('meo.components.common.table.action.detail'),
-					edit: $t('meo.components.common.table.action.edit'),
-					delete: $t('meo.components.common.table.action.delete')
-				}"
+				:action="table.action"
 				@paginate="list"
-				@action="table.action"
 			>
 				<template #bodyCell="{ column, record }">
 					<template v-if="isEqual(column.dataIndex, 'show')">

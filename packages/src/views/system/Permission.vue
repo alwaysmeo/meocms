@@ -28,9 +28,10 @@
 		page: 1,
 		limit: 10,
 		total: 0,
-		action: (key, record) => {
-			return {
-				create: async () => {
+		action: {
+			create: {
+				name: '新增',
+				event: async (record) => {
 					form.data = {
 						parent_id: record.id,
 						code: `${record.code}-`,
@@ -38,19 +39,25 @@
 						level: record.level + 1
 					}
 					form.open = true
-				},
-				edit: () => {
+				}
+			},
+			edit: {
+				name: '编辑',
+				event: (record) => {
 					form.data = pick(record, ['id', 'parent_id', 'code', 'icon', 'name', 'description', 'path', 'level'])
 					form.data.level = record.level ?? 0
 					form.open = true
-				},
-				delete: () => {
+				}
+			},
+			delete: {
+				name: '删除',
+				event: (record) => {
 					useModalConfirm({
 						content: `确定要删除【${record.name}】权限？`,
 						confirm: async () => await deleted({ id: record.id })
 					})
 				}
-			}[key]()
+			}
 		}
 	})
 
@@ -137,13 +144,8 @@
 				:dataSource="table.data"
 				:loading="table.loading"
 				:total="table.total"
-				:action="{
-					create: $t('meo.components.common.table.action.create'),
-					edit: $t('meo.components.common.table.action.edit'),
-					delete: $t('meo.components.common.table.action.delete')
-				}"
+				:action="table.action"
 				@paginate="list"
-				@action="table.action"
 			>
 				<template #bodyCell="{ column, record }">
 					<template v-if="isEqual(column.dataIndex, 'icon')">
