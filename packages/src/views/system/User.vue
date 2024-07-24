@@ -222,9 +222,11 @@
 					<template v-if="isEqual(column.dataIndex, 'phone')">
 						{{ record.phone ?? '-' }}
 					</template>
-					<template v-if="isEqual(column.dataIndex, 'role')"> 【{{ record.role_info.name }}】 </template>
+					<template v-if="isEqual(column.dataIndex, 'role')">【{{ record.role_info.name }}】</template>
 					<template v-if="isEqual(column.dataIndex, 'status')">
-						{{ ['封禁', '正常'][record.status] }}
+						<span :class="['color-error', 'color-success'][record.status]">
+							{{ ['封禁', '正常'][record.status] }}
+						</span>
 					</template>
 				</template>
 			</meo-table>

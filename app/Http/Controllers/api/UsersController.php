@@ -168,4 +168,26 @@ class UsersController extends Controller
 		]);
 		return $this->success();
 	}
+
+	/* 修改用户封禁状态 */
+	public function changeStatus(Request $request): Response
+	{
+		$req = $request->only(['ulid', 'status']);
+		$validator = Validator::make($req, ['ulid' => 'required|ulid', 'status' => 'required|in:0,1']);
+		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
+		Users::query()->where('ulid', $req['ulid'])->update([
+			'status' => $req['status']
+		]);
+		/* 添加账号操作记录 */
+		$common = new Common();
+		AccountRecord::query()->create([
+			'user_ulid' => $req['ulid'],
+			'control_user_ulid' => $request->user()->getAuthIdentifier(),
+			'type' => $req['status'] === 0 ? 6 : 7, # 6:封禁, 7:解封
+			'description' => $req['status'] === 0 ? '账号封禁' : '账号解封',
+			'ipv4' => $common->ipv4($request),
+			'ipv6' => $common->ipv6($request)
+		]);
+		return $this->success();
+	}
 }

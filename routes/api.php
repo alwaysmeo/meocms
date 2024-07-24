@@ -78,6 +78,8 @@ Route::group(['middleware' => 'auth:api'], function () {
 		Route::get('/detail', [UsersController::class, 'detail']);
 		/* 注销删除用户 */
 		Route::post('/delete', [UsersController::class, 'delete']);
+		/* 修改用户封禁状态 */
+		Route::post('/change/status', [UsersController::class, 'changeStatus']);
 	});
 
 	Route::group(['prefix' => 'organizes'], function () {
