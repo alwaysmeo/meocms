@@ -16,10 +16,10 @@
 	const table = reactive({
 		columns: [
 			{ dataIndex: 'index', title: '序号', width: 120, align: 'center', show: true },
-			{ dataIndex: 'icon', title: '图标', width: 100, align: 'center', show: true },
-			{ dataIndex: 'code', title: '唯一标识', align: 'center' },
+			{ dataIndex: 'icon', title: '图标', width: 120, align: 'center', show: true },
+			{ dataIndex: 'code', title: '唯一标识', align: 'center', show: true },
 			{ dataIndex: 'name', title: '权限名称', show: true },
-			{ dataIndex: 'description', title: '权限描述', show: true },
+			{ dataIndex: 'description', title: '权限描述', ellipsis: true },
 			{ dataIndex: 'path', title: 'URL', show: true },
 			{ dataIndex: 'show', title: '是否启用', width: 120, align: 'center', show: true },
 			{ dataIndex: 'action', title: '操作', width: 160, align: 'center', show: true }
@@ -30,36 +30,34 @@
 		page: 1,
 		limit: 10,
 		total: 0,
-		action: (record) => {
-			return {
-				create: {
-					name: '新增',
-					event: async () => {
-						form.data = {
-							parent_id: record.id,
-							code: `${record.code}-`,
-							path: `${record.path}/`,
-							level: record.level + 1
-						}
-						form.open = true
+		action: {
+			create: {
+				name: '新增',
+				event: async (record) => {
+					form.data = {
+						parent_id: record.id,
+						code: `${record.code}-`,
+						path: `${record.path}/`,
+						level: record.level + 1
 					}
-				},
-				edit: {
-					name: '编辑',
-					event: () => {
-						form.data = pick(record, ['id', 'parent_id', 'code', 'icon', 'name', 'description', 'path', 'level'])
-						form.data.level = record.level ?? 0
-						form.open = true
-					}
-				},
-				delete: {
-					name: '删除',
-					event: () => {
-						useModalConfirm({
-							content: `确定要删除【${record.name}】权限？`,
-							confirm: async () => await deleted({ id: record.id })
-						})
-					}
+					form.open = true
+				}
+			},
+			edit: {
+				name: '编辑',
+				event: (record) => {
+					form.data = pick(record, ['id', 'parent_id', 'code', 'icon', 'name', 'description', 'path', 'level'])
+					form.data.level = record.level ?? 0
+					form.open = true
+				}
+			},
+			delete: {
+				name: '删除',
+				event: (record) => {
+					useModalConfirm({
+						content: `确定要删除【${record.name}】权限？`,
+						confirm: async () => await deleted({ id: record.id })
+					})
 				}
 			}
 		}
@@ -180,7 +178,7 @@
 						<a-input v-model:value="form.data.name" :maxlength="80" placeholder="请输入权限名称" show-count />
 					</a-form-item>
 					<a-form-item name="description" label="描述信息">
-						<a-textarea v-model:value="form.data.description" :maxlength="200" placeholder="请输入权限描述信息" show-count />
+						<a-textarea v-model:value="form.data.description" :maxlength="200" auto-size placeholder="请输入权限描述信息" show-count />
 					</a-form-item>
 					<a-form-item name="path" label="URL">
 						<a-input v-model:value="form.data.path" :maxlength="230" placeholder="请输入权限 URL" show-count />

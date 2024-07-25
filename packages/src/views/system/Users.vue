@@ -33,78 +33,76 @@
 		page: 1,
 		limit: 10,
 		total: 0,
-		action: (record) => {
-			return {
-				detail: {
-					name: '详情',
-					event: async () => {
-						const { code, data } = await usersApi.detail({ ulid: record.ulid })
-						if (isEqual(code, 200)) {
-							detail.select = 0 // 组织列表的 index 索引
-							detail.data = data
-							detail.open = true
+		action: {
+			detail: {
+				name: '详情',
+				event: async (record) => {
+					const { code, data } = await usersApi.detail({ ulid: record.ulid })
+					if (isEqual(code, 200)) {
+						detail.select = 0 // 组织列表的 index 索引
+						detail.data = data
+						detail.open = true
+					}
+				}
+			},
+			edit: {
+				name: '编辑',
+				event: async (record) => {
+					if (isEmpty(form.role_list)) {
+						const { code, data } = await rolesApi.list({ organize_id: organizes.value.checked.id })
+						if (isEqual(code, 200)) form.role_list = data.list
+					}
+					form.data = pick(record, ['ulid', 'nickname', 'email', 'phone'])
+					form.data.role_id = record.role_info?.id
+					form.open = true
+				}
+			},
+			banned: {
+				name: '封禁',
+				show: (record) => isEqual(record.status, 1),
+				event: (record) => {
+					useModalConfirm({
+						title: '提示',
+						content: h('div', { class: 'meo-modal-content' }, [
+							h('p', {}, `是否封禁【${record.nickname}】用户？`),
+							h('p', { class: 'warning' }, `注意：确认封禁后该用户将无法登录账号，请谨慎操作！`)
+						]),
+						confirm: async () => {
+							await changeStatus({ ulid: record.ulid, status: 0 })
 						}
-					}
-				},
-				edit: {
-					name: '编辑',
-					event: async () => {
-						if (isEmpty(form.role_list)) {
-							const { code, data } = await rolesApi.list({ organize_id: organizes.value.checked.id })
-							if (isEqual(code, 200)) form.role_list = data.list
+					})
+				}
+			},
+			unseal: {
+				name: '解封',
+				show: (record) => isEqual(record.status, 0),
+				event: (record) => {
+					useModalConfirm({
+						title: '提示',
+						content: h('div', { class: 'meo-modal-content' }, [
+							h('p', {}, `是否解封【${record.nickname}】用户？`),
+							h('p', { class: 'warning' }, `注意：确认解封后该用户即可正常登录。`)
+						]),
+						confirm: async () => {
+							await changeStatus({ ulid: record.ulid, status: 1 })
 						}
-						form.data = pick(record, ['ulid', 'nickname', 'email', 'phone'])
-						form.data.role_id = record.role_info?.id
-						form.open = true
-					}
-				},
-				banned: {
-					name: '封禁',
-					hide: () => isEqual(record.status, 1),
-					event: () => {
-						useModalConfirm({
-							title: '提示',
-							content: h('div', { class: 'meo-modal-content' }, [
-								h('p', {}, `是否封禁【${record.nickname}】用户？`),
-								h('p', { class: 'warning' }, `注意：确认封禁后该用户将无法登录账号，请谨慎操作！`)
-							]),
-							confirm: async () => {
-								await changeStatus({ ulid: record.ulid, status: 0 })
-							}
-						})
-					}
-				},
-				unseal: {
-					name: '解封',
-					hide: () => isEqual(record.status, 0),
-					event: () => {
-						useModalConfirm({
-							title: '提示',
-							content: h('div', { class: 'meo-modal-content' }, [
-								h('p', {}, `是否解封【${record.nickname}】用户？`),
-								h('p', { class: 'warning' }, `注意：确认解封后该用户即可正常登录。`)
-							]),
-							confirm: async () => {
-								await changeStatus({ ulid: record.ulid, status: 1 })
-							}
-						})
-					}
-				},
-				delete: {
-					name: '删除',
-					event: () => {
-						useModalConfirm({
-							title: '提示',
-							content: h('div', { class: 'meo-modal-content' }, [
-								h('p', {}, `是否删除【${record.nickname}】用户？`),
-								h('p', { class: 'warning' }, `注意：确认删除后该用户将无法登录账号。\n该操作无法撤销恢复，请谨慎操作！`)
-							]),
-							confirm: async () => {
-								const { code } = await rolesApi.deleted({ ulid: record.ulid })
-								if (isEqual(code, 200)) message.success('删除成功')
-							}
-						})
-					}
+					})
+				}
+			},
+			delete: {
+				name: '删除',
+				event: (record) => {
+					useModalConfirm({
+						title: '提示',
+						content: h('div', { class: 'meo-modal-content' }, [
+							h('p', {}, `是否删除【${record.nickname}】用户？`),
+							h('p', { class: 'warning' }, `注意：确认删除后该用户将无法登录账号。\n该操作无法撤销恢复，请谨慎操作！`)
+						]),
+						confirm: async () => {
+							const { code } = await rolesApi.deleted({ ulid: record.ulid })
+							if (isEqual(code, 200)) message.success('删除成功')
+						}
+					})
 				}
 			}
 		}

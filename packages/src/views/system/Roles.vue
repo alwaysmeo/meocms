@@ -20,8 +20,8 @@
 			{ dataIndex: 'index', title: '序号', width: 120, align: 'center', show: true },
 			{ dataIndex: 'id', title: 'ID', width: 260, align: 'center', show: true },
 			{ dataIndex: 'name', title: '角色名称', show: true },
-			{ dataIndex: 'description', title: '角色描述' },
-			{ dataIndex: 'count', title: '当前已绑定用户数', align: 'center', show: true },
+			{ dataIndex: 'description', title: '角色描述', ellipsis: true },
+			{ dataIndex: 'count', title: '已绑定用户数', width: 130, align: 'center', show: true },
 			{ dataIndex: 'show', title: '是否启用', width: 240, align: 'center', show: true },
 			{ dataIndex: 'action', title: '操作', width: 160, align: 'center', show: true }
 		],
@@ -31,40 +31,38 @@
 		page: 1,
 		limit: 10,
 		total: 0,
-		action: (record) => {
-			return {
-				detail: {
-					name: '详情',
-					event: async () => {
-						if (isEmpty(state.permission_list)) await permissionList()
-						detail.data = record
-						await users()
-						detail.open = true
-					}
-				},
-				edit: {
-					name: '编辑',
-					event: async () => {
-						if (isEmpty(state.permission_list)) await permissionList()
-						form.data = pick(record, ['id', 'name', 'description', 'permission_ids'])
-						if (isEmpty(record)) form.data.permission_ids = []
-						form.open = true
-					}
-				},
-				delete: {
-					name: '删除',
-					event: () => {
-						useModalConfirm({
-							content: h('div', { class: 'meo-modal-content' }, [
-								h('p', {}, `确定要删除【${record.name}】角色？`),
-								h('p', { class: 'warning' }, `提示：删除前请先解除该角色下绑定的所有用户。`)
-							]),
-							confirm: async () => {
-								if (record.count > 0) return message.warning('请先解除该角色下绑定的所有用户')
-								await deleted({ id: record.id })
-							}
-						})
-					}
+		action: {
+			detail: {
+				name: '详情',
+				event: async (record) => {
+					if (isEmpty(state.permission_list)) await permissionList()
+					detail.data = record
+					await users()
+					detail.open = true
+				}
+			},
+			edit: {
+				name: '编辑',
+				event: async (record) => {
+					if (isEmpty(state.permission_list)) await permissionList()
+					form.data = pick(record, ['id', 'name', 'description', 'permission_ids'])
+					if (isEmpty(record)) form.data.permission_ids = []
+					form.open = true
+				}
+			},
+			delete: {
+				name: '删除',
+				event: (record) => {
+					useModalConfirm({
+						content: h('div', { class: 'meo-modal-content' }, [
+							h('p', {}, `确定要删除【${record.name}】角色？`),
+							h('p', { class: 'warning' }, `提示：删除前请先解除该角色下绑定的所有用户。`)
+						]),
+						confirm: async () => {
+							if (record.count > 0) return message.warning('请先解除该角色下绑定的所有用户')
+							await deleted({ id: record.id })
+						}
+					})
 				}
 			}
 		}
@@ -74,9 +72,9 @@
 		open: false,
 		columns: [
 			{ dataIndex: 'index', title: '序号', width: 120, align: 'center', show: true },
-			{ dataIndex: 'email', key: 'email', title: '邮箱账号', show: true },
-			{ dataIndex: 'nickname', key: 'nickname', title: '用户名', show: true },
-			{ dataIndex: 'phone', key: 'phone', title: '联系电话', show: true }
+			{ dataIndex: 'email', title: '邮箱账号', show: true },
+			{ dataIndex: 'nickname', title: '用户名', show: true },
+			{ dataIndex: 'phone', title: '联系电话', show: true }
 		],
 		data: {},
 		list: [],
@@ -91,7 +89,7 @@
 		open: false,
 		data: {},
 		rules: {
-			name: [{ required: true, message: '请输角色名称', trigger: 'blur' }],
+			name: [{ required: true, message: '请输入角色名称', trigger: 'blur' }],
 			permission_ids: [
 				{ required: true, message: '请至少选择一个权限', trigger: 'blur' },
 				{
@@ -272,7 +270,7 @@
 					<a-input v-model:value="form.data.name" placeholder="请输入角色名称" show-count :maxlength="30" />
 				</a-form-item>
 				<a-form-item name="description" label="角色描述">
-					<a-textarea v-model:value="form.data.description" :maxlength="200" placeholder="请输入角色描述信息" show-count />
+					<a-textarea v-model:value="form.data.description" :maxlength="200" auto-size placeholder="请输入角色描述信息" show-count />
 				</a-form-item>
 				<a-form-item label="角色权限" name="permission_ids" validateFirst>
 					<div class="permissions-container">
