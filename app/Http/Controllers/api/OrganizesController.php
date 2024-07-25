@@ -32,4 +32,41 @@ class OrganizesController extends Controller
 		]);
 	}
 
+	/* 新增修改组织 */
+	public function upsert(Request $request): Response
+	{
+		$req = $request->only(['id', 'name', 'description']);
+		$validator = Validator::make($req, [
+			'id' => 'integer',
+			'name' => 'required|max:30',
+			'description' => 'max:200'
+		]);
+		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
+		Organizes::query()->updateOrCreate(['id' => $req['id'] ?? null], $req);
+		return $this->success();
+	}
+
+	/* 删除组织 */
+	public function delete(Request $request): Response
+	{
+		$req = $request->only(['id']);
+		$validator = Validator::make($req, ['id' => 'required|integer']);
+		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
+		Organizes::query()->where('id', $req['id'])->update([
+			'deleted_at' => date('Y-m-d H:i:s')
+		]);
+		return $this->success();
+	}
+
+	/* 修改组织启用状态 */
+	public function changeShow(Request $request): Response
+	{
+		$req = $request->only(['id', 'show']);
+		$validator = Validator::make($req, ['id' => 'required|integer', 'show' => 'required|in:0,1']);
+		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
+		Organizes::query()->where('id', $req['id'])->update([
+			'show' => $req['show']
+		]);
+		return $this->success();
+	}
 }

@@ -85,5 +85,11 @@ Route::group(['middleware' => 'auth:api'], function () {
 	Route::group(['prefix' => 'organizes'], function () {
 		/* 获取组织列表 */
 		Route::get('/list', [OrganizesController::class, 'list']);
+		/* 新增修改组织 */
+		Route::post('/upsert', [OrganizesController::class, 'upsert']);
+		/* 删除组织 */
+		Route::post('/delete', [OrganizesController::class, 'delete']);
+		/* 修改组织启用状态 */
+		Route::post('/change/show', [OrganizesController::class, 'changeShow']);
 	});
 });
