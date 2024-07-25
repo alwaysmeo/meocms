@@ -82,7 +82,7 @@
 				<ant-setting-outlined />
 			</a-button>
 		</a-tooltip>
-		<a-popover placement="bottomLeft" overlayClassName="site-popover" trigger="focus">
+		<a-popover placement="bottomLeft" overlayClassName="meo-popover-container" trigger="focus">
 			<a-button type="text" size="small">
 				<ant-bank-outlined />
 				<span>{{ organizes?.checked?.name }}</span>
