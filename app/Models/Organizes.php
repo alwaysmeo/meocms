@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class Organizes extends Model
@@ -18,6 +17,7 @@ class Organizes extends Model
 	    'show',
         'order'
     ];
+	protected $appends = ['count'];
 	protected $hidden = ['laravel_through_key'];
 
 	protected function casts(): array
@@ -27,6 +27,11 @@ class Organizes extends Model
 			'updated_at' => 'datetime:Y-m-d H:i:s',
 			'deleted_at' => 'datetime:Y-m-d H:i:s'
 		];
+	}
+
+	public function getCountAttribute(): int
+	{
+		return RoleOrganize::query()->where('organize_id', $this->attributes['id'])->get()->count();
 	}
 
 	public function getShowAttribute($value): bool

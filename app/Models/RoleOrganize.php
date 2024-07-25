@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class RoleOrganize extends Model
 {
@@ -17,4 +18,9 @@ class RoleOrganize extends Model
 		'role_id',
 		'organize_id'
 	];
+
+	public function role_info(): hasOne
+	{
+		return $this->hasOne(Roles::class, 'id', 'role_id');
+	}
 }

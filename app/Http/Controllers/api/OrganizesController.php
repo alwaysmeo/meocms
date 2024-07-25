@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Organizes;
+use App\Models\RoleOrganize;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
@@ -56,6 +57,33 @@ class OrganizesController extends Controller
 			'deleted_at' => date('Y-m-d H:i:s')
 		]);
 		return $this->success();
+	}
+
+	/* 获取组织关联的角色 */
+	public function roles(Request $request): Response
+	{
+		$req = $request->only(['id', 'page', 'limit']);
+		$validator = Validator::make($req, [
+			'id' => 'required|integer',
+			'page' => 'integer',
+			'limit' => 'integer'
+		]);
+		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
+		$page = isset($req['page']) ? intval($req['page']) : null;
+		$limit = isset($req['limit']) ? intval($req['limit']) : null;
+		$list = RoleOrganize::query();
+		$list->where('organize_id', $req['id']);
+		$list->with(['role_info' => function ($query) {
+			$query->select('id', 'name');
+		}]);
+		$total = $list->count();
+		$list->offset(($page - 1) * $limit)->limit($limit);
+		return $this->success([
+			'list' => $list->get(),
+			'total' => $total,
+			'page' => $page,
+			'limit' => $limit
+		]);
 	}
 
 	/* 修改组织启用状态 */

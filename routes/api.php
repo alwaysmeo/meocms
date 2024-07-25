@@ -89,6 +89,8 @@ Route::group(['middleware' => 'auth:api'], function () {
 		Route::post('/upsert', [OrganizesController::class, 'upsert']);
 		/* 删除组织 */
 		Route::post('/delete', [OrganizesController::class, 'delete']);
+		/* 获取组织关联的角色 */
+		Route::get('/roles', [OrganizesController::class, 'roles']);
 		/* 修改组织启用状态 */
 		Route::post('/change/show', [OrganizesController::class, 'changeShow']);
 	});
