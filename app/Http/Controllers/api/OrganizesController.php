@@ -21,7 +21,7 @@ class OrganizesController extends Controller
 		$list = Organizes::query();
 		$list->whereNull('deleted_at');
 		$list->select('id', 'name', 'description', 'show', 'order');
-		$list->orderBy('order');
+		$list->orderByRaw('ISNULL(`ORDER`), `ORDER` ASC');
 		$total = $list->count();
 		($page && $limit) && $list->offset(($page - 1) * $limit)->limit($limit);
 		return $this->success([

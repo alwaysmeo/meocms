@@ -37,7 +37,7 @@ class UsersController extends Controller
 			->whereNull('deleted_at')
 			->where('show', 1)
 			->whereIn('id', json_decode($role_permission['permission_ids']))
-			->orderBy('order')
+			->orderByRaw('ISNULL(`ORDER`), `ORDER` ASC')
 			->get();
 		return $this->success($this->common->buildTree($list->toArray()));
 	}

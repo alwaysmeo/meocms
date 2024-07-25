@@ -33,7 +33,7 @@ class RolesController extends Controller
 		$list->whereHas('organize_info', function ($query) use ($organize_id) {
 			$query->where('id', $organize_id);
 		});
-		$list->orderBy('order');
+		$list->orderByRaw('ISNULL(`ORDER`), `ORDER` ASC');
 		$total = $list->count();
 		($page && $limit) && $list->offset(($page - 1) * $limit)->limit($limit);
 		return $this->success([

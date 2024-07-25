@@ -25,9 +25,9 @@ class PermissionsController extends Controller
 	public function list(): Response
 	{
 		$list = Permissions::query()
-			->select('id', 'parent_id', 'code', 'name', 'description', 'icon', 'path', 'slot', 'level', 'show')
+			->select('id', 'parent_id', 'code', 'name', 'description', 'icon', 'path', 'order', 'level', 'show')
 			->whereNull('deleted_at')
-			->orderBy('slot')
+			->orderByRaw('ISNULL(`ORDER`), `ORDER` ASC')
 			->get();
 		return $this->success($this->common->buildTree($list->toArray()));
 	}

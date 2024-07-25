@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Permissions;
 use App\Models\RolePermissions;
+use App\Models\Roles;
 use Illuminate\Database\Seeder;
 
 class PermissionsSeeder extends Seeder
@@ -144,8 +145,10 @@ class PermissionsSeeder extends Seeder
 				$item['parent_id'] = Permissions::query()->where('level', 1)->latest('id')->value('id');
 			Permissions::query()->insert($item);
 		}
+		# 添加角色权限关联记录
+		$role = Roles::query()->first();
 		RolePermissions::query()->create([
-			'role_id' => 1,
+			'role_id' => $role['id'],
 			'permission_ids' => json_encode($ids)
 		]);
 	}
