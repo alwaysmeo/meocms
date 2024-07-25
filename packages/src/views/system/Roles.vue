@@ -139,7 +139,8 @@
 	async function upsert() {
 		const { code } = await rolesApi.upsert({
 			organize_id: state.organizes.checked.id,
-			...form.data
+			...form.data,
+			permission_ids: JSON.stringify(form.data.permission_ids)
 		})
 		if (isEqual(code, 200)) {
 			message.success(form.data.id ? '修改成功' : '新增成功')

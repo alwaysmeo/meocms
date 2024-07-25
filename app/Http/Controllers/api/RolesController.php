@@ -53,7 +53,7 @@ class RolesController extends Controller
 			'id' => 'integer',
 			'name' => 'required|max:30',
 			'description' => 'max:200',
-			'permission_ids' => 'required|list'
+			'permission_ids' => 'required|json'
 		]);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
 		$role = Roles::query()->updateOrCreate(['id' => $req['id'] ?? null], $req);
@@ -63,7 +63,7 @@ class RolesController extends Controller
 		);
 		RolePermissions::query()->updateOrCreate(['role_id' => $role['id']], [
 			'role_id' => $role['id'],
-			'permission_ids' => json_encode($req['permission_ids'])
+			'permission_ids' => $req['permission_ids']
 		]);
 		return $this->success();
 	}
