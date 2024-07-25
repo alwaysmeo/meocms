@@ -97,7 +97,7 @@
 						<a-button class="color-primary" type="text" size="small" @click="props.action(scoped.record)[state.action_first_key].event">
 							{{ props.action(scoped.record)[state.action_first_key].name }}
 						</a-button>
-						<a-dropdown trigger="click" placement="bottom" :getPopupContainer="(e) => e.parentNode.parentNode.parentNode.parentNode">
+						<a-dropdown trigger="click" placement="bottom" :getPopupContainer="(e) => e.parentNode">
 							<a-button type="text" size="small">
 								<span class="color-primary">更多</span>
 								<ant-down-outlined class="color-primary" />
