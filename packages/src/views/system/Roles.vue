@@ -6,7 +6,7 @@
 	import permissionsApi from '@apis/permissions'
 	import rolesApi from '@apis/roles'
 
-	defineOptions({ name: 'SystemRole' })
+	defineOptions({ name: 'SystemRoles' })
 
 	const organizesStore = useOrganizesStore()
 

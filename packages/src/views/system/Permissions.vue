@@ -5,7 +5,7 @@
 	import { isEqual, pick } from 'radash'
 	import permissionsApi from '@apis/permissions'
 
-	defineOptions({ name: 'SystemPermission' })
+	defineOptions({ name: 'SystemPermissions' })
 
 	const organizesStore = useOrganizesStore()
 

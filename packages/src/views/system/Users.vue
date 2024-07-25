@@ -8,7 +8,7 @@
 	import rolesApi from '@apis/roles'
 	import i18n from '@language'
 
-	defineOptions({ name: 'SystemUser' })
+	defineOptions({ name: 'SystemUsers' })
 
 	const { t } = i18n.global
 	const organizesStore = useOrganizesStore()
