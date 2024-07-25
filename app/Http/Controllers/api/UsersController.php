@@ -150,6 +150,7 @@ class UsersController extends Controller
 					$role_query->select('id', 'name');
 				}]);
 		}]);
+		$user->where('ulid', $req['ulid']);
 		$user->select('ulid', 'email', 'nickname', 'picture', 'phone', 'status', 'last_login_at', 'created_at');
 		return $this->success($user->first());
 	}
