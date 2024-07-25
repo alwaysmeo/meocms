@@ -1,6 +1,6 @@
 <!-- 表格组件：table component -->
 <script setup>
-	import { isEmpty, isEqual, first, omit } from 'radash'
+	import { isEqual, first, omit } from 'radash'
 	import { useVModel } from '@vueuse/core'
 
 	const emits = defineEmits(['update:open', 'update:columns', 'update:page', 'update:limit', 'paginate'])
@@ -35,7 +35,7 @@
 			message: '指定每页可以显示多少条'
 		},
 		action: {
-			type: Function,
+			type: Object,
 			default: () => {},
 			message: '操作列中的数据对象：key: { name, show, disabled, click }'
 		},
@@ -56,7 +56,7 @@
 		limit: 10,
 		open: useVModel(props, 'open', emits),
 		action_first_key: computed(() => {
-			return first(Object.keys(props.action()))
+			return first(Object.keys(props.action))
 		}),
 		columns: computed(() => props.columns.filter((item) => item.show))
 	})
@@ -94,24 +94,29 @@
 				<slot name="bodyCell" v-bind="scoped"></slot>
 				<template v-if="isEqual(scoped.column.dataIndex, 'action')">
 					<a-space>
-						<a-button class="color-primary" type="text" size="small" @click="props.action(scoped.record)[state.action_first_key].event">
-							{{ props.action(scoped.record)[state.action_first_key].name }}
+						<a-button class="color-primary" type="text" size="small" @click="props.action[state.action_first_key].event(scoped.record)">
+							{{ props.action[state.action_first_key].name }}
 						</a-button>
-						<a-dropdown trigger="click" placement="bottom" :getPopupContainer="(e) => e.parentNode">
+						<a-popover placement="bottomRight" overlayClassName="meo-popover-container" trigger="focus">
 							<a-button type="text" size="small">
 								<span class="color-primary">更多</span>
 								<ant-down-outlined class="color-primary" />
 							</a-button>
-							<template #overlay>
-								<a-menu @click="(e) => props.action(scoped.record)[e.key].event()">
-									<template v-for="(item, key) in omit(props.action(scoped.record), [state.action_first_key])" :key="key">
-										<a-menu-item v-if="isEmpty(item.hide) || item.hide()" :key="key" :disabled="item.disabled">
-											{{ item.name }}
-										</a-menu-item>
-									</template>
-								</a-menu>
+							<template #content>
+								<div class="action-container">
+									<a-button
+										type="text"
+										v-for="(item, key) in omit(props.action, [state.action_first_key])"
+										v-show="item?.show?.(scoped.record) ?? true"
+										:disabled="item?.disabled?.(scoped.record)"
+										:key="key"
+										@click="item.event(scoped.record)"
+									>
+										{{ item.name }}
+									</a-button>
+								</div>
 							</template>
-						</a-dropdown>
+						</a-popover>
 					</a-space>
 				</template>
 			</template>
@@ -165,6 +170,15 @@
 					white-space: nowrap;
 				}
 			}
+		}
+	}
+	.meo-popover-container {
+		.action-container {
+			display: grid;
+			grid-template-columns: repeat(1, 1fr);
+		}
+		:deep(.ant-popover-inner) {
+			padding: 6px !important;
 		}
 	}
 </style>
