@@ -33,24 +33,31 @@ class PermissionsSeeder extends Seeder
 				'level' => 1
 			],
 			[
-				'code' => 'system-user',
+				'code' => 'system-users',
 				'name' => '用户管理',
 				'description' => '系统管理-用户管理',
-				'path' => '/system/user',
+				'path' => '/system/users',
 				'level' => 2
 			],
 			[
-				'code' => 'system-role',
+				'code' => 'system-roles',
 				'name' => '角色管理',
 				'description' => '系统管理-角色管理',
-				'path' => '/system/role',
+				'path' => '/system/roles',
 				'level' => 2
 			],
 			[
-				'code' => 'system-permission',
+				'code' => 'system-permissions',
 				'name' => '权限管理',
 				'description' => '系统管理-权限管理',
-				'path' => '/system/permission',
+				'path' => '/system/permissions',
+				'level' => 2
+			],
+			[
+				'code' => 'system-organizes',
+				'name' => '组织管理',
+				'description' => '系统管理-组织管理',
+				'path' => '/system/organizes',
 				'level' => 2
 			],
 			[

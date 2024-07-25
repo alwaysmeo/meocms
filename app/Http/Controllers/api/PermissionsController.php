@@ -47,8 +47,10 @@ class PermissionsController extends Controller
 			'level' => 'required|integer'
 		]);
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
-		$is_exist = Permissions::query()->where('code', $req['code'])->first();
-		if ($is_exist) return $this->fail(null, $this->code['5001'], 5001);
+		if (!isset($req['id'])) {
+			$is_exist = Permissions::query()->where('code', $req['code'])->first();
+			if ($is_exist) return $this->fail(null, $this->code['5001'], 5001);
+		}
 		Permissions::query()->updateOrCreate(['id' => $req['id'] ?? null], $req);
 		return $this->success();
 	}
