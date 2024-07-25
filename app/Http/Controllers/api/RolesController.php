@@ -28,12 +28,12 @@ class RolesController extends Controller
 		$limit = isset($req['limit']) ? intval($req['limit']) : null;
 		$list = Roles::query();
 		$list->whereNull('deleted_at');
-		$list->select('id', 'name', 'description', 'slot', 'show');
+		$list->select('id', 'name', 'description', 'order', 'show');
 		# 只查询当前组织的角色
 		$list->whereHas('organize_info', function ($query) use ($organize_id) {
 			$query->where('id', $organize_id);
 		});
-		$list->orderBy('slot');
+		$list->orderBy('order');
 		$total = $list->count();
 		($page && $limit) && $list->offset(($page - 1) * $limit)->limit($limit);
 		return $this->success([

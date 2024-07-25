@@ -14,8 +14,8 @@ class Roles extends Model
 	protected $fillable = [
 		'name',
 		'description',
-		'slot',
-		'show'
+		'show',
+		'order'
 	];
 	protected $appends = ['count', 'permission_ids'];
 	protected $hidden = ['laravel_through_key'];

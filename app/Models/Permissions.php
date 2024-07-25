@@ -18,9 +18,9 @@ class Permissions extends Model
         'description',
         'icon',
         'path',
-        'slot',
         'level',
-        'show'
+        'show',
+        'order'
     ];
 
 	protected function casts(): array

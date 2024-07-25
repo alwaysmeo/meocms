@@ -18,7 +18,7 @@ class RolesSeeder extends Seeder
 		# 添加系统超级管理员角色
 		$role = Roles::query()->create([
 			'name' => '系统超级管理员',
-			'slot' => 0
+			'order' => 0
 		]);
 		$organize = Organizes::query()->first();
 		RoleOrganize::query()->create([

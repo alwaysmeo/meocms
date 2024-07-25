@@ -15,8 +15,8 @@ class Organizes extends Model
     protected $fillable = [
         'name',
         'description',
-        'slot',
-	    'show'
+	    'show',
+        'order'
     ];
 	protected $hidden = ['laravel_through_key'];
 

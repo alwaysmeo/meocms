@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('path', 255)->comment('页面路径地址');
             $table->tinyInteger('level')->default(1)->comment('菜单层级 【1:一级, 2:二级, 3:三级】');
             $table->tinyInteger('show')->default(1)->comment('是否显示【0:隐藏, 1:显示】');
-            $table->integer('slot')->nullable()->comment('菜单排序');
+            $table->integer('order')->nullable()->comment('菜单排序');
 	        $table->dateTime('created_at')->useCurrent()->comment('创建时间');
 	        $table->dateTime('updated_at')->nullable()->useCurrentOnUpdate()->comment('更新时间');
 	        $table->dateTime('deleted_at')->nullable()->comment('删除时间');

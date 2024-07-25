@@ -136,7 +136,7 @@ class PermissionsSeeder extends Seeder
 		];
 		$ids = [];
 		for ($i = 0; $i < count($data); $i++) {
-			$data[$i]['slot'] = $i;
+			$data[$i]['order'] = $i;
 			$ids[] = $i + 1;
 		}
 		foreach ($data as $item) {

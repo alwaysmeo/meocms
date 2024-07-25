@@ -20,8 +20,8 @@ class OrganizesController extends Controller
 		$limit = isset($req['limit']) ? intval($req['limit']) : null;
 		$list = Organizes::query();
 		$list->whereNull('deleted_at');
-		$list->select('id', 'name', 'description', 'show', 'slot');
-		$list->orderBy('slot');
+		$list->select('id', 'name', 'description', 'show', 'order');
+		$list->orderBy('order');
 		$total = $list->count();
 		($page && $limit) && $list->offset(($page - 1) * $limit)->limit($limit);
 		return $this->success([
