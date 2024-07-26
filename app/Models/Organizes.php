@@ -31,7 +31,15 @@ class Organizes extends Model
 
 	public function getCountAttribute(): int
 	{
-		return RoleOrganize::query()->where('organize_id', $this->attributes['id'])->get()->count();
+		return RoleOrganize::query()
+			->where('organize_id', $this->attributes['id'])
+			->whereHas('role_info', function ($query) {
+				$query->whereNull('deleted_at');
+			})
+			->whereHas('organize_info', function ($query) {
+				$query->whereNull('deleted_at');
+			})
+			->get()->count();
 	}
 
 	public function getShowAttribute($value): bool

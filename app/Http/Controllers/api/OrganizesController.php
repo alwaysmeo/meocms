@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\Organizes;
 use App\Models\RoleOrganize;
+use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
@@ -59,6 +60,36 @@ class OrganizesController extends Controller
 		return $this->success();
 	}
 
+	/* 获取组织关联的用户 */
+	public function users(Request $request): Response
+	{
+		$req = $request->only(['id', 'page', 'limit']);
+		$validator = Validator::make($req, [
+			'id' => 'required|integer',
+			'page' => 'integer',
+			'limit' => 'integer'
+		]);
+		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
+		$page = isset($req['page']) ? intval($req['page']) : null;
+		$limit = isset($req['limit']) ? intval($req['limit']) : null;
+		$list = Users::query();
+		$list->select('ulid', 'nickname', 'phone', 'email',);
+		$list->whereNull('deleted_at');
+		/* 只查询当前组织下的用户 */
+		$organize_id = $req['id'];
+		$list->whereHas('organize_info', function ($query) use ($organize_id) {
+			$query->where('id', $organize_id);
+		});
+		$total = $list->count();
+		$list->offset(($page - 1) * $limit)->limit($limit);
+		return $this->success([
+			'list' => $list->get(),
+			'total' => $total,
+			'page' => $page,
+			'limit' => $limit
+		]);
+	}
+
 	/* 获取组织关联的角色 */
 	public function roles(Request $request): Response
 	{
@@ -76,6 +107,9 @@ class OrganizesController extends Controller
 		$list->with(['role_info' => function ($query) {
 			$query->select('id', 'name');
 		}]);
+		$list->whereHas('role_info', function ($query) {
+			$query->whereNull('deleted_at');
+		});
 		$total = $list->count();
 		$list->offset(($page - 1) * $limit)->limit($limit);
 		return $this->success([

@@ -43,7 +43,8 @@ class Users extends AuthenticatableAuthenticatable
 	 * @var array<int, string>
 	 */
 	protected $hidden = [
-		'password'
+		'password',
+		'laravel_through_key'
 	];
 
 	/**

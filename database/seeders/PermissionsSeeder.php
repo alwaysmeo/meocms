@@ -70,10 +70,10 @@ class PermissionsSeeder extends Seeder
 				'level' => 1
 			],
 			[
-				'code' => 'content-article',
+				'code' => 'content-manage',
 				'name' => '内容管理',
 				'description' => '内容管理-文章管理',
-				'path' => '/content/article',
+				'path' => '/content/manage',
 				'level' => 2
 			],
 			[
@@ -97,6 +97,13 @@ class PermissionsSeeder extends Seeder
 				'icon' => 'AntProfileOutlined',
 				'path' => '/column',
 				'level' => 1
+			],
+			[
+				'code' => 'column-manage',
+				'name' => '栏目管理',
+				'description' => '栏目管理-栏目管理',
+				'path' => '/column/manage',
+				'level' => 2
 			],
 			[
 				'code' => 'column-model',

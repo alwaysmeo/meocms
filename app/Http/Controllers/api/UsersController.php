@@ -71,7 +71,7 @@ class UsersController extends Controller
 				$query->where('organize_id', $organize_id);
 			})->select('id', 'name');
 		}]);
-		$list->where('deleted_at', NULL);
+		$list->whereNull('deleted_at');
 		$list->orderBy('created_at', 'desc');
 		($search_type && $keyword) && $list->where($search_type, 'like', '%' . $keyword . '%');
 		$total = $list->count();
@@ -145,9 +145,9 @@ class UsersController extends Controller
 		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
 		$user = Users::query();
 		$user->with(['organize_info' => function ($organize_query) {
-			$organize_query->select('id', 'name')
+			$organize_query->select('id', 'name')->whereNull('deleted_at')
 				->with(['role_info' => function ($role_query) {
-					$role_query->select('id', 'name');
+					$role_query->select('id', 'name')->whereNull('deleted_at');
 				}]);
 		}]);
 		$user->where('ulid', $req['ulid']);

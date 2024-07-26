@@ -23,4 +23,9 @@ class RoleOrganize extends Model
 	{
 		return $this->hasOne(Roles::class, 'id', 'role_id');
 	}
+
+	public function organize_info(): hasOne
+	{
+		return $this->hasOne(Organizes::class, 'id', 'organize_id');
+	}
 }

@@ -32,6 +32,11 @@ class UserRole extends Model
 		return $this->hasOne(Users::class, 'ulid', 'user_ulid');
 	}
 
+	public function role_info(): hasOne
+	{
+		return $this->hasOne(Roles::class, 'id', 'role_id');
+	}
+
 	public function organize_info(): hasOne
 	{
 		return $this->hasOne(RoleOrganize::class, 'role_id', 'role_id');

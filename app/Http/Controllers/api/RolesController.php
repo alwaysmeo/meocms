@@ -95,7 +95,7 @@ class RolesController extends Controller
 		$list = UserRole::query();
 		$list->where('role_id', $req['id']);
 		$list->with(['user_info' => function ($query) {
-			$query->select('ulid', 'nickname', 'phone', 'email', 'last_login_at', 'picture');
+			$query->select('ulid', 'nickname', 'phone', 'email');
 		}]);
 		$total = $list->count();
 		$list->offset(($page - 1) * $limit)->limit($limit);
