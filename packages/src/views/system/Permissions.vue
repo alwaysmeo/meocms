@@ -14,6 +14,7 @@
 	})
 
 	const table = reactive({
+		loading: true,
 		columns: [
 			{ dataIndex: 'index', title: '序号', width: 120, align: 'center', show: true },
 			{ dataIndex: 'icon', title: '图标', width: 120, align: 'center', show: true },
@@ -25,8 +26,6 @@
 			{ dataIndex: 'action', title: '操作', width: 160, align: 'center', show: true }
 		],
 		data: [],
-		open: false,
-		loading: true,
 		page: 1,
 		limit: 10,
 		total: 0,
@@ -132,14 +131,10 @@
 					<div class="desc">系统权限管理</div>
 				</div>
 				<a-space>
-					<a-button @click="table.open = true">
-						<span>{{ $t('meo.components.common.table.list_filtering') }}</span>
-					</a-button>
 					<a-button type="primary" @click="table.action('edit', {})">新增权限</a-button>
 				</a-space>
 			</div>
 			<meo-table
-				v-model:open="table.open"
 				v-model:columns="table.columns"
 				v-model:page="table.page"
 				v-model:limit="table.limit"

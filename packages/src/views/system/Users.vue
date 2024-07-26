@@ -28,7 +28,6 @@
 			{ dataIndex: 'action', title: t('meo.pages.system.user.table.columns.action'), width: 160, align: 'center', show: true }
 		],
 		data: [],
-		open: false,
 		loading: true,
 		page: 1,
 		limit: 10,
@@ -194,14 +193,10 @@
 					<div class="desc">{{ $t('meo.pages.system.user.desc') }}</div>
 				</div>
 				<a-space>
-					<a-button @click="table.open = true">
-						<span>{{ $t('meo.components.common.table.list_filtering') }}</span>
-					</a-button>
 					<a-button type="primary" @click="table.action('edit', {})">新增用户</a-button>
 				</a-space>
 			</div>
 			<meo-table
-				v-model:open="table.open"
 				v-model:columns="table.columns"
 				v-model:page="table.page"
 				v-model:limit="table.limit"

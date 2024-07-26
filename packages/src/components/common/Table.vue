@@ -1,7 +1,6 @@
 <!-- 表格组件：table component -->
 <script setup>
 	import { isEqual, first, omit } from 'radash'
-	import { useVModel } from '@vueuse/core'
 
 	const emits = defineEmits(['update:open', 'update:columns', 'update:page', 'update:limit', 'paginate'])
 
@@ -42,19 +41,13 @@
 		columnOption: {
 			type: Boolean,
 			default: true,
-			message: '是否使用列表筛选弹窗'
-		},
-		open: {
-			type: Boolean,
-			default: false,
-			message: '控制选择可见的表格列的筛选模态框显示隐藏 v-model:open，（需设置 v-model:columns、columnOption=true）'
+			message: '是否显示列表筛选弹窗'
 		}
 	})
 
 	const state = reactive({
 		page: 1,
 		limit: 10,
-		open: useVModel(props, 'open', emits),
 		action_first_key: computed(() => {
 			return first(Object.keys(props.action))
 		}),
@@ -62,22 +55,47 @@
 	})
 
 	const checkbox = ref(props.columns.filter((item) => item.show).map((item) => item.dataIndex))
-	const checkbox_list = useVModel(props, 'columns', emits)
 
-	function handleChange(paginate, filters, sorter, { action, currentDataSource }) {
+	function handleChange(paginate, filters, sorter, { action }) {
 		emits('update:page', paginate.current)
 		emits('update:limit', paginate.pageSize)
-		emits(action, { page: paginate.current, limit: paginate.pageSize, total: props.total }, filters, sorter, { action, currentDataSource })
+		emits(action)
 	}
 
-	function handleConfirm() {
-		for (const item of checkbox_list.value) item.show = checkbox.value.includes(item.dataIndex)
-		state.open = false
+	function selector(value) {
+		for (const item of props.columns) {
+			if (!isEqual(item.dataIndex, 'index')) {
+				item.show = value.includes(item.dataIndex)
+			}
+		}
 	}
 </script>
 
 <template>
 	<div class="meo-table-container">
+		<div class="meo-table-header">
+			<a-tooltip title="刷新">
+				<a-button type="text" size="small" @click="emits('paginate')">
+					<ant-reload-outlined />
+				</a-button>
+			</a-tooltip>
+			<a-popover placement="bottomRight" trigger="click">
+				<a-tooltip title="列设置">
+					<a-button type="text" size="small">
+						<ant-setting-outlined />
+					</a-button>
+				</a-tooltip>
+				<template #content>
+					<a-checkbox-group class="checkbox-container" v-model:value="checkbox" @change="selector">
+						<template v-for="item in props.columns" :key="item.dataIndex">
+							<a-checkbox v-if="!isEqual(item.dataIndex, 'index')" :value="item.dataIndex">
+								{{ item.title }}
+							</a-checkbox>
+						</template>
+					</a-checkbox-group>
+				</template>
+			</a-popover>
+		</div>
 		<a-table
 			class="meo-table"
 			rowKey="id"
@@ -104,81 +122,42 @@
 							</a-button>
 							<template #content>
 								<div class="action-container">
-									<a-button
-										type="text"
-										v-for="(item, key) in omit(props.action, [state.action_first_key])"
-										v-show="item?.show?.(scoped.record) ?? true"
-										:disabled="item?.disabled?.(scoped.record)"
-										:key="key"
-										@click="item.event(scoped.record)"
-									>
-										{{ item.name }}
-									</a-button>
+									<a-space direction="vertical" :size="0">
+										<template v-for="(item, key) in omit(props.action, [state.action_first_key])" :key="key">
+											<a-button
+												type="text"
+												v-if="item?.show?.(scoped.record) ?? true"
+												:disabled="item?.disabled?.(scoped.record)"
+												@click="item.event(scoped.record)"
+											>
+												{{ item.name }}
+											</a-button>
+										</template>
+									</a-space>
 								</div>
 							</template>
 						</a-popover>
 					</a-space>
 				</template>
 			</template>
-			<template #emptyText>
-				<div class="text-align-center">{{ $attrs.emptyTxt ?? $t('meo.components.common.table.not_data') }}</div>
-			</template>
 		</a-table>
-		<meo-modal
-			v-if="props.columnOption"
-			:title="$t('meo.components.common.table.select_table_header')"
-			v-model:open="state.open"
-			class="meo-table-modal-container"
-			@confirm="handleConfirm"
-			@cancel="state.open = false"
-		>
-			<a-checkbox-group class="checkbox-container" v-model:value="checkbox">
-				<a-checkbox v-for="item in checkbox_list" :key="item.dataIndex" :value="item.dataIndex" :disabled="['index', 'action'].includes(item.dataIndex)">
-					<a-tooltip :title="item.title">
-						{{ item.title }}
-					</a-tooltip>
-				</a-checkbox>
-			</a-checkbox-group>
-		</meo-modal>
 	</div>
 </template>
 
 <style scoped lang="scss">
 	.meo-table-container {
 		position: relative;
-		.selector {
-			position: absolute;
-			top: 0;
-			left: 0;
-			z-index: 1;
-			font-size: 20px;
+		.meo-table-header {
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			gap: 4px;
+			padding: 4px;
 		}
 	}
-	.meo-table-modal-container {
-		.checkbox-container {
-			padding: 10px 30px 0 30px;
-			width: 100%;
-			display: grid;
-			grid-template-columns: repeat(3, 1fr);
-			gap: 10px;
-			:deep(label) {
-				overflow: hidden;
-				> span:last-child {
-					display: block;
-					overflow: hidden;
-					text-overflow: ellipsis;
-					white-space: nowrap;
-				}
-			}
-		}
-	}
-	.meo-popover-container {
-		.action-container {
-			display: grid;
-			grid-template-columns: repeat(1, 1fr);
-		}
-		:deep(.ant-popover-inner) {
-			padding: 6px !important;
-		}
+	.checkbox-container {
+		display: grid;
+		grid-template-columns: repeat(1, 1fr);
+		gap: 10px;
 	}
 </style>
