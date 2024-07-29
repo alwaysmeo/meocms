@@ -16,6 +16,7 @@ return new class extends Migration
             'upload_record' => '资源上传记录表',
             'organizes' => '组织表',
             'roles' => '角色表',
+            'role_organize' => '角色组织关联表',
             'permissions' => '权限菜单表',
             'role_permissions' => '角色权限关联表',
             'users' => '用户表',
