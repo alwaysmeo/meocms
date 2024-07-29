@@ -8,18 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class RolePermissions extends Model
 {
-	use HasFactory;
+    use HasFactory;
 
-	protected $table = 'role_permissions';
-	protected $primaryKey = 'role_id';
-	public $timestamps = false;
-	protected $fillable = [
-		'role_id',
-		'permission_ids'
-	];
+    protected $table = 'role_permissions';
 
-	protected function casts(): array
-	{
-		return ['permission_ids' => Json::class];
-	}
+    protected $primaryKey = 'role_id';
+
+    public $timestamps = false;
+
+    protected $fillable = [
+        'role_id',
+        'permission_ids',
+    ];
+
+    protected function casts(): array
+    {
+        return ['permission_ids' => Json::class];
+    }
 }

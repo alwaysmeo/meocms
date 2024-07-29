@@ -8,24 +8,28 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class RoleOrganize extends Model
 {
-	use HasFactory;
+    use HasFactory;
 
-	protected $table = 'role_organize';
-	protected $primaryKey = 'role_id';
-	public $incrementing = false;
-	public $timestamps = false;
-	protected $fillable = [
-		'role_id',
-		'organize_id'
-	];
+    protected $table = 'role_organize';
 
-	public function role_info(): hasOne
-	{
-		return $this->hasOne(Roles::class, 'id', 'role_id');
-	}
+    protected $primaryKey = 'role_id';
 
-	public function organize_info(): hasOne
-	{
-		return $this->hasOne(Organizes::class, 'id', 'organize_id');
-	}
+    public $incrementing = false;
+
+    public $timestamps = false;
+
+    protected $fillable = [
+        'role_id',
+        'organize_id',
+    ];
+
+    public function role_info(): hasOne
+    {
+        return $this->hasOne(Roles::class, 'id', 'role_id');
+    }
+
+    public function organize_info(): hasOne
+    {
+        return $this->hasOne(Organizes::class, 'id', 'organize_id');
+    }
 }

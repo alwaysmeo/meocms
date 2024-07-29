@@ -8,8 +8,8 @@ use Illuminate\Http\Response;
 
 class TestController extends Controller
 {
-	public function test(Request $request): Response
-	{
-		return $this->success($request);
-	}
+    public function test(Request $request): Response
+    {
+        return $this->success($request);
+    }
 }

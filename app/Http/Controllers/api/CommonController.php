@@ -11,12 +11,15 @@ use Mews\Captcha\Facades\Captcha;
 
 class CommonController extends Controller
 {
-	public function captcha(Request $request): Response
-	{
-		$req = $request->only(['type']);
-		$validator = Validator::make($req, ['type' => Rule::in(['default', 'math', 'flat', 'mini', 'inverse'])]);
-		if (!$validator->passes()) return $this->fail(null, $validator->errors()->first(), 5000);
-		$data = Captcha::create($req['type'] ?? 'math', true);
-		return $this->success($data);
-	}
+    public function captcha(Request $request): Response
+    {
+        $req = $request->only(['type']);
+        $validator = Validator::make($req, ['type' => Rule::in(['default', 'math', 'flat', 'mini', 'inverse'])]);
+        if (! $validator->passes()) {
+            return $this->fail(null, $validator->errors()->first(), 5000);
+        }
+        $data = Captcha::create($req['type'] ?? 'math', true);
+
+        return $this->success($data);
+    }
 }

@@ -10,7 +10,9 @@ class Permissions extends Model
     use HasFactory;
 
     protected $table = 'permissions';
-	public $timestamps = false;
+
+    public $timestamps = false;
+
     protected $fillable = [
         'parent_id',
         'code',
@@ -20,20 +22,20 @@ class Permissions extends Model
         'path',
         'level',
         'show',
-        'order'
+        'order',
     ];
 
-	protected function casts(): array
-	{
-		return [
-			'created_at' => 'datetime:Y-m-d H:i:s',
-			'updated_at' => 'datetime:Y-m-d H:i:s',
-			'deleted_at' => 'datetime:Y-m-d H:i:s'
-		];
-	}
+    protected function casts(): array
+    {
+        return [
+            'created_at' => 'datetime:Y-m-d H:i:s',
+            'updated_at' => 'datetime:Y-m-d H:i:s',
+            'deleted_at' => 'datetime:Y-m-d H:i:s',
+        ];
+    }
 
-	public function getShowAttribute($value): bool
-	{
-		return [0 => false, 1 => true][$value];
-	}
+    public function getShowAttribute($value): bool
+    {
+        return [0 => false, 1 => true][$value];
+    }
 }

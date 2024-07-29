@@ -94,7 +94,9 @@ class AccountController extends Controller
         }
         /* 验证账号是否已存在 */
         $user = Users::query()->where('email', $req['account'])->whereNull('deleted_at')->first();
-        if ($user) return $this->fail(null, $this->code['3002'], 3002);
+        if ($user) {
+            return $this->fail(null, $this->code['3002'], 3002);
+        }
         /* 创建用户 */
         Users::query()->create([
             'email' => $req['account'],

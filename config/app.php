@@ -135,7 +135,7 @@ return [
     */
     'aliases' => [
         'Redis' => Illuminate\Support\Facades\Redis::class,
-	    'Captcha' => Mews\Captcha\Facades\Captcha::class,
+        'Captcha' => Mews\Captcha\Facades\Captcha::class,
     ],
 
 ];
