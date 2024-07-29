@@ -1,6 +1,8 @@
 <!-- 表格组件：table component -->
 <script setup>
+	import { useVModel } from '@vueuse/core'
 	import { isEqual, first, omit } from 'radash'
+	import { vDraggable } from 'vue-draggable-plus'
 
 	const emits = defineEmits(['update:open', 'update:columns', 'update:page', 'update:limit', 'paginate'])
 
@@ -37,11 +39,6 @@
 			type: Object,
 			default: () => {},
 			message: '操作列中的数据对象：key: { name, show, disabled, click }'
-		},
-		columnOption: {
-			type: Boolean,
-			default: true,
-			message: '是否显示列表筛选弹窗'
 		}
 	})
 
@@ -51,7 +48,7 @@
 		action_first_key: computed(() => {
 			return first(Object.keys(props.action))
 		}),
-		columns: computed(() => props.columns.filter((item) => item.show))
+		columns: useVModel(props, 'columns', emits)
 	})
 
 	const checkbox = ref(props.columns.filter((item) => item.show).map((item) => item.dataIndex))
@@ -86,12 +83,20 @@
 					</a-button>
 				</a-tooltip>
 				<template #content>
-					<a-checkbox-group class="checkbox-container" v-model:value="checkbox" @change="selector">
-						<template v-for="item in props.columns" :key="item.dataIndex">
-							<a-checkbox v-if="!isEqual(item.dataIndex, 'index')" :value="item.dataIndex">
-								{{ item.title }}
-							</a-checkbox>
-						</template>
+					<a-checkbox-group
+						v-draggable="[state.columns, { animation: 300, handle: '.handle' }]"
+						class="checkbox-container"
+						v-model:value="checkbox"
+						@change="selector"
+					>
+						<div class="checkbox-item" v-for="item in state.columns" :key="item.dataIndex">
+							<template v-if="!isEqual(item.dataIndex, 'index')">
+								<ant-holder-outlined class="handle" />
+								<a-checkbox :value="item.dataIndex" class="user-select-none">
+									{{ item.title }}
+								</a-checkbox>
+							</template>
+						</div>
 					</a-checkbox-group>
 				</template>
 			</a-popover>
@@ -103,7 +108,7 @@
 			:scroll="{ x: 1200 }"
 			@change="handleChange"
 			v-bind="$attrs"
-			:columns="state.columns"
+			:columns="state.columns.filter((item) => item.show)"
 		>
 			<template #bodyCell="scoped">
 				<template v-if="isEqual(scoped.column.dataIndex, 'index')">
@@ -159,5 +164,15 @@
 		display: grid;
 		grid-template-columns: repeat(1, 1fr);
 		gap: 10px;
+		cursor: default;
+		.checkbox-item {
+			display: flex;
+			align-items: center;
+			gap: 6px;
+			.handle {
+				padding-left: 4px;
+				cursor: move;
+			}
+		}
 	}
 </style>

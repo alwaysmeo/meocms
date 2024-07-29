@@ -44,6 +44,10 @@
 	font-weight: 700;
 }
 
+.user-select-none {
+	user-select: none;
+}
+
 .active:active {
 	opacity: 0.6;
 }
