@@ -2,7 +2,10 @@
 
 .ant-modal {
 	/** useModalConfirm 样式 */
-	.meo-modal-content {
+	.meo-modal-body {
+		overflow-y: auto;
+		overflow-x: hidden;
+		max-height: 500px;
 		.warning {
 			margin-top: 10px;
 			padding-left: 3em;
@@ -11,6 +14,16 @@
 			color: $color-error;
 			white-space: pre;
 		}
+	}
+	.ant-modal-footer .ant-btn-primary,
+	.ant-modal-footer .ant-btn-default {
+		display: none;
+	}
+	&.meo-modal-button-confirm .ant-modal-footer .ant-btn-primary {
+		display: inline-block;
+	}
+	&.meo-modal-button-cancel .ant-modal-footer .ant-btn-default {
+		display: inline-block;
 	}
 }
 

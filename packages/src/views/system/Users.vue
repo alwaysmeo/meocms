@@ -62,7 +62,7 @@
 				event: (record) => {
 					useModalConfirm({
 						title: '提示',
-						content: h('div', { class: 'meo-modal-content' }, [
+						content: h('div', { class: 'meo-modal-body' }, [
 							h('p', {}, `是否封禁【${record.nickname}】用户？`),
 							h('p', { class: 'warning' }, `注意：确认封禁后该用户将无法登录账号，请谨慎操作！`)
 						]),
@@ -78,7 +78,7 @@
 				event: (record) => {
 					useModalConfirm({
 						title: '提示',
-						content: h('div', { class: 'meo-modal-content' }, [
+						content: h('div', { class: 'meo-modal-body' }, [
 							h('p', {}, `是否解封【${record.nickname}】用户？`),
 							h('p', { class: 'warning' }, `注意：确认解封后该用户即可正常登录。`)
 						]),
@@ -93,7 +93,7 @@
 				event: (record) => {
 					useModalConfirm({
 						title: '提示',
-						content: h('div', { class: 'meo-modal-content' }, [
+						content: h('div', { class: 'meo-modal-body' }, [
 							h('p', {}, `是否删除【${record.nickname}】用户？`),
 							h('p', { class: 'warning' }, `注意：确认删除后该用户将无法登录账号。\n该操作无法撤销恢复，请谨慎操作！`)
 						]),
@@ -225,7 +225,7 @@
 			</meo-table>
 		</div>
 
-		<meo-modal v-model:open="form.open" :title="form.data.ulid ? '修改用户' : '新增用户'" @confirm="form.submit">
+		<meo-modal v-model:open="form.open" :title="form.data.ulid ? '修改用户' : '新增用户'" :on-confirm="form.submit">
 			<div>
 				<a-form ref="formRef" :model="form.data" :rules="form.rules" :label-col="{ span: 6 }" :wrapper-col="{ span: 16 }">
 					<a-form-item name="nickname" label="用户名">
@@ -251,7 +251,7 @@
 			</div>
 		</meo-modal>
 
-		<meo-modal v-model:open="detail.open" title="用户详情" :confirm="false">
+		<meo-modal v-model:open="detail.open" title="用户详情" cancel="关闭" :confirm="false">
 			<a-row :gutter="[10, 20]">
 				<a-col :span="8" class="text-align-right">用户头像：</a-col>
 				<a-col :span="16">
