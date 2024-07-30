@@ -3,6 +3,7 @@
 	import { isEmpty, isEqual, pick } from 'radash'
 	import { useOrganizesStore } from '@stores/organizesStore'
 	import { useModalConfirm } from '@hooks/useModal'
+	import Controller from '@components/controller'
 	import rexExp from '@utils/rexExp'
 	import usersApi from '@apis/users'
 	import rolesApi from '@apis/roles'
@@ -12,6 +13,26 @@
 
 	const { t } = i18n.global
 	const organizesStore = useOrganizesStore()
+
+	const controllerRef = ref()
+	const controller = reactive({
+		list: [
+			{
+				key: 'keyword',
+				component: 'SelectInput',
+				checked: 'ulid',
+				value: '',
+				options: {
+					ulid: '用户ID',
+					email: '邮箱账号',
+					nickname: '用户名',
+					phone: '联系电话'
+				}
+			}
+		],
+		reset: () => controllerRef.value.map((item) => item.reset()),
+		query: () => {}
+	})
 
 	const table = reactive({
 		columns: [
@@ -186,6 +207,25 @@
 
 <template>
 	<div>
+		<div class="primary-container">
+			<div class="primary-header">
+				<component
+					ref="controllerRef"
+					v-for="item in controller.list"
+					:key="item.key"
+					:is="Controller[item.component]"
+					v-model:checked="item.checked"
+					v-model:value="item.value"
+					:options="item.options"
+				/>
+			</div>
+			<div class="primary-body">
+				<a-space>
+					<a-button @click="controller.reset">重置</a-button>
+					<a-button type="primary" @click="controller.query">查询</a-button>
+				</a-space>
+			</div>
+		</div>
 		<div class="primary-container">
 			<div class="primary-header">
 				<div>

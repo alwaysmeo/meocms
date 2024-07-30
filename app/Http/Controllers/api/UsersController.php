@@ -47,13 +47,13 @@ class UsersController extends Controller
     /* 获取用户列表 */
     public function list(Request $request): Response
     {
-        $req = $request->only(['organize_id', 'page', 'limit', 'search_type', 'keyword']);
+        $req = $request->only(['organize_id', 'page', 'limit', 'keyword_type', 'keyword']);
         $validator = Validator::make($req, [
             'organize_id' => 'required|integer',
             'page' => 'integer',
             'limit' => 'integer',
-            'search_type' => 'in:ulid,email,nickname,phone',
-            'keyword' => 'max:60',
+            'keyword_type' => 'in:ulid,email,nickname,phone',
+            'keyword' => 'max:100',
         ]);
         if (! $validator->passes()) {
             return $this->fail(null, $validator->errors()->first(), 5000);
@@ -61,7 +61,7 @@ class UsersController extends Controller
         $organize_id = intval($req['organize_id']);
         $page = isset($req['page']) ? intval($req['page']) : null;
         $limit = isset($req['limit']) ? intval($req['limit']) : null;
-        $search_type = $req['search_type'] ?? null;
+        $keyword_type = $req['keyword_type'] ?? null;
         $keyword = $req['keyword'] ?? null;
         $list = Users::query();
         $list->select('ulid', 'email', 'nickname', 'picture', 'phone', 'status', 'last_login_at', 'created_at');
@@ -77,7 +77,7 @@ class UsersController extends Controller
         }]);
         $list->whereNull('deleted_at');
         $list->orderBy('created_at', 'desc');
-        ($search_type && $keyword) && $list->where($search_type, 'like', '%'.$keyword.'%');
+        ($keyword_type && $keyword) && $list->where($keyword_type, 'like', '%'.$keyword.'%');
         $total = $list->count();
         $list->offset(($page - 1) * $limit)->limit($limit);
 
