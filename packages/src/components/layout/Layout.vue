@@ -24,8 +24,11 @@
 					<Header />
 				</a-layout-header>
 				<a-layout-content>
-					<AppMain />
-					<Footer />
+					<AppMain>
+						<template #footer>
+							<Footer />
+						</template>
+					</AppMain>
 				</a-layout-content>
 			</a-layout>
 		</a-layout>

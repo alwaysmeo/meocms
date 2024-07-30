@@ -58,11 +58,14 @@
 			</a-breadcrumb>
 		</div>
 		<div class="main-app">
-			<router-view v-slot="{ Component }">
-				<transition appear name="fade-transform" mode="out-in">
-					<component :is="Component" />
-				</transition>
-			</router-view>
+			<div>
+				<router-view v-slot="{ Component }">
+					<transition appear name="fade-transform" mode="out-in">
+						<component :is="Component" />
+					</transition>
+				</router-view>
+			</div>
+			<slot name="footer"></slot>
 		</div>
 	</div>
 </template>
@@ -81,11 +84,14 @@
 		}
 	}
 	.main-breadcrumb {
-		padding: 10px 20px 0 20px;
+		padding: 10px 20px;
 	}
 	.main-app {
-		height: calc(100vh - 64px - 38px - 32px - 50px);
+		height: calc(100vh - 64px - 38px - 42px);
 		overflow-y: auto;
-		padding: 20px;
+		padding: 0 20px 20px 20px;
+		> div:first-child {
+			min-height: calc(100vh - 64px - 38px - 42px - 50px - 20px);
+		}
 	}
 </style>
