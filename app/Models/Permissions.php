@@ -23,6 +23,7 @@ class Permissions extends Model
         'level',
         'show',
         'order',
+        'type',
     ];
 
     protected function casts(): array

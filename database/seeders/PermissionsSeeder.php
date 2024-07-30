@@ -24,6 +24,7 @@ class PermissionsSeeder extends Seeder
                 'icon' => 'AntHomeOutlined',
                 'path' => '/home',
                 'level' => 1,
+                'type' => 1,
             ],
             [
                 'code' => 'system',
@@ -32,6 +33,7 @@ class PermissionsSeeder extends Seeder
                 'icon' => 'AntInboxOutlined',
                 'path' => '/system',
                 'level' => 1,
+                'type' => 1,
             ],
             [
                 'code' => 'system-users',
@@ -39,6 +41,7 @@ class PermissionsSeeder extends Seeder
                 'description' => '系统管理-用户管理',
                 'path' => '/system/users',
                 'level' => 2,
+                'type' => 1,
             ],
             [
                 'code' => 'system-roles',
@@ -46,6 +49,7 @@ class PermissionsSeeder extends Seeder
                 'description' => '系统管理-角色管理',
                 'path' => '/system/roles',
                 'level' => 2,
+                'type' => 1,
             ],
             [
                 'code' => 'system-permissions',
@@ -53,6 +57,7 @@ class PermissionsSeeder extends Seeder
                 'description' => '系统管理-权限管理',
                 'path' => '/system/permissions',
                 'level' => 2,
+                'type' => 1,
             ],
             [
                 'code' => 'system-organizes',
@@ -60,6 +65,7 @@ class PermissionsSeeder extends Seeder
                 'description' => '系统管理-组织管理',
                 'path' => '/system/organizes',
                 'level' => 2,
+                'type' => 1,
             ],
             [
                 'code' => 'content',
@@ -68,6 +74,7 @@ class PermissionsSeeder extends Seeder
                 'icon' => 'AntContainerOutlined',
                 'path' => '/content',
                 'level' => 1,
+                'type' => 1,
             ],
             [
                 'code' => 'content-manage',
@@ -75,6 +82,7 @@ class PermissionsSeeder extends Seeder
                 'description' => '内容管理-文章管理',
                 'path' => '/content/manage',
                 'level' => 2,
+                'type' => 1,
             ],
             [
                 'code' => 'content-model',
@@ -82,6 +90,7 @@ class PermissionsSeeder extends Seeder
                 'description' => '内容管理-内容模型管理',
                 'path' => '/content/model',
                 'level' => 2,
+                'type' => 1,
             ],
             [
                 'code' => 'content-timing',
@@ -89,6 +98,7 @@ class PermissionsSeeder extends Seeder
                 'description' => '内容管理-定时任务',
                 'path' => '/content/timing',
                 'level' => 2,
+                'type' => 1,
             ],
             [
                 'code' => 'column',
@@ -97,6 +107,7 @@ class PermissionsSeeder extends Seeder
                 'icon' => 'AntProfileOutlined',
                 'path' => '/column',
                 'level' => 1,
+                'type' => 1,
             ],
             [
                 'code' => 'column-manage',
@@ -104,6 +115,7 @@ class PermissionsSeeder extends Seeder
                 'description' => '栏目管理-栏目管理',
                 'path' => '/column/manage',
                 'level' => 2,
+                'type' => 1,
             ],
             [
                 'code' => 'column-model',
@@ -111,6 +123,7 @@ class PermissionsSeeder extends Seeder
                 'description' => '栏目管理-栏目模型管理',
                 'path' => '/column/model',
                 'level' => 2,
+                'type' => 1,
             ],
             [
                 'code' => 'statistics',
@@ -119,6 +132,7 @@ class PermissionsSeeder extends Seeder
                 'icon' => 'AntLineChartOutlined',
                 'path' => '/statistics',
                 'level' => 1,
+                'type' => 1,
             ],
             [
                 'code' => 'statistics-general',
@@ -126,6 +140,7 @@ class PermissionsSeeder extends Seeder
                 'description' => '数据统计-网站概况',
                 'path' => '/statistics/general',
                 'level' => 2,
+                'type' => 1,
             ],
             [
                 'code' => 'statistics-visitor',
@@ -133,6 +148,7 @@ class PermissionsSeeder extends Seeder
                 'description' => '数据统计-访客分析',
                 'path' => '/statistics/visitor',
                 'level' => 2,
+                'type' => 1,
             ],
             [
                 'code' => 'statistics-content',
@@ -140,6 +156,7 @@ class PermissionsSeeder extends Seeder
                 'description' => '数据统计-内容数据统计',
                 'path' => '/statistics/content',
                 'level' => 2,
+                'type' => 1,
             ],
         ];
         $ids = [];
