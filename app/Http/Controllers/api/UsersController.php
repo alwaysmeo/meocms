@@ -37,6 +37,7 @@ class UsersController extends Controller
         $list = Permissions::query()
             ->whereNull('deleted_at')
             ->where('show', 1)
+            ->where('type', 1)
             ->whereIn('id', json_decode($role_permission['permission_ids']))
             ->orderByRaw('ISNULL(`ORDER`), `ORDER` ASC')
             ->get();

@@ -26,7 +26,7 @@ class PermissionsController extends Controller
     public function list(): Response
     {
         $list = Permissions::query()
-            ->select('id', 'parent_id', 'code', 'name', 'description', 'icon', 'path', 'order', 'level', 'show')
+            ->select('id', 'parent_id', 'code', 'name', 'description', 'icon', 'path', 'level', 'show', 'order', 'type')
             ->whereNull('deleted_at')
             ->orderByRaw('ISNULL(`ORDER`), `ORDER` ASC')
             ->get();
@@ -79,6 +79,31 @@ class PermissionsController extends Controller
         ]);
 
         return $this->success();
+    }
+
+    /* 获取子权限 */
+    public function children(Request $request): Response
+    {
+        $req = $request->only(['parent_id', 'parent_code']);
+        $validator = Validator::make($req, [
+            'parent_id' => 'integer',
+            'parent_code' => 'max:100',
+        ]);
+        if (! $validator->passes()) {
+            return $this->fail(null, $validator->errors()->first(), 5000);
+        }
+        $permissions = Permissions::query();
+        $permissions->whereNull('deleted_at');
+        if (isset($req['parent_id'])) {
+            $permissions->where('parent_id', $req['parent_id']);
+        }
+        if (isset($req['parent_code'])) {
+            $permissions->where('code', $req['parent_code']);
+        }
+        $permissions->select('id', 'parent_id', 'code', 'name', 'description', 'icon', 'path', 'level', 'show', 'order', 'type');
+        $permissions->get();
+
+        return $this->success($permissions);
     }
 
     /* 修改权限启用状态 */

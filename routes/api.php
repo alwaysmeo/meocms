@@ -63,6 +63,8 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::post('/upsert', [PermissionsController::class, 'upsert']);
         /* 删除权限 */
         Route::post('/delete', [PermissionsController::class, 'delete']);
+        /* 获取子权限 */
+        Route::get('/children', [PermissionsController::class, 'children']);
         /* 修改权限启用状态 */
         Route::post('/change/show', [PermissionsController::class, 'changeShow']);
     });
