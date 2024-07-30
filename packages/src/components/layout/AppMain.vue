@@ -41,7 +41,13 @@
 <template>
 	<div>
 		<div class="main-tabs">
-			<a-tabs v-model:activeKey="tabs_active" hideAdd type="editable-card" @change="router.push({ name: $event })" @edit="closeTabs">
+			<a-tabs
+				v-model:activeKey="tabs_active"
+				hideAdd
+				type="editable-card"
+				@change="router.push({ name: $event })"
+				@edit="closeTabs"
+			>
 				<a-tab-pane v-for="(value, key) in tabs_list" :key="key" :tab="value" :closable="tabs_with_close" />
 			</a-tabs>
 		</div>

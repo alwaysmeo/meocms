@@ -207,13 +207,23 @@
 			</meo-table>
 		</meo-modal>
 
-		<meo-modal v-model:open="form.open" :title="form.data.role_id ? '编辑组织' : '新增组织'" :on-confirm="form.submit()">
+		<meo-modal
+			v-model:open="form.open"
+			:title="form.data.role_id ? '编辑组织' : '新增组织'"
+			:on-confirm="form.submit()"
+		>
 			<a-form ref="formRef" :model="form.data" :rules="form.rules" :label-col="{ span: 6 }" :wrapper-col="{ span: 16 }">
 				<a-form-item label="组织名称" name="name">
 					<a-input v-model:value="form.data.name" placeholder="请输入组织名称" show-count :maxlength="30" />
 				</a-form-item>
 				<a-form-item name="description" label="组织描述">
-					<a-textarea v-model:value="form.data.description" :maxlength="200" auto-size placeholder="请输入组织描述信息" show-count />
+					<a-textarea
+						v-model:value="form.data.description"
+						:maxlength="200"
+						auto-size
+						placeholder="请输入组织描述信息"
+						show-count
+					/>
 				</a-form-item>
 			</a-form>
 		</meo-modal>

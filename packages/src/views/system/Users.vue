@@ -43,17 +43,51 @@
 
 	const table = reactive({
 		columns: [
-			{ dataIndex: 'index', title: t('meo.pages.system.user.table.columns.index'), width: 120, align: 'center', show: true },
+			{
+				dataIndex: 'index',
+				title: t('meo.pages.system.user.table.columns.index'),
+				width: 120,
+				align: 'center',
+				show: true
+			},
 			{ dataIndex: 'ulid', title: t('meo.pages.system.user.table.columns.id'), width: 260 },
-			{ dataIndex: 'picture', title: t('meo.pages.system.user.table.columns.picture'), width: 120, align: 'center', show: true },
+			{
+				dataIndex: 'picture',
+				title: t('meo.pages.system.user.table.columns.picture'),
+				width: 120,
+				align: 'center',
+				show: true
+			},
 			{ dataIndex: 'email', title: t('meo.pages.system.user.table.columns.email'), show: true },
 			{ dataIndex: 'phone', title: t('meo.pages.system.user.table.columns.phone'), width: 150, align: 'center' },
 			{ dataIndex: 'nickname', title: t('meo.pages.system.user.table.columns.nickname'), show: true },
 			{ dataIndex: 'role', title: t('meo.pages.system.user.table.columns.role'), align: 'center', show: true },
-			{ dataIndex: 'created_at', title: t('meo.pages.system.user.table.columns.created_at'), width: 170, align: 'center' },
-			{ dataIndex: 'last_login_at', title: t('meo.pages.system.user.table.columns.last_login_at'), width: 170, align: 'center' },
-			{ dataIndex: 'status', title: t('meo.pages.system.user.table.columns.status'), width: 120, align: 'center', show: true },
-			{ dataIndex: 'action', title: t('meo.pages.system.user.table.columns.action'), width: 160, align: 'center', show: true }
+			{
+				dataIndex: 'created_at',
+				title: t('meo.pages.system.user.table.columns.created_at'),
+				width: 170,
+				align: 'center'
+			},
+			{
+				dataIndex: 'last_login_at',
+				title: t('meo.pages.system.user.table.columns.last_login_at'),
+				width: 170,
+				align: 'center'
+			},
+			{
+				dataIndex: 'status',
+				title: t('meo.pages.system.user.table.columns.status'),
+				width: 120,
+				align: 'center',
+				show: true
+			},
+			{
+				dataIndex: 'action',
+				title: t('meo.pages.system.user.table.columns.action'),
+				width: 160,
+				align: 'center',
+				show: true
+			}
 		],
 		data: [],
 		loading: true,
@@ -242,7 +276,12 @@
 					<div class="desc">{{ $t('meo.pages.system.user.desc') }}</div>
 				</div>
 				<a-space>
-					<a-button type="primary" v-if="state.permissions.includes(`${route.name}-create`)" @click="table.action('edit', {})">新增用户</a-button>
+					<a-button
+						type="primary"
+						v-if="state.permissions.includes(`${route.name}-create`)"
+						@click="table.action('edit', {})"
+						>新增用户</a-button
+					>
 				</a-space>
 			</div>
 			<meo-table
@@ -276,7 +315,13 @@
 
 		<meo-modal v-model:open="form.open" :title="form.data.ulid ? '修改用户' : '新增用户'" :on-confirm="form.submit">
 			<div>
-				<a-form ref="formRef" :model="form.data" :rules="form.rules" :label-col="{ span: 6 }" :wrapper-col="{ span: 16 }">
+				<a-form
+					ref="formRef"
+					:model="form.data"
+					:rules="form.rules"
+					:label-col="{ span: 6 }"
+					:wrapper-col="{ span: 16 }"
+				>
 					<a-form-item name="nickname" label="用户名">
 						<a-input v-model:value="form.data.nickname" :maxlength="30" placeholder="请输入用户名" show-count />
 					</a-form-item>
@@ -288,7 +333,12 @@
 						</a-select>
 					</a-form-item>
 					<a-form-item name="email" label="邮箱账号">
-						<a-input v-model:value="form.data.email" :maxlength="60" placeholder="请输入邮箱账号（用户登录账号）" show-count />
+						<a-input
+							v-model:value="form.data.email"
+							:maxlength="60"
+							placeholder="请输入邮箱账号（用户登录账号）"
+							show-count
+						/>
 					</a-form-item>
 					<a-form-item name="phone" label="联系电话">
 						<a-input v-model:value="form.data.phone" :maxlength="11" placeholder="请输入用户联系电话" show-count />

@@ -166,7 +166,13 @@
 
 		<meo-modal v-model:open="form.open" :title="form.data.ulid ? '修改权限' : '新增权限'" :on-confirm="form.submit">
 			<div>
-				<a-form ref="formRef" :model="form.data" :rules="form.rules" :label-col="{ span: 6 }" :wrapper-col="{ span: 16 }">
+				<a-form
+					ref="formRef"
+					:model="form.data"
+					:rules="form.rules"
+					:label-col="{ span: 6 }"
+					:wrapper-col="{ span: 16 }"
+				>
 					<a-form-item name="code" label="唯一标识">
 						<a-input v-model:value="form.data.code" :maxlength="100" placeholder="请输入权限唯一标识" show-count />
 					</a-form-item>

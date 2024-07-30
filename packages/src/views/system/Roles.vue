@@ -269,7 +269,13 @@
 					<a-input v-model:value="form.data.name" placeholder="请输入角色名称" show-count :maxlength="30" />
 				</a-form-item>
 				<a-form-item name="description" label="角色描述">
-					<a-textarea v-model:value="form.data.description" :maxlength="200" auto-size placeholder="请输入角色描述信息" show-count />
+					<a-textarea
+						v-model:value="form.data.description"
+						:maxlength="200"
+						auto-size
+						placeholder="请输入角色描述信息"
+						show-count
+					/>
 				</a-form-item>
 				<a-form-item label="角色权限" name="permission_ids" validateFirst>
 					<div class="permissions-container">

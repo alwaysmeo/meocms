@@ -104,7 +104,12 @@
 		<a-table
 			class="meo-table"
 			rowKey="id"
-			:pagination="{ current: props.page, pageSize: props.limit, total: props.total, pageSizeOptions: props.pageSizeOptions }"
+			:pagination="{
+				current: props.page,
+				pageSize: props.limit,
+				total: props.total,
+				pageSizeOptions: props.pageSizeOptions
+			}"
 			:scroll="{ x: 1200 }"
 			@change="handleChange"
 			v-bind="$attrs"
@@ -117,7 +122,12 @@
 				<slot name="bodyCell" v-bind="scoped"></slot>
 				<template v-if="isEqual(scoped.column.dataIndex, 'action')">
 					<a-space>
-						<a-button class="color-primary" type="text" size="small" @click="props.action[state.action_first_key].event(scoped.record)">
+						<a-button
+							class="color-primary"
+							type="text"
+							size="small"
+							@click="props.action[state.action_first_key].event(scoped.record)"
+						>
 							{{ props.action[state.action_first_key].name }}
 						</a-button>
 						<a-popover placement="bottomRight" overlayClassName="meo-popover-container" trigger="focus">
