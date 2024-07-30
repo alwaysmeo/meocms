@@ -20,6 +20,7 @@
 			{ dataIndex: 'icon', title: '图标', width: 120, align: 'center', show: true },
 			{ dataIndex: 'code', title: '唯一标识', align: 'center', show: true },
 			{ dataIndex: 'name', title: '权限名称', show: true },
+			{ dataIndex: 'type', title: '权限类型', width: 120, show: true },
 			{ dataIndex: 'description', title: '权限描述', ellipsis: true },
 			{ dataIndex: 'path', title: 'URL', show: true },
 			{ dataIndex: 'show', title: '是否启用', width: 120, align: 'center', show: true },
@@ -36,7 +37,6 @@
 					form.data = {
 						parent_id: record.id,
 						code: `${record.code}-`,
-						path: `${record.path}/`,
 						level: record.level + 1
 					}
 					form.open = true
@@ -45,7 +45,7 @@
 			edit: {
 				name: '编辑',
 				event: (record) => {
-					form.data = pick(record, ['id', 'parent_id', 'code', 'icon', 'name', 'description', 'path', 'level'])
+					form.data = pick(record, ['id', 'parent_id', 'code', 'icon', 'name', 'description', 'path', 'level', 'type'])
 					form.data.level = record.level ?? 0
 					form.open = true
 				}
@@ -70,7 +70,7 @@
 		rules: {
 			code: [{ required: true, message: '请输入权限唯一标识', trigger: 'blur' }],
 			name: [{ required: true, message: '请输入权限名称', trigger: 'blur' }],
-			path: [{ required: true, message: '请输入权限 URL', trigger: 'blur' }]
+			type: [{ required: true, message: '请选择权限类型', trigger: 'blur' }]
 		},
 		submit: async () => {
 			try {
@@ -148,6 +148,10 @@
 					<template v-if="isEqual(column.dataIndex, 'icon')">
 						<component :is="record.icon" />
 					</template>
+					<template v-if="isEqual(column.dataIndex, 'type')">
+						<a-tag color="green" v-if="isEqual(record.type, 1)">菜单目录</a-tag>
+						<a-tag color="blue" v-if="isEqual(record.type, 2)">页面按钮</a-tag>
+					</template>
 					<template v-if="isEqual(column.dataIndex, 'show')">
 						<a-tooltip v-if="!isEqual(record.id, 1)">
 							<template #title>
@@ -172,11 +176,23 @@
 					<a-form-item name="name" label="权限名称">
 						<a-input v-model:value="form.data.name" :maxlength="80" placeholder="请输入权限名称" show-count />
 					</a-form-item>
+					<a-form-item name="type" label="权限类型">
+						<a-select v-model:value="form.data.type" placeholder="请选择权限类型">
+							<a-select-option :value="1">菜单目录</a-select-option>
+							<a-select-option :value="2">页面按钮</a-select-option>
+						</a-select>
+					</a-form-item>
 					<a-form-item name="description" label="描述信息">
-						<a-textarea v-model:value="form.data.description" :maxlength="200" auto-size placeholder="请输入权限描述信息" show-count />
+						<a-textarea
+							v-model:value="form.data.description"
+							:maxlength="200"
+							:auto-size="{ minRows: 2, maxRows: 5 }"
+							placeholder="请输入权限描述信息"
+							show-count
+						/>
 					</a-form-item>
 					<a-form-item name="path" label="URL">
-						<a-input v-model:value="form.data.path" :maxlength="230" placeholder="请输入权限 URL" show-count />
+						<a-input v-model:value="form.data.path" :maxlength="250" placeholder="请输入权限 URL" show-count />
 					</a-form-item>
 				</a-form>
 			</div>

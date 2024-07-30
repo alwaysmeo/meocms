@@ -3,6 +3,7 @@
 	import { useModalConfirm } from '@hooks/useModal'
 	import { useOrganizesStore } from '@stores/organizesStore'
 	import { isEmpty, isEqual, pick } from 'radash'
+	import usePermissions from '@hooks/usePermissions'
 	import permissionsApi from '@apis/permissions'
 	import rolesApi from '@apis/roles'
 
@@ -11,6 +12,7 @@
 	const organizesStore = useOrganizesStore()
 
 	const state = reactive({
+		permissions: [],
 		organizes: null,
 		permission_list: []
 	})
@@ -95,13 +97,14 @@
 					message: '必须选择【首页】权限',
 					trigger: 'blur',
 					validator: (rule, value) => {
-						if (isEqual(value.filter((item) => isEqual(item, 1)).length, 0)) return Promise.reject()
+						if (isEqual(value.checked.filter((item) => isEqual(item, 1)).length, 0)) return Promise.reject()
 						return Promise.resolve()
 					}
 				}
 			]
 		},
 		submit: async () => {
+			console.log(form.data)
 			try {
 				await formRef.value.validateFields()
 				await upsert()
@@ -115,6 +118,7 @@
 	})
 
 	onMounted(async () => {
+		state.permissions = await usePermissions()
 		state.organizes = await organizesStore.get()
 		await list()
 	})
@@ -137,7 +141,7 @@
 		const { code } = await rolesApi.upsert({
 			organize_id: state.organizes.checked.id,
 			...form.data,
-			permission_ids: JSON.stringify(form.data.permission_ids)
+			permission_ids: JSON.stringify(form.data.permission_ids.checked)
 		})
 		if (isEqual(code, 200)) {
 			message.success(form.data.id ? '修改成功' : '新增成功')
@@ -259,7 +263,7 @@
 			</a-tabs>
 		</meo-modal>
 
-		<meo-modal v-model:open="form.open" :title="form.data.role_id ? '编辑角色' : '新增角色'" :on-confirm="form.submit()">
+		<meo-modal v-model:open="form.open" :title="form.data.role_id ? '编辑角色' : '新增角色'" :on-confirm="form.submit">
 			<a-form ref="formRef" :model="form.data" :rules="form.rules" :label-col="{ span: 6 }" :wrapper-col="{ span: 16 }">
 				<a-form-item label="角色名称" name="name">
 					<a-input v-model:value="form.data.name" placeholder="请输入角色名称" show-count :maxlength="30" />
@@ -271,6 +275,7 @@
 					<div class="permissions-container">
 						<a-tree
 							checkable
+							checkStrictly
 							v-model:checkedKeys="form.data.permission_ids"
 							:tree-data="state.permission_list"
 							:fieldNames="{ children: 'children', title: 'name', key: 'id' }"

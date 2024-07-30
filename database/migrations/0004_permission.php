@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('permissions', function (Blueprint $table) {
             $table->id();
             $table->integer('parent_id')->nullable()->comment('父级ID');
-            $table->string('code', 100)->comment('唯一标识');
+            $table->string('code', 255)->comment('唯一标识');
             $table->string('name', 80)->comment('权限名称');
             $table->string('description', 200)->nullable()->comment('权限描述');
             $table->string('icon', 100)->nullable()->comment('权限图标');

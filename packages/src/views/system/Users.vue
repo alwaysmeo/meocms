@@ -3,6 +3,7 @@
 	import { isEmpty, isEqual, pick } from 'radash'
 	import { useOrganizesStore } from '@stores/organizesStore'
 	import { useModalConfirm } from '@hooks/useModal'
+	import usePermissions from '@hooks/usePermissions'
 	import Controller from '@components/controller'
 	import rexExp from '@utils/rexExp'
 	import usersApi from '@apis/users'
@@ -12,7 +13,13 @@
 	defineOptions({ name: 'SystemUsers' })
 
 	const { t } = i18n.global
+	const route = useRoute()
 	const organizesStore = useOrganizesStore()
+
+	const state = reactive({
+		permissions: [],
+		organizes: null
+	})
 
 	const controllerRef = ref()
 	const controller = reactive({
@@ -67,9 +74,10 @@
 			},
 			edit: {
 				name: '编辑',
+				show: () => state.permissions.includes(`${route.name}-update`),
 				event: async (record) => {
 					if (isEmpty(form.role_list)) {
-						const { code, data } = await rolesApi.list({ organize_id: organizes.value.checked.id })
+						const { code, data } = await rolesApi.list({ organize_id: state.organizes.checked.id })
 						if (isEqual(code, 200)) form.role_list = data.list
 					}
 					form.data = pick(record, ['ulid', 'nickname', 'email', 'phone'])
@@ -79,7 +87,7 @@
 			},
 			banned: {
 				name: '封禁',
-				show: (record) => isEqual(record.status, 1),
+				show: (record) => isEqual(record.status, 1) && state.permissions.includes(`${route.name}-banned`),
 				event: (record) => {
 					useModalConfirm({
 						title: '提示',
@@ -95,7 +103,7 @@
 			},
 			unseal: {
 				name: '解封',
-				show: (record) => isEqual(record.status, 0),
+				show: (record) => isEqual(record.status, 0) && state.permissions.includes(`${route.name}-unseal`),
 				event: (record) => {
 					useModalConfirm({
 						title: '提示',
@@ -111,6 +119,7 @@
 			},
 			delete: {
 				name: '删除',
+				show: () => state.permissions.includes(`${route.name}-update`),
 				event: (record) => {
 					useModalConfirm({
 						title: '提示',
@@ -164,16 +173,16 @@
 		}
 	})
 
-	const organizes = ref()
 	onMounted(async () => {
-		organizes.value = await organizesStore.get()
+		state.permissions = await usePermissions()
+		state.organizes = await organizesStore.get()
 		await list()
 	})
 
 	async function list() {
 		table.loading = true
 		const { code, data } = await usersApi.list({
-			organize_id: organizes.value.checked.id,
+			organize_id: state.organizes.checked.id,
 			page: table.page,
 			limit: table.limit
 		})
@@ -186,7 +195,7 @@
 
 	async function upsert() {
 		const { code } = await usersApi.upsert({
-			organize_id: organizes.value.checked.id,
+			organize_id: state.organizes.checked.id,
 			...form.data
 		})
 		if (isEqual(code, 200)) {
@@ -233,7 +242,7 @@
 					<div class="desc">{{ $t('meo.pages.system.user.desc') }}</div>
 				</div>
 				<a-space>
-					<a-button type="primary" @click="table.action('edit', {})">新增用户</a-button>
+					<a-button type="primary" v-if="state.permissions.includes(`${route.name}-create`)" @click="table.action('edit', {})">新增用户</a-button>
 				</a-space>
 			</div>
 			<meo-table
