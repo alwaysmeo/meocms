@@ -1,5 +1,9 @@
-import Image from './Image.vue'
-import Modal from './Modal.vue'
-import Table from './Table.vue'
+const pages = import.meta.glob('./*.vue', {
+	eager: true,
+	import: 'default'
+})
 
-export { Image, Modal, Table }
+const exports = {}
+for (const key in pages) exports[key.match(/\.\/(.*)\.vue$/)[1]] = pages[key]
+
+export const { Image, Modal, Table } = exports

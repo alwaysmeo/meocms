@@ -1,6 +1,6 @@
 <script setup>
 	import { message } from 'ant-design-vue'
-	import { useModalConfirm } from '@hooks/useModal'
+	import { useModalConfirm } from '@hooks'
 	import { isEqual, pick } from 'radash'
 	import organizesApi from '@apis/organizes'
 

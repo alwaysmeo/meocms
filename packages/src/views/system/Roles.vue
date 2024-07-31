@@ -1,9 +1,9 @@
 <script setup>
 	import { message } from 'ant-design-vue'
-	import { useModalConfirm } from '@hooks/useModal'
+	import { usePermissions, useModalConfirm } from '@hooks'
 	import { useOrganizesStore } from '@stores/organizesStore'
 	import { isEmpty, isEqual, pick } from 'radash'
-	import usePermissions from '@hooks/usePermissions'
+	import { Tree } from '@components'
 	import permissionsApi from '@apis/permissions'
 	import rolesApi from '@apis/roles'
 
@@ -279,13 +279,7 @@
 				</a-form-item>
 				<a-form-item label="角色权限" name="permission_ids" validateFirst>
 					<div class="permissions-container">
-						<a-tree
-							checkable
-							checkStrictly
-							v-model:checkedKeys="form.data.permission_ids"
-							:tree-data="state.permission_list"
-							:fieldNames="{ children: 'children', title: 'name', key: 'id' }"
-						/>
+						<tree v-model:value="form.data.permission_ids" :tree-data="state.permission_list" />
 					</div>
 				</a-form-item>
 			</a-form>

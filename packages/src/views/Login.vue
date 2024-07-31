@@ -1,6 +1,6 @@
 <script setup>
 	import { message } from 'ant-design-vue'
-	import { useBotd } from '@hooks/useFingerprintjs'
+	import { useBotd } from '@hooks'
 	import { useUserInfoStore } from '@stores/userInfoStore'
 	import { isEmpty, isEqual, random } from 'radash'
 	import accountApi from '@apis/account'

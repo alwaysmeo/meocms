@@ -4,7 +4,7 @@
 	import { isEqual } from 'radash'
 	import { useUserInfoStore } from '@stores/userInfoStore'
 	import { useOrganizesStore } from '@stores/organizesStore'
-	import { useModalConfirm } from '@hooks/useModal'
+	import { useModalConfirm } from '@hooks'
 	import localforage from '@utils/localforage'
 	import accountApi from '@apis/account'
 	import i18n from '@language'
