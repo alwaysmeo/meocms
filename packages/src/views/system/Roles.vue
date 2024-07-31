@@ -97,7 +97,7 @@
 					message: '必须选择【首页】权限',
 					trigger: 'blur',
 					validator: (rule, value) => {
-						if (isEqual(value.checked.filter((item) => isEqual(item, 1)).length, 0)) return Promise.reject()
+						if (isEqual(value.filter((item) => isEqual(item, 1)).length, 0)) return Promise.reject()
 						return Promise.resolve()
 					}
 				}
@@ -141,7 +141,7 @@
 		const { code } = await rolesApi.upsert({
 			organize_id: state.organizes.checked.id,
 			...form.data,
-			permission_ids: JSON.stringify(form.data.permission_ids.checked)
+			permission_ids: JSON.stringify(form.data.permission_ids)
 		})
 		if (isEqual(code, 200)) {
 			message.success(form.data.id ? '修改成功' : '新增成功')
@@ -188,7 +188,7 @@
 					<div class="desc">系统角色管理</div>
 				</div>
 				<a-space>
-					<a-button type="primary" @click="table.action('edit', {})">新增角色</a-button>
+					<a-button type="primary" @click="table.action.edit.event({})">新增角色</a-button>
 				</a-space>
 			</div>
 			<meo-table
@@ -278,9 +278,7 @@
 					/>
 				</a-form-item>
 				<a-form-item label="角色权限" name="permission_ids" validateFirst>
-					<div class="permissions-container">
-						<tree v-model:value="form.data.permission_ids" :tree-data="state.permission_list" />
-					</div>
+					<tree v-model:value="form.data.permission_ids" :tree-data="state.permission_list" />
 				</a-form-item>
 			</a-form>
 		</meo-modal>
@@ -307,9 +305,5 @@
 			color: $color-primary;
 			margin-bottom: 10px;
 		}
-	}
-	.permissions-container {
-		max-height: 320px;
-		overflow-y: auto;
 	}
 </style>

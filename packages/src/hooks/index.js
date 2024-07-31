@@ -5,4 +5,4 @@ const pages = import.meta.glob('./*.js', {
 const exports = {}
 for (const key in pages) Object.assign(exports, pages[key])
 
-export const { useBuildTree, useBotd, useModalConfirm, usePermissions } = exports
+export const { useUnfoldTree, useBotd, useModalConfirm, usePermissions } = exports
