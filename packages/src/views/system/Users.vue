@@ -278,9 +278,10 @@
 					<a-button
 						type="primary"
 						v-if="state.permissions.includes(`${route.name}-create`)"
-						@click="table.action('edit', {})"
-						>新增用户</a-button
+						@click="table.action.edit.event({})"
 					>
+						新增用户
+					</a-button>
 				</a-space>
 			</div>
 			<meo-table

@@ -152,7 +152,7 @@
 				<a-space>
 					<a-button>关联用户</a-button>
 					<a-button>排序</a-button>
-					<a-button type="primary" @click="table.action('edit', {})">新增组织</a-button>
+					<a-button type="primary" @click="table.action.edit.event({})">新增组织</a-button>
 				</a-space>
 			</div>
 			<meo-table

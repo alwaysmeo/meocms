@@ -131,7 +131,7 @@
 					<div class="desc">系统权限管理</div>
 				</div>
 				<a-space>
-					<a-button type="primary" @click="table.action('edit', {})">新增权限</a-button>
+					<a-button type="primary" @click="table.action.edit.event({})">新增权限</a-button>
 				</a-space>
 			</div>
 			<meo-table
