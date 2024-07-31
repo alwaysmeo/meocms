@@ -39,7 +39,7 @@ export default [
 		files: ['src/**/*.vue'],
 		rules: {
 			indent: 'off',
-			'vue/script-indent': ['error', 'tab', { baseIndent: 1 }],
+			'vue/script-indent': ['error', 'tab', { baseIndent: 1, switchCase: 1 }],
 			'vue/multi-word-component-names': 'off',
 			'vue/no-parsing-error': 'off',
 			'vue/html-self-closing': ['error', { html: { void: 'always', normal: 'never', component: 'always' } }]
