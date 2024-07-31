@@ -1,14 +1,14 @@
 <script setup>
 	import { useVModel } from '@vueuse/core'
 
-	const emits = defineEmits(['update:checked', 'update:value'])
+	const emits = defineEmits(['update:checked'])
 
 	const props = defineProps({
-		checked: {
+		name: {
 			type: String,
-			default: undefined
+			default: ''
 		},
-		value: {
+		checked: {
 			type: String,
 			default: undefined
 		},
@@ -19,47 +19,50 @@
 		},
 		placeholder: {
 			type: String,
-			default: '请输入要搜索的内容'
-		},
-		placeholder_type: {
-			type: String,
-			default: '请选择'
+			default: '请选择要搜索的内容'
 		}
 	})
 
 	const state = reactive({
-		checked: useVModel(props, 'checked', emits),
-		value: useVModel(props, 'value', emits)
+		checked: useVModel(props, 'checked', emits)
 	})
 
 	function reset() {
 		state.checked = undefined
-		state.value = undefined
 	}
 
 	defineExpose({ reset })
 </script>
 
 <template>
-	<div class="meo-select-input-container">
-		<a-select v-model:value="state.checked" :placeholder="props.placeholder_type">
-			<a-select-option v-for="(item, key) in props.options" :key="key" :value="key">{{ item }}</a-select-option>
+	<div class="meo-select-container">
+		<a-tooltip :title="props.name">
+			<p class="text-overflow">
+				{{ props.name }}
+			</p>
+		</a-tooltip>
+		<a-select v-model:value="state.checked" :placeholder="props.placeholder">
+			<template v-for="(item, key) in props.options" :key="key">
+				<a-select-option :value="key">{{ item }}</a-select-option>
+			</template>
 		</a-select>
-		<a-input v-model:value.trim="state.value" :placeholder="props.placeholder" />
 	</div>
 </template>
 
 <style scoped lang="scss">
-	.meo-select-input-container {
+	.meo-select-container {
 		max-width: 350px;
 		width: 100%;
 		display: grid;
 		grid-template-columns: 100px 1fr;
-		:deep(.ant-select-selector) {
+		> p {
 			padding: 0 10px;
+			border: 1px solid #d9d9d9;
 			border-radius: 6px 0 0 6px;
+			line-height: 30px;
 		}
-		:deep(.ant-input) {
+		:deep(.ant-select-selector) {
+			width: 100%;
 			border-radius: 0 6px 6px 0;
 			margin-left: -1px;
 		}
