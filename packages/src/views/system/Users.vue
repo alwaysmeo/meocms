@@ -3,7 +3,6 @@
 	import { isEmpty, isEqual, pick } from 'radash'
 	import { useOrganizesStore } from '@stores/organizesStore'
 	import { usePermissions, useModalConfirm } from '@hooks'
-	import { Index as ControllerIndex } from '@components/controller'
 	import rexExp from '@utils/rexExp'
 	import usersApi from '@apis/users'
 	import rolesApi from '@apis/roles'
@@ -17,7 +16,10 @@
 
 	const state = reactive({
 		permissions: [],
-		organizes: null,
+		organizes: null
+	})
+
+	const table = reactive({
 		controller: [
 			{
 				key: 'keyword_type,keyword',
@@ -51,10 +53,7 @@
 					'@0': '已封禁'
 				}
 			}
-		]
-	})
-
-	const table = reactive({
+		],
 		columns: [
 			{
 				dataIndex: 'index',
@@ -220,6 +219,8 @@
 		}
 	})
 
+	const mountRef = ref()
+
 	onMounted(async () => {
 		state.permissions = await usePermissions()
 		state.organizes = await organizesStore.get()
@@ -231,7 +232,8 @@
 		const { code, data } = await usersApi.list({
 			organize_id: state.organizes.checked.id,
 			page: table.page,
-			limit: table.limit
+			limit: table.limit,
+			...table.params
 		})
 		if (isEqual(code, 200)) {
 			table.data = data.list
@@ -260,14 +262,15 @@
 		}
 	}
 
-	function query(params) {
-		console.log(params)
+	async function query(params) {
+		table.params = params
+		await list()
 	}
 </script>
 
 <template>
 	<div>
-		<controller-index :list="state.controller" @query="query" />
+		<div ref="mountRef"></div>
 		<div class="primary-container">
 			<div class="primary-header">
 				<div>
@@ -288,11 +291,14 @@
 				v-model:columns="table.columns"
 				v-model:page="table.page"
 				v-model:limit="table.limit"
+				:controller="table.controller"
+				:mount="mountRef"
 				:dataSource="table.data"
 				:loading="table.loading"
 				:total="table.total"
 				:action="table.action"
 				@paginate="list"
+				@query="query"
 			>
 				<template #bodyCell="{ column, record }">
 					<template v-if="isEqual(column.dataIndex, 'picture')">

@@ -63,6 +63,7 @@
 
 <style scoped lang="scss">
 	.controller-container {
+		margin-bottom: 20px;
 		.controller-body {
 			display: flex;
 			flex-wrap: wrap;

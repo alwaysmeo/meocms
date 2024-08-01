@@ -3,10 +3,21 @@
 	import { useVModel } from '@vueuse/core'
 	import { isEqual, first, omit } from 'radash'
 	import { vDraggable } from 'vue-draggable-plus'
+	import { Index as ControllerIndex } from '@components/controller'
 
-	const emits = defineEmits(['update:open', 'update:columns', 'update:page', 'update:limit', 'paginate'])
+	const emits = defineEmits(['update:open', 'update:columns', 'update:page', 'update:limit', 'paginate', 'query'])
 
 	const props = defineProps({
+		controller: {
+			type: Array,
+			default: () => new Array(),
+			message: '筛选控件数据列'
+		},
+		mount: {
+			type: [Boolean, HTMLDivElement],
+			default: false,
+			message: '筛选控件的挂载节点，为 false 时不显示筛选控件'
+		},
 		columns: {
 			type: Array,
 			default: () => new Array(),
@@ -21,7 +32,7 @@
 		page: {
 			type: Number,
 			default: 1,
-			validator: (val) => val >= 0,
+			validator: (val) => val > 0,
 			message: '页码'
 		},
 		limit: {
@@ -48,10 +59,10 @@
 		action_first_key: computed(() => {
 			return first(Object.keys(props.action))
 		}),
-		columns: useVModel(props, 'columns', emits)
+		columns: useVModel(props, 'columns', emits),
+		checkbox: props.columns.filter((item) => item.show).map((item) => item.dataIndex),
+		open: false // 是否显示筛选控件
 	})
-
-	const checkbox = ref(props.columns.filter((item) => item.show).map((item) => item.dataIndex))
 
 	function handleChange(paginate, filters, sorter, { action }) {
 		emits('update:page', paginate.current)
@@ -70,7 +81,17 @@
 
 <template>
 	<div class="meo-table-container">
+		<teleport v-if="props.mount" :to="props.mount">
+			<transition name="fade-transform">
+				<controller-index v-show="state.open" :list="props.controller" @query="emits('query', $event)" />
+			</transition>
+		</teleport>
 		<div class="meo-table-header">
+			<a-tooltip v-if="props.controller" title="数据筛选">
+				<a-button type="text" size="small" @click="state.open = !state.open">
+					<ant-ant-design-outlined />
+				</a-button>
+			</a-tooltip>
 			<a-tooltip title="刷新">
 				<a-button type="text" size="small" @click="emits('paginate')">
 					<ant-reload-outlined />
@@ -86,7 +107,7 @@
 					<a-checkbox-group
 						v-draggable="[state.columns, { animation: 300, handle: '.handle' }]"
 						class="checkbox-container"
-						v-model:value="checkbox"
+						v-model:value="state.checkbox"
 						@change="selector"
 					>
 						<div class="checkbox-item" v-for="item in state.columns" :key="item.dataIndex">

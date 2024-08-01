@@ -13,7 +13,7 @@
 .fade-transform-in-enter-active,
 .fade-transform-leave-active,
 .fade-transform-enter-active {
-	transition: all 0.5s;
+	transition: all 0.6s;
 }
 .fade-transform-in-enter-from,
 .fade-transform-enter-from {
@@ -23,5 +23,5 @@
 
 .fade-transform-leave-to {
 	opacity: 0;
-	transform: translateY(-30px);
+	transform: translateY(30px);
 }
