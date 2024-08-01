@@ -12,6 +12,7 @@ use App\Models\UserRole;
 use App\Models\Users;
 use App\Services\Common;
 use App\Services\Mapping;
+use App\Services\Query;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
@@ -21,11 +22,14 @@ class UsersController extends Controller
 {
     private Common $common;
 
+    private Query $query;
+
     private array $code;
 
     public function __construct()
     {
         $this->common = new Common;
+        $this->query = new Query;
         $this->code = Mapping::$code;
     }
 
@@ -48,13 +52,16 @@ class UsersController extends Controller
     /* 获取用户列表 */
     public function list(Request $request): Response
     {
-        $req = $request->only(['organize_id', 'page', 'limit', 'keyword_type', 'keyword']);
+        $req = $request->only(['organize_id', 'page', 'limit', 'keyword_type', 'keyword', 'created_at', 'last_login_at', 'status']);
         $validator = Validator::make($req, [
             'organize_id' => 'required|integer',
             'page' => 'integer',
             'limit' => 'integer',
             'keyword_type' => 'in:ulid,email,nickname,phone',
             'keyword' => 'max:100',
+            'created_at' => 'max:21',
+            'last_login_at' => 'max:21',
+            'status' => 'in:0,1',
         ]);
         if (! $validator->passes()) {
             return $this->fail(null, $validator->errors()->first(), 5000);
@@ -64,6 +71,9 @@ class UsersController extends Controller
         $limit = isset($req['limit']) ? intval($req['limit']) : null;
         $keyword_type = $req['keyword_type'] ?? null;
         $keyword = $req['keyword'] ?? null;
+        $created_at = $req['created_at'] ?? null;
+        $last_login_at = $req['last_login_at'] ?? null;
+        $status = $req['status'] ?? null;
         $list = Users::query();
         $list->select('ulid', 'email', 'nickname', 'picture', 'phone', 'status', 'last_login_at', 'created_at');
         /* 只查询当前组织下的用户 */
@@ -79,6 +89,9 @@ class UsersController extends Controller
         $list->whereNull('deleted_at');
         $list->orderBy('created_at', 'desc');
         ($keyword_type && $keyword) && $list->where($keyword_type, 'like', '%'.$keyword.'%');
+        $created_at && $this->query->whereBetween($list, 'created_at', $created_at);
+        $last_login_at && $this->query->whereBetween($list, 'last_login_at', $last_login_at);
+        $status != null && $list->where('status', $status);
         $total = $list->count();
         $list->offset(($page - 1) * $limit)->limit($limit);
 
