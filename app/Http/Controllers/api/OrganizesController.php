@@ -15,17 +15,25 @@ class OrganizesController extends Controller
     /* 获取组织列表 */
     public function list(Request $request): Response
     {
-        $req = $request->only(['page', 'limit']);
-        $validator = Validator::make($req, ['page' => 'integer', 'limit' => 'integer']);
+        $req = $request->only(['page', 'limit', 'keyword_type', 'keyword']);
+        $validator = Validator::make($req, [
+            'page' => 'integer',
+            'limit' => 'integer',
+            'keyword_type' => 'in:id,name',
+            'keyword' => 'max:100',
+        ]);
         if (! $validator->passes()) {
             return $this->fail(null, $validator->errors()->first(), 5000);
         }
         $page = isset($req['page']) ? intval($req['page']) : null;
         $limit = isset($req['limit']) ? intval($req['limit']) : null;
+        $keyword_type = $req['keyword_type'] ?? null;
+        $keyword = $req['keyword'] ?? null;
         $list = Organizes::query();
         $list->whereNull('deleted_at');
         $list->select('id', 'name', 'description', 'show', 'order');
         $list->orderByRaw('ISNULL(`ORDER`), `ORDER` ASC');
+        ($keyword_type && $keyword) && $list->where($keyword_type, 'like', '%'.$keyword.'%');
         $total = $list->count();
         ($page && $limit) && $list->offset(($page - 1) * $limit)->limit($limit);
 

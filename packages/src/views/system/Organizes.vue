@@ -6,8 +6,18 @@
 
 	defineOptions({ name: 'SystemOrganizes' })
 
+	const mountRef = ref()
 	const table = reactive({
-		loading: true,
+		data_screen: [
+			{
+				key: 'keyword_type,keyword',
+				component: 'SelectInput',
+				options: {
+					'@id': '组织ID',
+					'@name': '组织名称'
+				}
+			}
+		],
 		columns: [
 			{ dataIndex: 'index', title: '序号', width: 120, align: 'center', show: true },
 			{ dataIndex: 'id', title: 'ID', width: 260, align: 'center', show: true },
@@ -17,6 +27,7 @@
 			{ dataIndex: 'show', title: '是否启用', width: 240, align: 'center', show: true },
 			{ dataIndex: 'action', title: '操作', width: 160, align: 'center', show: true }
 		],
+		loading: true,
 		data: [],
 		page: 1,
 		limit: 10,
@@ -99,7 +110,8 @@
 		table.loading = true
 		const { code, data } = await organizesApi.list({
 			page: table.page,
-			limit: table.limit
+			limit: table.limit,
+			...table.params
 		})
 		if (isEqual(code, 200)) {
 			table.data = data.list
@@ -139,10 +151,16 @@
 		}
 		detail.loading = false
 	}
+
+	async function query(params) {
+		table.params = params
+		await list()
+	}
 </script>
 
 <template>
 	<div>
+		<div ref="mountRef"></div>
 		<div class="primary-container">
 			<div class="primary-header">
 				<div>
@@ -159,11 +177,14 @@
 				v-model:columns="table.columns"
 				v-model:page="table.page"
 				v-model:limit="table.limit"
+				:data-screen="table.data_screen"
+				:mount="mountRef"
 				:data-source="table.data"
 				:loading="table.loading"
 				:total="table.total"
 				:action="table.action"
 				@paginate="list"
+				@query="query"
 			>
 				<template #bodyCell="{ column, record }">
 					<template v-if="isEqual(column.dataIndex, 'show')">
