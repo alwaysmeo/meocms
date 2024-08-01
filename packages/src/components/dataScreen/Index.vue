@@ -1,6 +1,6 @@
 <script setup>
 	import { isEqual } from 'radash'
-	import Controller from '@components/controller'
+	import DataScreen from '@components/dataScreen'
 
 	const emits = defineEmits(['query'])
 
@@ -44,7 +44,7 @@
 				ref="controllerRef"
 				v-for="item in props.list"
 				:key="item.key"
-				:is="Controller[item.component]"
+				:is="DataScreen[item.component]"
 				:name="item.name"
 				:placeholder="item.placeholder"
 				v-model:checked="item.checked"

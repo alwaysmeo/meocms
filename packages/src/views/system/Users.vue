@@ -20,7 +20,7 @@
 	})
 
 	const table = reactive({
-		controller: [
+		data_screen: [
 			{
 				key: 'keyword_type,keyword',
 				component: 'SelectInput',
@@ -291,7 +291,7 @@
 				v-model:columns="table.columns"
 				v-model:page="table.page"
 				v-model:limit="table.limit"
-				:controller="table.controller"
+				:data-screen="table.data_screen"
 				:mount="mountRef"
 				:dataSource="table.data"
 				:loading="table.loading"

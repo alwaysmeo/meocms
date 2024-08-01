@@ -1,14 +1,14 @@
 <!-- 表格组件：table component -->
 <script setup>
 	import { useVModel } from '@vueuse/core'
-	import { isEqual, first, omit } from 'radash'
+	import { isEmpty, isEqual, first, omit } from 'radash'
 	import { vDraggable } from 'vue-draggable-plus'
-	import { Index as ControllerIndex } from '@components/controller'
+	import { Index as DataScreenIndex } from '@components/dataScreen'
 
 	const emits = defineEmits(['update:open', 'update:columns', 'update:page', 'update:limit', 'paginate', 'query'])
 
 	const props = defineProps({
-		controller: {
+		dataScreen: {
 			type: Array,
 			default: () => new Array(),
 			message: '筛选控件数据列'
@@ -83,11 +83,11 @@
 	<div class="meo-table-container">
 		<teleport v-if="props.mount" :to="props.mount">
 			<transition name="fade-transform">
-				<controller-index v-show="state.open" :list="props.controller" @query="emits('query', $event)" />
+				<data-screen-index v-show="state.open" :list="props.dataScreen" @query="emits('query', $event)" />
 			</transition>
 		</teleport>
 		<div class="meo-table-header">
-			<a-tooltip v-if="props.controller" title="数据筛选">
+			<a-tooltip v-if="!isEmpty(props.dataScreen)" title="数据筛选">
 				<a-button type="text" size="small" @click="state.open = !state.open">
 					<ant-ant-design-outlined />
 				</a-button>
