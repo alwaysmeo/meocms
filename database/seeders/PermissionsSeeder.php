@@ -249,8 +249,11 @@ class PermissionsSeeder extends Seeder
             $ids[] = $i + 1;
         }
         foreach ($data as $item) {
-            if ($item['level'] === 2) {
-                $item['parent_id'] = Permissions::query()->where('level', 1)->latest('id')->value('id');
+            if ($item['level'] > 1) {
+                $item['parent_id'] = Permissions::query()
+                    ->where('level', $item['level'] - 1)
+                    ->latest('id')
+                    ->value('id');
             }
             Permissions::query()->insert($item);
         }
