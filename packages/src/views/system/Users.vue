@@ -19,12 +19,12 @@
 		organizes: null
 	})
 
+	const mountRef = ref()
 	const table = reactive({
 		data_screen: [
 			{
 				key: 'keyword_type,keyword',
 				component: 'SelectInput',
-				placeholder_type: '请选择',
 				options: {
 					'@ulid': '用户ID',
 					'@email': '邮箱账号',
@@ -219,8 +219,6 @@
 		}
 	})
 
-	const mountRef = ref()
-
 	onMounted(async () => {
 		state.permissions = await usePermissions()
 		state.organizes = await organizesStore.get()
@@ -293,7 +291,7 @@
 				v-model:limit="table.limit"
 				:data-screen="table.data_screen"
 				:mount="mountRef"
-				:dataSource="table.data"
+				:data-source="table.data"
 				:loading="table.loading"
 				:total="table.total"
 				:action="table.action"

@@ -138,7 +138,7 @@
 				v-model:columns="table.columns"
 				v-model:page="table.page"
 				v-model:limit="table.limit"
-				:dataSource="table.data"
+				:data-source="table.data"
 				:loading="table.loading"
 				:total="table.total"
 				:action="table.action"
