@@ -17,14 +17,25 @@
 		permission_list: []
 	})
 
+	const mountRef = ref()
 	const table = reactive({
+		data_screen: [
+			{
+				key: 'keyword_type,keyword',
+				component: 'SelectInput',
+				options: {
+					'@id': '角色ID',
+					'@name': '角色名称'
+				}
+			}
+		],
 		loading: true,
 		columns: [
 			{ dataIndex: 'index', title: '序号', width: 120, align: 'center', show: true },
 			{ dataIndex: 'id', title: 'ID', width: 260, align: 'center', show: true },
 			{ dataIndex: 'name', title: '角色名称', show: true },
 			{ dataIndex: 'description', title: '角色描述', ellipsis: true },
-			{ dataIndex: 'count', title: '已绑定用户数', width: 130, align: 'center', show: true },
+			{ dataIndex: 'count', title: '已关联用户数', width: 130, align: 'center', show: true },
 			{ dataIndex: 'show', title: '是否启用', width: 240, align: 'center', show: true },
 			{ dataIndex: 'action', title: '操作', width: 160, align: 'center', show: true }
 		],
@@ -57,10 +68,10 @@
 					useModalConfirm({
 						content: h('div', { class: 'meo-modal-body' }, [
 							h('p', {}, `确定要删除【${record.name}】角色？`),
-							h('p', { class: 'warning' }, `提示：删除前请先解除该角色下绑定的所有用户。`)
+							h('p', { class: 'warning' }, `提示：删除前请先解除该角色下关联的所有用户。`)
 						]),
 						confirm: async () => {
-							if (record.count > 0) return message.warning('请先解除该角色下绑定的所有用户')
+							if (record.count > 0) return message.warning('请先解除该角色下关联的所有用户')
 							await deleted({ id: record.id })
 						}
 					})
@@ -128,7 +139,8 @@
 		const { code, data } = await rolesApi.list({
 			organize_id: state.organizes.checked.id,
 			page: table.page,
-			limit: table.limit
+			limit: table.limit,
+			...table.params
 		})
 		if (isEqual(code, 200)) {
 			table.data = data.list
@@ -177,10 +189,16 @@
 		const { code, data } = await permissionsApi.list({ organize_id: state.organizes.checked.id })
 		if (isEqual(code, 200)) state.permission_list = data
 	}
+
+	async function query(params) {
+		table.params = params
+		await list()
+	}
 </script>
 
 <template>
 	<div>
+		<div ref="mountRef"></div>
 		<div class="primary-container">
 			<div class="primary-header">
 				<div>
@@ -195,17 +213,20 @@
 				v-model:columns="table.columns"
 				v-model:page="table.page"
 				v-model:limit="table.limit"
-				:dataSource="table.data"
+				:data-screen="table.data_screen"
+				:mount="mountRef"
+				:data-source="table.data"
 				:loading="table.loading"
 				:total="table.total"
 				:action="table.action"
 				@paginate="list"
+				@query="query"
 			>
 				<template #bodyCell="{ column, record }">
 					<template v-if="isEqual(column.dataIndex, 'show')">
 						<a-tooltip>
 							<template #title>
-								{{ record.show ? '点击关闭（已绑定用户不受影响）' : '点击开启' }}
+								{{ record.show ? '点击关闭（已关联用户不受影响）' : '点击开启' }}
 							</template>
 							<a-switch :checked="record.show" @change="changeShow(record)" />
 						</a-tooltip>
@@ -239,7 +260,7 @@
 						v-model:page="detail.page"
 						v-model:limit="detail.limit"
 						:columnOption="false"
-						:dataSource="detail.list"
+						:data-source="detail.list"
 						:loading="detail.loading"
 						:total="detail.total"
 						:scroll="{ x: 0 }"
