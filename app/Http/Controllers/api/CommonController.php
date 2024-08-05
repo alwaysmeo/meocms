@@ -11,6 +11,11 @@ use Mews\Captcha\Facades\Captcha;
 
 class CommonController extends Controller
 {
+    /**
+     * 生成验证码
+     *
+     * @group 公共 - Common
+     */
     public function captcha(Request $request): Response
     {
         $req = $request->only(['type']);

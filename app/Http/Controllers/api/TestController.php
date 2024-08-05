@@ -8,6 +8,11 @@ use Illuminate\Http\Response;
 
 class TestController extends Controller
 {
+    /**
+     * 测试
+     *
+     * @unauthenticated
+     */
     public function test(Request $request): Response
     {
         return $this->success($request);

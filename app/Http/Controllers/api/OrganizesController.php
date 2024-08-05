@@ -12,7 +12,16 @@ use Illuminate\Support\Facades\Validator;
 
 class OrganizesController extends Controller
 {
-    /* 获取组织列表 */
+    /**
+     * 获取组织列表
+     *
+     * @group 组织 - Organizes
+     *
+     * @bodyParam page int Example: 1
+     * @bodyParam limit int Example: 10
+     * @bodyParam keyword_type string Enum: id, name No-example
+     * @bodyParam keyword string No-example
+     */
     public function list(Request $request): Response
     {
         $req = $request->only(['page', 'limit', 'keyword_type', 'keyword']);
@@ -45,7 +54,11 @@ class OrganizesController extends Controller
         ]);
     }
 
-    /* 新增修改组织 */
+    /**
+     * 新增修改组织
+     *
+     * @group 组织 - Organizes
+     */
     public function upsert(Request $request): Response
     {
         $req = $request->only(['id', 'name', 'description']);
@@ -62,7 +75,11 @@ class OrganizesController extends Controller
         return $this->success();
     }
 
-    /* 删除组织 */
+    /**
+     * 删除组织
+     *
+     * @group 组织 - Organizes
+     */
     public function delete(Request $request): Response
     {
         $req = $request->only(['id']);
@@ -77,7 +94,15 @@ class OrganizesController extends Controller
         return $this->success();
     }
 
-    /* 获取组织关联的用户 */
+    /**
+     * 获取组织关联的用户
+     *
+     * @group 组织 - Organizes
+     *
+     * @bodyParam id int required Example: 1
+     * @bodyParam page int Example: 1
+     * @bodyParam limit int Example: 10
+     */
     public function users(Request $request): Response
     {
         $req = $request->only(['id', 'page', 'limit']);
@@ -110,7 +135,15 @@ class OrganizesController extends Controller
         ]);
     }
 
-    /* 获取组织关联的角色 */
+    /**
+     * 获取组织关联的角色
+     *
+     * @group 组织 - Organizes
+     *
+     * @bodyParam id int required Example: 1
+     * @bodyParam page int Example: 1
+     * @bodyParam limit int Example: 10
+     */
     public function roles(Request $request): Response
     {
         $req = $request->only(['id', 'page', 'limit']);
@@ -143,7 +176,11 @@ class OrganizesController extends Controller
         ]);
     }
 
-    /* 修改组织启用状态 */
+    /**
+     * 修改组织启用状态
+     *
+     * @group 组织 - Organizes
+     */
     public function changeShow(Request $request): Response
     {
         $req = $request->only(['id', 'show']);

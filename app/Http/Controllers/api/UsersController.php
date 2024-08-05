@@ -33,7 +33,11 @@ class UsersController extends Controller
         $this->code = Mapping::$code;
     }
 
-    /* 获取用户权限列表 */
+    /**
+     * 获取用户权限列表
+     *
+     * @group 用户 - Users
+     */
     public function permissionsList(Request $request): Response
     {
         $user = $request->user();
@@ -49,7 +53,20 @@ class UsersController extends Controller
         return $this->success($this->common->buildTree($list->toArray()));
     }
 
-    /* 获取用户列表 */
+    /**
+     * 获取用户列表
+     *
+     * @group 用户 - Users
+     *
+     * @bodyParam organize_id int required Example: 1
+     * @bodyParam page int Example: 1
+     * @bodyParam limit int Example: 10
+     * @bodyParam keyword_type string Enum: ulid, email, nickname, phone No-example
+     * @bodyParam keyword string No-example
+     * @bodyParam created_at string No-example
+     * @bodyParam last_login_at string No-example
+     * @bodyParam status string Enum: 0, 1 No-example
+     */
     public function list(Request $request): Response
     {
         $req = $request->only(['organize_id', 'page', 'limit', 'keyword_type', 'keyword', 'created_at', 'last_login_at', 'status']);
@@ -103,7 +120,11 @@ class UsersController extends Controller
         ]);
     }
 
-    /* 新增修改用户 */
+    /**
+     * 新增修改用户
+     *
+     * @group 用户 - Users
+     */
     public function upsert(Request $request): Response
     {
         $req = $request->only(['ulid', 'organize_id', 'nickname', 'role_id', 'email', 'phone', 'password']);
@@ -161,7 +182,11 @@ class UsersController extends Controller
         return $this->success();
     }
 
-    /* 用户详情 */
+    /**
+     * 用户详情
+     *
+     * @group 用户 - Users
+     */
     public function detail(Request $request): Response
     {
         $req = $request->only(['ulid']);
@@ -182,7 +207,11 @@ class UsersController extends Controller
         return $this->success($user->first());
     }
 
-    /* 注销删除用户 */
+    /**
+     * 注销删除用户
+     *
+     * @group 用户 - Users
+     */
     public function delete(Request $request): Response
     {
         $req = $request->only(['ulid']);
@@ -206,7 +235,11 @@ class UsersController extends Controller
         return $this->success();
     }
 
-    /* 修改用户封禁状态 */
+    /**
+     * 修改用户封禁状态
+     *
+     * @group 用户 - Users
+     */
     public function changeStatus(Request $request): Response
     {
         $req = $request->only(['ulid', 'status']);

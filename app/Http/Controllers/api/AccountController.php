@@ -24,13 +24,28 @@ class AccountController extends Controller
         $this->code = Mapping::$code;
     }
 
-    /* 令牌失效回调 */
+    /**
+     * 令牌失效回调
+     *
+     * @unauthenticated
+     *
+     * @group 账号 - Account
+     */
     public function invalid(): Response
     {
         return $this->fail(null, $this->code['1000'], 1000);
     }
 
-    /* 登录 */
+    /**
+     * 登录
+     *
+     * @unauthenticated
+     *
+     * @group 账号 - Account
+     *
+     * @bodyParam account string Example: alwaysmeorg@qq.com
+     * @bodyParam password string Example: 123456
+     */
     public function login(Request $request): Response
     {
         $req = $request->only(['account', 'password', 'captcha']);
@@ -81,7 +96,13 @@ class AccountController extends Controller
         return $this->success($user);
     }
 
-    /* 注册 */
+    /**
+     * 注册
+     *
+     * @unauthenticated
+     *
+     * @group 账号 - Account
+     */
     public function register(Request $request): Response
     {
         $req = $request->only(['account', 'password']);
@@ -107,7 +128,11 @@ class AccountController extends Controller
         return $this->success();
     }
 
-    /* 登出 */
+    /**
+     * 登出
+     *
+     * @group 账号 - Account
+     */
     public function logout(Request $request): Response
     {
         $request->user()->currentAccessToken()->delete();

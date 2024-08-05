@@ -13,7 +13,17 @@ use Illuminate\Support\Facades\Validator;
 
 class RolesController extends Controller
 {
-    /* 获取角色列表 */
+    /**
+     * 获取角色列表
+     *
+     * @group 角色 - Roles
+     *
+     * @bodyParam organize_id int Example: 1
+     * @bodyParam page int Example: 1
+     * @bodyParam limit int Example: 10
+     * @bodyParam keyword_type string Enum: id, name No-example
+     * @bodyParam keyword string No-example
+     */
     public function list(Request $request): Response
     {
         $req = $request->only(['organize_id', 'page', 'limit', 'keyword_type', 'keyword']);
@@ -52,7 +62,11 @@ class RolesController extends Controller
         ]);
     }
 
-    /* 新增修改角色 */
+    /**
+     * 新增修改角色
+     *
+     * @group 角色 - Roles
+     */
     public function upsert(Request $request): Response
     {
         $req = $request->only(['organize_id', 'id', 'name', 'description', 'permission_ids']);
@@ -79,7 +93,11 @@ class RolesController extends Controller
         return $this->success();
     }
 
-    /* 删除角色 */
+    /**
+     * 删除角色
+     *
+     * @group 角色 - Roles
+     */
     public function delete(Request $request): Response
     {
         $req = $request->only(['id']);
@@ -94,7 +112,11 @@ class RolesController extends Controller
         return $this->success();
     }
 
-    /* 获取角色关联的用户 */
+    /**
+     * 获取角色关联的用户
+     *
+     * @group 角色 - Roles
+     */
     public function users(Request $request): Response
     {
         $req = $request->only(['id', 'page', 'limit']);
@@ -124,7 +146,11 @@ class RolesController extends Controller
         ]);
     }
 
-    /* 修改角色启用状态 */
+    /**
+     * 修改角色启用状态
+     *
+     * @group 角色 - Roles
+     */
     public function changeShow(Request $request): Response
     {
         $req = $request->only(['id', 'show']);

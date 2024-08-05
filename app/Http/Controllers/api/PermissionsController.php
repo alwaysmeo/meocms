@@ -23,7 +23,11 @@ class PermissionsController extends Controller
         $this->code = Mapping::$code;
     }
 
-    /* 获取权限列表 */
+    /**
+     * 获取权限列表
+     *
+     * @group 权限 - Permissions
+     */
     public function list(): Response
     {
         $list = Permissions::query()
@@ -35,7 +39,11 @@ class PermissionsController extends Controller
         return $this->success($this->common->buildTree($list->toArray()));
     }
 
-    /* 新增修改权限 */
+    /**
+     * 新增修改权限
+     *
+     * @group 权限 - Permissions
+     */
     public function upsert(Request $request): Response
     {
         $req = $request->only(['id', 'parent_id', 'code', 'name', 'description', 'icon', 'path', 'level', 'type']);
@@ -64,7 +72,11 @@ class PermissionsController extends Controller
         return $this->success();
     }
 
-    /* 删除权限 */
+    /**
+     * 删除权限
+     *
+     * @group 权限 - Permissions
+     */
     public function delete(Request $request): Response
     {
         $req = $request->only(['id']);
@@ -83,7 +95,11 @@ class PermissionsController extends Controller
         return $this->success();
     }
 
-    /* 获取子权限 */
+    /**
+     * 获取子权限
+     *
+     * @group 权限 - Permissions
+     */
     public function children(Request $request): Response
     {
         $user = $request->user();
@@ -110,7 +126,11 @@ class PermissionsController extends Controller
         return $this->success($permissions->get());
     }
 
-    /* 修改权限启用状态 */
+    /**
+     * 修改权限启用状态
+     *
+     * @group 权限 - Permissions
+     */
     public function changeShow(Request $request): Response
     {
         $req = $request->only(['id', 'show']);
