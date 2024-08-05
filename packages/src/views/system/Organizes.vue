@@ -1,10 +1,16 @@
 <script setup>
 	import { message } from 'ant-design-vue'
-	import { useModalConfirm } from '@hooks'
+	import { usePermissions, useModalConfirm } from '@hooks'
 	import { isEqual, pick } from 'radash'
 	import organizesApi from '@apis/organizes'
 
+	state.permissions = await usePermissions()
 	defineOptions({ name: 'SystemOrganizes' })
+
+	const route = useRoute()
+	const state = reactive({
+		permissions: []
+	})
 
 	const mountRef = ref()
 	const table = reactive({
@@ -43,6 +49,7 @@
 			},
 			edit: {
 				name: '编辑',
+				show: () => state.permissions.includes(`${route.name}-update`),
 				event: async (record) => {
 					form.data = pick(record, ['id', 'name', 'description'])
 					form.open = true
@@ -50,6 +57,7 @@
 			},
 			delete: {
 				name: '删除',
+				show: () => state.permissions.includes(`${route.name}-delete`),
 				event: (record) => {
 					useModalConfirm({
 						content: h('div', { class: 'meo-modal-body' }, [
@@ -170,7 +178,13 @@
 				<a-space>
 					<a-button>关联用户</a-button>
 					<a-button>排序</a-button>
-					<a-button type="primary" @click="table.action.edit.event({})">新增组织</a-button>
+					<a-button
+						type="primary"
+						v-if="state.permissions.includes(`${route.name}-create`)"
+						@click="table.action.edit.event({})"
+					>
+						新增组织
+					</a-button>
 				</a-space>
 			</div>
 			<meo-table

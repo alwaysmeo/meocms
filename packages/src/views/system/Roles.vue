@@ -9,6 +9,7 @@
 
 	defineOptions({ name: 'SystemRoles' })
 
+	const route = useRoute()
 	const organizesStore = useOrganizesStore()
 
 	const state = reactive({
@@ -55,6 +56,7 @@
 			},
 			edit: {
 				name: '编辑',
+				show: () => state.permissions.includes(`${route.name}-update`),
 				event: async (record) => {
 					if (isEmpty(state.permission_list)) await permissionList()
 					form.data = pick(record, ['id', 'name', 'description', 'permission_ids'])
@@ -64,6 +66,7 @@
 			},
 			delete: {
 				name: '删除',
+				show: () => state.permissions.includes(`${route.name}-delete`),
 				event: (record) => {
 					useModalConfirm({
 						content: h('div', { class: 'meo-modal-body' }, [
@@ -206,7 +209,13 @@
 					<div class="desc">系统角色管理</div>
 				</div>
 				<a-space>
-					<a-button type="primary" @click="table.action.edit.event({})">新增角色</a-button>
+					<a-button
+						type="primary"
+						v-if="state.permissions.includes(`${route.name}-create`)"
+						@click="table.action.edit.event({})"
+					>
+						新增角色
+					</a-button>
 				</a-space>
 			</div>
 			<meo-table

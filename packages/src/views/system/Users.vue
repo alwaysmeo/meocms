@@ -165,7 +165,7 @@
 			},
 			delete: {
 				name: '删除',
-				show: () => state.permissions.includes(`${route.name}-update`),
+				show: () => state.permissions.includes(`${route.name}-delete`),
 				event: (record) => {
 					useModalConfirm({
 						title: '提示',

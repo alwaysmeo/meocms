@@ -1,15 +1,17 @@
 <script setup>
 	import { message } from 'ant-design-vue'
-	import { useModalConfirm } from '@hooks'
+	import { usePermissions, useModalConfirm } from '@hooks'
 	import { useOrganizesStore } from '@stores/organizesStore'
 	import { isEqual, pick } from 'radash'
 	import permissionsApi from '@apis/permissions'
 
 	defineOptions({ name: 'SystemPermissions' })
 
+	const route = useRoute()
 	const organizesStore = useOrganizesStore()
 
 	const state = reactive({
+		permissions: [],
 		organizes: null
 	})
 
@@ -33,6 +35,7 @@
 		action: {
 			create: {
 				name: '新增',
+				show: () => state.permissions.includes(`${route.name}-create`),
 				event: async (record) => {
 					form.data = {
 						parent_id: record.id,
@@ -44,6 +47,7 @@
 			},
 			edit: {
 				name: '编辑',
+				show: () => state.permissions.includes(`${route.name}-update`),
 				event: (record) => {
 					form.data = pick(record, ['id', 'parent_id', 'code', 'icon', 'name', 'description', 'path', 'level', 'type'])
 					form.data.level = record.level ?? 0
@@ -52,6 +56,7 @@
 			},
 			delete: {
 				name: '删除',
+				show: () => state.permissions.includes(`${route.name}-delete`),
 				event: (record) => {
 					useModalConfirm({
 						content: `确定要删除【${record.name}】权限？`,
@@ -86,6 +91,7 @@
 	})
 
 	onMounted(async () => {
+		state.permissions = await usePermissions()
 		state.organizes = await organizesStore.get()
 		await list()
 	})
