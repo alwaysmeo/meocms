@@ -22,12 +22,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // 注册SQL执行监听器
+        /** 注册SQL执行监听器 */
         if (env('LOG_LEVEL') === 'debug') {
             DB::listen(function ($query) {
                 Log::DEBUG('', ['time' => "{$query->time}ms", 'sql' => $query->sql, 'bindings' => $query->bindings]);
             });
         }
+        /** 接口文档生成添加 Token */
         if (class_exists(\Knuckles\Scribe\Scribe::class)) {
             Scribe::beforeResponseCall(function (Request $request, ExtractedEndpointData $endpointData) {
                 $user = Users::query()->orderBy('last_login_at', 'desc')->first();
