@@ -70,7 +70,7 @@ endpoints:
         name: id
         description: ''
         required: false
-        example: 2
+        example: 9
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -79,7 +79,7 @@ endpoints:
         name: parent_id
         description: ''
         required: false
-        example: 12
+        example: 11
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -88,7 +88,7 @@ endpoints:
         name: code
         description: validation.max.
         required: true
-        example: gcwvgyfvhdgolhcnmlgwux
+        example: kvrrohdmnhxiyhtdpjkj
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -97,7 +97,7 @@ endpoints:
         name: name
         description: validation.max.
         required: true
-        example: tkpjkphawxyjxoislb
+        example: saeatnrjtlxjxsv
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -106,7 +106,7 @@ endpoints:
         name: description
         description: validation.max.
         required: false
-        example: 'Aut impedit fugiat sit voluptatem sit voluptatibus.'
+        example: 'Qui enim sapiente nobis laborum et modi sed.'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -115,7 +115,7 @@ endpoints:
         name: icon
         description: validation.max.
         required: false
-        example: yqysawtufajotxbbla
+        example: qarqtjagpprdsgh
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -124,7 +124,7 @@ endpoints:
         name: path
         description: validation.max.
         required: false
-        example: tuzcz
+        example: fnlfhqkkbjhuhebhls
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -133,7 +133,7 @@ endpoints:
         name: level
         description: ''
         required: true
-        example: 11
+        example: 10
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -150,14 +150,14 @@ endpoints:
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      id: 2
-      parent_id: 12
-      code: gcwvgyfvhdgolhcnmlgwux
-      name: tkpjkphawxyjxoislb
-      description: 'Aut impedit fugiat sit voluptatem sit voluptatibus.'
-      icon: yqysawtufajotxbbla
-      path: tuzcz
-      level: 11
+      id: 9
+      parent_id: 11
+      code: kvrrohdmnhxiyhtdpjkj
+      name: saeatnrjtlxjxsv
+      description: 'Qui enim sapiente nobis laborum et modi sed.'
+      icon: qarqtjagpprdsgh
+      path: fnlfhqkkbjhuhebhls
+      level: 10
       type: '2'
     fileParameters: []
     responses:
@@ -205,13 +205,13 @@ endpoints:
         name: id
         description: ''
         required: true
-        example: 20
+        example: 12
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      id: 20
+      id: 12
     fileParameters: []
     responses:
       -
@@ -258,7 +258,7 @@ endpoints:
         name: parent_id
         description: ''
         required: false
-        example: 10
+        example: 15
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -267,19 +267,19 @@ endpoints:
         name: parent_code
         description: validation.max.
         required: false
-        example: xanolegdv
+        example: lye
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      parent_id: 10
-      parent_code: xanolegdv
+      parent_id: 15
+      parent_code: lye
     fileParameters: []
     responses:
       -
         status: 200
-        content: '{"data":[],"message":"success","code":200}'
+        content: '{"data":[{"id":16,"parent_id":15,"code":"system-organizes-create","name":"\u65b0\u589e","description":"\u7cfb\u7edf\u7ba1\u7406-\u7ec4\u7ec7\u7ba1\u7406-\u65b0\u589e\u6309\u94ae","icon":null,"path":null,"level":3,"show":true,"order":15,"type":2},{"id":17,"parent_id":15,"code":"system-organizes-update","name":"\u4fee\u6539","description":"\u7cfb\u7edf\u7ba1\u7406-\u7ec4\u7ec7\u7ba1\u7406-\u4fee\u6539\u6309\u94ae","icon":null,"path":null,"level":3,"show":true,"order":16,"type":2},{"id":18,"parent_id":15,"code":"system-organizes-delete","name":"\u5220\u9664","description":"\u7cfb\u7edf\u7ba1\u7406-\u7ec4\u7ec7\u7ba1\u7406-\u5220\u9664\u6309\u94ae","icon":null,"path":null,"level":3,"show":true,"order":17,"type":2}],"message":"success","code":200}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -330,7 +330,7 @@ endpoints:
         name: show
         description: ''
         required: true
-        example: '0'
+        example: '1'
         type: string
         enumValues:
           - '0'
@@ -339,7 +339,7 @@ endpoints:
         custom: []
     cleanBodyParameters:
       id: 9
-      show: '0'
+      show: '1'
     fileParameters: []
     responses:
       -

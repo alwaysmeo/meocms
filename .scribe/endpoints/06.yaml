@@ -110,7 +110,7 @@ endpoints:
         name: id
         description: ''
         required: false
-        example: 12
+        example: 17
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -119,7 +119,7 @@ endpoints:
         name: name
         description: validation.max.
         required: true
-        example: cpnfqptyzq
+        example: ifeyysoexlwpdjtge
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -128,15 +128,15 @@ endpoints:
         name: description
         description: validation.max.
         required: false
-        example: 'Sed adipisci perferendis aliquid itaque quasi.'
+        example: 'Voluptatem necessitatibus esse qui sint.'
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      id: 12
-      name: cpnfqptyzq
-      description: 'Sed adipisci perferendis aliquid itaque quasi.'
+      id: 17
+      name: ifeyysoexlwpdjtge
+      description: 'Voluptatem necessitatibus esse qui sint.'
     fileParameters: []
     responses:
       -
@@ -183,13 +183,13 @@ endpoints:
         name: id
         description: ''
         required: true
-        example: 14
+        example: 18
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      id: 14
+      id: 18
     fileParameters: []
     responses:
       -
@@ -382,7 +382,7 @@ endpoints:
         name: id
         description: ''
         required: true
-        example: 4
+        example: 18
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -391,7 +391,7 @@ endpoints:
         name: show
         description: ''
         required: true
-        example: '0'
+        example: '1'
         type: string
         enumValues:
           - '0'
@@ -399,8 +399,8 @@ endpoints:
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      id: 4
-      show: '0'
+      id: 18
+      show: '1'
     fileParameters: []
     responses:
       -

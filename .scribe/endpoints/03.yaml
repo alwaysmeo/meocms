@@ -120,7 +120,7 @@ endpoints:
         name: organize_id
         description: ''
         required: true
-        example: 9
+        example: 7
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -129,7 +129,7 @@ endpoints:
         name: id
         description: ''
         required: false
-        example: 15
+        example: 4
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -138,7 +138,7 @@ endpoints:
         name: name
         description: validation.max.
         required: true
-        example: srhsbututqgfoakbuxjhyzlp
+        example: egunlfpfodkxkhntlvrbuipkz
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -147,7 +147,7 @@ endpoints:
         name: description
         description: validation.max.
         required: false
-        example: 'Deserunt voluptates velit similique dolorem.'
+        example: 'Quia magni sint ut est quia laudantium ad officia.'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -156,17 +156,17 @@ endpoints:
         name: permission_ids
         description: validation.json.
         required: true
-        example: '["eum","dolores"]'
+        example: '["omnis","consequuntur"]'
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      organize_id: 9
-      id: 15
-      name: srhsbututqgfoakbuxjhyzlp
-      description: 'Deserunt voluptates velit similique dolorem.'
-      permission_ids: '["eum","dolores"]'
+      organize_id: 7
+      id: 4
+      name: egunlfpfodkxkhntlvrbuipkz
+      description: 'Quia magni sint ut est quia laudantium ad officia.'
+      permission_ids: '["omnis","consequuntur"]'
     fileParameters: []
     responses:
       -
@@ -213,13 +213,13 @@ endpoints:
         name: id
         description: ''
         required: true
-        example: 20
+        example: 3
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      id: 20
+      id: 3
     fileParameters: []
     responses:
       -
@@ -266,7 +266,7 @@ endpoints:
         name: id
         description: ''
         required: true
-        example: 2
+        example: 17
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -275,7 +275,7 @@ endpoints:
         name: page
         description: ''
         required: false
-        example: 14
+        example: 12
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -284,20 +284,20 @@ endpoints:
         name: limit
         description: ''
         required: false
-        example: 11
+        example: 14
         type: integer
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      id: 2
-      page: 14
-      limit: 11
+      id: 17
+      page: 12
+      limit: 14
     fileParameters: []
     responses:
       -
         status: 200
-        content: '{"data":{"list":[],"total":4,"page":14,"limit":11},"message":"success","code":200}'
+        content: '{"data":{"list":[],"total":0,"page":12,"limit":14},"message":"success","code":200}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -339,7 +339,7 @@ endpoints:
         name: id
         description: ''
         required: true
-        example: 20
+        example: 4
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -356,7 +356,7 @@ endpoints:
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      id: 20
+      id: 4
       show: '0'
     fileParameters: []
     responses:

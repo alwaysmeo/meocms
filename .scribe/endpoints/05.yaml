@@ -194,7 +194,7 @@ endpoints:
         name: organize_id
         description: ''
         required: true
-        example: 2
+        example: 13
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -212,7 +212,7 @@ endpoints:
         name: role_id
         description: ''
         required: true
-        example: 10
+        example: 5
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -221,7 +221,7 @@ endpoints:
         name: nickname
         description: validation.between.
         required: true
-        example: v
+        example: o
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -230,7 +230,7 @@ endpoints:
         name: email
         description: validation.email.
         required: true
-        example: nwyman@example.net
+        example: farrell.monserrat@example.com
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -239,7 +239,7 @@ endpoints:
         name: phone
         description: validation.digits.
         required: false
-        example: '01282613596'
+        example: '14225556017'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -248,18 +248,18 @@ endpoints:
         name: password
         description: 'Must match the regex /^[a-zA-Z0-9]+$/. validation.between.'
         required: true
-        example: 'G~J9JNx8LDO!*='
+        example: '2b]^LJjXciZ=WMy2_'
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      organize_id: 2
-      role_id: 10
-      nickname: v
-      email: nwyman@example.net
-      phone: '01282613596'
-      password: 'G~J9JNx8LDO!*='
+      organize_id: 13
+      role_id: 5
+      nickname: o
+      email: farrell.monserrat@example.com
+      phone: '14225556017'
+      password: '2b]^LJjXciZ=WMy2_'
     fileParameters: []
     responses:
       -
@@ -306,13 +306,13 @@ endpoints:
         name: ulid
         description: ''
         required: true
-        example: deserunt
+        example: fuga
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      ulid: deserunt
+      ulid: fuga
     fileParameters: []
     responses:
       -
@@ -359,13 +359,13 @@ endpoints:
         name: ulid
         description: ''
         required: true
-        example: beatae
+        example: consequuntur
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      ulid: beatae
+      ulid: consequuntur
     fileParameters: []
     responses:
       -
@@ -412,7 +412,7 @@ endpoints:
         name: ulid
         description: ''
         required: true
-        example: soluta
+        example: voluptates
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -429,7 +429,7 @@ endpoints:
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      ulid: soluta
+      ulid: voluptates
       status: '0'
     fileParameters: []
     responses:
