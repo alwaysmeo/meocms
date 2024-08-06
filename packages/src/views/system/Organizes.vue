@@ -1,10 +1,10 @@
 <script setup>
 	import { message } from 'ant-design-vue'
-	import { usePermissions, useModalConfirm } from '@hooks'
 	import { isEqual, pick } from 'radash'
+	import hooks from '@hooks'
 	import organizesApi from '@apis/organizes'
 
-	state.permissions = await usePermissions()
+	state.permissions = await hooks.usePermissions()
 	defineOptions({ name: 'SystemOrganizes' })
 
 	const route = useRoute()
@@ -59,7 +59,7 @@
 				name: '删除',
 				show: () => state.permissions.includes(`${route.name}-delete`),
 				event: (record) => {
-					useModalConfirm({
+					hooks.useModalConfirm({
 						content: h('div', { class: 'meo-modal-body' }, [
 							h('p', {}, `确定要删除【${record.name}】组织？`),
 							h('p', { class: 'warning' }, `提示：删除前请先解除该组织下绑定的所有角色。`)

@@ -1,12 +1,12 @@
 <script setup>
-	import { useSidebarStore } from '@stores/sidebarStore'
 	import { computedAsync } from '@vueuse/core'
 	import { isEmpty } from 'radash'
+	import stores from '@stores'
 
 	const route = useRoute()
 	const router = useRouter()
 
-	const sidebarStore = useSidebarStore()
+	const sidebarStore = stores.useSidebarStore()
 
 	const sidebar_list = computedAsync(async () => {
 		return await sidebarStore.getList()

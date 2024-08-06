@@ -1,8 +1,8 @@
 <!-- 树形控件组件：tree component -->
 <script setup>
 	import { useVModel } from '@vueuse/core'
-	import { useUnfoldTree } from '@hooks'
 	import { isEqual, isEmpty, flat } from 'radash'
+	import hooks from '@hooks'
 
 	const emits = defineEmits(['update:value'])
 
@@ -22,7 +22,7 @@
 		checkedKeys: computed(() => {
 			const checked = []
 			const halfChecked = []
-			const unfold = useUnfoldTree(props.treeData)
+			const unfold = hooks.useUnfoldTree(props.treeData)
 			for (const item of unfold) {
 				if (props.value.includes(item.id)) {
 					const childs = unfold.filter((v) => isEqual(v.parent_id, item.id) && props.value.includes(v.id))

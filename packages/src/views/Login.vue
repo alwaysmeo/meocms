@@ -1,8 +1,8 @@
 <script setup>
 	import { message } from 'ant-design-vue'
-	import { useBotd } from '@hooks'
-	import { useUserInfoStore } from '@stores/userInfoStore'
 	import { isEmpty, isEqual, random } from 'radash'
+	import hooks from '@hooks'
+	import stores from '@stores'
 	import accountApi from '@apis/account'
 	import commonApi from '@apis/common'
 	import i18n from '@language'
@@ -12,7 +12,7 @@
 	const router = useRouter()
 
 	const { t } = i18n.global
-	const userInfoStore = useUserInfoStore()
+	const userInfoStore = stores.useUserInfoStore()
 
 	const state = reactive({
 		year: computed(() => (dayjs().format('YYYY') > 2024 ? `2024-${dayjs().format('YYYY')}` : dayjs().format('YYYY'))),
@@ -69,7 +69,7 @@
 			})
 		}
 		requestAnimationFrame(update)
-		if (await useBotd()) captcha()
+		if (await hooks.useBotd()) captcha()
 	})
 
 	const form = reactive({

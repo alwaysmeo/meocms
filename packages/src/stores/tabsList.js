@@ -5,7 +5,7 @@ import STORAGE_KEY from '@utils/storageKey'
 import localforage from '@utils/localforage'
 
 const storeKey = STORAGE_KEY.TABS_LIST
-export const useTabsListStore = defineStore(storeKey, {
+export default defineStore(storeKey, {
 	state: () => {
 		return { data: new Object() }
 	},

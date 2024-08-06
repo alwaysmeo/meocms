@@ -5,7 +5,8 @@ import STORAGE_KEY from '@utils/storageKey'
 import organizesApi from '@apis/organizes'
 
 const storeKey = STORAGE_KEY.ORGANIZES
-export const useOrganizesStore = defineStore(storeKey, {
+
+export default defineStore(storeKey, {
 	state: () => {
 		return {
 			checked: new Object(),

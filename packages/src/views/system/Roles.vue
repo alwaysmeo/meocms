@@ -1,16 +1,16 @@
 <script setup>
 	import { message } from 'ant-design-vue'
-	import { usePermissions, useModalConfirm } from '@hooks'
-	import { useOrganizesStore } from '@stores/organizesStore'
 	import { isEmpty, isEqual, pick } from 'radash'
 	import { Tree } from '@components'
+	import hooks from '@hooks'
+	import stores from '@stores'
 	import permissionsApi from '@apis/permissions'
 	import rolesApi from '@apis/roles'
 
 	defineOptions({ name: 'SystemRoles' })
 
 	const route = useRoute()
-	const organizesStore = useOrganizesStore()
+	const organizesStore = stores.useOrganizesStore()
 
 	const state = reactive({
 		permissions: [],
@@ -68,7 +68,7 @@
 				name: '删除',
 				show: () => state.permissions.includes(`${route.name}-delete`),
 				event: (record) => {
-					useModalConfirm({
+					hooks.useModalConfirm({
 						content: h('div', { class: 'meo-modal-body' }, [
 							h('p', {}, `确定要删除【${record.name}】角色？`),
 							h('p', { class: 'warning' }, `提示：删除前请先解除该角色下关联的所有用户。`)
@@ -132,7 +132,7 @@
 	})
 
 	onMounted(async () => {
-		state.permissions = await usePermissions()
+		state.permissions = await hooks.usePermissions()
 		state.organizes = await organizesStore.get()
 		await list()
 	})

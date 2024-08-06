@@ -1,11 +1,11 @@
 <script setup>
-	import { useSidebarStore } from '@stores/sidebarStore'
+	import stores from '@stores'
 	import Header from './Header.vue'
 	import Sidebar from './Sidebar.vue'
 	import AppMain from './AppMain.vue'
 	import Footer from './Footer.vue'
 
-	const sidebarStore = useSidebarStore()
+	const sidebarStore = stores.useSidebarStore()
 
 	const collapsed = computed(() => {
 		return sidebarStore.getCollapsed()

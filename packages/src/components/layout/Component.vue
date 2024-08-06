@@ -1,9 +1,9 @@
 <script setup>
 	import { pascal } from 'radash'
 	import { computedAsync } from '@vueuse/core'
-	import { useTabsListStore } from '@stores/tabsListStore.js'
+	import stores from '@stores'
 
-	const tabsListStore = useTabsListStore()
+	const tabsListStore = stores.useTabsListStore()
 	const allow_list = computedAsync(async () => {
 		return Object.keys(await tabsListStore.get()).map((item) => pascal(item))
 	})

@@ -1,7 +1,7 @@
 'use strict'
 import { message } from 'ant-design-vue'
-import { useUserInfoStore } from '@stores/userInfoStore'
 import { isEqual, isString, isNumber, isFunction } from 'radash'
+import stores from '@stores'
 import localforage from '@utils/localforage'
 import routes from '@routes'
 import i18n from '@language'
@@ -34,7 +34,7 @@ export default async ({ response, error }) => {
 	}
 	if (isEqual(error?.response?.status, 401)) {
 		message.error(t('meo.request.error.401'))
-		const userInfoStore = useUserInfoStore()
+		const userInfoStore = stores.useUserInfoStore()
 		await userInfoStore.clear()
 		localStorage.clear()
 		localforage.clear()

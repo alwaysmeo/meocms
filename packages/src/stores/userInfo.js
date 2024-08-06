@@ -5,7 +5,7 @@ import STORAGE_KEY from '@utils/storageKey'
 import localforage from '@utils/localforage'
 
 const storeKey = STORAGE_KEY.USER_INFO
-export const useUserInfoStore = defineStore(storeKey, {
+export default defineStore(storeKey, {
 	state: () => {
 		return {
 			data: new Object()

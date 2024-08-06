@@ -2,23 +2,22 @@
 	import { message } from 'ant-design-vue'
 	import { useAsyncState } from '@vueuse/core'
 	import { isEqual } from 'radash'
-	import { useUserInfoStore } from '@stores/userInfoStore'
-	import { useOrganizesStore } from '@stores/organizesStore'
-	import { useModalConfirm } from '@hooks'
+	import hooks from '@hooks'
+	import stores from '@stores'
 	import localforage from '@utils/localforage'
 	import accountApi from '@apis/account'
 	import i18n from '@language'
 
 	const { t } = i18n.global
 	const router = useRouter()
-	const userInfoStore = useUserInfoStore()
-	const organizesStore = useOrganizesStore()
+	const userInfoStore = stores.useUserInfoStore()
+	const organizesStore = stores.useOrganizesStore()
 
 	const { state: userInfo } = useAsyncState(userInfoStore.get())
 	const { state: organizes } = useAsyncState(organizesStore.get())
 
 	async function logout() {
-		useModalConfirm({
+		hooks.useModalConfirm({
 			title: '提示',
 			content: `确认退出【${userInfo.value.nickname}】账号？`,
 			confirm: async () => {

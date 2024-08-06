@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import stores from './stores'
+import stores from './stores/pinia'
 import routes from './routes'
 import language from './language'
 import * as Icons from '@ant-design/icons-vue'

@@ -1,10 +1,10 @@
 <script setup>
 	import { isEmpty, isEqual, last } from 'radash'
-	import { useTabsListStore } from '@stores/tabsListStore.js'
+	import stores from '@stores'
 
 	const route = useRoute()
 	const router = useRouter()
-	const tabsListStore = useTabsListStore()
+	const tabsListStore = stores.useTabsListStore()
 
 	const tabs_active = ref('')
 	const tabs_list = ref()

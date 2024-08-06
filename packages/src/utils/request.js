@@ -1,7 +1,7 @@
 import Axios from 'axios'
 import nprogress from '@utils/nprogress'
-import { useUserInfoStore } from '@stores/userInfoStore'
 import handleRequest from '@utils/handleRequest'
+import stores from '@stores'
 
 const axios = Axios.create({
 	timeout: 30000,
@@ -14,7 +14,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/json'
 axios.interceptors.request.use(
 	async (response) => {
 		nprogress.start()
-		const userInfoStore = useUserInfoStore()
+		const userInfoStore = stores.useUserInfoStore()
 		const { token } = await userInfoStore.get()
 		if (token) response.headers['Authorization'] = `Bearer ${token}`
 		return response

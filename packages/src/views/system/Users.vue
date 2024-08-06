@@ -1,8 +1,8 @@
 <script setup>
 	import { message } from 'ant-design-vue'
 	import { isEmpty, isEqual, pick } from 'radash'
-	import { useOrganizesStore } from '@stores/organizesStore'
-	import { usePermissions, useModalConfirm } from '@hooks'
+	import hooks from '@hooks'
+	import stores from '@stores'
 	import rexExp from '@utils/rexExp'
 	import usersApi from '@apis/users'
 	import rolesApi from '@apis/roles'
@@ -12,7 +12,7 @@
 
 	const { t } = i18n.global
 	const route = useRoute()
-	const organizesStore = useOrganizesStore()
+	const organizesStore = stores.useOrganizesStore()
 
 	const state = reactive({
 		permissions: [],
@@ -220,7 +220,7 @@
 	})
 
 	onMounted(async () => {
-		state.permissions = await usePermissions()
+		state.permissions = await hooks.usePermissions()
 		state.organizes = await organizesStore.get()
 		await list()
 	})

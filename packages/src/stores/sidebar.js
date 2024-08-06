@@ -5,7 +5,8 @@ import STORAGE_KEY from '@utils/storageKey'
 import usersApi from '@apis/users'
 
 const storeKey = STORAGE_KEY.SIDEBAR
-export const useSidebarStore = defineStore(storeKey, {
+
+export default defineStore(storeKey, {
 	state: () => {
 		return {
 			list: new Array(),
