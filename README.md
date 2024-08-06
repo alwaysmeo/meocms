@@ -30,6 +30,11 @@
 
 `php artisan db:seed`
 
+## Generate api documentation
+
+`php artisan scribe:generate`
+
 ## License
 
 - The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
