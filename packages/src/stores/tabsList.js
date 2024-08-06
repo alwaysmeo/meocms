@@ -18,10 +18,7 @@ export default defineStore(storeKey, {
 			await localforage.setItem(storeKey, toRaw(this.data))
 		},
 		async get() {
-			if (isEmpty(this.data)) {
-				const obj = await localforage.getItem(storeKey)
-				Object.assign(this.data, obj)
-			}
+			Object.assign(this.data, await localforage.getItem(storeKey) ?? {})
 			return this.data
 		},
 		async clear() {
