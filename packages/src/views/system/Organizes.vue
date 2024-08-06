@@ -4,7 +4,6 @@
 	import hooks from '@hooks'
 	import organizesApi from '@apis/organizes'
 
-	state.permissions = await hooks.usePermissions()
 	defineOptions({ name: 'SystemOrganizes' })
 
 	const route = useRoute()
@@ -111,6 +110,7 @@
 	})
 
 	onMounted(async () => {
+		state.permissions = await hooks.usePermissions()
 		await list()
 	})
 
