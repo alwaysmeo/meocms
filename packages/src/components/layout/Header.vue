@@ -4,7 +4,6 @@
 	import { isEqual } from 'radash'
 	import hooks from '@hooks'
 	import stores from '@stores'
-	import localforage from '@utils/localforage'
 	import accountApi from '@apis/account'
 	import i18n from '@language'
 
@@ -23,18 +22,17 @@
 			confirm: async () => {
 				const { code } = await accountApi.logout()
 				if (isEqual(code, 200)) {
-					message.success(t('meo.tip.success.submit_logout'))
-					await userInfoStore.clear()
-					localStorage.clear()
-					localforage.clear()
-					router.replace({ name: 'login' })
+					hooks.useLogout(() => {
+						message.success(t('meo.tip.success.submit_logout'))
+						router.replace({ name: 'login' })
+					})
 				}
 			}
 		})
 	}
 
-	function changeOrganizes(item) {
-		organizesStore.change(item)
+	async function changeOrganizes(item) {
+		await organizesStore.change(item)
 		router.go(0)
 	}
 </script>

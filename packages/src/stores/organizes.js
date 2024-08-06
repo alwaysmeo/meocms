@@ -2,28 +2,28 @@
 import { isEmpty, isEqual, first } from 'radash'
 import { defineStore } from 'pinia'
 import STORAGE_KEY from '@utils/storageKey'
+import localforage from '@utils/localforage'
 import organizesApi from '@apis/organizes'
 
 const storeKey = STORAGE_KEY.ORGANIZES
 
 export default defineStore(storeKey, {
-	state: () => {
-		return {
-			checked: new Object(),
-			list: new Array()
-		}
-	},
+	state: () => ({ checked: new Object(), list: new Array() }),
 	actions: {
 		async get() {
-			const that = this
 			if (isEmpty(this.list)) {
-				const { code, data } = await organizesApi.list()
-				if (isEqual(code, 200)) {
-					this.list = data.list.map((item) => {
-						return { id: item.id, name: item.name }
-					})
-					const exist = data.list.find((item) => isEqual(item.id, that.checked.id))
-					this.checked = exist ?? first(this.list)
+				const store = await localforage.getItem(storeKey)
+				if (store) {
+					this.checked = store.checked
+					this.list = store.list
+				} else {
+					const { code, data } = await organizesApi.list()
+					if (isEqual(code, 200)) {
+						const list = data.list.map((item) => ({ id: item.id, name: item.name }))
+						this.list = list
+						this.checked = first(list)
+						await localforage.setItem(storeKey, { checked: first(list), list })
+					}
 				}
 			}
 			return {
@@ -31,17 +31,14 @@ export default defineStore(storeKey, {
 				list: this.list
 			}
 		},
-		change(data) {
+		async change(data) {
+			await localforage.setItem(storeKey, { checked: toRaw(data), list: toRaw(this.list) })
 			Object.assign(this.checked, data)
 		},
-		clear() {
+		async clear() {
 			this.checked = new Object()
 			this.list = new Array()
+			await localforage.removeItem(storeKey)
 		}
-	},
-	persist: {
-		paths: ['checked', 'list'],
-		enabled: true,
-		key: storeKey
 	}
 })

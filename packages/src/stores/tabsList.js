@@ -6,9 +6,7 @@ import localforage from '@utils/localforage'
 
 const storeKey = STORAGE_KEY.TABS_LIST
 export default defineStore(storeKey, {
-	state: () => {
-		return { data: new Object() }
-	},
+	state: () => ({ data: new Object() }),
 	actions: {
 		async add({ key, value }) {
 			Object.assign(this.data, { [key]: value })
@@ -26,8 +24,9 @@ export default defineStore(storeKey, {
 			}
 			return this.data
 		},
-		clear() {
+		async clear() {
 			this.data = new Object()
+			await localforage.removeItem(storeKey)
 		}
 	}
 })

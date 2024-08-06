@@ -2,22 +2,26 @@
 import { isEmpty, isEqual } from 'radash'
 import { defineStore } from 'pinia'
 import STORAGE_KEY from '@utils/storageKey'
+import localforage from '@utils/localforage'
 import usersApi from '@apis/users'
 
 const storeKey = STORAGE_KEY.SIDEBAR
 
 export default defineStore(storeKey, {
-	state: () => {
-		return {
-			list: new Array(),
-			collapsed: false
-		}
-	},
+	state: () => ({ list: new Array(), collapsed: false }),
 	actions: {
 		async getList() {
 			if (isEmpty(this.list)) {
-				const { code, data } = await usersApi.permissionsList()
-				if (isEqual(code, 200)) this.list = data
+				const store = await localforage.getItem(storeKey)
+				if (store) {
+					this.list = store
+				} else {
+					const { code, data } = await usersApi.permissionsList()
+					if (isEqual(code, 200)) {
+						await localforage.setItem(storeKey, data)
+						this.list = data
+					}
+				}
 			}
 			return this.list
 		},
@@ -27,8 +31,9 @@ export default defineStore(storeKey, {
 		changeCollapsed() {
 			this.collapsed = !this.collapsed
 		},
-		clear() {
+		async clear() {
 			this.list = new Array()
+			await localforage.removeItem(storeKey)
 		}
 	},
 	persist: {

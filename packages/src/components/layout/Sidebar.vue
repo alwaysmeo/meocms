@@ -1,5 +1,5 @@
 <script setup>
-	import { computedAsync } from '@vueuse/core'
+	import { useAsyncState } from '@vueuse/core'
 	import { isEmpty } from 'radash'
 	import stores from '@stores'
 
@@ -8,7 +8,7 @@
 
 	const sidebarStore = stores.useSidebarStore()
 
-	const sidebar_list = computedAsync(async () => {
+	const { state: sidebar_list } = useAsyncState(async () => {
 		return await sidebarStore.getList()
 	})
 

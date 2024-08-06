@@ -1,8 +1,7 @@
 'use strict'
 import { message } from 'ant-design-vue'
 import { isEqual, isString, isNumber, isFunction } from 'radash'
-import stores from '@stores'
-import localforage from '@utils/localforage'
+import hooks from '@hooks'
 import routes from '@routes'
 import i18n from '@language'
 
@@ -33,11 +32,9 @@ export default async ({ response, error }) => {
 		if (isFunction(mapping[response.data.code])) mapping[response.data.code](response)
 	}
 	if (isEqual(error?.response?.status, 401)) {
-		message.error(t('meo.request.error.401'))
-		const userInfoStore = stores.useUserInfoStore()
-		await userInfoStore.clear()
-		localStorage.clear()
-		localforage.clear()
-		routes.replace({ name: 'login' })
+		hooks.useLogout(() => {
+			message.error(t('meo.request.error.401'))
+			routes.replace({ name: 'login' })
+		})
 	}
 }

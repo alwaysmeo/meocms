@@ -6,11 +6,7 @@ import localforage from '@utils/localforage'
 
 const storeKey = STORAGE_KEY.USER_INFO
 export default defineStore(storeKey, {
-	state: () => {
-		return {
-			data: new Object()
-		}
-	},
+	state: () => ({ data: new Object() }),
 	actions: {
 		async set(data) {
 			if (!isEmpty(data)) {
