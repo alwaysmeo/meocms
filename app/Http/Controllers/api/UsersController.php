@@ -34,7 +34,7 @@ class UsersController extends Controller
     }
 
     /**
-     * 获取用户权限列表
+     * 获取用户拥有的权限列表
      *
      * @group 用户 - Users
      */
@@ -51,6 +51,39 @@ class UsersController extends Controller
             ->get();
 
         return $this->success($this->common->buildTree($list->toArray()));
+    }
+
+    /**
+     * 获取用户拥有的子权限
+     *
+     * @group 权限 - Users
+     */
+    public function permissionsChild(Request $request): Response
+    {
+        $user = $request->user();
+        $req = $request->only(['parent_id', 'parent_code']);
+        $validator = Validator::make($req, [
+            'parent_id' => 'integer',
+            'parent_code' => 'max:100',
+        ]);
+        if (! $validator->passes()) {
+            return $this->fail(null, $validator->errors()->first(), 5000);
+        }
+        $role_permission = RolePermissions::query()->find($user['role_info']['id']);
+        $permissions = Permissions::query();
+        $permissions->whereNull('deleted_at')
+            ->where('show', 1)
+            ->orderByRaw('ISNULL(`ORDER`), `ORDER` ASC')
+            ->whereIn('id', json_decode($role_permission['permission_ids']));
+        if (isset($req['parent_id'])) {
+            $permissions->where('parent_id', $req['parent_id']);
+        } elseif (isset($req['parent_code'])) {
+            $permission = Permissions::query()->where('code', $req['parent_code'])->first();
+            $permissions->where('parent_id', $permission['id']);
+        }
+        $permissions->select('id', 'parent_id', 'code', 'name', 'description', 'icon', 'path', 'level', 'show', 'order', 'type');
+
+        return $this->success($permissions->get());
     }
 
     /**

@@ -12,7 +12,7 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 获取用户权限列表
+      title: 获取用户拥有的权限列表
       description: ''
       authenticated: true
       custom: []
@@ -196,7 +196,7 @@ endpoints:
         name: organize_id
         description: ''
         required: true
-        example: 13
+        example: 8
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -214,7 +214,7 @@ endpoints:
         name: role_id
         description: ''
         required: true
-        example: 5
+        example: 3
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -223,7 +223,7 @@ endpoints:
         name: nickname
         description: validation.between.
         required: true
-        example: o
+        example: mq
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -232,7 +232,7 @@ endpoints:
         name: email
         description: validation.email.
         required: true
-        example: farrell.monserrat@example.com
+        example: jeanne79@example.org
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -241,7 +241,7 @@ endpoints:
         name: phone
         description: validation.digits.
         required: false
-        example: '14225556017'
+        example: '61550178369'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -250,18 +250,18 @@ endpoints:
         name: password
         description: 'Must match the regex /^[a-zA-Z0-9]+$/. validation.between.'
         required: true
-        example: '2b]^LJjXciZ=WMy2_'
+        example: (rNp2p
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      organize_id: 13
-      role_id: 5
-      nickname: o
-      email: farrell.monserrat@example.com
-      phone: '14225556017'
-      password: '2b]^LJjXciZ=WMy2_'
+      organize_id: 8
+      role_id: 3
+      nickname: mq
+      email: jeanne79@example.org
+      phone: '61550178369'
+      password: (rNp2p
     fileParameters: []
     responses:
       -
@@ -308,13 +308,13 @@ endpoints:
         name: ulid
         description: ''
         required: true
-        example: fuga
+        example: vitae
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      ulid: fuga
+      ulid: vitae
     fileParameters: []
     responses:
       -
@@ -361,13 +361,13 @@ endpoints:
         name: ulid
         description: ''
         required: true
-        example: consequuntur
+        example: temporibus
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      ulid: consequuntur
+      ulid: temporibus
     fileParameters: []
     responses:
       -
@@ -414,7 +414,7 @@ endpoints:
         name: ulid
         description: ''
         required: true
-        example: voluptates
+        example: tempore
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -423,7 +423,7 @@ endpoints:
         name: status
         description: ''
         required: true
-        example: '0'
+        example: '1'
         type: string
         enumValues:
           - '0'
@@ -431,8 +431,8 @@ endpoints:
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      ulid: voluptates
-      status: '0'
+      ulid: tempore
+      status: '1'
     fileParameters: []
     responses:
       -

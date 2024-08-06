@@ -46,10 +46,19 @@ export default {
 	},
 
 	/**
-	 * 获取用户权限列表
+	 * 获取用户拥有的权限列表
 	 */
 	permissionsList: async function () {
 		return await request.get(`/api/users/permissions/list`)
+	},
+
+	/**
+	 * 获取用户拥有的子权限
+	 * @param parent_id		父级权限ID
+	 * @param parent_code	父级权限code
+	 */
+	permissionsChild: async function (data) {
+		return await request.get(`/api/users/permissions/child`, { params: data })
 	},
 
 	change: {

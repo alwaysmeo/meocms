@@ -4,7 +4,6 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Permissions;
-use App\Models\RolePermissions;
 use App\Services\Common;
 use App\Services\Mapping;
 use Illuminate\Http\Request;
@@ -93,37 +92,6 @@ class PermissionsController extends Controller
         ]);
 
         return $this->success();
-    }
-
-    /**
-     * 获取子权限
-     *
-     * @group 权限 - Permissions
-     */
-    public function children(Request $request): Response
-    {
-        $user = $request->user();
-        $req = $request->only(['parent_id', 'parent_code']);
-        $validator = Validator::make($req, [
-            'parent_id' => 'integer',
-            'parent_code' => 'max:100',
-        ]);
-        if (! $validator->passes()) {
-            return $this->fail(null, $validator->errors()->first(), 5000);
-        }
-        $role_permission = RolePermissions::query()->find($user['role_info']['id']);
-        $permissions = Permissions::query();
-        $permissions->whereNull('deleted_at');
-        $permissions->whereIn('id', json_decode($role_permission['permission_ids']));
-        if (isset($req['parent_id'])) {
-            $permissions->where('parent_id', $req['parent_id']);
-        } elseif (isset($req['parent_code'])) {
-            $permission = Permissions::query()->where('code', $req['parent_code'])->first();
-            $permissions->where('parent_id', $permission['id']);
-        }
-        $permissions->select('id', 'parent_id', 'code', 'name', 'description', 'icon', 'path', 'level', 'show', 'order', 'type');
-
-        return $this->success($permissions->get());
     }
 
     /**

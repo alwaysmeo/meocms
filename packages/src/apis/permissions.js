@@ -34,15 +34,6 @@ export default {
 		return await request.post(`/api/permissions/delete`, data)
 	},
 
-	/**
-	 * 获取子权限
-	 * @param parent_id		父级权限ID
-	 * @param parent_code	父级权限code
-	 */
-	children: async function (data) {
-		return await request.get(`/api/permissions/children`, { params: data })
-	},
-
 	change: {
 		/**
 		 * 修改权限启用状态

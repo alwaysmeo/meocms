@@ -63,15 +63,15 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::post('/upsert', [PermissionsController::class, 'upsert']);
         /* 删除权限 */
         Route::post('/delete', [PermissionsController::class, 'delete']);
-        /* 获取子权限 */
-        Route::get('/children', [PermissionsController::class, 'children']);
         /* 修改权限启用状态 */
         Route::post('/change/show', [PermissionsController::class, 'changeShow']);
     });
 
     Route::group(['prefix' => 'users'], function () {
-        /* 获取用户权限列表 */
+        /* 获取用户拥有的权限列表 */
         Route::get('/permissions/list', [UsersController::class, 'permissionsList']);
+        /* 获取用户拥有的子权限 */
+        Route::get('/permissions/child', [UsersController::class, 'permissionsChild']);
         /* 获取用户列表 */
         Route::get('/list', [UsersController::class, 'list']);
         /* 新增修改用户 */

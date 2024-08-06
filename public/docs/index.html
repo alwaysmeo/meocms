@@ -276,23 +276,42 @@
                                                                             </div>
                                                                     <div class="expandable">
                                         <div class="sl-flex sl-items-center sl-h-md sl-pr-4 sl-pl-8 sl-bg-canvas-100 hover:sl-bg-canvas-200 sl-cursor-pointer sl-select-none"
-                                             id="toc-item-permissions-GETapi-permissions-children">
-                                            <div class="sl-flex-1 sl-items-center sl-truncate sl-mr-1.5 sl-p-0" title="获取子权限">
-                                                <a class="ElementsTableOfContentsItem sl-block sl-no-underline"
-                                                   href="#permissions-GETapi-permissions-children">
-                                                    获取子权限
-                                                </a>
-                                            </div>
-                                                                                    </div>
-
-                                                                            </div>
-                                                                    <div class="expandable">
-                                        <div class="sl-flex sl-items-center sl-h-md sl-pr-4 sl-pl-8 sl-bg-canvas-100 hover:sl-bg-canvas-200 sl-cursor-pointer sl-select-none"
                                              id="toc-item-permissions-POSTapi-permissions-change-show">
                                             <div class="sl-flex-1 sl-items-center sl-truncate sl-mr-1.5 sl-p-0" title="修改权限启用状态">
                                                 <a class="ElementsTableOfContentsItem sl-block sl-no-underline"
                                                    href="#permissions-POSTapi-permissions-change-show">
                                                     修改权限启用状态
+                                                </a>
+                                            </div>
+                                                                                    </div>
+
+                                                                            </div>
+                                                            </div>
+                                            </div>
+                                    <div class="expandable">
+                        <div title="权限 - Users" id="toc-item-users"
+                             class="sl-flex sl-items-center sl-h-md sl-pr-4 sl-pl-4 sl-bg-canvas-100 hover:sl-bg-canvas-200 sl-cursor-pointer sl-select-none">
+                            <a href="#users"
+                               class="sl-flex-1 sl-items-center sl-truncate sl-mr-1.5 sl-p-0">权限 - Users</a>
+                                                            <div class="sl-flex sl-items-center sl-text-xs expansion-chevrons">
+                                    <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                         data-icon="chevron-right"
+                                         class="svg-inline--fa fa-chevron-right fa-fw sl-icon sl-text-muted"
+                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                        <path fill="currentColor"
+                                              d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path>
+                                    </svg>
+                                </div>
+                                                    </div>
+
+                                                    <div class="children" style="display: none;">
+                                                                    <div class="expandable">
+                                        <div class="sl-flex sl-items-center sl-h-md sl-pr-4 sl-pl-8 sl-bg-canvas-100 hover:sl-bg-canvas-200 sl-cursor-pointer sl-select-none"
+                                             id="toc-item-users-GETapi-users-permissions-child">
+                                            <div class="sl-flex-1 sl-items-center sl-truncate sl-mr-1.5 sl-p-0" title="获取用户拥有的子权限">
+                                                <a class="ElementsTableOfContentsItem sl-block sl-no-underline"
+                                                   href="#users-GETapi-users-permissions-child">
+                                                    获取用户拥有的子权限
                                                 </a>
                                             </div>
                                                                                     </div>
@@ -320,10 +339,10 @@
                                                                     <div class="expandable">
                                         <div class="sl-flex sl-items-center sl-h-md sl-pr-4 sl-pl-8 sl-bg-canvas-100 hover:sl-bg-canvas-200 sl-cursor-pointer sl-select-none"
                                              id="toc-item-users-GETapi-users-permissions-list">
-                                            <div class="sl-flex-1 sl-items-center sl-truncate sl-mr-1.5 sl-p-0" title="获取用户权限列表">
+                                            <div class="sl-flex-1 sl-items-center sl-truncate sl-mr-1.5 sl-p-0" title="获取用户拥有的权限列表">
                                                 <a class="ElementsTableOfContentsItem sl-block sl-no-underline"
                                                    href="#users-GETapi-users-permissions-list">
-                                                    获取用户权限列表
+                                                    获取用户拥有的权限列表
                                                 </a>
                                             </div>
                                                                                     </div>
@@ -632,7 +651,7 @@
 
         </div>
         <div class="sl-flex sl-items-center sl-px-4 sl-py-3 sl-border-t">
-            Last updated: August 5, 2024
+            Last updated: August 6, 2024
         </div>
 
         <div class="sl-flex sl-items-center sl-px-4 sl-py-3 sl-border-t">
@@ -1048,8 +1067,8 @@
                                                        class="language-json sl-overflow-x-auto sl-overflow-y-auto">{
     &quot;data&quot;: {
         &quot;sensitive&quot;: false,
-        &quot;key&quot;: &quot;eyJpdiI6IlBzZkdCYUwzdEJGR2VzWWNIVllXTWc9PSIsInZhbHVlIjoiYTY3clBlMDhKd0FIU1dYZVdHYW94M3FGMnNRTVRjdERuZHVjZVZnZ2tza2I0OHNKL256cnlxSmZobW5WUGdDZWo4OHlaRG1IVG9OTU9GNXduVE1oTUJTZURvZTRHMC9IT1RRKzhOemdVYzA9IiwibWFjIjoiZTg4MTk0MzIyZjgyMDk2ZGNhOTZjYTEzYTg3YThkMTA1ZmI0NTRiYWQyODdkMzEzYTVhNjUwY2U1YzcwMTJhOCIsInRhZyI6IiJ9&quot;,
-        &quot;img&quot;: &quot;data:image/png;base64,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&quot;
+        &quot;key&quot;: &quot;eyJpdiI6IkxyK2h6U1E0Q0NMa2JtTGVkUDdQK2c9PSIsInZhbHVlIjoiMkJQRWhscmNDZlZiSDA1Zk8xcWVxK3lvcUFmdmhFTmdsaUo2UWQrWWNndExaQzFuMWs5ZG96TnB5UzBRaHhuT1gzRTF2NEhZa0FBZHhRQXczQ1ZxWmQyc21wOVZFSy9WWkJVRERId3JEd0E9IiwibWFjIjoiYzdiNGVmNTQzNjVjMTYxOTc2NmU2ZTY3MDE2M2U3N2FkN2IwZDU1N2VjOWY4Nzg2NGIyNWVkNGQ3YzFmZjQzNSIsInRhZyI6IiJ9&quot;,
+        &quot;img&quot;: &quot;data:image/png;base64,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&quot;
     },
     &quot;message&quot;: &quot;success&quot;,
     &quot;code&quot;: 200
@@ -1290,7 +1309,7 @@
                             &quot;icon&quot;: null,
                             &quot;path&quot;: null,
                             &quot;level&quot;: 3,
-                            &quot;show&quot;: true,
+                            &quot;show&quot;: false,
                             &quot;order&quot;: 3,
                             &quot;type&quot;: 2
                         },
@@ -1303,7 +1322,7 @@
                             &quot;icon&quot;: null,
                             &quot;path&quot;: null,
                             &quot;level&quot;: 3,
-                            &quot;show&quot;: true,
+                            &quot;show&quot;: false,
                             &quot;order&quot;: 4,
                             &quot;type&quot;: 2
                         },
@@ -1316,7 +1335,7 @@
                             &quot;icon&quot;: null,
                             &quot;path&quot;: null,
                             &quot;level&quot;: 3,
-                            &quot;show&quot;: true,
+                            &quot;show&quot;: false,
                             &quot;order&quot;: 5,
                             &quot;type&quot;: 2
                         }
@@ -1768,7 +1787,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        9
+                        11
                     </div>
                 </div>
             </div>
@@ -1817,7 +1836,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        kvrrohdmnhxiyhtdpjkj
+                        kc
                     </div>
                 </div>
             </div>
@@ -1844,7 +1863,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        saeatnrjtlxjxsv
+                        rlbxjcau
                     </div>
                 </div>
             </div>
@@ -1869,7 +1888,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        Qui enim sapiente nobis laborum et modi sed.
+                        Eum animi et quidem rerum.
                     </div>
                 </div>
             </div>
@@ -1894,7 +1913,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        qarqtjagpprdsgh
+                        iqwoyzjdfuomson
                     </div>
                 </div>
             </div>
@@ -1919,7 +1938,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        fnlfhqkkbjhuhebhls
+                        nprrnqxtddc
                     </div>
                 </div>
             </div>
@@ -1969,7 +1988,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        2
+                        1
                     </div>
                 </div>
             </div>
@@ -2182,7 +2201,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        12
+                        15
                     </div>
                 </div>
             </div>
@@ -2261,282 +2280,6 @@
                                             <pre><code style="max-height: 300px;"
                                                        class="language-json sl-overflow-x-auto sl-overflow-y-auto">{
     &quot;data&quot;: null,
-    &quot;message&quot;: &quot;success&quot;,
-    &quot;code&quot;: 200
-}</code></pre>
-                                                                            </div>
-                                </div>
-                                                    </div>
-                            </div>
-    </div>
-</div>
-
-                    <div class="sl-stack sl-stack--vertical sl-stack--8 HttpOperation sl-flex sl-flex-col sl-items-stretch sl-w-full">
-    <div class="sl-stack sl-stack--vertical sl-stack--5 sl-flex sl-flex-col sl-items-stretch">
-        <div class="sl-relative">
-            <div class="sl-stack sl-stack--horizontal sl-stack--5 sl-flex sl-flex-row sl-items-center">
-                <h2 class="sl-text-3xl sl-leading-tight sl-font-prose sl-text-heading sl-mt-5 sl-mb-1"
-                    id="permissions-GETapi-permissions-children">
-                    获取子权限
-                </h2>
-            </div>
-        </div>
-
-        <div class="sl-relative">
-            <div title="http://localhost:9004/api/permissions/children"
-                     class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
-                >
-                                            <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
-                             style="background-color: green;"
-                        >
-                            GET
-                        </div>
-                                        <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
-                        <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:9004</div>
-                        <div class="sl-flex-1 sl-font-semibold">/api/permissions/children</div>
-                    </div>
-
-                                                    <div class="sl-font-prose sl-font-semibold sl-px-1.5 sl-py-0.5 sl-text-on-primary sl-rounded-lg"
-                                 style="background-color: darkred"
-                            >requires authentication
-                            </div>
-                                    </div>
-        </div>
-
-        
-    </div>
-    <div class="sl-flex">
-        <div data-testid="two-column-left" class="sl-flex-1 sl-w-0">
-            <div class="sl-stack sl-stack--vertical sl-stack--10 sl-flex sl-flex-col sl-items-stretch">
-                <div class="sl-stack sl-stack--vertical sl-stack--8 sl-flex sl-flex-col sl-items-stretch">
-                                            <div class="sl-stack sl-stack--vertical sl-stack--5 sl-flex sl-flex-col sl-items-stretch">
-                            <h3 class="sl-text-2xl sl-leading-snug sl-font-prose">
-                                Headers
-                            </h3>
-                            <div class="sl-text-sm">
-                                                                    <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">Authorization</div>
-                                    </div>
-                                    </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        Bearer {YOUR_AUTH_KEY}
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-                                                                    <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">Content-Type</div>
-                                    </div>
-                                    </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        application/json
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-                                                                    <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">Accept</div>
-                                    </div>
-                                    </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        application/json
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-                                                            </div>
-                        </div>
-                    
-                    
-
-                    
-                                            <div class="sl-stack sl-stack--vertical sl-stack--6 sl-flex sl-flex-col sl-items-stretch">
-                            <h3 class="sl-text-2xl sl-leading-snug sl-font-prose">Body Parameters</h3>
-
-                                <div class="sl-text-sm">
-                                    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">parent_id</div>
-                                            <span class="sl-truncate sl-text-muted">integer</span>
-                                    </div>
-                                    </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        15
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">parent_code</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>validation.max.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        lye
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-                            </div>
-                        </div>
-                    
-                                    </div>
-            </div>
-        </div>
-
-        <div data-testid="two-column-right" class="sl-relative sl-w-2/5 sl-ml-16" style="max-width: 500px;">
-            <div class="sl-stack sl-stack--vertical sl-stack--6 sl-flex sl-flex-col sl-items-stretch">
-
-                
-                    
-                                            <div class="sl-panel sl-outline-none sl-w-full sl-rounded-lg">
-                            <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-3 sl-pl-4 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-select-none">
-                                <div class="sl-flex sl-flex-1 sl-items-center sl-py-2">
-                                    <div class="sl--ml-2">
-                                        <div class="sl-h-sm sl-text-base sl-font-medium sl-px-1.5 sl-text-muted sl-rounded sl-border-transparent sl-border">
-                                            <div class="sl-mb-2 sl-inline-block">Example response:</div>
-                                            <div class="sl-mb-2 sl-inline-block">
-                                                <select
-                                                        class="example-response-GETapi-permissions-children-toggle sl-text-base"
-                                                        aria-label="Response sample"
-                                                        onchange="switchExampleResponse('GETapi-permissions-children', event.target.value);">
-                                                                                                            <option value="0">200</option>
-                                                                                                    </select></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type="button"
-                                        class="sl-button sl-h-sm sl-text-base sl-font-medium sl-px-1.5 hover:sl-bg-canvas-50 active:sl-bg-canvas-100 sl-text-muted hover:sl-text-body focus:sl-text-body sl-rounded sl-border-transparent sl-border disabled:sl-opacity-70">
-                                    <div class="sl-mx-0">
-                                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="copy"
-                                             class="svg-inline--fa fa-copy fa-fw fa-sm sl-icon" role="img"
-                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                            <path fill="currentColor"
-                                                  d="M384 96L384 0h-112c-26.51 0-48 21.49-48 48v288c0 26.51 21.49 48 48 48H464c26.51 0 48-21.49 48-48V128h-95.1C398.4 128 384 113.6 384 96zM416 0v96h96L416 0zM192 352V128h-144c-26.51 0-48 21.49-48 48v288c0 26.51 21.49 48 48 48h192c26.51 0 48-21.49 48-48L288 416h-32C220.7 416 192 387.3 192 352z"></path>
-                                        </svg>
-                                    </div>
-                                </button>
-                            </div>
-                                                            <div class="sl-panel__content-wrapper sl-bg-canvas-100 example-response-GETapi-permissions-children example-response-GETapi-permissions-children-0"
-                                     style=" "
-                                >
-                                    <div class="sl-panel__content sl-p-0">                                            <details class="sl-pl-2">
-                                                <summary style="cursor: pointer; list-style: none;">
-                                                    <small>
-                                                        <span class="expansion-chevrons">
-
-    <svg aria-hidden="true" focusable="false" data-prefix="fas"
-         data-icon="chevron-right"
-         class="svg-inline--fa fa-chevron-right fa-fw sl-icon sl-text-muted"
-         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-        <path fill="currentColor"
-              d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path>
-    </svg>
-                                                            </span>
-                                                        Headers
-                                                    </small>
-                                                </summary>
-                                                <pre><code class="language-http">                                                            cache-control
-                                                            : no-cache, private
-                                                                                                                    content-type
-                                                            : application/json
-                                                                                                                    access-control-allow-origin
-                                                            : *
-                                                         </code></pre>
-                                            </details>
-                                                                                                                                                                        
-                                            <pre><code style="max-height: 300px;"
-                                                       class="language-json sl-overflow-x-auto sl-overflow-y-auto">{
-    &quot;data&quot;: [
-        {
-            &quot;id&quot;: 16,
-            &quot;parent_id&quot;: 15,
-            &quot;code&quot;: &quot;system-organizes-create&quot;,
-            &quot;name&quot;: &quot;新增&quot;,
-            &quot;description&quot;: &quot;系统管理-组织管理-新增按钮&quot;,
-            &quot;icon&quot;: null,
-            &quot;path&quot;: null,
-            &quot;level&quot;: 3,
-            &quot;show&quot;: true,
-            &quot;order&quot;: 15,
-            &quot;type&quot;: 2
-        },
-        {
-            &quot;id&quot;: 17,
-            &quot;parent_id&quot;: 15,
-            &quot;code&quot;: &quot;system-organizes-update&quot;,
-            &quot;name&quot;: &quot;修改&quot;,
-            &quot;description&quot;: &quot;系统管理-组织管理-修改按钮&quot;,
-            &quot;icon&quot;: null,
-            &quot;path&quot;: null,
-            &quot;level&quot;: 3,
-            &quot;show&quot;: true,
-            &quot;order&quot;: 16,
-            &quot;type&quot;: 2
-        },
-        {
-            &quot;id&quot;: 18,
-            &quot;parent_id&quot;: 15,
-            &quot;code&quot;: &quot;system-organizes-delete&quot;,
-            &quot;name&quot;: &quot;删除&quot;,
-            &quot;description&quot;: &quot;系统管理-组织管理-删除按钮&quot;,
-            &quot;icon&quot;: null,
-            &quot;path&quot;: null,
-            &quot;level&quot;: 3,
-            &quot;show&quot;: true,
-            &quot;order&quot;: 17,
-            &quot;type&quot;: 2
-        }
-    ],
     &quot;message&quot;: &quot;success&quot;,
     &quot;code&quot;: 200
 }</code></pre>
@@ -2671,7 +2414,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        9
+                        15
                     </div>
                 </div>
             </div>
@@ -2697,7 +2440,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
+                        0
                     </div>
                 </div>
             </div>
@@ -2789,6 +2532,290 @@
                 <h1 id="users"
         class="sl-text-5xl sl-leading-tight sl-font-prose sl-text-heading"
     >
+        权限 - Users
+    </h1>
+
+    
+
+                                <div class="sl-stack sl-stack--vertical sl-stack--8 HttpOperation sl-flex sl-flex-col sl-items-stretch sl-w-full">
+    <div class="sl-stack sl-stack--vertical sl-stack--5 sl-flex sl-flex-col sl-items-stretch">
+        <div class="sl-relative">
+            <div class="sl-stack sl-stack--horizontal sl-stack--5 sl-flex sl-flex-row sl-items-center">
+                <h2 class="sl-text-3xl sl-leading-tight sl-font-prose sl-text-heading sl-mt-5 sl-mb-1"
+                    id="users-GETapi-users-permissions-child">
+                    获取用户拥有的子权限
+                </h2>
+            </div>
+        </div>
+
+        <div class="sl-relative">
+            <div title="http://localhost:9004/api/users/permissions/child"
+                     class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
+                >
+                                            <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
+                             style="background-color: green;"
+                        >
+                            GET
+                        </div>
+                                        <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
+                        <div dir="rtl"
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:9004</div>
+                        <div class="sl-flex-1 sl-font-semibold">/api/users/permissions/child</div>
+                    </div>
+
+                                                    <div class="sl-font-prose sl-font-semibold sl-px-1.5 sl-py-0.5 sl-text-on-primary sl-rounded-lg"
+                                 style="background-color: darkred"
+                            >requires authentication
+                            </div>
+                                    </div>
+        </div>
+
+        
+    </div>
+    <div class="sl-flex">
+        <div data-testid="two-column-left" class="sl-flex-1 sl-w-0">
+            <div class="sl-stack sl-stack--vertical sl-stack--10 sl-flex sl-flex-col sl-items-stretch">
+                <div class="sl-stack sl-stack--vertical sl-stack--8 sl-flex sl-flex-col sl-items-stretch">
+                                            <div class="sl-stack sl-stack--vertical sl-stack--5 sl-flex sl-flex-col sl-items-stretch">
+                            <h3 class="sl-text-2xl sl-leading-snug sl-font-prose">
+                                Headers
+                            </h3>
+                            <div class="sl-text-sm">
+                                                                    <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">Authorization</div>
+                                    </div>
+                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        Bearer {YOUR_AUTH_KEY}
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                                    <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">Content-Type</div>
+                                    </div>
+                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        application/json
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                                    <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">Accept</div>
+                                    </div>
+                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        application/json
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                            </div>
+                        </div>
+                    
+                    
+
+                    
+                                            <div class="sl-stack sl-stack--vertical sl-stack--6 sl-flex sl-flex-col sl-items-stretch">
+                            <h3 class="sl-text-2xl sl-leading-snug sl-font-prose">Body Parameters</h3>
+
+                                <div class="sl-text-sm">
+                                    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">parent_id</div>
+                                            <span class="sl-truncate sl-text-muted">integer</span>
+                                    </div>
+                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        7
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">parent_code</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>validation.max.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        ruzdaijw
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+                            </div>
+                        </div>
+                    
+                                    </div>
+            </div>
+        </div>
+
+        <div data-testid="two-column-right" class="sl-relative sl-w-2/5 sl-ml-16" style="max-width: 500px;">
+            <div class="sl-stack sl-stack--vertical sl-stack--6 sl-flex sl-flex-col sl-items-stretch">
+
+                
+                    
+                                            <div class="sl-panel sl-outline-none sl-w-full sl-rounded-lg">
+                            <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-3 sl-pl-4 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-select-none">
+                                <div class="sl-flex sl-flex-1 sl-items-center sl-py-2">
+                                    <div class="sl--ml-2">
+                                        <div class="sl-h-sm sl-text-base sl-font-medium sl-px-1.5 sl-text-muted sl-rounded sl-border-transparent sl-border">
+                                            <div class="sl-mb-2 sl-inline-block">Example response:</div>
+                                            <div class="sl-mb-2 sl-inline-block">
+                                                <select
+                                                        class="example-response-GETapi-users-permissions-child-toggle sl-text-base"
+                                                        aria-label="Response sample"
+                                                        onchange="switchExampleResponse('GETapi-users-permissions-child', event.target.value);">
+                                                                                                            <option value="0">200</option>
+                                                                                                    </select></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button"
+                                        class="sl-button sl-h-sm sl-text-base sl-font-medium sl-px-1.5 hover:sl-bg-canvas-50 active:sl-bg-canvas-100 sl-text-muted hover:sl-text-body focus:sl-text-body sl-rounded sl-border-transparent sl-border disabled:sl-opacity-70">
+                                    <div class="sl-mx-0">
+                                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="copy"
+                                             class="svg-inline--fa fa-copy fa-fw fa-sm sl-icon" role="img"
+                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor"
+                                                  d="M384 96L384 0h-112c-26.51 0-48 21.49-48 48v288c0 26.51 21.49 48 48 48H464c26.51 0 48-21.49 48-48V128h-95.1C398.4 128 384 113.6 384 96zM416 0v96h96L416 0zM192 352V128h-144c-26.51 0-48 21.49-48 48v288c0 26.51 21.49 48 48 48h192c26.51 0 48-21.49 48-48L288 416h-32C220.7 416 192 387.3 192 352z"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                            </div>
+                                                            <div class="sl-panel__content-wrapper sl-bg-canvas-100 example-response-GETapi-users-permissions-child example-response-GETapi-users-permissions-child-0"
+                                     style=" "
+                                >
+                                    <div class="sl-panel__content sl-p-0">                                            <details class="sl-pl-2">
+                                                <summary style="cursor: pointer; list-style: none;">
+                                                    <small>
+                                                        <span class="expansion-chevrons">
+
+    <svg aria-hidden="true" focusable="false" data-prefix="fas"
+         data-icon="chevron-right"
+         class="svg-inline--fa fa-chevron-right fa-fw sl-icon sl-text-muted"
+         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+        <path fill="currentColor"
+              d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path>
+    </svg>
+                                                            </span>
+                                                        Headers
+                                                    </small>
+                                                </summary>
+                                                <pre><code class="language-http">                                                            cache-control
+                                                            : no-cache, private
+                                                                                                                    content-type
+                                                            : application/json
+                                                                                                                    access-control-allow-origin
+                                                            : *
+                                                         </code></pre>
+                                            </details>
+                                                                                                                                                                        
+                                            <pre><code style="max-height: 300px;"
+                                                       class="language-json sl-overflow-x-auto sl-overflow-y-auto">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 8,
+            &quot;parent_id&quot;: 7,
+            &quot;code&quot;: &quot;system-roles-create&quot;,
+            &quot;name&quot;: &quot;新增&quot;,
+            &quot;description&quot;: &quot;系统管理-角色管理-新增按钮&quot;,
+            &quot;icon&quot;: null,
+            &quot;path&quot;: null,
+            &quot;level&quot;: 3,
+            &quot;show&quot;: true,
+            &quot;order&quot;: 7,
+            &quot;type&quot;: 2
+        },
+        {
+            &quot;id&quot;: 9,
+            &quot;parent_id&quot;: 7,
+            &quot;code&quot;: &quot;system-roles-update&quot;,
+            &quot;name&quot;: &quot;修改&quot;,
+            &quot;description&quot;: &quot;系统管理-角色管理-修改按钮&quot;,
+            &quot;icon&quot;: null,
+            &quot;path&quot;: null,
+            &quot;level&quot;: 3,
+            &quot;show&quot;: true,
+            &quot;order&quot;: 8,
+            &quot;type&quot;: 2
+        },
+        {
+            &quot;id&quot;: 10,
+            &quot;parent_id&quot;: 7,
+            &quot;code&quot;: &quot;system-roles-delete&quot;,
+            &quot;name&quot;: &quot;删除&quot;,
+            &quot;description&quot;: &quot;系统管理-角色管理-删除按钮&quot;,
+            &quot;icon&quot;: null,
+            &quot;path&quot;: null,
+            &quot;level&quot;: 3,
+            &quot;show&quot;: true,
+            &quot;order&quot;: 9,
+            &quot;type&quot;: 2
+        }
+    ],
+    &quot;message&quot;: &quot;success&quot;,
+    &quot;code&quot;: 200
+}</code></pre>
+                                                                            </div>
+                                </div>
+                                                    </div>
+                            </div>
+    </div>
+</div>
+
+                <h1 id="users"
+        class="sl-text-5xl sl-leading-tight sl-font-prose sl-text-heading"
+    >
         用户 - Users
     </h1>
 
@@ -2800,7 +2827,7 @@
             <div class="sl-stack sl-stack--horizontal sl-stack--5 sl-flex sl-flex-row sl-items-center">
                 <h2 class="sl-text-3xl sl-leading-tight sl-font-prose sl-text-heading sl-mt-5 sl-mb-1"
                     id="users-GETapi-users-permissions-list">
-                    获取用户权限列表
+                    获取用户拥有的权限列表
                 </h2>
             </div>
         </div>
@@ -4009,7 +4036,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        13
+                        8
                     </div>
                 </div>
             </div>
@@ -4047,7 +4074,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        5
+                        3
                     </div>
                 </div>
             </div>
@@ -4074,7 +4101,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        o
+                        mq
                     </div>
                 </div>
             </div>
@@ -4101,7 +4128,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        farrell.monserrat@example.com
+                        jeanne79@example.org
                     </div>
                 </div>
             </div>
@@ -4126,7 +4153,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        14225556017
+                        61550178369
                     </div>
                 </div>
             </div>
@@ -4153,7 +4180,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        2b]^LJjXciZ=WMy2_
+                        (rNp2p
                     </div>
                 </div>
             </div>
@@ -4366,7 +4393,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        fuga
+                        vitae
                     </div>
                 </div>
             </div>
@@ -4579,7 +4606,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        consequuntur
+                        temporibus
                     </div>
                 </div>
             </div>
@@ -4792,7 +4819,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        voluptates
+                        tempore
                     </div>
                 </div>
             </div>
@@ -4818,7 +4845,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        0
+                        1
                     </div>
                 </div>
             </div>
@@ -5354,7 +5381,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        17
+                        18
                     </div>
                 </div>
             </div>
@@ -5381,7 +5408,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        ifeyysoexlwpdjtge
+                        abyivixrwuloeufbxgnvcmoxv
                     </div>
                 </div>
             </div>
@@ -5406,7 +5433,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        Voluptatem necessitatibus esse qui sint.
+                        Porro rerum nulla exercitationem pariatur.
                     </div>
                 </div>
             </div>
@@ -5619,7 +5646,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        18
+                        3
                     </div>
                 </div>
             </div>
@@ -6288,7 +6315,6 @@
                     &quot;count&quot;: 14,
                     &quot;permission_ids&quot;: [
                         1,
-                        2,
                         3,
                         4,
                         5,
@@ -6301,10 +6327,7 @@
                         12,
                         13,
                         14,
-                        15,
-                        16,
                         17,
-                        18,
                         19,
                         20,
                         21,
@@ -6315,7 +6338,11 @@
                         26,
                         27,
                         28,
-                        29
+                        29,
+                        2,
+                        15,
+                        16,
+                        18
                     ]
                 }
             },
@@ -6328,13 +6355,14 @@
                     &quot;count&quot;: 4,
                     &quot;permission_ids&quot;: [
                         1,
-                        2,
                         3,
                         4,
                         5,
                         6,
-                        7,
-                        8
+                        8,
+                        9,
+                        10,
+                        7
                     ]
                 }
             },
@@ -6579,7 +6607,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
+                        0
                     </div>
                 </div>
             </div>
@@ -6961,7 +6989,6 @@
                 &quot;count&quot;: 14,
                 &quot;permission_ids&quot;: [
                     1,
-                    2,
                     3,
                     4,
                     5,
@@ -6974,10 +7001,7 @@
                     12,
                     13,
                     14,
-                    15,
-                    16,
                     17,
-                    18,
                     19,
                     20,
                     21,
@@ -6988,7 +7012,11 @@
                     26,
                     27,
                     28,
-                    29
+                    29,
+                    2,
+                    15,
+                    16,
+                    18
                 ]
             },
             {
@@ -7000,13 +7028,14 @@
                 &quot;count&quot;: 4,
                 &quot;permission_ids&quot;: [
                     1,
-                    2,
                     3,
                     4,
                     5,
                     6,
-                    7,
-                    8
+                    8,
+                    9,
+                    10,
+                    7
                 ]
             },
             {
@@ -7220,7 +7249,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        7
+                        15
                     </div>
                 </div>
             </div>
@@ -7242,7 +7271,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        4
+                        7
                     </div>
                 </div>
             </div>
@@ -7269,7 +7298,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        egunlfpfodkxkhntlvrbuipkz
+                        mazsgszuraqlsy
                     </div>
                 </div>
             </div>
@@ -7294,7 +7323,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        Quia magni sint ut est quia laudantium ad officia.
+                        Quam ea voluptas accusamus eos.
                     </div>
                 </div>
             </div>
@@ -7321,7 +7350,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [&quot;omnis&quot;,&quot;consequuntur&quot;]
+                        [&quot;ipsam&quot;,&quot;id&quot;]
                     </div>
                 </div>
             </div>
@@ -7534,7 +7563,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        3
+                        14
                     </div>
                 </div>
             </div>
@@ -7747,7 +7776,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        17
+                        1
                     </div>
                 </div>
             </div>
@@ -7769,7 +7798,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        12
+                        18
                     </div>
                 </div>
             </div>
@@ -7791,7 +7820,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        14
+                        2
                     </div>
                 </div>
             </div>
@@ -7871,9 +7900,9 @@
                                                        class="language-json sl-overflow-x-auto sl-overflow-y-auto">{
     &quot;data&quot;: {
         &quot;list&quot;: [],
-        &quot;total&quot;: 0,
-        &quot;page&quot;: 12,
-        &quot;limit&quot;: 14
+        &quot;total&quot;: 14,
+        &quot;page&quot;: 18,
+        &quot;limit&quot;: 2
     },
     &quot;message&quot;: &quot;success&quot;,
     &quot;code&quot;: 200
@@ -8009,7 +8038,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        4
+                        3
                     </div>
                 </div>
             </div>
@@ -8496,7 +8525,7 @@
     &quot;data&quot;: {
         &quot;ulid&quot;: &quot;01j465weqc1he6hmtj29xf9pkq&quot;,
         &quot;email&quot;: &quot;alwaysmeorg@qq.com&quot;,
-        &quot;token&quot;: &quot;80|DZAORtyIla8peo8sK6mYIUR6MLOASmer4jN1LHTmf998e8e3&quot;,
+        &quot;token&quot;: &quot;92|2RwFf8aq142PkHVow0ZoI2RrdOo6jj5XYjTYb3XHe251a5be&quot;,
         &quot;nickname&quot;: &quot;系统管理员&quot;,
         &quot;picture&quot;: {
             &quot;url&quot;: &quot;https://picsum.photos/100/100&quot;,
@@ -8505,10 +8534,10 @@
         },
         &quot;phone&quot;: 18182354601,
         &quot;status&quot;: 1,
-        &quot;last_login_at&quot;: &quot;2024-08-05 10:09:42&quot;,
+        &quot;last_login_at&quot;: &quot;2024-08-06 18:07:06&quot;,
         &quot;platform&quot;: &quot;&quot;,
         &quot;created_at&quot;: &quot;2024-08-01 05:16:27&quot;,
-        &quot;updated_at&quot;: &quot;2024-08-05 02:09:42&quot;,
+        &quot;updated_at&quot;: &quot;2024-08-06 10:07:06&quot;,
         &quot;deleted_at&quot;: null
     },
     &quot;message&quot;: &quot;success&quot;,
@@ -8626,7 +8655,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        walker.anita@example.net
+                        dariana23@example.net
                     </div>
                 </div>
             </div>
@@ -8653,7 +8682,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        XA@B]-
+                        z+[Z(g:iNF
                     </div>
                 </div>
             </div>
