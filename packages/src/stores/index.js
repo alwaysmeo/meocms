@@ -10,5 +10,6 @@ for (const key in pages) {
 		exports[`use${hooks.useCapitalCase(key.match(/\.\/(.*)\.js$/)[1])}Store`] = pages[key]
 	}
 }
-console.info('stores', Object.keys(exports))
+
+console.info('❤️ stores:', Object.keys(exports))
 export default exports
