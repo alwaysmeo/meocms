@@ -38,7 +38,8 @@
 <template>
 	<div class="sidebar">
 		<div class="logo">
-			<img src="" alt="logo" />
+			<img src="/public/vue.svg" alt="logo" />
+			<span v-if="!collapsed">vue</span>
 		</div>
 		<a-menu v-model:openKeys="openKeys" v-model:selectedKeys="selectedKeys" mode="inline">
 			<template v-for="parent in sidebar_list" :key="parent.code">
