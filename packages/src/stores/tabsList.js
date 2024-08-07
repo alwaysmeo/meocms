@@ -9,6 +9,7 @@ export default defineStore(storeKey, {
 	state: () => ({ data: new Object() }),
 	actions: {
 		async add({ key, value }) {
+			if (isEmpty(this.data)) await this.get()
 			Object.assign(this.data, { [key]: value })
 			await localforage.setItem(storeKey, toRaw(this.data))
 		},
@@ -18,7 +19,7 @@ export default defineStore(storeKey, {
 			await localforage.setItem(storeKey, toRaw(this.data))
 		},
 		async get() {
-			Object.assign(this.data, await localforage.getItem(storeKey) ?? {})
+			Object.assign(this.data, (await localforage.getItem(storeKey)) ?? {})
 			return this.data
 		},
 		async clear() {

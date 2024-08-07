@@ -31,6 +31,30 @@
 		tabs_list.value = await tabsListStore.get()
 	})
 
+	const openPopover = ref()
+	async function handleTabs(type, key) {
+		openPopover.value = false
+		nextTick(() => {
+			openPopover.value = undefined
+		})
+		setTimeout(() => {
+			switch (type) {
+				case 'close_other':
+					Object.keys(tabs_list.value).forEach(async (key_value) => {
+						if (!isEqual(key, key_value)) closeTabs(key_value)
+					})
+					break
+				case 'close_all':
+					Object.keys(tabs_list.value).forEach(async (key_value) => {
+						closeTabs(key_value)
+					})
+					break
+				default:
+					break
+			}
+		}, 200)
+	}
+
 	async function closeTabs(event) {
 		await tabsListStore.remove(event)
 		if (isEmpty(tabs_list.value)) return router.replace({ name: 'home' })
@@ -48,7 +72,24 @@
 				@change="router.push({ name: $event })"
 				@edit="closeTabs"
 			>
-				<a-tab-pane v-for="(value, key) in tabs_list" :key="key" :tab="value" :closable="tabs_with_close" />
+				<a-tab-pane v-for="(value, key) in tabs_list" :key="key" :closable="tabs_with_close">
+					<template #tab>
+						<a-popover
+							:open="openPopover"
+							:trigger="['contextmenu']"
+							placement="bottom"
+							overlayClassName="meo-popover-container"
+						>
+							<div>{{ value }}</div>
+							<template #content>
+								<a-space direction="vertical">
+									<a-button type="text" size="small" block @click="handleTabs('close_other', key)">关闭其他</a-button>
+									<a-button type="text" size="small" block @click="handleTabs('close_all', key)">关闭全部</a-button>
+								</a-space>
+							</template>
+						</a-popover>
+					</template>
+				</a-tab-pane>
 			</a-tabs>
 		</div>
 		<div class="main-breadcrumb">
