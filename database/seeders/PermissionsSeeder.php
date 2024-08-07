@@ -170,8 +170,8 @@ class PermissionsSeeder extends Seeder
             ],
             [
                 'code' => 'column-model',
-                'name' => '栏目模型管理',
-                'description' => '栏目管理-栏目模型管理',
+                'name' => '模型管理',
+                'description' => '栏目管理-模型管理',
                 'path' => '/column/model',
                 'level' => 2,
                 'type' => 1,
@@ -196,7 +196,7 @@ class PermissionsSeeder extends Seeder
             [
                 'code' => 'content-model',
                 'name' => '内容模型管理',
-                'description' => '内容管理-内容模型管理',
+                'description' => '内容管理-模型管理',
                 'path' => '/content/model',
                 'level' => 2,
                 'type' => 1,
