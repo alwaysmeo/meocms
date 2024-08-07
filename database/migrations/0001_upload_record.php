@@ -16,10 +16,10 @@ return new class extends Migration
             $table->id()->primary()->unique();
             $table->ulid('user_ulid')->comment('上传者用户id');
             $table->string('url', 255)->comment('文件路径');
-            $table->tinyInteger('file_type')->default(0)->comment('文件类型【0:其他, 1:图片, 2:视频, 3:文件, 4:音频】');
+            $table->tinyInteger('file_type')->default(0)->comment('文件类型 【0:其他, 1:图片, 2:视频, 3:文件, 4:音频】');
             $table->string('origin_name', 200)->comment('源文件名称');
             $table->string('suffix', 20)->comment('文件后缀');
-            $table->tinyInteger('status')->default(1)->comment('有效状态【0:无效, 1:有效】');
+            $table->tinyInteger('status')->default(1)->comment('有效状态 【0:无效, 1:有效】');
             $table->tinyInteger('type')->default(1)->comment('类型【1:本地文件, 2:网络文件】');
             $table->dateTime('created_at')->useCurrent()->comment('上传时间');
             $table->dateTime('updated_at')->nullable()->useCurrentOnUpdate()->comment('使用时间');

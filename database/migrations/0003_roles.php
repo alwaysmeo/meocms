@@ -14,10 +14,10 @@ return new class extends Migration
         /* 角色表 */
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 30)->comment('角色名称');
-            $table->string('description', 200)->nullable()->comment('角色描述');
-            $table->tinyInteger('show')->default(1)->comment('是否启用【0:关闭, 1:开启】');
-            $table->integer('order')->nullable()->comment('角色排序');
+            $table->string('name', 30)->comment('名称');
+            $table->string('description', 200)->nullable()->comment('描述');
+            $table->tinyInteger('show')->default(1)->comment('是否启用 【0:关闭, 1:开启】');
+            $table->integer('order')->nullable()->comment('排序');
             $table->dateTime('created_at')->useCurrent()->comment('创建时间');
             $table->dateTime('updated_at')->nullable()->useCurrentOnUpdate()->comment('更新时间');
             $table->dateTime('deleted_at')->nullable()->comment('删除时间');
