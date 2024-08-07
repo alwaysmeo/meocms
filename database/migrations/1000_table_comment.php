@@ -26,6 +26,8 @@ return new class extends Migration
             'account_record' => '账号操作记录表',
             'columns' => '栏目表',
             'column_organize' => '栏目组织关联表',
+            'content_model' => '内容模型表',
+            'content' => '内容表',
         ];
         /* 生成表注释 */
         foreach ($arr as $k => $v) {
