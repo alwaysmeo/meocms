@@ -1,7 +1,10 @@
 'use strict'
 import Layout from '@components/layout/Layout.vue'
-import home from './home'
-import system from './system'
+
+const pages = import.meta.glob('./*.js', {
+	eager: true,
+	import: 'default'
+})
 
 export default [
 	{
@@ -14,6 +17,6 @@ export default [
 		path: '/',
 		redirect: '/home',
 		component: Layout,
-		children: [home, system]
+		children: Object.values(pages)
 	}
 ]
