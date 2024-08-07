@@ -22,13 +22,12 @@
 	watch(
 		() => route.name,
 		() => {
+			openKeys.value = route.matched
+				.filter((item) => item.name)
+				.map((item) => item.name)
+				.slice(0, 2)
 			selectedKeys.value = [openKeys.value[openKeys.value.length - 1]]
-			if (!collapsed.value) {
-				openKeys.value = route.matched
-					.filter((item) => item.name)
-					.map((item) => item.name)
-					.slice(0, 2)
-			}
+			if (collapsed.value) openKeys.value = []
 		},
 		{
 			immediate: true
