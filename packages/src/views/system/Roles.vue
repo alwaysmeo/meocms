@@ -308,7 +308,7 @@
 					/>
 				</a-form-item>
 				<a-form-item label="角色权限" name="permission_ids" validateFirst>
-					<tree v-model:value="form.data.permission_ids" :tree-data="state.permission_list" />
+					<tree v-model:value="form.data.permission_ids" :tree-data="state.permission_list" checkable />
 				</a-form-item>
 			</a-form>
 		</meo-modal>

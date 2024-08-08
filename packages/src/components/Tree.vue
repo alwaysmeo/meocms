@@ -4,20 +4,23 @@
 	import { isEqual, isEmpty, flat } from 'radash'
 	import hooks from '@hooks'
 
-	const emits = defineEmits(['update:value'])
+	const emits = defineEmits(['update:treeData', 'update:value'])
 
 	const props = defineProps({
 		treeData: {
 			type: Array,
-			default: () => []
+			default: () => [],
+			message: '数据列表（可选：v-model）'
 		},
 		value: {
 			type: Array,
-			default: () => []
+			default: () => [],
+			message: '选中复选框的树节点（v-model）'
 		}
 	})
 
 	const state = reactive({
+		treeData: useVModel(props, 'treeData', emits),
 		value: useVModel(props, 'value', emits),
 		checkedKeys: computed(() => {
 			const checked = []
@@ -37,6 +40,64 @@
 		})
 	})
 
+	function drop(info) {
+		const dropKey = info.node.key
+		const dragKey = info.dragNode.key
+		const dropPos = info.node.pos.split('-')
+		const dropPosition = info.dropPosition - Number(dropPos[dropPos.length - 1])
+		const loop = (data, key, callback) => {
+			data.forEach((item, index) => {
+				if (item.key === key) {
+					return callback(item, index, data)
+				}
+				if (item.children) {
+					return loop(item.children, key, callback)
+				}
+			})
+		}
+		const data = [...state.treeData]
+
+		// Find dragObject
+		let dragObj
+		loop(data, dragKey, (item, index, arr) => {
+			arr.splice(index, 1)
+			dragObj = item
+		})
+		if (!info.dropToGap) {
+			// Drop on the content
+			loop(data, dropKey, (item) => {
+				item.children = item.children || []
+				/// where to insert 示例添加到头部，可以是随意位置
+				item.children.unshift(dragObj)
+			})
+		} else if (
+			(info.node.children || []).length > 0 &&
+			// Has children
+			info.node.expanded &&
+			// Is expanded
+			dropPosition === 1 // On the bottom gap
+		) {
+			loop(data, dropKey, (item) => {
+				item.children = item.children || []
+				// where to insert 示例添加到头部，可以是随意位置
+				item.children.unshift(dragObj)
+			})
+		} else {
+			let ar = []
+			let i = 0
+			loop(data, dropKey, (_item, index, arr) => {
+				ar = arr
+				i = index
+			})
+			if (dropPosition === -1) {
+				ar.splice(i, 0, dragObj)
+			} else {
+				ar.splice(i + 1, 0, dragObj)
+			}
+		}
+		state.treeData = data
+	}
+
 	function check(checkedKeys, e) {
 		state.value = flat([checkedKeys, e.halfCheckedKeys])
 	}
@@ -44,13 +105,17 @@
 
 <template>
 	<a-tree
-		checkable
 		:fieldNames="{ children: 'children', title: 'name', key: 'id' }"
 		v-bind="$attrs"
 		:checkedKeys="state.checkedKeys"
-		:treeData="props.treeData"
+		:treeData="state.treeData"
 		@check="check"
-	/>
+		@drop="drop"
+	>
+		<template v-if="$slots.switcherIcon" #switcherIcon="scoped">
+			<slot name="switcherIcon" v-bind="scoped"></slot>
+		</template>
+	</a-tree>
 </template>
 
 <style scoped lang="scss">
