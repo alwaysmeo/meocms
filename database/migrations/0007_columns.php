@@ -14,12 +14,13 @@ return new class extends Migration
         /* 栏目表 */
         Schema::create('columns', function (Blueprint $table) {
             $table->id();
-			$table->integer('parent_id')->nullable()->comment('父级ID');
+            $table->integer('parent_id')->nullable()->comment('父级ID');
             $table->string('name', 120)->comment('名称');
             $table->string('description', 200)->nullable()->comment('描述');
             $table->string('path', 255)->nullable()->comment('访问路径');
             $table->integer('cover')->nullable()->comment('封面图 【关联上传记录ID】');
             $table->text('external_link')->nullable()->comment('外部链接');
+            $table->tinyInteger('level')->default(1)->comment('层级 【1:一级, 2:二级, 3:三级, ...】');
             $table->tinyInteger('show')->default(1)->comment('是否启用 【0:关闭, 1:开启】');
             $table->integer('order')->nullable()->comment('排序');
             $table->dateTime('created_at')->useCurrent()->comment('创建时间');
