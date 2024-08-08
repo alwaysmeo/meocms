@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Permissions;
+use App\Models\Columns;
 use App\Services\Common;
 use App\Services\Mapping;
 use Illuminate\Http\Request;
@@ -34,11 +34,12 @@ class ColumnsController extends Controller
         if (! $validator->passes()) {
             return $this->fail(null, $validator->errors()->first(), 5000);
         }
-        $list = Permissions::query()
+        $list = Columns::query()
             ->select('id', 'organize_id', 'parent_id', 'parent_id', 'name', 'description', 'path', 'cover', 'external_link', 'level', 'show', 'order')
             ->whereNull('deleted_at')
             ->where('organize_id', $req['organize_id'])
             ->orderByRaw('ISNULL(`ORDER`), `ORDER` ASC')
+			->orderBy('id')
             ->get();
 
         return $this->success($this->common->buildTree($list->toArray()));

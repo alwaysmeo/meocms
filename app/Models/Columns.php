@@ -14,6 +14,7 @@ class Columns extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'organize_id',
         'parent_id',
         'name',
         'description',
