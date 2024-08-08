@@ -6,8 +6,8 @@ export default {
 	/**
 	 * 获取权限列表
 	 */
-	list: async function (data) {
-		return await request.get(`/api/permissions/list`, { params: data })
+	list: async function () {
+		return await request.get(`/api/permissions/list`)
 	},
 
 	/**

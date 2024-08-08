@@ -2,17 +2,14 @@
 	import { message } from 'ant-design-vue'
 	import { isEqual, pick } from 'radash'
 	import hooks from '@hooks'
-	import stores from '@stores'
 	import permissionsApi from '@apis/permissions'
 
 	defineOptions({ name: 'SystemPermissions' })
 
 	const route = useRoute()
-	const organizesStore = stores.useOrganizesStore()
 
 	const state = reactive({
-		permissions: [],
-		organizes: null
+		permissions: []
 	})
 
 	const table = reactive({
@@ -92,13 +89,12 @@
 
 	onMounted(async () => {
 		state.permissions = await hooks.usePermissions()
-		state.organizes = await organizesStore.get()
 		await list()
 	})
 
 	async function list() {
 		table.loading = true
-		const { code, data } = await permissionsApi.list({ organize_id: state.organizes.checked.id })
+		const { code, data } = await permissionsApi.list()
 		if (isEqual(code, 200)) {
 			table.data = data
 		}
