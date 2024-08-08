@@ -5,7 +5,6 @@ import request from '@utils/request'
 export default {
 	/**
 	 * 获取权限列表
-	 * @param organize_id * 组织ID
 	 */
 	list: async function (data) {
 		return await request.get(`/api/permissions/list`, { params: data })
