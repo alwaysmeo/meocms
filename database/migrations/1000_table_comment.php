@@ -25,7 +25,6 @@ return new class extends Migration
             'personal_access_tokens' => '访问令牌表',
             'account_record' => '账号操作记录表',
             'columns' => '栏目表',
-            'column_organize' => '栏目组织关联表',
             'content_model' => '内容模型表',
             'content' => '内容表',
         ];

@@ -12,6 +12,7 @@
 */
 
 use App\Http\Controllers\api\AccountController;
+use App\Http\Controllers\api\ColumnsController;
 use App\Http\Controllers\api\CommonController;
 use App\Http\Controllers\api\OrganizesController;
 use App\Http\Controllers\api\PermissionsController;
@@ -97,5 +98,10 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::get('/roles', [OrganizesController::class, 'roles']);
         /* 修改组织启用状态 */
         Route::post('/change/show', [OrganizesController::class, 'changeShow']);
+    });
+
+    Route::group(['prefix' => 'columns'], function () {
+        /* 获取栏目列表 */
+        Route::get('/list', [ColumnsController::class, 'list']);
     });
 });

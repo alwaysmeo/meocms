@@ -14,6 +14,7 @@ return new class extends Migration
         /* 栏目表 */
         Schema::create('columns', function (Blueprint $table) {
             $table->id();
+            $table->integer('organize_id')->comment('组织ID');
             $table->integer('parent_id')->nullable()->comment('父级ID');
             $table->string('name', 120)->comment('名称');
             $table->string('description', 200)->nullable()->comment('描述');
@@ -29,14 +30,6 @@ return new class extends Migration
             $table->charset('utf8mb4');
             $table->collation('utf8mb4_unicode_ci');
         });
-
-        /* 组织、栏目关联表 */
-        Schema::create('column_organize', function (Blueprint $table) {
-            $table->ulid('organize_id')->comment('组织ID');
-            $table->integer('column_id')->comment('栏目ID');
-            $table->charset('utf8mb4');
-            $table->collation('utf8mb4_unicode_ci');
-        });
     }
 
     /**
@@ -45,6 +38,5 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('columns');
-        Schema::dropIfExists('column_organize');
     }
 };
