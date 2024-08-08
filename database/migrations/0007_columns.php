@@ -14,6 +14,7 @@ return new class extends Migration
         /* 栏目表 */
         Schema::create('columns', function (Blueprint $table) {
             $table->id();
+			$table->integer('parent_id')->nullable()->comment('父级ID');
             $table->string('name', 120)->comment('名称');
             $table->string('description', 200)->nullable()->comment('描述');
             $table->string('path', 255)->nullable()->comment('访问路径');
