@@ -54,6 +54,10 @@
 				&.flip {
 					transform: rotateY(180deg);
 				}
+				&:hover {
+					color: $color-primary;
+					user-select: none;
+				}
 			}
 		}
 	}
