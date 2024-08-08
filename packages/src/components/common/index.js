@@ -6,4 +6,4 @@ const pages = import.meta.glob('./*.vue', {
 const exports = {}
 for (const key in pages) exports[key.match(/\.\/(.*)\.vue$/)[1]] = pages[key]
 
-export const { Image, Modal, Table } = exports
+export const { Image, Loading, Modal, Table } = exports
