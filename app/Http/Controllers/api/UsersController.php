@@ -56,7 +56,7 @@ class UsersController extends Controller
     /**
      * 获取用户拥有的子权限
      *
-     * @group 权限 - Users
+     * @group 用户 - Users
      */
     public function permissionsChild(Request $request): Response
     {

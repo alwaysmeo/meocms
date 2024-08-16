@@ -28,7 +28,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":[{"id":1,"parent_id":null,"code":"home","name":"\u9996\u9875","description":"\u9996\u9875","icon":"AntHomeOutlined","path":"\/home","level":1,"show":true,"order":0,"type":1,"created_at":"2024-08-01 13:16:27","updated_at":null,"deleted_at":null},{"id":2,"parent_id":null,"code":"system","name":"\u7cfb\u7edf\u7ba1\u7406","description":"\u7cfb\u7edf\u7ba1\u7406","icon":"AntInboxOutlined","path":"\/system","level":1,"show":true,"order":1,"type":1,"created_at":"2024-08-01 13:16:27","updated_at":null,"deleted_at":null,"children":[{"id":3,"parent_id":2,"code":"system-users","name":"\u7528\u6237\u7ba1\u7406","description":"\u7cfb\u7edf\u7ba1\u7406-\u7528\u6237\u7ba1\u7406","icon":null,"path":"\/system\/users","level":2,"show":true,"order":2,"type":1,"created_at":"2024-08-01 13:16:27","updated_at":null,"deleted_at":null},{"id":7,"parent_id":2,"code":"system-roles","name":"\u89d2\u8272\u7ba1\u7406","description":"\u7cfb\u7edf\u7ba1\u7406-\u89d2\u8272\u7ba1\u7406","icon":null,"path":"\/system\/roles","level":2,"show":true,"order":6,"type":1,"created_at":"2024-08-01 13:16:27","updated_at":null,"deleted_at":null},{"id":11,"parent_id":2,"code":"system-permissions","name":"\u6743\u9650\u7ba1\u7406","description":"\u7cfb\u7edf\u7ba1\u7406-\u6743\u9650\u7ba1\u7406","icon":null,"path":"\/system\/permissions","level":2,"show":true,"order":10,"type":1,"created_at":"2024-08-01 13:16:27","updated_at":null,"deleted_at":null},{"id":15,"parent_id":2,"code":"system-organizes","name":"\u7ec4\u7ec7\u7ba1\u7406","description":"\u7cfb\u7edf\u7ba1\u7406-\u7ec4\u7ec7\u7ba1\u7406","icon":null,"path":"\/system\/organizes","level":2,"show":true,"order":14,"type":1,"created_at":"2024-08-01 13:16:27","updated_at":null,"deleted_at":null}]},{"id":19,"parent_id":null,"code":"content","name":"\u5185\u5bb9\u7ba1\u7406","description":"\u5185\u5bb9\u7ba1\u7406","icon":"AntContainerOutlined","path":"\/content","level":1,"show":true,"order":18,"type":1,"created_at":"2024-08-01 13:16:27","updated_at":null,"deleted_at":null,"children":[{"id":20,"parent_id":19,"code":"content-manage","name":"\u5185\u5bb9\u7ba1\u7406","description":"\u5185\u5bb9\u7ba1\u7406-\u6587\u7ae0\u7ba1\u7406","icon":null,"path":"\/content\/manage","level":2,"show":true,"order":19,"type":1,"created_at":"2024-08-01 13:16:27","updated_at":null,"deleted_at":null},{"id":21,"parent_id":19,"code":"content-model","name":"\u5185\u5bb9\u6a21\u578b\u7ba1\u7406","description":"\u5185\u5bb9\u7ba1\u7406-\u5185\u5bb9\u6a21\u578b\u7ba1\u7406","icon":null,"path":"\/content\/model","level":2,"show":true,"order":20,"type":1,"created_at":"2024-08-01 13:16:27","updated_at":null,"deleted_at":null},{"id":22,"parent_id":19,"code":"content-timing","name":"\u5b9a\u65f6\u4efb\u52a1","description":"\u5185\u5bb9\u7ba1\u7406-\u5b9a\u65f6\u4efb\u52a1","icon":null,"path":"\/content\/timing","level":2,"show":true,"order":21,"type":1,"created_at":"2024-08-01 13:16:27","updated_at":null,"deleted_at":null}]},{"id":23,"parent_id":null,"code":"column","name":"\u680f\u76ee\u7ba1\u7406","description":"\u680f\u76ee\u7ba1\u7406","icon":"AntProfileOutlined","path":"\/column","level":1,"show":true,"order":22,"type":1,"created_at":"2024-08-01 13:16:27","updated_at":null,"deleted_at":null,"children":[{"id":24,"parent_id":23,"code":"column-manage","name":"\u680f\u76ee\u7ba1\u7406","description":"\u680f\u76ee\u7ba1\u7406-\u680f\u76ee\u7ba1\u7406","icon":null,"path":"\/column\/manage","level":2,"show":true,"order":23,"type":1,"created_at":"2024-08-01 13:16:27","updated_at":null,"deleted_at":null},{"id":25,"parent_id":23,"code":"column-model","name":"\u680f\u76ee\u6a21\u578b\u7ba1\u7406","description":"\u680f\u76ee\u7ba1\u7406-\u680f\u76ee\u6a21\u578b\u7ba1\u7406","icon":null,"path":"\/column\/model","level":2,"show":true,"order":24,"type":1,"created_at":"2024-08-01 13:16:27","updated_at":null,"deleted_at":null}]},{"id":26,"parent_id":null,"code":"statistics","name":"\u6570\u636e\u7edf\u8ba1","description":"\u6570\u636e\u7edf\u8ba1","icon":"AntLineChartOutlined","path":"\/statistics","level":1,"show":true,"order":25,"type":1,"created_at":"2024-08-01 13:16:27","updated_at":null,"deleted_at":null,"children":[{"id":27,"parent_id":26,"code":"statistics-general","name":"\u7f51\u7ad9\u6982\u51b5","description":"\u6570\u636e\u7edf\u8ba1-\u7f51\u7ad9\u6982\u51b5","icon":null,"path":"\/statistics\/general","level":2,"show":true,"order":26,"type":1,"created_at":"2024-08-01 13:16:27","updated_at":null,"deleted_at":null},{"id":28,"parent_id":26,"code":"statistics-visitor","name":"\u8bbf\u5ba2\u5206\u6790","description":"\u6570\u636e\u7edf\u8ba1-\u8bbf\u5ba2\u5206\u6790","icon":null,"path":"\/statistics\/visitor","level":2,"show":true,"order":27,"type":1,"created_at":"2024-08-01 13:16:27","updated_at":null,"deleted_at":null},{"id":29,"parent_id":26,"code":"statistics-content","name":"\u5185\u5bb9\u6570\u636e\u7edf\u8ba1","description":"\u6570\u636e\u7edf\u8ba1-\u5185\u5bb9\u6570\u636e\u7edf\u8ba1","icon":null,"path":"\/statistics\/content","level":2,"show":true,"order":28,"type":1,"created_at":"2024-08-01 13:16:27","updated_at":null,"deleted_at":null}]}],"message":"success","code":200}'
+        content: '{"data":[{"id":1,"parent_id":null,"code":"home","name":"\u9996\u9875","description":"\u9996\u9875","icon":"AntHomeOutlined","path":"\/home","level":1,"show":true,"order":0,"type":1,"created_at":"2024-08-16 12:03:12","updated_at":null,"deleted_at":null},{"id":2,"parent_id":null,"code":"system","name":"\u7cfb\u7edf\u7ba1\u7406","description":"\u7cfb\u7edf\u7ba1\u7406","icon":"AntInboxOutlined","path":"\/system","level":1,"show":true,"order":1,"type":1,"created_at":"2024-08-16 12:03:12","updated_at":null,"deleted_at":null,"children":[{"id":3,"parent_id":2,"code":"system-users","name":"\u7528\u6237\u7ba1\u7406","description":"\u7cfb\u7edf\u7ba1\u7406-\u7528\u6237\u7ba1\u7406","icon":null,"path":"\/system\/users","level":2,"show":true,"order":2,"type":1,"created_at":"2024-08-16 12:03:12","updated_at":null,"deleted_at":null},{"id":7,"parent_id":2,"code":"system-roles","name":"\u89d2\u8272\u7ba1\u7406","description":"\u7cfb\u7edf\u7ba1\u7406-\u89d2\u8272\u7ba1\u7406","icon":null,"path":"\/system\/roles","level":2,"show":true,"order":6,"type":1,"created_at":"2024-08-16 12:03:12","updated_at":null,"deleted_at":null},{"id":11,"parent_id":2,"code":"system-permissions","name":"\u6743\u9650\u7ba1\u7406","description":"\u7cfb\u7edf\u7ba1\u7406-\u6743\u9650\u7ba1\u7406","icon":null,"path":"\/system\/permissions","level":2,"show":true,"order":10,"type":1,"created_at":"2024-08-16 12:03:12","updated_at":null,"deleted_at":null},{"id":15,"parent_id":2,"code":"system-organizes","name":"\u7ec4\u7ec7\u7ba1\u7406","description":"\u7cfb\u7edf\u7ba1\u7406-\u7ec4\u7ec7\u7ba1\u7406","icon":null,"path":"\/system\/organizes","level":2,"show":true,"order":14,"type":1,"created_at":"2024-08-16 12:03:12","updated_at":null,"deleted_at":null}]},{"id":19,"parent_id":null,"code":"column","name":"\u680f\u76ee\u7ba1\u7406","description":"\u680f\u76ee\u7ba1\u7406","icon":"AntProfileOutlined","path":"\/column","level":1,"show":true,"order":18,"type":1,"created_at":"2024-08-16 12:03:12","updated_at":null,"deleted_at":null,"children":[{"id":20,"parent_id":19,"code":"column-manage","name":"\u680f\u76ee\u7ba1\u7406","description":"\u680f\u76ee\u7ba1\u7406-\u680f\u76ee\u7ba1\u7406","icon":null,"path":"\/column\/manage","level":2,"show":true,"order":19,"type":1,"created_at":"2024-08-16 12:03:12","updated_at":null,"deleted_at":null},{"id":21,"parent_id":19,"code":"column-model","name":"\u6a21\u578b\u7ba1\u7406","description":"\u680f\u76ee\u7ba1\u7406-\u6a21\u578b\u7ba1\u7406","icon":null,"path":"\/column\/model","level":2,"show":true,"order":20,"type":1,"created_at":"2024-08-16 12:03:12","updated_at":null,"deleted_at":null}]},{"id":22,"parent_id":null,"code":"content","name":"\u5185\u5bb9\u7ba1\u7406","description":"\u5185\u5bb9\u7ba1\u7406","icon":"AntContainerOutlined","path":"\/content","level":1,"show":true,"order":21,"type":1,"created_at":"2024-08-16 12:03:12","updated_at":null,"deleted_at":null,"children":[{"id":23,"parent_id":22,"code":"content-manage","name":"\u5185\u5bb9\u7ba1\u7406","description":"\u5185\u5bb9\u7ba1\u7406-\u6587\u7ae0\u7ba1\u7406","icon":null,"path":"\/content\/manage","level":2,"show":true,"order":22,"type":1,"created_at":"2024-08-16 12:03:12","updated_at":null,"deleted_at":null},{"id":24,"parent_id":22,"code":"content-model","name":"\u5185\u5bb9\u6a21\u578b\u7ba1\u7406","description":"\u5185\u5bb9\u7ba1\u7406-\u6a21\u578b\u7ba1\u7406","icon":null,"path":"\/content\/model","level":2,"show":true,"order":23,"type":1,"created_at":"2024-08-16 12:03:12","updated_at":null,"deleted_at":null},{"id":25,"parent_id":22,"code":"content-timing","name":"\u5b9a\u65f6\u4efb\u52a1","description":"\u5185\u5bb9\u7ba1\u7406-\u5b9a\u65f6\u4efb\u52a1","icon":null,"path":"\/content\/timing","level":2,"show":true,"order":24,"type":1,"created_at":"2024-08-16 12:03:12","updated_at":null,"deleted_at":null}]},{"id":26,"parent_id":null,"code":"statistics","name":"\u6570\u636e\u7edf\u8ba1","description":"\u6570\u636e\u7edf\u8ba1","icon":"AntLineChartOutlined","path":"\/statistics","level":1,"show":true,"order":25,"type":1,"created_at":"2024-08-16 12:03:12","updated_at":null,"deleted_at":null,"children":[{"id":27,"parent_id":26,"code":"statistics-general","name":"\u7f51\u7ad9\u6982\u51b5","description":"\u6570\u636e\u7edf\u8ba1-\u7f51\u7ad9\u6982\u51b5","icon":null,"path":"\/statistics\/general","level":2,"show":true,"order":26,"type":1,"created_at":"2024-08-16 12:03:12","updated_at":null,"deleted_at":null},{"id":28,"parent_id":26,"code":"statistics-visitor","name":"\u8bbf\u5ba2\u5206\u6790","description":"\u6570\u636e\u7edf\u8ba1-\u8bbf\u5ba2\u5206\u6790","icon":null,"path":"\/statistics\/visitor","level":2,"show":true,"order":27,"type":1,"created_at":"2024-08-16 12:03:12","updated_at":null,"deleted_at":null},{"id":29,"parent_id":26,"code":"statistics-content","name":"\u5185\u5bb9\u6570\u636e\u7edf\u8ba1","description":"\u6570\u636e\u7edf\u8ba1-\u5185\u5bb9\u6570\u636e\u7edf\u8ba1","icon":null,"path":"\/statistics\/content","level":2,"show":true,"order":28,"type":1,"created_at":"2024-08-16 12:03:12","updated_at":null,"deleted_at":null}]}],"message":"success","code":200}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -39,7 +39,70 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 121111111111111111'
+      - 'Bearer ZafvDeV8gE64P3d6ahkb15c'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/users/permissions/child
+    metadata:
+      groupName: '用户 - Users'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 获取用户拥有的子权限
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      parent_id:
+        name: parent_id
+        description: ''
+        required: false
+        example: 3
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      parent_code:
+        name: parent_code
+        description: validation.max.
+        required: false
+        example: hiijvinjrvqkkuydc
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanBodyParameters:
+      parent_id: 3
+      parent_code: hiijvinjrvqkkuydc
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":[{"id":4,"parent_id":3,"code":"system-users-create","name":"\u65b0\u589e","description":"\u7cfb\u7edf\u7ba1\u7406-\u7528\u6237\u7ba1\u7406-\u65b0\u589e\u6309\u94ae","icon":null,"path":null,"level":3,"show":true,"order":3,"type":2},{"id":5,"parent_id":3,"code":"system-users-update","name":"\u4fee\u6539","description":"\u7cfb\u7edf\u7ba1\u7406-\u7528\u6237\u7ba1\u7406-\u4fee\u6539\u6309\u94ae","icon":null,"path":null,"level":3,"show":true,"order":4,"type":2},{"id":6,"parent_id":3,"code":"system-users-delete","name":"\u5220\u9664","description":"\u7cfb\u7edf\u7ba1\u7406-\u7528\u6237\u7ba1\u7406-\u5220\u9664\u6309\u94ae","icon":null,"path":null,"level":3,"show":true,"order":5,"type":2}],"message":"success","code":200}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Z63VD6v5kEf4aacdh8eP1gb'
     controller: null
     method: null
     route: null
@@ -152,7 +215,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":{"list":[{"ulid":"01j466b2yt6x94pap2903qbnt0","email":"g.xysptlt@dta.nt","nickname":"\u953a\u9759","picture":{"url":"https:\/\/picsum.photos\/100\/100","origin_name":"\u5934\u50cf","suffix":"jpeg"},"phone":18192632571,"status":1,"last_login_at":null,"created_at":"2024-08-01 05:24:27","role_info":{"id":6,"name":"\u5177\u5b9a\u96c6\u53eb\u7387\u7c7b\u89d2\u8272","count":5,"permission_ids":[1,2,3,4,5,6,7,8]}},{"ulid":"01j466b1zzap91qcnkhdzsx437","email":"g.nahrqg@nnkvdqser.fr","nickname":"\u53f2\u6d0b","picture":{"url":"https:\/\/picsum.photos\/100\/100","origin_name":"\u5934\u50cf","suffix":"jpeg"},"phone":19860646288,"status":1,"last_login_at":null,"created_at":"2024-08-01 05:24:26","role_info":{"id":6,"name":"\u5177\u5b9a\u96c6\u53eb\u7387\u7c7b\u89d2\u8272","count":5,"permission_ids":[1,2,3,4,5,6,7,8]}},{"ulid":"01j466b1e01wfmz5aa4yae9rcm","email":"e.drzsmbwa@eihts.sa","nickname":"\u9648\u79c0\u82f1","picture":{"url":"https:\/\/picsum.photos\/100\/100","origin_name":"\u5934\u50cf","suffix":"jpeg"},"phone":18158978054,"status":1,"last_login_at":null,"created_at":"2024-08-01 05:24:25","role_info":{"id":6,"name":"\u5177\u5b9a\u96c6\u53eb\u7387\u7c7b\u89d2\u8272","count":5,"permission_ids":[1,2,3,4,5,6,7,8]}},{"ulid":"01j466b0x0r0f450dx04fgmz8j","email":"d.yoltkrhla@dmdhl.ni","nickname":"\u5b54\u9759","picture":{"url":"https:\/\/picsum.photos\/100\/100","origin_name":"\u5934\u50cf","suffix":"jpeg"},"phone":18154739926,"status":1,"last_login_at":null,"created_at":"2024-08-01 05:24:25","role_info":{"id":6,"name":"\u5177\u5b9a\u96c6\u53eb\u7387\u7c7b\u89d2\u8272","count":5,"permission_ids":[1,2,3,4,5,6,7,8]}},{"ulid":"01j466b0947n9537qttpgwf2wj","email":"d.dbtewpg@hlhlat.cn","nickname":"\u4efb\u9759","picture":{"url":"https:\/\/picsum.photos\/100\/100","origin_name":"\u5934\u50cf","suffix":"jpeg"},"phone":18121816573,"status":1,"last_login_at":null,"created_at":"2024-08-01 05:24:24","role_info":{"id":6,"name":"\u5177\u5b9a\u96c6\u53eb\u7387\u7c7b\u89d2\u8272","count":5,"permission_ids":[1,2,3,4,5,6,7,8]}},{"ulid":"01j466axs2a329kyssgkrwjg9w","email":"l.dlsqni@ibkv.ev","nickname":"\u90b9\u5f3a","picture":{"url":"https:\/\/picsum.photos\/100\/100","origin_name":"\u5934\u50cf","suffix":"jpeg"},"phone":13686714312,"status":1,"last_login_at":null,"created_at":"2024-08-01 05:24:21","role_info":{"id":5,"name":"\u56e0\u53cd\u4e14\u89d2\u8272","count":7,"permission_ids":[1,2,3,4,5,6,7,8]}},{"ulid":"01j466ax73aesabrtsxrsyfgsb","email":"s.vwnllxj@akqydlv.br","nickname":"\u9b4f\u6770","picture":{"url":"https:\/\/picsum.photos\/100\/100","origin_name":"\u5934\u50cf","suffix":"jpeg"},"phone":18177828317,"status":1,"last_login_at":null,"created_at":"2024-08-01 05:24:21","role_info":{"id":5,"name":"\u56e0\u53cd\u4e14\u89d2\u8272","count":7,"permission_ids":[1,2,3,4,5,6,7,8]}},{"ulid":"01j466awnz9y4vqa7nd2e021hq","email":"e.qpwmfsyucd@rdoomjln.ht","nickname":"\u59da\u5f3a","picture":{"url":"https:\/\/picsum.photos\/100\/100","origin_name":"\u5934\u50cf","suffix":"jpeg"},"phone":18123676264,"status":1,"last_login_at":null,"created_at":"2024-08-01 05:24:20","role_info":{"id":5,"name":"\u56e0\u53cd\u4e14\u89d2\u8272","count":7,"permission_ids":[1,2,3,4,5,6,7,8]}},{"ulid":"01j466aw4yem29x9j9rbpth1rd","email":"x.ctikhuk@medmlxcrtj.ca","nickname":"\u6587\u6770","picture":{"url":"https:\/\/picsum.photos\/100\/100","origin_name":"\u5934\u50cf","suffix":"jpeg"},"phone":18177394724,"status":1,"last_login_at":null,"created_at":"2024-08-01 05:24:20","role_info":{"id":5,"name":"\u56e0\u53cd\u4e14\u89d2\u8272","count":7,"permission_ids":[1,2,3,4,5,6,7,8]}},{"ulid":"01j466avfg98ybzapjntjt02xe","email":"e.cqopnnl@evrtlei.sj","nickname":"\u9a6c\u5e73","picture":{"url":"https:\/\/picsum.photos\/100\/100","origin_name":"\u5934\u50cf","suffix":"jpeg"},"phone":19875426190,"status":1,"last_login_at":null,"created_at":"2024-08-01 05:24:19","role_info":{"id":5,"name":"\u56e0\u53cd\u4e14\u89d2\u8272","count":7,"permission_ids":[1,2,3,4,5,6,7,8]}}],"total":42,"page":1,"limit":10},"message":"success","code":200}'
+        content: '{"data":{"list":[{"ulid":"01j5cnn3vnphc1351x15esm4md","email":"alwaysmeorg@qq.com","nickname":"\u7cfb\u7edf\u7ba1\u7406\u5458","picture":{"url":"https:\/\/picsum.photos\/100\/100","origin_name":"\u5934\u50cf","suffix":"jpeg"},"phone":null,"status":1,"last_login_at":"2024-08-16 12:05:40","created_at":"2024-08-16 04:03:12","role_info":{"id":1,"name":"\u7cfb\u7edf\u8d85\u7ea7\u7ba1\u7406\u5458","count":1,"permission_ids":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29]}}],"total":1,"page":1,"limit":10},"message":"success","code":200}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -163,7 +226,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 121111111111111111'
+      - 'Bearer E51v4fg8kbVPD63Zheaadc6'
     controller: null
     method: null
     route: null
@@ -194,7 +257,7 @@ endpoints:
         name: organize_id
         description: ''
         required: true
-        example: 8
+        example: 7
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -212,7 +275,7 @@ endpoints:
         name: role_id
         description: ''
         required: true
-        example: 3
+        example: 5
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -221,7 +284,7 @@ endpoints:
         name: nickname
         description: validation.between.
         required: true
-        example: mq
+        example: qy
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -230,7 +293,7 @@ endpoints:
         name: email
         description: validation.email.
         required: true
-        example: jeanne79@example.org
+        example: antonina.jaskolski@example.net
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -239,7 +302,7 @@ endpoints:
         name: phone
         description: validation.digits.
         required: false
-        example: '61550178369'
+        example: '27755051313'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -248,18 +311,18 @@ endpoints:
         name: password
         description: 'Must match the regex /^[a-zA-Z0-9]+$/. validation.between.'
         required: true
-        example: (rNp2p
+        example: aG(gtG
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      organize_id: 8
-      role_id: 3
-      nickname: mq
-      email: jeanne79@example.org
-      phone: '61550178369'
-      password: (rNp2p
+      organize_id: 7
+      role_id: 5
+      nickname: qy
+      email: antonina.jaskolski@example.net
+      phone: '27755051313'
+      password: aG(gtG
     fileParameters: []
     responses:
       -
@@ -275,7 +338,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 121111111111111111'
+      - 'Bearer 6PEca3Vvgkhef8aZ6db41D5'
     controller: null
     method: null
     route: null
@@ -306,13 +369,13 @@ endpoints:
         name: ulid
         description: ''
         required: true
-        example: vitae
+        example: fuga
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      ulid: vitae
+      ulid: fuga
     fileParameters: []
     responses:
       -
@@ -328,7 +391,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 121111111111111111'
+      - 'Bearer 8faV436PEavcdbgDZke16h5'
     controller: null
     method: null
     route: null
@@ -359,13 +422,13 @@ endpoints:
         name: ulid
         description: ''
         required: true
-        example: temporibus
+        example: natus
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      ulid: temporibus
+      ulid: natus
     fileParameters: []
     responses:
       -
@@ -381,7 +444,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 121111111111111111'
+      - 'Bearer 3ah8dea6kg6v5ZPfD14EVbc'
     controller: null
     method: null
     route: null
@@ -412,7 +475,7 @@ endpoints:
         name: ulid
         description: ''
         required: true
-        example: tempore
+        example: doloremque
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -421,7 +484,7 @@ endpoints:
         name: status
         description: ''
         required: true
-        example: '1'
+        example: '0'
         type: string
         enumValues:
           - '0'
@@ -429,8 +492,8 @@ endpoints:
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      ulid: tempore
-      status: '1'
+      ulid: doloremque
+      status: '0'
     fileParameters: []
     responses:
       -
@@ -446,7 +509,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 121111111111111111'
+      - 'Bearer 3dDZbaePh6Vak58gvf4Ec61'
     controller: null
     method: null
     route: null

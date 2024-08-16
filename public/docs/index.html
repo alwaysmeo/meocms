@@ -289,10 +289,10 @@
                                                             </div>
                                             </div>
                                     <div class="expandable">
-                        <div title="权限 - Users" id="toc-item-users"
+                        <div title="栏目 - Columns" id="toc-item-columns"
                              class="sl-flex sl-items-center sl-h-md sl-pr-4 sl-pl-4 sl-bg-canvas-100 hover:sl-bg-canvas-200 sl-cursor-pointer sl-select-none">
-                            <a href="#users"
-                               class="sl-flex-1 sl-items-center sl-truncate sl-mr-1.5 sl-p-0">权限 - Users</a>
+                            <a href="#columns"
+                               class="sl-flex-1 sl-items-center sl-truncate sl-mr-1.5 sl-p-0">栏目 - Columns</a>
                                                             <div class="sl-flex sl-items-center sl-text-xs expansion-chevrons">
                                     <svg aria-hidden="true" focusable="false" data-prefix="fas"
                                          data-icon="chevron-right"
@@ -307,11 +307,11 @@
                                                     <div class="children" style="display: none;">
                                                                     <div class="expandable">
                                         <div class="sl-flex sl-items-center sl-h-md sl-pr-4 sl-pl-8 sl-bg-canvas-100 hover:sl-bg-canvas-200 sl-cursor-pointer sl-select-none"
-                                             id="toc-item-users-GETapi-users-permissions-child">
-                                            <div class="sl-flex-1 sl-items-center sl-truncate sl-mr-1.5 sl-p-0" title="获取用户拥有的子权限">
+                                             id="toc-item-columns-GETapi-columns-list">
+                                            <div class="sl-flex-1 sl-items-center sl-truncate sl-mr-1.5 sl-p-0" title="获取栏目列表">
                                                 <a class="ElementsTableOfContentsItem sl-block sl-no-underline"
-                                                   href="#users-GETapi-users-permissions-child">
-                                                    获取用户拥有的子权限
+                                                   href="#columns-GETapi-columns-list">
+                                                    获取栏目列表
                                                 </a>
                                             </div>
                                                                                     </div>
@@ -343,6 +343,18 @@
                                                 <a class="ElementsTableOfContentsItem sl-block sl-no-underline"
                                                    href="#users-GETapi-users-permissions-list">
                                                     获取用户拥有的权限列表
+                                                </a>
+                                            </div>
+                                                                                    </div>
+
+                                                                            </div>
+                                                                    <div class="expandable">
+                                        <div class="sl-flex sl-items-center sl-h-md sl-pr-4 sl-pl-8 sl-bg-canvas-100 hover:sl-bg-canvas-200 sl-cursor-pointer sl-select-none"
+                                             id="toc-item-users-GETapi-users-permissions-child">
+                                            <div class="sl-flex-1 sl-items-center sl-truncate sl-mr-1.5 sl-p-0" title="获取用户拥有的子权限">
+                                                <a class="ElementsTableOfContentsItem sl-block sl-no-underline"
+                                                   href="#users-GETapi-users-permissions-child">
+                                                    获取用户拥有的子权限
                                                 </a>
                                             </div>
                                                                                     </div>
@@ -651,7 +663,7 @@
 
         </div>
         <div class="sl-flex sl-items-center sl-px-4 sl-py-3 sl-border-t">
-            Last updated: August 6, 2024
+            Last updated: August 16, 2024
         </div>
 
         <div class="sl-flex sl-items-center sl-px-4 sl-py-3 sl-border-t">
@@ -677,7 +689,7 @@
                 <h1 id="introduction">Introduction</h1>
 <p>Api Documentation</p>
 <aside>
-    <strong>Base URL</strong>: <code>http://localhost:9004</code>
+    <strong>Base URL</strong>: <code>http://localhost</code>
 </aside>
 <aside>This documentation aims to provide all the information you need to work with our API.</aside>
 
@@ -708,7 +720,7 @@
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:9004/api/test"
+            <div title="http://localhost/api/test"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -718,7 +730,7 @@
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:9004</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/test</div>
                     </div>
 
@@ -885,7 +897,7 @@
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:9004/api/common/captcha"
+            <div title="http://localhost/api/common/captcha"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -895,7 +907,7 @@
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:9004</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/common/captcha</div>
                     </div>
 
@@ -1067,8 +1079,8 @@
                                                        class="language-json sl-overflow-x-auto sl-overflow-y-auto">{
     &quot;data&quot;: {
         &quot;sensitive&quot;: false,
-        &quot;key&quot;: &quot;eyJpdiI6IkxyK2h6U1E0Q0NMa2JtTGVkUDdQK2c9PSIsInZhbHVlIjoiMkJQRWhscmNDZlZiSDA1Zk8xcWVxK3lvcUFmdmhFTmdsaUo2UWQrWWNndExaQzFuMWs5ZG96TnB5UzBRaHhuT1gzRTF2NEhZa0FBZHhRQXczQ1ZxWmQyc21wOVZFSy9WWkJVRERId3JEd0E9IiwibWFjIjoiYzdiNGVmNTQzNjVjMTYxOTc2NmU2ZTY3MDE2M2U3N2FkN2IwZDU1N2VjOWY4Nzg2NGIyNWVkNGQ3YzFmZjQzNSIsInRhZyI6IiJ9&quot;,
-        &quot;img&quot;: &quot;data:image/png;base64,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&quot;
+        &quot;key&quot;: &quot;eyJpdiI6ImlUNnRESWNJd1RmNlIrVXM5VGJVN2c9PSIsInZhbHVlIjoiMUo1RWMzbzA1YXNWcDBudWFpK0xEandBRENJZjdlYWsreTFaUG1kVXJnN2phTmFLclpvTjJBMk1lQmVLSTErRzkyUDFxOC9SQWQ4UEE5TTdQMWVXMnJvR3lMYmJsNzlZZEcxRzlrU2h5cUE9IiwibWFjIjoiMjlhOWYzY2M3Y2VlZGU1MGEzOTM3MGU0YzMwNGI3NzRiNGRlNDgwYjQ5ZTc1MmE4OTg5YjQ1MTgxMzI1ZGE3MCIsInRhZyI6IiJ9&quot;,
+        &quot;img&quot;: &quot;data:image/png;base64,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&quot;
     },
     &quot;message&quot;: &quot;success&quot;,
     &quot;code&quot;: 200
@@ -1100,7 +1112,7 @@
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:9004/api/permissions/list"
+            <div title="http://localhost/api/permissions/list"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -1110,7 +1122,7 @@
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:9004</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/permissions/list</div>
                     </div>
 
@@ -1309,7 +1321,7 @@
                             &quot;icon&quot;: null,
                             &quot;path&quot;: null,
                             &quot;level&quot;: 3,
-                            &quot;show&quot;: false,
+                            &quot;show&quot;: true,
                             &quot;order&quot;: 3,
                             &quot;type&quot;: 2
                         },
@@ -1322,7 +1334,7 @@
                             &quot;icon&quot;: null,
                             &quot;path&quot;: null,
                             &quot;level&quot;: 3,
-                            &quot;show&quot;: false,
+                            &quot;show&quot;: true,
                             &quot;order&quot;: 4,
                             &quot;type&quot;: 2
                         },
@@ -1335,7 +1347,7 @@
                             &quot;icon&quot;: null,
                             &quot;path&quot;: null,
                             &quot;level&quot;: 3,
-                            &quot;show&quot;: false,
+                            &quot;show&quot;: true,
                             &quot;order&quot;: 5,
                             &quot;type&quot;: 2
                         }
@@ -1508,11 +1520,11 @@
         {
             &quot;id&quot;: 19,
             &quot;parent_id&quot;: null,
-            &quot;code&quot;: &quot;content&quot;,
-            &quot;name&quot;: &quot;内容管理&quot;,
-            &quot;description&quot;: &quot;内容管理&quot;,
-            &quot;icon&quot;: &quot;AntContainerOutlined&quot;,
-            &quot;path&quot;: &quot;/content&quot;,
+            &quot;code&quot;: &quot;column&quot;,
+            &quot;name&quot;: &quot;栏目管理&quot;,
+            &quot;description&quot;: &quot;栏目管理&quot;,
+            &quot;icon&quot;: &quot;AntProfileOutlined&quot;,
+            &quot;path&quot;: &quot;/column&quot;,
             &quot;level&quot;: 1,
             &quot;show&quot;: true,
             &quot;order&quot;: 18,
@@ -1521,11 +1533,11 @@
                 {
                     &quot;id&quot;: 20,
                     &quot;parent_id&quot;: 19,
-                    &quot;code&quot;: &quot;content-manage&quot;,
-                    &quot;name&quot;: &quot;内容管理&quot;,
-                    &quot;description&quot;: &quot;内容管理-文章管理&quot;,
+                    &quot;code&quot;: &quot;column-manage&quot;,
+                    &quot;name&quot;: &quot;栏目管理&quot;,
+                    &quot;description&quot;: &quot;栏目管理-栏目管理&quot;,
                     &quot;icon&quot;: null,
-                    &quot;path&quot;: &quot;/content/manage&quot;,
+                    &quot;path&quot;: &quot;/column/manage&quot;,
                     &quot;level&quot;: 2,
                     &quot;show&quot;: true,
                     &quot;order&quot;: 19,
@@ -1534,52 +1546,52 @@
                 {
                     &quot;id&quot;: 21,
                     &quot;parent_id&quot;: 19,
-                    &quot;code&quot;: &quot;content-model&quot;,
-                    &quot;name&quot;: &quot;内容模型管理&quot;,
-                    &quot;description&quot;: &quot;内容管理-内容模型管理&quot;,
+                    &quot;code&quot;: &quot;column-model&quot;,
+                    &quot;name&quot;: &quot;模型管理&quot;,
+                    &quot;description&quot;: &quot;栏目管理-模型管理&quot;,
                     &quot;icon&quot;: null,
-                    &quot;path&quot;: &quot;/content/model&quot;,
+                    &quot;path&quot;: &quot;/column/model&quot;,
                     &quot;level&quot;: 2,
                     &quot;show&quot;: true,
                     &quot;order&quot;: 20,
-                    &quot;type&quot;: 1
-                },
-                {
-                    &quot;id&quot;: 22,
-                    &quot;parent_id&quot;: 19,
-                    &quot;code&quot;: &quot;content-timing&quot;,
-                    &quot;name&quot;: &quot;定时任务&quot;,
-                    &quot;description&quot;: &quot;内容管理-定时任务&quot;,
-                    &quot;icon&quot;: null,
-                    &quot;path&quot;: &quot;/content/timing&quot;,
-                    &quot;level&quot;: 2,
-                    &quot;show&quot;: true,
-                    &quot;order&quot;: 21,
                     &quot;type&quot;: 1
                 }
             ]
         },
         {
-            &quot;id&quot;: 23,
+            &quot;id&quot;: 22,
             &quot;parent_id&quot;: null,
-            &quot;code&quot;: &quot;column&quot;,
-            &quot;name&quot;: &quot;栏目管理&quot;,
-            &quot;description&quot;: &quot;栏目管理&quot;,
-            &quot;icon&quot;: &quot;AntProfileOutlined&quot;,
-            &quot;path&quot;: &quot;/column&quot;,
+            &quot;code&quot;: &quot;content&quot;,
+            &quot;name&quot;: &quot;内容管理&quot;,
+            &quot;description&quot;: &quot;内容管理&quot;,
+            &quot;icon&quot;: &quot;AntContainerOutlined&quot;,
+            &quot;path&quot;: &quot;/content&quot;,
             &quot;level&quot;: 1,
             &quot;show&quot;: true,
-            &quot;order&quot;: 22,
+            &quot;order&quot;: 21,
             &quot;type&quot;: 1,
             &quot;children&quot;: [
                 {
-                    &quot;id&quot;: 24,
-                    &quot;parent_id&quot;: 23,
-                    &quot;code&quot;: &quot;column-manage&quot;,
-                    &quot;name&quot;: &quot;栏目管理&quot;,
-                    &quot;description&quot;: &quot;栏目管理-栏目管理&quot;,
+                    &quot;id&quot;: 23,
+                    &quot;parent_id&quot;: 22,
+                    &quot;code&quot;: &quot;content-manage&quot;,
+                    &quot;name&quot;: &quot;内容管理&quot;,
+                    &quot;description&quot;: &quot;内容管理-文章管理&quot;,
                     &quot;icon&quot;: null,
-                    &quot;path&quot;: &quot;/column/manage&quot;,
+                    &quot;path&quot;: &quot;/content/manage&quot;,
+                    &quot;level&quot;: 2,
+                    &quot;show&quot;: true,
+                    &quot;order&quot;: 22,
+                    &quot;type&quot;: 1
+                },
+                {
+                    &quot;id&quot;: 24,
+                    &quot;parent_id&quot;: 22,
+                    &quot;code&quot;: &quot;content-model&quot;,
+                    &quot;name&quot;: &quot;内容模型管理&quot;,
+                    &quot;description&quot;: &quot;内容管理-模型管理&quot;,
+                    &quot;icon&quot;: null,
+                    &quot;path&quot;: &quot;/content/model&quot;,
                     &quot;level&quot;: 2,
                     &quot;show&quot;: true,
                     &quot;order&quot;: 23,
@@ -1587,12 +1599,12 @@
                 },
                 {
                     &quot;id&quot;: 25,
-                    &quot;parent_id&quot;: 23,
-                    &quot;code&quot;: &quot;column-model&quot;,
-                    &quot;name&quot;: &quot;栏目模型管理&quot;,
-                    &quot;description&quot;: &quot;栏目管理-栏目模型管理&quot;,
+                    &quot;parent_id&quot;: 22,
+                    &quot;code&quot;: &quot;content-timing&quot;,
+                    &quot;name&quot;: &quot;定时任务&quot;,
+                    &quot;description&quot;: &quot;内容管理-定时任务&quot;,
                     &quot;icon&quot;: null,
-                    &quot;path&quot;: &quot;/column/model&quot;,
+                    &quot;path&quot;: &quot;/content/timing&quot;,
                     &quot;level&quot;: 2,
                     &quot;show&quot;: true,
                     &quot;order&quot;: 24,
@@ -1677,7 +1689,7 @@
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:9004/api/permissions/upsert"
+            <div title="http://localhost/api/permissions/upsert"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -1687,7 +1699,7 @@
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:9004</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/permissions/upsert</div>
                     </div>
 
@@ -1787,7 +1799,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        11
+                        1
                     </div>
                 </div>
             </div>
@@ -1809,7 +1821,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        11
+                        10
                     </div>
                 </div>
             </div>
@@ -1836,7 +1848,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        kc
+                        dvvcqvlwnnnbpohqvarehl
                     </div>
                 </div>
             </div>
@@ -1863,7 +1875,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        rlbxjcau
+                        wtvyfwo
                     </div>
                 </div>
             </div>
@@ -1888,7 +1900,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        Eum animi et quidem rerum.
+                        Eum doloribus ratione porro illum et saepe.
                     </div>
                 </div>
             </div>
@@ -1913,7 +1925,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        iqwoyzjdfuomson
+                        bwkaibqxejyqlfgeeg
                     </div>
                 </div>
             </div>
@@ -1938,7 +1950,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        nprrnqxtddc
+                        ieu
                     </div>
                 </div>
             </div>
@@ -1962,7 +1974,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        10
+                        12
                     </div>
                 </div>
             </div>
@@ -1988,7 +2000,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
+                        2
                     </div>
                 </div>
             </div>
@@ -2089,7 +2101,7 @@
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:9004/api/permissions/delete"
+            <div title="http://localhost/api/permissions/delete"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -2099,7 +2111,7 @@
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:9004</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/permissions/delete</div>
                     </div>
 
@@ -2201,7 +2213,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        15
+                        20
                     </div>
                 </div>
             </div>
@@ -2302,7 +2314,7 @@
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:9004/api/permissions/change/show"
+            <div title="http://localhost/api/permissions/change/show"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -2312,7 +2324,7 @@
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:9004</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/permissions/change/show</div>
                     </div>
 
@@ -2414,7 +2426,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        15
+                        20
                     </div>
                 </div>
             </div>
@@ -2440,7 +2452,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        0
+                        1
                     </div>
                 </div>
             </div>
@@ -2529,10 +2541,10 @@
     </div>
 </div>
 
-                <h1 id="users"
+                <h1 id="columns"
         class="sl-text-5xl sl-leading-tight sl-font-prose sl-text-heading"
     >
-        权限 - Users
+        栏目 - Columns
     </h1>
 
     
@@ -2542,14 +2554,14 @@
         <div class="sl-relative">
             <div class="sl-stack sl-stack--horizontal sl-stack--5 sl-flex sl-flex-row sl-items-center">
                 <h2 class="sl-text-3xl sl-leading-tight sl-font-prose sl-text-heading sl-mt-5 sl-mb-1"
-                    id="users-GETapi-users-permissions-child">
-                    获取用户拥有的子权限
+                    id="columns-GETapi-columns-list">
+                    获取栏目列表
                 </h2>
             </div>
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:9004/api/users/permissions/child"
+            <div title="http://localhost/api/columns/list"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -2559,8 +2571,8 @@
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:9004</div>
-                        <div class="sl-flex-1 sl-font-semibold">/api/users/permissions/child</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
+                        <div class="sl-flex-1 sl-font-semibold">/api/columns/list</div>
                     </div>
 
                                                     <div class="sl-font-prose sl-font-semibold sl-px-1.5 sl-py-0.5 sl-text-on-primary sl-rounded-lg"
@@ -2651,40 +2663,17 @@
     <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
         <div class="sl-flex sl-items-center sl-max-w-full">
                                         <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">parent_id</div>
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">organize_id</div>
                                             <span class="sl-truncate sl-text-muted">integer</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        7
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">parent_code</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>validation.max.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        ruzdaijw
+                        18
                     </div>
                 </div>
             </div>
@@ -2712,9 +2701,9 @@
                                             <div class="sl-mb-2 sl-inline-block">Example response:</div>
                                             <div class="sl-mb-2 sl-inline-block">
                                                 <select
-                                                        class="example-response-GETapi-users-permissions-child-toggle sl-text-base"
+                                                        class="example-response-GETapi-columns-list-toggle sl-text-base"
                                                         aria-label="Response sample"
-                                                        onchange="switchExampleResponse('GETapi-users-permissions-child', event.target.value);">
+                                                        onchange="switchExampleResponse('GETapi-columns-list', event.target.value);">
                                                                                                             <option value="0">200</option>
                                                                                                     </select></div>
                                         </div>
@@ -2732,7 +2721,7 @@
                                     </div>
                                 </button>
                             </div>
-                                                            <div class="sl-panel__content-wrapper sl-bg-canvas-100 example-response-GETapi-users-permissions-child example-response-GETapi-users-permissions-child-0"
+                                                            <div class="sl-panel__content-wrapper sl-bg-canvas-100 example-response-GETapi-columns-list example-response-GETapi-columns-list-0"
                                      style=" "
                                 >
                                     <div class="sl-panel__content sl-p-0">                                            <details class="sl-pl-2">
@@ -2762,47 +2751,7 @@
                                                                                                                                                                         
                                             <pre><code style="max-height: 300px;"
                                                        class="language-json sl-overflow-x-auto sl-overflow-y-auto">{
-    &quot;data&quot;: [
-        {
-            &quot;id&quot;: 8,
-            &quot;parent_id&quot;: 7,
-            &quot;code&quot;: &quot;system-roles-create&quot;,
-            &quot;name&quot;: &quot;新增&quot;,
-            &quot;description&quot;: &quot;系统管理-角色管理-新增按钮&quot;,
-            &quot;icon&quot;: null,
-            &quot;path&quot;: null,
-            &quot;level&quot;: 3,
-            &quot;show&quot;: true,
-            &quot;order&quot;: 7,
-            &quot;type&quot;: 2
-        },
-        {
-            &quot;id&quot;: 9,
-            &quot;parent_id&quot;: 7,
-            &quot;code&quot;: &quot;system-roles-update&quot;,
-            &quot;name&quot;: &quot;修改&quot;,
-            &quot;description&quot;: &quot;系统管理-角色管理-修改按钮&quot;,
-            &quot;icon&quot;: null,
-            &quot;path&quot;: null,
-            &quot;level&quot;: 3,
-            &quot;show&quot;: true,
-            &quot;order&quot;: 8,
-            &quot;type&quot;: 2
-        },
-        {
-            &quot;id&quot;: 10,
-            &quot;parent_id&quot;: 7,
-            &quot;code&quot;: &quot;system-roles-delete&quot;,
-            &quot;name&quot;: &quot;删除&quot;,
-            &quot;description&quot;: &quot;系统管理-角色管理-删除按钮&quot;,
-            &quot;icon&quot;: null,
-            &quot;path&quot;: null,
-            &quot;level&quot;: 3,
-            &quot;show&quot;: true,
-            &quot;order&quot;: 9,
-            &quot;type&quot;: 2
-        }
-    ],
+    &quot;data&quot;: [],
     &quot;message&quot;: &quot;success&quot;,
     &quot;code&quot;: 200
 }</code></pre>
@@ -2833,7 +2782,7 @@
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:9004/api/users/permissions/list"
+            <div title="http://localhost/api/users/permissions/list"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -2843,7 +2792,7 @@
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:9004</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/users/permissions/list</div>
                     </div>
 
@@ -3006,7 +2955,7 @@
             &quot;show&quot;: true,
             &quot;order&quot;: 0,
             &quot;type&quot;: 1,
-            &quot;created_at&quot;: &quot;2024-08-01 13:16:27&quot;,
+            &quot;created_at&quot;: &quot;2024-08-16 12:03:12&quot;,
             &quot;updated_at&quot;: null,
             &quot;deleted_at&quot;: null
         },
@@ -3022,7 +2971,7 @@
             &quot;show&quot;: true,
             &quot;order&quot;: 1,
             &quot;type&quot;: 1,
-            &quot;created_at&quot;: &quot;2024-08-01 13:16:27&quot;,
+            &quot;created_at&quot;: &quot;2024-08-16 12:03:12&quot;,
             &quot;updated_at&quot;: null,
             &quot;deleted_at&quot;: null,
             &quot;children&quot;: [
@@ -3038,7 +2987,7 @@
                     &quot;show&quot;: true,
                     &quot;order&quot;: 2,
                     &quot;type&quot;: 1,
-                    &quot;created_at&quot;: &quot;2024-08-01 13:16:27&quot;,
+                    &quot;created_at&quot;: &quot;2024-08-16 12:03:12&quot;,
                     &quot;updated_at&quot;: null,
                     &quot;deleted_at&quot;: null
                 },
@@ -3054,7 +3003,7 @@
                     &quot;show&quot;: true,
                     &quot;order&quot;: 6,
                     &quot;type&quot;: 1,
-                    &quot;created_at&quot;: &quot;2024-08-01 13:16:27&quot;,
+                    &quot;created_at&quot;: &quot;2024-08-16 12:03:12&quot;,
                     &quot;updated_at&quot;: null,
                     &quot;deleted_at&quot;: null
                 },
@@ -3070,7 +3019,7 @@
                     &quot;show&quot;: true,
                     &quot;order&quot;: 10,
                     &quot;type&quot;: 1,
-                    &quot;created_at&quot;: &quot;2024-08-01 13:16:27&quot;,
+                    &quot;created_at&quot;: &quot;2024-08-16 12:03:12&quot;,
                     &quot;updated_at&quot;: null,
                     &quot;deleted_at&quot;: null
                 },
@@ -3086,7 +3035,7 @@
                     &quot;show&quot;: true,
                     &quot;order&quot;: 14,
                     &quot;type&quot;: 1,
-                    &quot;created_at&quot;: &quot;2024-08-01 13:16:27&quot;,
+                    &quot;created_at&quot;: &quot;2024-08-16 12:03:12&quot;,
                     &quot;updated_at&quot;: null,
                     &quot;deleted_at&quot;: null
                 }
@@ -3095,72 +3044,6 @@
         {
             &quot;id&quot;: 19,
             &quot;parent_id&quot;: null,
-            &quot;code&quot;: &quot;content&quot;,
-            &quot;name&quot;: &quot;内容管理&quot;,
-            &quot;description&quot;: &quot;内容管理&quot;,
-            &quot;icon&quot;: &quot;AntContainerOutlined&quot;,
-            &quot;path&quot;: &quot;/content&quot;,
-            &quot;level&quot;: 1,
-            &quot;show&quot;: true,
-            &quot;order&quot;: 18,
-            &quot;type&quot;: 1,
-            &quot;created_at&quot;: &quot;2024-08-01 13:16:27&quot;,
-            &quot;updated_at&quot;: null,
-            &quot;deleted_at&quot;: null,
-            &quot;children&quot;: [
-                {
-                    &quot;id&quot;: 20,
-                    &quot;parent_id&quot;: 19,
-                    &quot;code&quot;: &quot;content-manage&quot;,
-                    &quot;name&quot;: &quot;内容管理&quot;,
-                    &quot;description&quot;: &quot;内容管理-文章管理&quot;,
-                    &quot;icon&quot;: null,
-                    &quot;path&quot;: &quot;/content/manage&quot;,
-                    &quot;level&quot;: 2,
-                    &quot;show&quot;: true,
-                    &quot;order&quot;: 19,
-                    &quot;type&quot;: 1,
-                    &quot;created_at&quot;: &quot;2024-08-01 13:16:27&quot;,
-                    &quot;updated_at&quot;: null,
-                    &quot;deleted_at&quot;: null
-                },
-                {
-                    &quot;id&quot;: 21,
-                    &quot;parent_id&quot;: 19,
-                    &quot;code&quot;: &quot;content-model&quot;,
-                    &quot;name&quot;: &quot;内容模型管理&quot;,
-                    &quot;description&quot;: &quot;内容管理-内容模型管理&quot;,
-                    &quot;icon&quot;: null,
-                    &quot;path&quot;: &quot;/content/model&quot;,
-                    &quot;level&quot;: 2,
-                    &quot;show&quot;: true,
-                    &quot;order&quot;: 20,
-                    &quot;type&quot;: 1,
-                    &quot;created_at&quot;: &quot;2024-08-01 13:16:27&quot;,
-                    &quot;updated_at&quot;: null,
-                    &quot;deleted_at&quot;: null
-                },
-                {
-                    &quot;id&quot;: 22,
-                    &quot;parent_id&quot;: 19,
-                    &quot;code&quot;: &quot;content-timing&quot;,
-                    &quot;name&quot;: &quot;定时任务&quot;,
-                    &quot;description&quot;: &quot;内容管理-定时任务&quot;,
-                    &quot;icon&quot;: null,
-                    &quot;path&quot;: &quot;/content/timing&quot;,
-                    &quot;level&quot;: 2,
-                    &quot;show&quot;: true,
-                    &quot;order&quot;: 21,
-                    &quot;type&quot;: 1,
-                    &quot;created_at&quot;: &quot;2024-08-01 13:16:27&quot;,
-                    &quot;updated_at&quot;: null,
-                    &quot;deleted_at&quot;: null
-                }
-            ]
-        },
-        {
-            &quot;id&quot;: 23,
-            &quot;parent_id&quot;: null,
             &quot;code&quot;: &quot;column&quot;,
             &quot;name&quot;: &quot;栏目管理&quot;,
             &quot;description&quot;: &quot;栏目管理&quot;,
@@ -3168,15 +3051,15 @@
             &quot;path&quot;: &quot;/column&quot;,
             &quot;level&quot;: 1,
             &quot;show&quot;: true,
-            &quot;order&quot;: 22,
+            &quot;order&quot;: 18,
             &quot;type&quot;: 1,
-            &quot;created_at&quot;: &quot;2024-08-01 13:16:27&quot;,
+            &quot;created_at&quot;: &quot;2024-08-16 12:03:12&quot;,
             &quot;updated_at&quot;: null,
             &quot;deleted_at&quot;: null,
             &quot;children&quot;: [
                 {
-                    &quot;id&quot;: 24,
-                    &quot;parent_id&quot;: 23,
+                    &quot;id&quot;: 20,
+                    &quot;parent_id&quot;: 19,
                     &quot;code&quot;: &quot;column-manage&quot;,
                     &quot;name&quot;: &quot;栏目管理&quot;,
                     &quot;description&quot;: &quot;栏目管理-栏目管理&quot;,
@@ -3184,25 +3067,91 @@
                     &quot;path&quot;: &quot;/column/manage&quot;,
                     &quot;level&quot;: 2,
                     &quot;show&quot;: true,
+                    &quot;order&quot;: 19,
+                    &quot;type&quot;: 1,
+                    &quot;created_at&quot;: &quot;2024-08-16 12:03:12&quot;,
+                    &quot;updated_at&quot;: null,
+                    &quot;deleted_at&quot;: null
+                },
+                {
+                    &quot;id&quot;: 21,
+                    &quot;parent_id&quot;: 19,
+                    &quot;code&quot;: &quot;column-model&quot;,
+                    &quot;name&quot;: &quot;模型管理&quot;,
+                    &quot;description&quot;: &quot;栏目管理-模型管理&quot;,
+                    &quot;icon&quot;: null,
+                    &quot;path&quot;: &quot;/column/model&quot;,
+                    &quot;level&quot;: 2,
+                    &quot;show&quot;: true,
+                    &quot;order&quot;: 20,
+                    &quot;type&quot;: 1,
+                    &quot;created_at&quot;: &quot;2024-08-16 12:03:12&quot;,
+                    &quot;updated_at&quot;: null,
+                    &quot;deleted_at&quot;: null
+                }
+            ]
+        },
+        {
+            &quot;id&quot;: 22,
+            &quot;parent_id&quot;: null,
+            &quot;code&quot;: &quot;content&quot;,
+            &quot;name&quot;: &quot;内容管理&quot;,
+            &quot;description&quot;: &quot;内容管理&quot;,
+            &quot;icon&quot;: &quot;AntContainerOutlined&quot;,
+            &quot;path&quot;: &quot;/content&quot;,
+            &quot;level&quot;: 1,
+            &quot;show&quot;: true,
+            &quot;order&quot;: 21,
+            &quot;type&quot;: 1,
+            &quot;created_at&quot;: &quot;2024-08-16 12:03:12&quot;,
+            &quot;updated_at&quot;: null,
+            &quot;deleted_at&quot;: null,
+            &quot;children&quot;: [
+                {
+                    &quot;id&quot;: 23,
+                    &quot;parent_id&quot;: 22,
+                    &quot;code&quot;: &quot;content-manage&quot;,
+                    &quot;name&quot;: &quot;内容管理&quot;,
+                    &quot;description&quot;: &quot;内容管理-文章管理&quot;,
+                    &quot;icon&quot;: null,
+                    &quot;path&quot;: &quot;/content/manage&quot;,
+                    &quot;level&quot;: 2,
+                    &quot;show&quot;: true,
+                    &quot;order&quot;: 22,
+                    &quot;type&quot;: 1,
+                    &quot;created_at&quot;: &quot;2024-08-16 12:03:12&quot;,
+                    &quot;updated_at&quot;: null,
+                    &quot;deleted_at&quot;: null
+                },
+                {
+                    &quot;id&quot;: 24,
+                    &quot;parent_id&quot;: 22,
+                    &quot;code&quot;: &quot;content-model&quot;,
+                    &quot;name&quot;: &quot;内容模型管理&quot;,
+                    &quot;description&quot;: &quot;内容管理-模型管理&quot;,
+                    &quot;icon&quot;: null,
+                    &quot;path&quot;: &quot;/content/model&quot;,
+                    &quot;level&quot;: 2,
+                    &quot;show&quot;: true,
                     &quot;order&quot;: 23,
                     &quot;type&quot;: 1,
-                    &quot;created_at&quot;: &quot;2024-08-01 13:16:27&quot;,
+                    &quot;created_at&quot;: &quot;2024-08-16 12:03:12&quot;,
                     &quot;updated_at&quot;: null,
                     &quot;deleted_at&quot;: null
                 },
                 {
                     &quot;id&quot;: 25,
-                    &quot;parent_id&quot;: 23,
-                    &quot;code&quot;: &quot;column-model&quot;,
-                    &quot;name&quot;: &quot;栏目模型管理&quot;,
-                    &quot;description&quot;: &quot;栏目管理-栏目模型管理&quot;,
+                    &quot;parent_id&quot;: 22,
+                    &quot;code&quot;: &quot;content-timing&quot;,
+                    &quot;name&quot;: &quot;定时任务&quot;,
+                    &quot;description&quot;: &quot;内容管理-定时任务&quot;,
                     &quot;icon&quot;: null,
-                    &quot;path&quot;: &quot;/column/model&quot;,
+                    &quot;path&quot;: &quot;/content/timing&quot;,
                     &quot;level&quot;: 2,
                     &quot;show&quot;: true,
                     &quot;order&quot;: 24,
                     &quot;type&quot;: 1,
-                    &quot;created_at&quot;: &quot;2024-08-01 13:16:27&quot;,
+                    &quot;created_at&quot;: &quot;2024-08-16 12:03:12&quot;,
                     &quot;updated_at&quot;: null,
                     &quot;deleted_at&quot;: null
                 }
@@ -3220,7 +3169,7 @@
             &quot;show&quot;: true,
             &quot;order&quot;: 25,
             &quot;type&quot;: 1,
-            &quot;created_at&quot;: &quot;2024-08-01 13:16:27&quot;,
+            &quot;created_at&quot;: &quot;2024-08-16 12:03:12&quot;,
             &quot;updated_at&quot;: null,
             &quot;deleted_at&quot;: null,
             &quot;children&quot;: [
@@ -3236,7 +3185,7 @@
                     &quot;show&quot;: true,
                     &quot;order&quot;: 26,
                     &quot;type&quot;: 1,
-                    &quot;created_at&quot;: &quot;2024-08-01 13:16:27&quot;,
+                    &quot;created_at&quot;: &quot;2024-08-16 12:03:12&quot;,
                     &quot;updated_at&quot;: null,
                     &quot;deleted_at&quot;: null
                 },
@@ -3252,7 +3201,7 @@
                     &quot;show&quot;: true,
                     &quot;order&quot;: 27,
                     &quot;type&quot;: 1,
-                    &quot;created_at&quot;: &quot;2024-08-01 13:16:27&quot;,
+                    &quot;created_at&quot;: &quot;2024-08-16 12:03:12&quot;,
                     &quot;updated_at&quot;: null,
                     &quot;deleted_at&quot;: null
                 },
@@ -3268,11 +3217,287 @@
                     &quot;show&quot;: true,
                     &quot;order&quot;: 28,
                     &quot;type&quot;: 1,
-                    &quot;created_at&quot;: &quot;2024-08-01 13:16:27&quot;,
+                    &quot;created_at&quot;: &quot;2024-08-16 12:03:12&quot;,
                     &quot;updated_at&quot;: null,
                     &quot;deleted_at&quot;: null
                 }
             ]
+        }
+    ],
+    &quot;message&quot;: &quot;success&quot;,
+    &quot;code&quot;: 200
+}</code></pre>
+                                                                            </div>
+                                </div>
+                                                    </div>
+                            </div>
+    </div>
+</div>
+
+                    <div class="sl-stack sl-stack--vertical sl-stack--8 HttpOperation sl-flex sl-flex-col sl-items-stretch sl-w-full">
+    <div class="sl-stack sl-stack--vertical sl-stack--5 sl-flex sl-flex-col sl-items-stretch">
+        <div class="sl-relative">
+            <div class="sl-stack sl-stack--horizontal sl-stack--5 sl-flex sl-flex-row sl-items-center">
+                <h2 class="sl-text-3xl sl-leading-tight sl-font-prose sl-text-heading sl-mt-5 sl-mb-1"
+                    id="users-GETapi-users-permissions-child">
+                    获取用户拥有的子权限
+                </h2>
+            </div>
+        </div>
+
+        <div class="sl-relative">
+            <div title="http://localhost/api/users/permissions/child"
+                     class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
+                >
+                                            <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
+                             style="background-color: green;"
+                        >
+                            GET
+                        </div>
+                                        <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
+                        <div dir="rtl"
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
+                        <div class="sl-flex-1 sl-font-semibold">/api/users/permissions/child</div>
+                    </div>
+
+                                                    <div class="sl-font-prose sl-font-semibold sl-px-1.5 sl-py-0.5 sl-text-on-primary sl-rounded-lg"
+                                 style="background-color: darkred"
+                            >requires authentication
+                            </div>
+                                    </div>
+        </div>
+
+        
+    </div>
+    <div class="sl-flex">
+        <div data-testid="two-column-left" class="sl-flex-1 sl-w-0">
+            <div class="sl-stack sl-stack--vertical sl-stack--10 sl-flex sl-flex-col sl-items-stretch">
+                <div class="sl-stack sl-stack--vertical sl-stack--8 sl-flex sl-flex-col sl-items-stretch">
+                                            <div class="sl-stack sl-stack--vertical sl-stack--5 sl-flex sl-flex-col sl-items-stretch">
+                            <h3 class="sl-text-2xl sl-leading-snug sl-font-prose">
+                                Headers
+                            </h3>
+                            <div class="sl-text-sm">
+                                                                    <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">Authorization</div>
+                                    </div>
+                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        Bearer {YOUR_AUTH_KEY}
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                                    <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">Content-Type</div>
+                                    </div>
+                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        application/json
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                                    <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">Accept</div>
+                                    </div>
+                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        application/json
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                            </div>
+                        </div>
+                    
+                    
+
+                    
+                                            <div class="sl-stack sl-stack--vertical sl-stack--6 sl-flex sl-flex-col sl-items-stretch">
+                            <h3 class="sl-text-2xl sl-leading-snug sl-font-prose">Body Parameters</h3>
+
+                                <div class="sl-text-sm">
+                                    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">parent_id</div>
+                                            <span class="sl-truncate sl-text-muted">integer</span>
+                                    </div>
+                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        3
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">parent_code</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>validation.max.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        hiijvinjrvqkkuydc
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+                            </div>
+                        </div>
+                    
+                                    </div>
+            </div>
+        </div>
+
+        <div data-testid="two-column-right" class="sl-relative sl-w-2/5 sl-ml-16" style="max-width: 500px;">
+            <div class="sl-stack sl-stack--vertical sl-stack--6 sl-flex sl-flex-col sl-items-stretch">
+
+                
+                    
+                                            <div class="sl-panel sl-outline-none sl-w-full sl-rounded-lg">
+                            <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-3 sl-pl-4 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-select-none">
+                                <div class="sl-flex sl-flex-1 sl-items-center sl-py-2">
+                                    <div class="sl--ml-2">
+                                        <div class="sl-h-sm sl-text-base sl-font-medium sl-px-1.5 sl-text-muted sl-rounded sl-border-transparent sl-border">
+                                            <div class="sl-mb-2 sl-inline-block">Example response:</div>
+                                            <div class="sl-mb-2 sl-inline-block">
+                                                <select
+                                                        class="example-response-GETapi-users-permissions-child-toggle sl-text-base"
+                                                        aria-label="Response sample"
+                                                        onchange="switchExampleResponse('GETapi-users-permissions-child', event.target.value);">
+                                                                                                            <option value="0">200</option>
+                                                                                                    </select></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button"
+                                        class="sl-button sl-h-sm sl-text-base sl-font-medium sl-px-1.5 hover:sl-bg-canvas-50 active:sl-bg-canvas-100 sl-text-muted hover:sl-text-body focus:sl-text-body sl-rounded sl-border-transparent sl-border disabled:sl-opacity-70">
+                                    <div class="sl-mx-0">
+                                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="copy"
+                                             class="svg-inline--fa fa-copy fa-fw fa-sm sl-icon" role="img"
+                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor"
+                                                  d="M384 96L384 0h-112c-26.51 0-48 21.49-48 48v288c0 26.51 21.49 48 48 48H464c26.51 0 48-21.49 48-48V128h-95.1C398.4 128 384 113.6 384 96zM416 0v96h96L416 0zM192 352V128h-144c-26.51 0-48 21.49-48 48v288c0 26.51 21.49 48 48 48h192c26.51 0 48-21.49 48-48L288 416h-32C220.7 416 192 387.3 192 352z"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                            </div>
+                                                            <div class="sl-panel__content-wrapper sl-bg-canvas-100 example-response-GETapi-users-permissions-child example-response-GETapi-users-permissions-child-0"
+                                     style=" "
+                                >
+                                    <div class="sl-panel__content sl-p-0">                                            <details class="sl-pl-2">
+                                                <summary style="cursor: pointer; list-style: none;">
+                                                    <small>
+                                                        <span class="expansion-chevrons">
+
+    <svg aria-hidden="true" focusable="false" data-prefix="fas"
+         data-icon="chevron-right"
+         class="svg-inline--fa fa-chevron-right fa-fw sl-icon sl-text-muted"
+         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+        <path fill="currentColor"
+              d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path>
+    </svg>
+                                                            </span>
+                                                        Headers
+                                                    </small>
+                                                </summary>
+                                                <pre><code class="language-http">                                                            cache-control
+                                                            : no-cache, private
+                                                                                                                    content-type
+                                                            : application/json
+                                                                                                                    access-control-allow-origin
+                                                            : *
+                                                         </code></pre>
+                                            </details>
+                                                                                                                                                                        
+                                            <pre><code style="max-height: 300px;"
+                                                       class="language-json sl-overflow-x-auto sl-overflow-y-auto">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 4,
+            &quot;parent_id&quot;: 3,
+            &quot;code&quot;: &quot;system-users-create&quot;,
+            &quot;name&quot;: &quot;新增&quot;,
+            &quot;description&quot;: &quot;系统管理-用户管理-新增按钮&quot;,
+            &quot;icon&quot;: null,
+            &quot;path&quot;: null,
+            &quot;level&quot;: 3,
+            &quot;show&quot;: true,
+            &quot;order&quot;: 3,
+            &quot;type&quot;: 2
+        },
+        {
+            &quot;id&quot;: 5,
+            &quot;parent_id&quot;: 3,
+            &quot;code&quot;: &quot;system-users-update&quot;,
+            &quot;name&quot;: &quot;修改&quot;,
+            &quot;description&quot;: &quot;系统管理-用户管理-修改按钮&quot;,
+            &quot;icon&quot;: null,
+            &quot;path&quot;: null,
+            &quot;level&quot;: 3,
+            &quot;show&quot;: true,
+            &quot;order&quot;: 4,
+            &quot;type&quot;: 2
+        },
+        {
+            &quot;id&quot;: 6,
+            &quot;parent_id&quot;: 3,
+            &quot;code&quot;: &quot;system-users-delete&quot;,
+            &quot;name&quot;: &quot;删除&quot;,
+            &quot;description&quot;: &quot;系统管理-用户管理-删除按钮&quot;,
+            &quot;icon&quot;: null,
+            &quot;path&quot;: null,
+            &quot;level&quot;: 3,
+            &quot;show&quot;: true,
+            &quot;order&quot;: 5,
+            &quot;type&quot;: 2
         }
     ],
     &quot;message&quot;: &quot;success&quot;,
@@ -3297,7 +3522,7 @@
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:9004/api/users/list"
+            <div title="http://localhost/api/users/list"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -3307,7 +3532,7 @@
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:9004</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/users/list</div>
                     </div>
 
@@ -3608,22 +3833,22 @@
     &quot;data&quot;: {
         &quot;list&quot;: [
             {
-                &quot;ulid&quot;: &quot;01j466b2yt6x94pap2903qbnt0&quot;,
-                &quot;email&quot;: &quot;g.xysptlt@dta.nt&quot;,
-                &quot;nickname&quot;: &quot;锺静&quot;,
+                &quot;ulid&quot;: &quot;01j5cnn3vnphc1351x15esm4md&quot;,
+                &quot;email&quot;: &quot;alwaysmeorg@qq.com&quot;,
+                &quot;nickname&quot;: &quot;系统管理员&quot;,
                 &quot;picture&quot;: {
                     &quot;url&quot;: &quot;https://picsum.photos/100/100&quot;,
                     &quot;origin_name&quot;: &quot;头像&quot;,
                     &quot;suffix&quot;: &quot;jpeg&quot;
                 },
-                &quot;phone&quot;: 18192632571,
+                &quot;phone&quot;: null,
                 &quot;status&quot;: 1,
-                &quot;last_login_at&quot;: null,
-                &quot;created_at&quot;: &quot;2024-08-01 05:24:27&quot;,
+                &quot;last_login_at&quot;: &quot;2024-08-16 12:05:40&quot;,
+                &quot;created_at&quot;: &quot;2024-08-16 04:03:12&quot;,
                 &quot;role_info&quot;: {
-                    &quot;id&quot;: 6,
-                    &quot;name&quot;: &quot;具定集叫率类角色&quot;,
-                    &quot;count&quot;: 5,
+                    &quot;id&quot;: 1,
+                    &quot;name&quot;: &quot;系统超级管理员&quot;,
+                    &quot;count&quot;: 1,
                     &quot;permission_ids&quot;: [
                         1,
                         2,
@@ -3632,273 +3857,33 @@
                         5,
                         6,
                         7,
-                        8
-                    ]
-                }
-            },
-            {
-                &quot;ulid&quot;: &quot;01j466b1zzap91qcnkhdzsx437&quot;,
-                &quot;email&quot;: &quot;g.nahrqg@nnkvdqser.fr&quot;,
-                &quot;nickname&quot;: &quot;史洋&quot;,
-                &quot;picture&quot;: {
-                    &quot;url&quot;: &quot;https://picsum.photos/100/100&quot;,
-                    &quot;origin_name&quot;: &quot;头像&quot;,
-                    &quot;suffix&quot;: &quot;jpeg&quot;
-                },
-                &quot;phone&quot;: 19860646288,
-                &quot;status&quot;: 1,
-                &quot;last_login_at&quot;: null,
-                &quot;created_at&quot;: &quot;2024-08-01 05:24:26&quot;,
-                &quot;role_info&quot;: {
-                    &quot;id&quot;: 6,
-                    &quot;name&quot;: &quot;具定集叫率类角色&quot;,
-                    &quot;count&quot;: 5,
-                    &quot;permission_ids&quot;: [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8
-                    ]
-                }
-            },
-            {
-                &quot;ulid&quot;: &quot;01j466b1e01wfmz5aa4yae9rcm&quot;,
-                &quot;email&quot;: &quot;e.drzsmbwa@eihts.sa&quot;,
-                &quot;nickname&quot;: &quot;陈秀英&quot;,
-                &quot;picture&quot;: {
-                    &quot;url&quot;: &quot;https://picsum.photos/100/100&quot;,
-                    &quot;origin_name&quot;: &quot;头像&quot;,
-                    &quot;suffix&quot;: &quot;jpeg&quot;
-                },
-                &quot;phone&quot;: 18158978054,
-                &quot;status&quot;: 1,
-                &quot;last_login_at&quot;: null,
-                &quot;created_at&quot;: &quot;2024-08-01 05:24:25&quot;,
-                &quot;role_info&quot;: {
-                    &quot;id&quot;: 6,
-                    &quot;name&quot;: &quot;具定集叫率类角色&quot;,
-                    &quot;count&quot;: 5,
-                    &quot;permission_ids&quot;: [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8
-                    ]
-                }
-            },
-            {
-                &quot;ulid&quot;: &quot;01j466b0x0r0f450dx04fgmz8j&quot;,
-                &quot;email&quot;: &quot;d.yoltkrhla@dmdhl.ni&quot;,
-                &quot;nickname&quot;: &quot;孔静&quot;,
-                &quot;picture&quot;: {
-                    &quot;url&quot;: &quot;https://picsum.photos/100/100&quot;,
-                    &quot;origin_name&quot;: &quot;头像&quot;,
-                    &quot;suffix&quot;: &quot;jpeg&quot;
-                },
-                &quot;phone&quot;: 18154739926,
-                &quot;status&quot;: 1,
-                &quot;last_login_at&quot;: null,
-                &quot;created_at&quot;: &quot;2024-08-01 05:24:25&quot;,
-                &quot;role_info&quot;: {
-                    &quot;id&quot;: 6,
-                    &quot;name&quot;: &quot;具定集叫率类角色&quot;,
-                    &quot;count&quot;: 5,
-                    &quot;permission_ids&quot;: [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8
-                    ]
-                }
-            },
-            {
-                &quot;ulid&quot;: &quot;01j466b0947n9537qttpgwf2wj&quot;,
-                &quot;email&quot;: &quot;d.dbtewpg@hlhlat.cn&quot;,
-                &quot;nickname&quot;: &quot;任静&quot;,
-                &quot;picture&quot;: {
-                    &quot;url&quot;: &quot;https://picsum.photos/100/100&quot;,
-                    &quot;origin_name&quot;: &quot;头像&quot;,
-                    &quot;suffix&quot;: &quot;jpeg&quot;
-                },
-                &quot;phone&quot;: 18121816573,
-                &quot;status&quot;: 1,
-                &quot;last_login_at&quot;: null,
-                &quot;created_at&quot;: &quot;2024-08-01 05:24:24&quot;,
-                &quot;role_info&quot;: {
-                    &quot;id&quot;: 6,
-                    &quot;name&quot;: &quot;具定集叫率类角色&quot;,
-                    &quot;count&quot;: 5,
-                    &quot;permission_ids&quot;: [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8
-                    ]
-                }
-            },
-            {
-                &quot;ulid&quot;: &quot;01j466axs2a329kyssgkrwjg9w&quot;,
-                &quot;email&quot;: &quot;l.dlsqni@ibkv.ev&quot;,
-                &quot;nickname&quot;: &quot;邹强&quot;,
-                &quot;picture&quot;: {
-                    &quot;url&quot;: &quot;https://picsum.photos/100/100&quot;,
-                    &quot;origin_name&quot;: &quot;头像&quot;,
-                    &quot;suffix&quot;: &quot;jpeg&quot;
-                },
-                &quot;phone&quot;: 13686714312,
-                &quot;status&quot;: 1,
-                &quot;last_login_at&quot;: null,
-                &quot;created_at&quot;: &quot;2024-08-01 05:24:21&quot;,
-                &quot;role_info&quot;: {
-                    &quot;id&quot;: 5,
-                    &quot;name&quot;: &quot;因反且角色&quot;,
-                    &quot;count&quot;: 7,
-                    &quot;permission_ids&quot;: [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8
-                    ]
-                }
-            },
-            {
-                &quot;ulid&quot;: &quot;01j466ax73aesabrtsxrsyfgsb&quot;,
-                &quot;email&quot;: &quot;s.vwnllxj@akqydlv.br&quot;,
-                &quot;nickname&quot;: &quot;魏杰&quot;,
-                &quot;picture&quot;: {
-                    &quot;url&quot;: &quot;https://picsum.photos/100/100&quot;,
-                    &quot;origin_name&quot;: &quot;头像&quot;,
-                    &quot;suffix&quot;: &quot;jpeg&quot;
-                },
-                &quot;phone&quot;: 18177828317,
-                &quot;status&quot;: 1,
-                &quot;last_login_at&quot;: null,
-                &quot;created_at&quot;: &quot;2024-08-01 05:24:21&quot;,
-                &quot;role_info&quot;: {
-                    &quot;id&quot;: 5,
-                    &quot;name&quot;: &quot;因反且角色&quot;,
-                    &quot;count&quot;: 7,
-                    &quot;permission_ids&quot;: [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8
-                    ]
-                }
-            },
-            {
-                &quot;ulid&quot;: &quot;01j466awnz9y4vqa7nd2e021hq&quot;,
-                &quot;email&quot;: &quot;e.qpwmfsyucd@rdoomjln.ht&quot;,
-                &quot;nickname&quot;: &quot;姚强&quot;,
-                &quot;picture&quot;: {
-                    &quot;url&quot;: &quot;https://picsum.photos/100/100&quot;,
-                    &quot;origin_name&quot;: &quot;头像&quot;,
-                    &quot;suffix&quot;: &quot;jpeg&quot;
-                },
-                &quot;phone&quot;: 18123676264,
-                &quot;status&quot;: 1,
-                &quot;last_login_at&quot;: null,
-                &quot;created_at&quot;: &quot;2024-08-01 05:24:20&quot;,
-                &quot;role_info&quot;: {
-                    &quot;id&quot;: 5,
-                    &quot;name&quot;: &quot;因反且角色&quot;,
-                    &quot;count&quot;: 7,
-                    &quot;permission_ids&quot;: [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8
-                    ]
-                }
-            },
-            {
-                &quot;ulid&quot;: &quot;01j466aw4yem29x9j9rbpth1rd&quot;,
-                &quot;email&quot;: &quot;x.ctikhuk@medmlxcrtj.ca&quot;,
-                &quot;nickname&quot;: &quot;文杰&quot;,
-                &quot;picture&quot;: {
-                    &quot;url&quot;: &quot;https://picsum.photos/100/100&quot;,
-                    &quot;origin_name&quot;: &quot;头像&quot;,
-                    &quot;suffix&quot;: &quot;jpeg&quot;
-                },
-                &quot;phone&quot;: 18177394724,
-                &quot;status&quot;: 1,
-                &quot;last_login_at&quot;: null,
-                &quot;created_at&quot;: &quot;2024-08-01 05:24:20&quot;,
-                &quot;role_info&quot;: {
-                    &quot;id&quot;: 5,
-                    &quot;name&quot;: &quot;因反且角色&quot;,
-                    &quot;count&quot;: 7,
-                    &quot;permission_ids&quot;: [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8
-                    ]
-                }
-            },
-            {
-                &quot;ulid&quot;: &quot;01j466avfg98ybzapjntjt02xe&quot;,
-                &quot;email&quot;: &quot;e.cqopnnl@evrtlei.sj&quot;,
-                &quot;nickname&quot;: &quot;马平&quot;,
-                &quot;picture&quot;: {
-                    &quot;url&quot;: &quot;https://picsum.photos/100/100&quot;,
-                    &quot;origin_name&quot;: &quot;头像&quot;,
-                    &quot;suffix&quot;: &quot;jpeg&quot;
-                },
-                &quot;phone&quot;: 19875426190,
-                &quot;status&quot;: 1,
-                &quot;last_login_at&quot;: null,
-                &quot;created_at&quot;: &quot;2024-08-01 05:24:19&quot;,
-                &quot;role_info&quot;: {
-                    &quot;id&quot;: 5,
-                    &quot;name&quot;: &quot;因反且角色&quot;,
-                    &quot;count&quot;: 7,
-                    &quot;permission_ids&quot;: [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                        16,
+                        17,
+                        18,
+                        19,
+                        20,
+                        21,
+                        22,
+                        23,
+                        24,
+                        25,
+                        26,
+                        27,
+                        28,
+                        29
                     ]
                 }
             }
         ],
-        &quot;total&quot;: 42,
+        &quot;total&quot;: 1,
         &quot;page&quot;: 1,
         &quot;limit&quot;: 10
     },
@@ -3924,7 +3909,7 @@
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:9004/api/users/upsert"
+            <div title="http://localhost/api/users/upsert"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -3934,7 +3919,7 @@
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:9004</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/users/upsert</div>
                     </div>
 
@@ -4036,7 +4021,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        8
+                        7
                     </div>
                 </div>
             </div>
@@ -4074,7 +4059,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        3
+                        5
                     </div>
                 </div>
             </div>
@@ -4101,7 +4086,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        mq
+                        qy
                     </div>
                 </div>
             </div>
@@ -4128,7 +4113,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        jeanne79@example.org
+                        antonina.jaskolski@example.net
                     </div>
                 </div>
             </div>
@@ -4153,7 +4138,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        61550178369
+                        27755051313
                     </div>
                 </div>
             </div>
@@ -4180,7 +4165,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        (rNp2p
+                        aG(gtG
                     </div>
                 </div>
             </div>
@@ -4281,7 +4266,7 @@
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:9004/api/users/detail"
+            <div title="http://localhost/api/users/detail"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -4291,7 +4276,7 @@
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:9004</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/users/detail</div>
                     </div>
 
@@ -4393,7 +4378,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        vitae
+                        fuga
                     </div>
                 </div>
             </div>
@@ -4494,7 +4479,7 @@
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:9004/api/users/delete"
+            <div title="http://localhost/api/users/delete"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -4504,7 +4489,7 @@
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:9004</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/users/delete</div>
                     </div>
 
@@ -4606,7 +4591,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        temporibus
+                        natus
                     </div>
                 </div>
             </div>
@@ -4707,7 +4692,7 @@
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:9004/api/users/change/status"
+            <div title="http://localhost/api/users/change/status"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -4717,7 +4702,7 @@
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:9004</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/users/change/status</div>
                     </div>
 
@@ -4819,7 +4804,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        tempore
+                        doloremque
                     </div>
                 </div>
             </div>
@@ -4845,7 +4830,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
+                        0
                     </div>
                 </div>
             </div>
@@ -4954,7 +4939,7 @@
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:9004/api/organizes/list"
+            <div title="http://localhost/api/organizes/list"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -4964,7 +4949,7 @@
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:9004</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/organizes/list</div>
                     </div>
 
@@ -5202,50 +5187,10 @@
                 &quot;description&quot;: &quot;该组织为系统默认组织，可直接修改编辑使用。&quot;,
                 &quot;show&quot;: true,
                 &quot;order&quot;: 0,
-                &quot;count&quot;: 6
-            },
-            {
-                &quot;id&quot;: 2,
-                &quot;name&quot;: &quot;次相林县安组织&quot;,
-                &quot;description&quot;: &quot;近六却决收元间在水认关农保需目其展车活没光各除中外总作派容院步值想选改交县力种产强查处新省斯过地则张斯林专达性化千研素火明身边会外长此头识指明消强今件样程叫了矿结加技阶土张原百表引料力十工那当适争风问重入强步级海作连十看县志该消律只着断很原展响内明来问空放白白共约关性习金必等织化条就三。&quot;,
-                &quot;show&quot;: true,
-                &quot;order&quot;: null,
-                &quot;count&quot;: 3
-            },
-            {
-                &quot;id&quot;: 3,
-                &quot;name&quot;: &quot;和被快组织&quot;,
-                &quot;description&quot;: &quot;众物广积圆但革科运总手通面九住通手花权院组儿完三区。&quot;,
-                &quot;show&quot;: true,
-                &quot;order&quot;: null,
-                &quot;count&quot;: 3
-            },
-            {
-                &quot;id&quot;: 4,
-                &quot;name&quot;: &quot;飞育连权它给参组织&quot;,
-                &quot;description&quot;: &quot;我金山器无再那没领都强本红达她资值上组特派况六厂千务资多分元分到商适算定管会准公西按院们百入内图支科格如门例最商属并间接生织意对去处很内问四主子离日识热十上生路心算京使条无活收党最金生省及决拉两包斯许十什眼话素实约断后化位己回素门就省中明前好派统相百么结水气第书复下更式联叫活片状务量音十包标称才红没为成结段。&quot;,
-                &quot;show&quot;: true,
-                &quot;order&quot;: null,
                 &quot;count&quot;: 1
-            },
-            {
-                &quot;id&quot;: 5,
-                &quot;name&quot;: &quot;器见回系转进近带组织&quot;,
-                &quot;description&quot;: &quot;场类采你自新太了县家明断社军家众叫学别快加与体住计研严得红位上志离点名识见科强子单信元精眼满过按多思斗百口阶百加。&quot;,
-                &quot;show&quot;: true,
-                &quot;order&quot;: null,
-                &quot;count&quot;: 1
-            },
-            {
-                &quot;id&quot;: 6,
-                &quot;name&quot;: &quot;相反革历也何布组织&quot;,
-                &quot;description&quot;: &quot;维并军验常们教易很属约角入。&quot;,
-                &quot;show&quot;: true,
-                &quot;order&quot;: null,
-                &quot;count&quot;: 3
             }
         ],
-        &quot;total&quot;: 6,
+        &quot;total&quot;: 1,
         &quot;page&quot;: 1,
         &quot;limit&quot;: 10
     },
@@ -5271,7 +5216,7 @@
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:9004/api/organizes/upsert"
+            <div title="http://localhost/api/organizes/upsert"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -5281,7 +5226,7 @@
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:9004</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/organizes/upsert</div>
                     </div>
 
@@ -5381,7 +5326,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        18
+                        7
                     </div>
                 </div>
             </div>
@@ -5408,7 +5353,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        abyivixrwuloeufbxgnvcmoxv
+                        lswcsfsslgrxc
                     </div>
                 </div>
             </div>
@@ -5433,7 +5378,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        Porro rerum nulla exercitationem pariatur.
+                        Ullam autem earum repellat ut iste temporibus nostrum eos.
                     </div>
                 </div>
             </div>
@@ -5534,7 +5479,7 @@
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:9004/api/organizes/delete"
+            <div title="http://localhost/api/organizes/delete"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -5544,7 +5489,7 @@
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:9004</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/organizes/delete</div>
                     </div>
 
@@ -5646,7 +5591,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        3
+                        11
                     </div>
                 </div>
             </div>
@@ -5747,7 +5692,7 @@
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:9004/api/organizes/users"
+            <div title="http://localhost/api/organizes/users"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -5757,7 +5702,7 @@
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:9004</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/organizes/users</div>
                     </div>
 
@@ -5984,67 +5929,13 @@
     &quot;data&quot;: {
         &quot;list&quot;: [
             {
-                &quot;ulid&quot;: &quot;01j465weqc1he6hmtj29xf9pkq&quot;,
+                &quot;ulid&quot;: &quot;01j5cnn3vnphc1351x15esm4md&quot;,
                 &quot;nickname&quot;: &quot;系统管理员&quot;,
-                &quot;phone&quot;: 18182354601,
+                &quot;phone&quot;: null,
                 &quot;email&quot;: &quot;alwaysmeorg@qq.com&quot;
-            },
-            {
-                &quot;ulid&quot;: &quot;01j4666gvhkgk4w9m8ezmbby9v&quot;,
-                &quot;nickname&quot;: &quot;万刚&quot;,
-                &quot;phone&quot;: 18162991688,
-                &quot;email&quot;: &quot;r.ksk@reemjip.lu&quot;
-            },
-            {
-                &quot;ulid&quot;: &quot;01j4666hd3w192kd2tjn68my4n&quot;,
-                &quot;nickname&quot;: &quot;郭超&quot;,
-                &quot;phone&quot;: 18177553684,
-                &quot;email&quot;: &quot;t.ovqxffi@qrfcfpb.km&quot;
-            },
-            {
-                &quot;ulid&quot;: &quot;01j4666hynjt47279cey3m2vpp&quot;,
-                &quot;nickname&quot;: &quot;余伟&quot;,
-                &quot;phone&quot;: 18144604623,
-                &quot;email&quot;: &quot;l.wncrmfr@ytgxp.za&quot;
-            },
-            {
-                &quot;ulid&quot;: &quot;01j4666jfdn9ctfh57fyt1p3vr&quot;,
-                &quot;nickname&quot;: &quot;廖娟&quot;,
-                &quot;phone&quot;: 18176116925,
-                &quot;email&quot;: &quot;j.fymkdkp@ksppjz.ao&quot;
-            },
-            {
-                &quot;ulid&quot;: &quot;01j4666k16y04gbyx5tsnrenw1&quot;,
-                &quot;nickname&quot;: &quot;邹秀英&quot;,
-                &quot;phone&quot;: 18121155078,
-                &quot;email&quot;: &quot;f.irkqojthv@sszd.is&quot;
-            },
-            {
-                &quot;ulid&quot;: &quot;01j4666kr2nzhm8jh49fnz9716&quot;,
-                &quot;nickname&quot;: &quot;魏勇&quot;,
-                &quot;phone&quot;: 18101300480,
-                &quot;email&quot;: &quot;i.txo@foxsuxh.io&quot;
-            },
-            {
-                &quot;ulid&quot;: &quot;01j4666mah1vtw0wvh46nvh98w&quot;,
-                &quot;nickname&quot;: &quot;江强&quot;,
-                &quot;phone&quot;: 18651806769,
-                &quot;email&quot;: &quot;x.xwe@myxdulju.cv&quot;
-            },
-            {
-                &quot;ulid&quot;: &quot;01j4666mvep59tgearfzk2z61a&quot;,
-                &quot;nickname&quot;: &quot;董霞&quot;,
-                &quot;phone&quot;: 13577138667,
-                &quot;email&quot;: &quot;s.vzgifjoil@leyvq.de&quot;
-            },
-            {
-                &quot;ulid&quot;: &quot;01j4666nd3c77w04069fv734vm&quot;,
-                &quot;nickname&quot;: &quot;廖刚&quot;,
-                &quot;phone&quot;: 13249234430,
-                &quot;email&quot;: &quot;c.zfajp@dxsxhwv.sc&quot;
             }
         ],
-        &quot;total&quot;: 42,
+        &quot;total&quot;: 1,
         &quot;page&quot;: 1,
         &quot;limit&quot;: 10
     },
@@ -6070,7 +5961,7 @@
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:9004/api/organizes/roles"
+            <div title="http://localhost/api/organizes/roles"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -6080,7 +5971,7 @@
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:9004</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/organizes/roles</div>
                     </div>
 
@@ -6312,9 +6203,10 @@
                 &quot;role_info&quot;: {
                     &quot;id&quot;: 1,
                     &quot;name&quot;: &quot;系统超级管理员&quot;,
-                    &quot;count&quot;: 14,
+                    &quot;count&quot;: 1,
                     &quot;permission_ids&quot;: [
                         1,
+                        2,
                         3,
                         4,
                         5,
@@ -6327,7 +6219,10 @@
                         12,
                         13,
                         14,
+                        15,
+                        16,
                         17,
+                        18,
                         19,
                         20,
                         21,
@@ -6338,112 +6233,12 @@
                         26,
                         27,
                         28,
-                        29,
-                        2,
-                        15,
-                        16,
-                        18
-                    ]
-                }
-            },
-            {
-                &quot;organize_id&quot;: &quot;1&quot;,
-                &quot;role_id&quot;: 2,
-                &quot;role_info&quot;: {
-                    &quot;id&quot;: 2,
-                    &quot;name&quot;: &quot;海少信很角色&quot;,
-                    &quot;count&quot;: 4,
-                    &quot;permission_ids&quot;: [
-                        1,
-                        3,
-                        4,
-                        5,
-                        6,
-                        8,
-                        9,
-                        10,
-                        7
-                    ]
-                }
-            },
-            {
-                &quot;organize_id&quot;: &quot;1&quot;,
-                &quot;role_id&quot;: 3,
-                &quot;role_info&quot;: {
-                    &quot;id&quot;: 3,
-                    &quot;name&quot;: &quot;相影调四角色&quot;,
-                    &quot;count&quot;: 6,
-                    &quot;permission_ids&quot;: [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8
-                    ]
-                }
-            },
-            {
-                &quot;organize_id&quot;: &quot;1&quot;,
-                &quot;role_id&quot;: 4,
-                &quot;role_info&quot;: {
-                    &quot;id&quot;: 4,
-                    &quot;name&quot;: &quot;受员复共体般角色&quot;,
-                    &quot;count&quot;: 6,
-                    &quot;permission_ids&quot;: [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8
-                    ]
-                }
-            },
-            {
-                &quot;organize_id&quot;: &quot;1&quot;,
-                &quot;role_id&quot;: 5,
-                &quot;role_info&quot;: {
-                    &quot;id&quot;: 5,
-                    &quot;name&quot;: &quot;因反且角色&quot;,
-                    &quot;count&quot;: 7,
-                    &quot;permission_ids&quot;: [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8
-                    ]
-                }
-            },
-            {
-                &quot;organize_id&quot;: &quot;1&quot;,
-                &quot;role_id&quot;: 6,
-                &quot;role_info&quot;: {
-                    &quot;id&quot;: 6,
-                    &quot;name&quot;: &quot;具定集叫率类角色&quot;,
-                    &quot;count&quot;: 5,
-                    &quot;permission_ids&quot;: [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8
+                        29
                     ]
                 }
             }
         ],
-        &quot;total&quot;: 6,
+        &quot;total&quot;: 1,
         &quot;page&quot;: 1,
         &quot;limit&quot;: 10
     },
@@ -6469,7 +6264,7 @@
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:9004/api/organizes/change/show"
+            <div title="http://localhost/api/organizes/change/show"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -6479,7 +6274,7 @@
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:9004</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/organizes/change/show</div>
                     </div>
 
@@ -6581,7 +6376,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        18
+                        10
                     </div>
                 </div>
             </div>
@@ -6716,7 +6511,7 @@
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:9004/api/roles/list"
+            <div title="http://localhost/api/roles/list"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -6726,7 +6521,7 @@
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:9004</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/roles/list</div>
                     </div>
 
@@ -6986,9 +6781,10 @@
                 &quot;description&quot;: null,
                 &quot;order&quot;: 0,
                 &quot;show&quot;: true,
-                &quot;count&quot;: 14,
+                &quot;count&quot;: 1,
                 &quot;permission_ids&quot;: [
                     1,
+                    2,
                     3,
                     4,
                     5,
@@ -7001,7 +6797,10 @@
                     12,
                     13,
                     14,
+                    15,
+                    16,
                     17,
+                    18,
                     19,
                     20,
                     21,
@@ -7012,106 +6811,11 @@
                     26,
                     27,
                     28,
-                    29,
-                    2,
-                    15,
-                    16,
-                    18
-                ]
-            },
-            {
-                &quot;id&quot;: 2,
-                &quot;name&quot;: &quot;海少信很角色&quot;,
-                &quot;description&quot;: &quot;教三出列革圆题响用方证易年业易知海办规真积极现易产还或林必进中论命想原律细三构量连就五题往产存题观义红儿少交感族样手研己办型标统具般族争片型住指数可起众局好思步识级三动门之他心。&quot;,
-                &quot;order&quot;: null,
-                &quot;show&quot;: true,
-                &quot;count&quot;: 4,
-                &quot;permission_ids&quot;: [
-                    1,
-                    3,
-                    4,
-                    5,
-                    6,
-                    8,
-                    9,
-                    10,
-                    7
-                ]
-            },
-            {
-                &quot;id&quot;: 3,
-                &quot;name&quot;: &quot;相影调四角色&quot;,
-                &quot;description&quot;: &quot;都边节准单需自温重外己据变处改今个规制将周权实算听新二证使声省照大矿或走了完省。&quot;,
-                &quot;order&quot;: null,
-                &quot;show&quot;: true,
-                &quot;count&quot;: 6,
-                &quot;permission_ids&quot;: [
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8
-                ]
-            },
-            {
-                &quot;id&quot;: 4,
-                &quot;name&quot;: &quot;受员复共体般角色&quot;,
-                &quot;description&quot;: &quot;技需子类群们亲方写但分己或团斯质治式原局称选共收和活特少可及要术明在步商示委向手区各元先我着起省们经住才日当约角马她农电质区三问分府口院才存门件下建化同联做外究影百命意装些情动本明美治八办导增老又把它建共照声会他民技果速存较日住研加自为声当于么族处铁格家造说需照次目有再青东方流识种接属市式把周极其表要义它才常美各增中年也发到少问看转维高称在政水科现为党织是。&quot;,
-                &quot;order&quot;: null,
-                &quot;show&quot;: true,
-                &quot;count&quot;: 6,
-                &quot;permission_ids&quot;: [
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8
-                ]
-            },
-            {
-                &quot;id&quot;: 5,
-                &quot;name&quot;: &quot;因反且角色&quot;,
-                &quot;description&quot;: &quot;求面会少当原主度不这给条多却习法广方光统区引性群叫第员层平利圆四边细行叫记统段把米当再石习对个小必特关比再约众历内小进交好事年影数做今期清节化处图不花号叫传众变满经战每太八称知气各且外会科间格切常热单于明派行办国应认积度何指料长制色状平设究研图权然力重存史时称发也金名指热龙只记即报。&quot;,
-                &quot;order&quot;: null,
-                &quot;show&quot;: true,
-                &quot;count&quot;: 7,
-                &quot;permission_ids&quot;: [
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8
-                ]
-            },
-            {
-                &quot;id&quot;: 6,
-                &quot;name&quot;: &quot;具定集叫率类角色&quot;,
-                &quot;description&quot;: &quot;儿增在别土周拉做红两身西许织等眼海关主石向战列制家革成关和局力人作气消象水连感专展现计并毛连义米传地第易三斗流支约族把边变克话党些听质对认到养给观是识大制几青有也却内每有他现志图军如任低带先水地清将压度类五这群万白步世共受包们温志流加过难看处局置方品原重规约们级太养运六原的指中观条分快。&quot;,
-                &quot;order&quot;: null,
-                &quot;show&quot;: true,
-                &quot;count&quot;: 5,
-                &quot;permission_ids&quot;: [
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8
+                    29
                 ]
             }
         ],
-        &quot;total&quot;: 6,
+        &quot;total&quot;: 1,
         &quot;page&quot;: 1,
         &quot;limit&quot;: 10
     },
@@ -7137,7 +6841,7 @@
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:9004/api/roles/upsert"
+            <div title="http://localhost/api/roles/upsert"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -7147,7 +6851,7 @@
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:9004</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/roles/upsert</div>
                     </div>
 
@@ -7271,7 +6975,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        7
+                        18
                     </div>
                 </div>
             </div>
@@ -7298,7 +7002,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        mazsgszuraqlsy
+                        imuvkmtfaslh
                     </div>
                 </div>
             </div>
@@ -7323,7 +7027,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        Quam ea voluptas accusamus eos.
+                        Omnis laudantium est molestiae ut.
                     </div>
                 </div>
             </div>
@@ -7350,7 +7054,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [&quot;ipsam&quot;,&quot;id&quot;]
+                        [&quot;ab&quot;,&quot;ratione&quot;]
                     </div>
                 </div>
             </div>
@@ -7451,7 +7155,7 @@
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:9004/api/roles/delete"
+            <div title="http://localhost/api/roles/delete"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -7461,7 +7165,7 @@
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:9004</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/roles/delete</div>
                     </div>
 
@@ -7563,7 +7267,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        14
+                        13
                     </div>
                 </div>
             </div>
@@ -7664,7 +7368,7 @@
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:9004/api/roles/users"
+            <div title="http://localhost/api/roles/users"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -7674,7 +7378,7 @@
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:9004</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/roles/users</div>
                     </div>
 
@@ -7776,7 +7480,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
+                        5
                     </div>
                 </div>
             </div>
@@ -7798,7 +7502,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        18
+                        15
                     </div>
                 </div>
             </div>
@@ -7820,7 +7524,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        2
+                        12
                     </div>
                 </div>
             </div>
@@ -7900,9 +7604,9 @@
                                                        class="language-json sl-overflow-x-auto sl-overflow-y-auto">{
     &quot;data&quot;: {
         &quot;list&quot;: [],
-        &quot;total&quot;: 14,
-        &quot;page&quot;: 18,
-        &quot;limit&quot;: 2
+        &quot;total&quot;: 0,
+        &quot;page&quot;: 15,
+        &quot;limit&quot;: 12
     },
     &quot;message&quot;: &quot;success&quot;,
     &quot;code&quot;: 200
@@ -7926,7 +7630,7 @@
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:9004/api/roles/change/show"
+            <div title="http://localhost/api/roles/change/show"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -7936,7 +7640,7 @@
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:9004</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/roles/change/show</div>
                     </div>
 
@@ -8038,7 +7742,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        3
+                        11
                     </div>
                 </div>
             </div>
@@ -8064,7 +7768,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        0
+                        1
                     </div>
                 </div>
             </div>
@@ -8173,7 +7877,7 @@
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:9004/api/account/invalid"
+            <div title="http://localhost/api/account/invalid"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -8183,7 +7887,7 @@
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:9004</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/account/invalid</div>
                     </div>
 
@@ -8334,7 +8038,7 @@
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:9004/api/account/login"
+            <div title="http://localhost/api/account/login"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -8344,7 +8048,7 @@
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:9004</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/account/login</div>
                     </div>
 
@@ -8523,21 +8227,21 @@
                                             <pre><code style="max-height: 300px;"
                                                        class="language-json sl-overflow-x-auto sl-overflow-y-auto">{
     &quot;data&quot;: {
-        &quot;ulid&quot;: &quot;01j465weqc1he6hmtj29xf9pkq&quot;,
+        &quot;ulid&quot;: &quot;01j5cnn3vnphc1351x15esm4md&quot;,
         &quot;email&quot;: &quot;alwaysmeorg@qq.com&quot;,
-        &quot;token&quot;: &quot;92|2RwFf8aq142PkHVow0ZoI2RrdOo6jj5XYjTYb3XHe251a5be&quot;,
+        &quot;token&quot;: &quot;2|XiVg6mTOtEPP94OxmEDnR1FssJwW60eHEBrvmZ5xd7c5d161&quot;,
         &quot;nickname&quot;: &quot;系统管理员&quot;,
         &quot;picture&quot;: {
             &quot;url&quot;: &quot;https://picsum.photos/100/100&quot;,
             &quot;origin_name&quot;: &quot;头像&quot;,
             &quot;suffix&quot;: &quot;jpeg&quot;
         },
-        &quot;phone&quot;: 18182354601,
+        &quot;phone&quot;: null,
         &quot;status&quot;: 1,
-        &quot;last_login_at&quot;: &quot;2024-08-06 18:07:06&quot;,
+        &quot;last_login_at&quot;: &quot;2024-08-16 12:08:12&quot;,
         &quot;platform&quot;: &quot;&quot;,
-        &quot;created_at&quot;: &quot;2024-08-01 05:16:27&quot;,
-        &quot;updated_at&quot;: &quot;2024-08-06 10:07:06&quot;,
+        &quot;created_at&quot;: &quot;2024-08-16 04:03:12&quot;,
+        &quot;updated_at&quot;: &quot;2024-08-16 04:08:12&quot;,
         &quot;deleted_at&quot;: null
     },
     &quot;message&quot;: &quot;success&quot;,
@@ -8562,7 +8266,7 @@
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:9004/api/account/register"
+            <div title="http://localhost/api/account/register"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -8572,7 +8276,7 @@
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:9004</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/account/register</div>
                     </div>
 
@@ -8655,7 +8359,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        dariana23@example.net
+                        mboehm@example.com
                     </div>
                 </div>
             </div>
@@ -8682,7 +8386,7 @@
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        z+[Z(g:iNF
+                        kxSC&quot;?
                     </div>
                 </div>
             </div>
@@ -8783,7 +8487,7 @@
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:9004/api/account/logout"
+            <div title="http://localhost/api/account/logout"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -8793,7 +8497,7 @@
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:9004</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/account/logout</div>
                     </div>
 

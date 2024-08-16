@@ -86,7 +86,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":{"ulid":"01j465weqc1he6hmtj29xf9pkq","email":"alwaysmeorg@qq.com","token":"92|2RwFf8aq142PkHVow0ZoI2RrdOo6jj5XYjTYb3XHe251a5be","nickname":"\u7cfb\u7edf\u7ba1\u7406\u5458","picture":{"url":"https:\/\/picsum.photos\/100\/100","origin_name":"\u5934\u50cf","suffix":"jpeg"},"phone":18182354601,"status":1,"last_login_at":"2024-08-06 18:07:06","platform":"","created_at":"2024-08-01 05:16:27","updated_at":"2024-08-06 10:07:06","deleted_at":null},"message":"success","code":200}'
+        content: '{"data":{"ulid":"01j5cnn3vnphc1351x15esm4md","email":"alwaysmeorg@qq.com","token":"2|XiVg6mTOtEPP94OxmEDnR1FssJwW60eHEBrvmZ5xd7c5d161","nickname":"\u7cfb\u7edf\u7ba1\u7406\u5458","picture":{"url":"https:\/\/picsum.photos\/100\/100","origin_name":"\u5934\u50cf","suffix":"jpeg"},"phone":null,"status":1,"last_login_at":"2024-08-16 12:08:12","platform":"","created_at":"2024-08-16 04:03:12","updated_at":"2024-08-16 04:08:12","deleted_at":null},"message":"success","code":200}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -124,7 +124,7 @@ endpoints:
         name: account
         description: validation.email.
         required: true
-        example: dariana23@example.net
+        example: mboehm@example.com
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -133,14 +133,14 @@ endpoints:
         name: password
         description: 'Must match the regex /^[a-zA-Z0-9]+$/. validation.between.'
         required: true
-        example: 'z+[Z(g:iNF'
+        example: 'kxSC"?'
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      account: dariana23@example.net
-      password: 'z+[Z(g:iNF'
+      account: mboehm@example.com
+      password: 'kxSC"?'
     fileParameters: []
     responses:
       -
@@ -196,7 +196,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 121111111111111111'
+      - 'Bearer 34gcE6DPbavf6Zdk18ah5Ve'
     controller: null
     method: null
     route: null
