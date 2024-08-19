@@ -2,6 +2,7 @@ import { isEqual } from 'radash'
 import usersApi from '@apis/users'
 
 export default {
+	/** 权限 */
 	usePermissions: async () => {
 		const route = useRoute()
 		const { code, data } = await usersApi.permissionsChild({ parent_code: route.name })

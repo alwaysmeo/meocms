@@ -1,7 +1,7 @@
 import { Modal } from 'ant-design-vue'
 
-// 对话确认弹窗
 export default {
+	/** 对话确认弹窗 */
 	useModalConfirm: async (options) => {
 		Modal.confirm({
 			title: '提示',

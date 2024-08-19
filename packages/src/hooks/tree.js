@@ -1,6 +1,7 @@
 import { isEqual } from 'radash'
 
 export default {
+	/** 展开树形结构 */
 	useUnfoldTree({ source, key = 'children', callback }) {
 		const arr = []
 		for (const element of source) {
@@ -11,6 +12,7 @@ export default {
 		return arr
 	},
 
+	/** 构建树形结构 */
 	useBuildTree({ source, parent_id = null, key = 'children', callback }) {
 		const arr = []
 		for (const element of source) {
