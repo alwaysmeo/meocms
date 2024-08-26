@@ -184,7 +184,7 @@ class UsersController extends Controller
         $user = Users::query()->updateOrCreate(['ulid' => $req['ulid'] ?? null], [
             'nickname' => $req['nickname'],
             'email' => $req['email'],
-            'phone' => $req['phone'],
+            'phone' => $req['phone'] ?? null,
             'password' => Hash::make($req['password']),
         ]);
         /* 添加、修改用户角色关联 */
