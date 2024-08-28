@@ -1,4 +1,8 @@
 {
+	"name": "meocms",
+	"version": "1.0.0",
+	"description": "meocms backend management system",
+	"author": "alwaysmeo",
 	"scripts": {
 		"dev": "pnpm -C ./packages dev",
 		"build": "pnpm -C ./packages build",
