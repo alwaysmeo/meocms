@@ -31,11 +31,13 @@
 			const checked = []
 			const halfChecked = []
 			if (props.checkable) {
-				const unfold = hooks.useUnfoldTree({ source: props.treeData })
+				const unfold = hooks.useUnfoldTree(props.treeData)
+				console.log(unfold)
 				for (const item of unfold) {
 					if (props.value.includes(item.id)) {
-						const childs = unfold.filter((v) => isEqual(v.parent_id, item.id) && props.value.includes(v.id))
-						if (isEmpty(item.children) || isEqual(item.children.length, childs.length)) {
+						const child_selected = unfold.filter((v) => isEqual(v.parent_id, item.id) && props.value.includes(v.id))
+						const child = unfold.filter((v) => isEqual(v.parent_id, item.id))
+						if (isEqual(child_selected.length, child.length)) {
 							checked.push(item.id)
 						} else {
 							halfChecked.push(item.id)
@@ -43,6 +45,7 @@
 					}
 				}
 			}
+			console.log({ checked, halfChecked })
 			return { checked, halfChecked }
 		})
 	})
@@ -50,17 +53,13 @@
 	function drop(info) {
 		console.log(info)
 		// hooks.useBuildTree()
-		const arr = hooks.useUnfoldTree({
-			source: state.treeData,
-			callback: (element) => {
-				// console.log(element)
-			}
-		})
+		const arr = hooks.useUnfoldTree(state.treeData)
 		console.log(arr)
 	}
 
 	function check(checkedKeys, e) {
-		state.value = flat([checkedKeys, e.halfCheckedKeys])
+		// console.log(checkedKeys, e.halfCheckedKeys)
+		// state.value = flat([checkedKeys, e.halfCheckedKeys])
 	}
 </script>
 
@@ -68,7 +67,7 @@
 	<a-tree
 		:fieldNames="{ children: 'children', title: 'name', key: 'id' }"
 		v-bind="$attrs"
-		:checkedKeys="state.checkedKeys"
+		v-model:checkedKeys="state.value"
 		:treeData="state.treeData"
 		:checkable="props.checkable"
 		@check="check"
